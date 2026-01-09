@@ -1,5 +1,7 @@
 import { Film, Palette, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ScrollReveal from "./ScrollReveal";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -32,25 +34,29 @@ const Services = () => {
       <div 
         className="absolute inset-0 opacity-30"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, hsl(174 72% 40% / 0.1) 0%, transparent 50%)'
+          background: 'radial-gradient(ellipse at 50% 100%, hsl(142 70% 45% / 0.1) 0%, transparent 50%)'
         }}
       />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-16 space-y-4">
+        <ScrollReveal className="text-center mb-16 space-y-4">
           <span className="text-primary uppercase tracking-widest text-sm font-semibold">Services</span>
           <h2 className="text-4xl md:text-6xl font-black">What I Offer</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             End-to-end post-production services tailored to your vision and budget.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
               className="glass-hover p-8 flex flex-col h-full group"
             >
               {/* Icon */}
@@ -79,7 +85,7 @@ const Services = () => {
                   Get Quote
                 </Button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

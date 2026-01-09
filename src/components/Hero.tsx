@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Play } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
@@ -14,7 +15,7 @@ const Hero = () => {
       <div 
         className="absolute inset-0 opacity-40"
         style={{
-          background: 'radial-gradient(ellipse at 50% 0%, hsl(174 72% 40% / 0.15) 0%, transparent 60%)'
+          background: 'radial-gradient(ellipse at 50% 0%, hsl(142 70% 45% / 0.15) 0%, transparent 60%)'
         }}
       />
 
@@ -22,37 +23,45 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Badge */}
-          <div 
-            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full opacity-0 animate-fade-up"
-            style={{ animationDelay: '0.1s' }}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full"
           >
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
             <span className="text-sm text-muted-foreground">Available for new projects</span>
-          </div>
+          </motion.div>
 
           {/* Main headline */}
-          <h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95] opacity-0 animate-fade-up"
-            style={{ animationDelay: '0.2s' }}
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95]"
           >
             Visual Storytelling
             <br />
             <span className="text-gradient">That Converts.</span>
-          </h1>
+          </motion.h1>
 
           {/* Sub-headline */}
-          <p 
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-up"
-            style={{ animationDelay: '0.3s' }}
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
           >
             Expert Editing & Motion Graphics using DaVinci Resolve & After Effects.
             Transforming raw footage into cinematic experiences.
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 opacity-0 animate-fade-up"
-            style={{ animationDelay: '0.4s' }}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
           >
             <Button variant="hero" size="xl" className="group">
               <Play className="w-5 h-5 transition-transform group-hover:scale-110" />
@@ -61,19 +70,21 @@ const Hero = () => {
             <Button variant="glass" size="xl">
               Let's Talk
             </Button>
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll indicator */}
-        <div 
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-fade-up"
-          style={{ animationDelay: '0.6s' }}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
         >
           <div className="flex flex-col items-center gap-2 text-muted-foreground">
             <span className="text-xs uppercase tracking-widest">Scroll</span>
             <ArrowDown className="w-4 h-4 animate-bounce" />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
