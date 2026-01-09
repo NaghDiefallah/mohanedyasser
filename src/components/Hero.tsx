@@ -1,90 +1,104 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 animated-gradient" />
+    <section className="relative min-h-screen flex items-end pb-24 md:pb-32 overflow-hidden">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-background" />
       
-      {/* Noise texture overlay */}
-      <div className="absolute inset-0 bg-noise pointer-events-none" />
-      
-      {/* Radial gradient for depth */}
+      {/* Accent glow - top right */}
       <div 
-        className="absolute inset-0 opacity-40"
+        className="absolute top-0 right-0 w-[600px] h-[600px] opacity-20 blur-3xl pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 50% 0%, hsl(142 70% 45% / 0.15) 0%, transparent 60%)'
+          background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)'
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        <div className="max-w-4xl mx-auto space-y-8">
-          {/* Badge */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full"
-          >
-            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm text-muted-foreground">Available for new projects</span>
-          </motion.div>
-
-          {/* Main headline */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.95]"
-          >
-            Visual Storytelling
-            <br />
-            <span className="text-gradient">That Converts.</span>
-          </motion.h1>
-
-          {/* Sub-headline */}
+      <div className="relative z-10 container mx-auto px-6 md:px-12">
+        <div className="max-w-6xl">
+          {/* Eyebrow */}
           <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-primary font-medium mb-6 tracking-wide"
           >
-            Expert Editing & Motion Graphics using DaVinci Resolve & After Effects.
-            Transforming raw footage into cinematic experiences.
+            Video Editor & Motion Designer
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+          {/* Main headline - stacked with mixed weights */}
+          <div className="space-y-2 md:space-y-0">
+            <motion.h1 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="text-[clamp(2.5rem,8vw,6rem)] font-bold leading-[1.05] tracking-tight"
+            >
+              I craft stories
+            </motion.h1>
+            <motion.h1 
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-[clamp(2.5rem,8vw,6rem)] font-light leading-[1.05] tracking-tight text-muted-foreground"
+            >
+              through motion.
+            </motion.h1>
+          </div>
+
+          {/* Description - left aligned, shorter */}
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+            className="mt-8 text-lg text-muted-foreground max-w-md leading-relaxed"
           >
-            <Button variant="hero" size="xl" className="group">
-              <Play className="w-5 h-5 transition-transform group-hover:scale-110" />
-              View Projects
+            Turning raw footage into cinematic experiences with DaVinci Resolve & After Effects.
+          </motion.p>
+
+          {/* CTA - simple, understated */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-10 flex items-center gap-8"
+          >
+            <Button variant="hero" size="lg" className="group gap-3">
+              See my work
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Button>
-            <Button variant="glass" size="xl">
-              Let's Talk
-            </Button>
+            <a 
+              href="#contact" 
+              className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+            >
+              Get in touch
+            </a>
+          </motion.div>
+
+          {/* Stats row - adds credibility without being flashy */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="mt-20 flex gap-12 md:gap-16 text-sm"
+          >
+            <div>
+              <span className="block text-2xl font-semibold text-foreground">50+</span>
+              <span className="text-muted-foreground">Projects delivered</span>
+            </div>
+            <div>
+              <span className="block text-2xl font-semibold text-foreground">4 yrs</span>
+              <span className="text-muted-foreground">Experience</span>
+            </div>
+            <div className="hidden sm:block">
+              <span className="block text-2xl font-semibold text-foreground">24h</span>
+              <span className="text-muted-foreground">Avg. response</span>
+            </div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <ArrowDown className="w-4 h-4 animate-bounce" />
-          </div>
-        </motion.div>
       </div>
     </section>
   );
