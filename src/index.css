@@ -6,46 +6,46 @@
 
 @layer base {
   :root {
-    --background: 220 20% 6%;
+    --background: 192 65% 28%;
     --foreground: 0 0% 98%;
 
-    --card: 220 20% 10%;
+    --card: 192 60% 22%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 220 20% 10%;
+    --popover: 192 60% 22%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 174 72% 40%;
+    --primary: 142 70% 45%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 220 15% 15%;
+    --secondary: 192 55% 18%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 18%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 192 50% 24%;
+    --muted-foreground: 192 20% 70%;
 
-    --accent: 174 72% 40%;
+    --accent: 142 70% 45%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
-    --ring: 174 72% 40%;
+    --border: 192 40% 35%;
+    --input: 192 40% 35%;
+    --ring: 142 70% 45%;
 
     --radius: 0.75rem;
 
     /* Custom properties */
-    --glow-primary: 174 72% 40%;
-    --glass-bg: 220 20% 12%;
-    --glass-border: 220 15% 25%;
-    --gradient-start: 174 72% 40%;
-    --gradient-end: 190 80% 50%;
+    --glow-primary: 142 70% 45%;
+    --glass-bg: 192 55% 20%;
+    --glass-border: 192 35% 40%;
+    --gradient-start: 142 70% 45%;
+    --gradient-end: 160 75% 50%;
   }
 
   .dark {
-    --background: 220 20% 6%;
+    --background: 192 65% 28%;
     --foreground: 0 0% 98%;
   }
 }
@@ -97,7 +97,7 @@
 
   /* Text Gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-cyan-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400;
   }
 
   /* Background noise */
@@ -111,9 +111,9 @@
     background: linear-gradient(
       135deg,
       hsl(var(--background)) 0%,
-      hsl(220 20% 8%) 25%,
-      hsl(var(--primary) / 0.1) 50%,
-      hsl(220 20% 8%) 75%,
+      hsl(192 60% 25%) 25%,
+      hsl(var(--primary) / 0.15) 50%,
+      hsl(192 60% 25%) 75%,
       hsl(var(--background)) 100%
     );
     background-size: 400% 400%;
