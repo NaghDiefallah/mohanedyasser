@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Play, X } from "lucide-react";
 import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import ScrollReveal from "./ScrollReveal";
+import { motion } from "framer-motion";
 
 interface Project {
   id: number;
@@ -69,19 +71,23 @@ const BentoGrid = () => {
     <section className="py-24 px-6">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-16 space-y-4">
+        <ScrollReveal className="text-center mb-16 space-y-4">
           <span className="text-primary uppercase tracking-widest text-sm font-semibold">Portfolio</span>
           <h2 className="text-4xl md:text-6xl font-black">The Work</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             A curated selection of projects showcasing storytelling, technical precision, and creative vision.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[250px]">
-          {projects.map((project) => (
-            <div
+          {projects.map((project, index) => (
+            <motion.div
               key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className={`group relative overflow-hidden rounded-2xl cursor-pointer card-hover-scale ${project.span}`}
               onClick={() => setSelectedProject(project)}
             >
@@ -100,7 +106,7 @@ const BentoGrid = () => {
               <div 
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
-                  boxShadow: 'inset 0 0 60px -20px hsl(174 72% 40% / 0.3)'
+                  boxShadow: 'inset 0 0 60px -20px hsl(142 70% 45% / 0.3)'
                 }}
               />
 
@@ -118,7 +124,7 @@ const BentoGrid = () => {
                 </span>
                 <h3 className="text-xl md:text-2xl font-bold mt-1">{project.title}</h3>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
