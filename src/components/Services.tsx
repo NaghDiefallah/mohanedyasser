@@ -57,10 +57,18 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="glass-hover p-8 flex flex-col h-full group"
+              className="p-8 flex flex-col h-full group rounded-2xl backdrop-blur-xl transition-all duration-300 hover:border-primary/40"
+              style={{
+                background: 'hsl(0 0% 5% / 0.8)',
+                border: '1px solid hsl(0 0% 100% / 0.1)',
+                boxShadow: 'none'
+              }}
+              whileHover={{
+                boxShadow: '0 0 50px -15px hsl(142 100% 50% / 0.4)'
+              }}
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300 border border-primary/20">
                 <service.icon className="w-7 h-7 text-primary" />
               </div>
 
