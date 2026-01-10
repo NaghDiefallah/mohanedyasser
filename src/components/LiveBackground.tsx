@@ -3,9 +3,17 @@ import { motion } from "framer-motion";
 const LiveBackground = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+      {/* Deep radial gradient background - teal center fading to near black */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 40%, hsl(192 45% 18%) 0%, hsl(192 50% 8%) 50%, hsl(200 60% 4%) 100%)',
+        }}
+      />
+
       {/* Animated gradient orbs */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-30"
+        className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-25"
         style={{
           background: 'radial-gradient(circle, hsl(142 70% 45%) 0%, transparent 70%)',
           top: '-10%',
@@ -24,7 +32,7 @@ const LiveBackground = () => {
       />
       
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full blur-[100px] opacity-20"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[100px] opacity-15"
         style={{
           background: 'radial-gradient(circle, hsl(192 60% 40%) 0%, transparent 70%)',
           bottom: '10%',
@@ -43,7 +51,7 @@ const LiveBackground = () => {
       />
 
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full blur-[80px] opacity-15"
+        className="absolute w-[400px] h-[400px] rounded-full blur-[80px] opacity-10"
         style={{
           background: 'radial-gradient(circle, hsl(142 70% 45%) 0%, transparent 70%)',
           top: '40%',
@@ -84,7 +92,7 @@ const LiveBackground = () => {
 
       {/* Subtle grid lines */}
       <div 
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `
             linear-gradient(hsl(142 70% 45% / 0.3) 1px, transparent 1px),
@@ -96,7 +104,7 @@ const LiveBackground = () => {
 
       {/* Scanline effect */}
       <motion.div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.015]"
         style={{
           background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, hsl(0 0% 100% / 0.1) 2px, hsl(0 0% 100% / 0.1) 4px)',
         }}
@@ -110,11 +118,11 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Vignette overlay */}
+      {/* Strong vignette overlay - darker edges */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, hsl(192 45% 22% / 0.4) 100%)',
+          background: 'radial-gradient(ellipse at 50% 50%, transparent 20%, hsl(200 60% 4% / 0.7) 80%, hsl(200 60% 2%) 100%)',
         }}
       />
     </div>
