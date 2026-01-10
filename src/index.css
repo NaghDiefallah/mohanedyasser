@@ -6,46 +6,46 @@
 
 @layer base {
   :root {
-    --background: 0 0% 2%;
+    --background: 192 45% 22%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 6%;
+    --card: 192 40% 18%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 6%;
+    --popover: 192 40% 18%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 100% 50%;
-    --primary-foreground: 0 0% 2%;
+    --primary: 142 70% 45%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 0 0% 10%;
+    --secondary: 192 35% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 192 30% 20%;
+    --muted-foreground: 192 15% 65%;
 
-    --accent: 142 100% 50%;
-    --accent-foreground: 0 0% 2%;
+    --accent: 142 70% 45%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 142 100% 50%;
+    --border: 192 30% 28%;
+    --input: 192 30% 28%;
+    --ring: 142 70% 45%;
 
     --radius: 0.75rem;
 
     /* Custom properties */
-    --glow-primary: 142 100% 50%;
-    --glass-bg: 0 0% 8%;
-    --glass-border: 0 0% 20%;
-    --gradient-start: 142 100% 50%;
-    --gradient-end: 160 100% 55%;
+    --glow-primary: 142 70% 45%;
+    --glass-bg: 192 35% 16%;
+    --glass-border: 192 25% 32%;
+    --gradient-start: 142 70% 45%;
+    --gradient-end: 160 75% 50%;
   }
 
   .dark {
-    --background: 0 0% 2%;
+    --background: 192 45% 22%;
     --foreground: 0 0% 98%;
   }
 }
@@ -66,11 +66,11 @@
 }
 
 @layer components {
-  /* Glassmorphism - dark glass with subtle white border */
+  /* Glassmorphism - teal glass with subtle border */
   .glass {
     @apply backdrop-blur-xl rounded-xl;
-    background: hsl(0 0% 5% / 0.8);
-    border: 1px solid hsl(0 0% 100% / 0.1);
+    background: hsl(192 40% 14% / 0.85);
+    border: 1px solid hsl(192 25% 35% / 0.5);
   }
 
   .glass-hover {
@@ -78,7 +78,7 @@
   }
 
   .glass-hover:hover {
-    background: hsl(0 0% 8% / 0.9);
+    background: hsl(192 40% 16% / 0.95);
     border-color: hsl(var(--primary) / 0.4);
     box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
   }
@@ -121,9 +121,9 @@
     background: linear-gradient(
       135deg,
       hsl(var(--background)) 0%,
-      hsl(0 0% 6%) 25%,
-      hsl(var(--primary) / 0.08) 50%,
-      hsl(0 0% 6%) 75%,
+      hsl(192 40% 20%) 25%,
+      hsl(var(--primary) / 0.12) 50%,
+      hsl(192 40% 20%) 75%,
       hsl(var(--background)) 100%
     );
     background-size: 400% 400%;
