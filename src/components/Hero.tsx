@@ -4,13 +4,21 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-end pb-24 md:pb-32 overflow-hidden">
-      {/* Subtle gradient background */}
+    <section className="relative min-h-screen flex items-end pb-32 md:pb-40 overflow-hidden">
+      {/* Dark background */}
       <div className="absolute inset-0 bg-background" />
       
-      {/* Accent glow - top right */}
+      {/* Subtle neon glow - top right */}
       <div 
-        className="absolute top-0 right-0 w-[600px] h-[600px] opacity-20 blur-3xl pointer-events-none"
+        className="absolute top-0 right-0 w-[800px] h-[800px] opacity-30 blur-[120px] pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 60%)'
+        }}
+      />
+      
+      {/* Secondary glow - bottom left */}
+      <div 
+        className="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-15 blur-[100px] pointer-events-none"
         style={{
           background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)'
         }}
@@ -24,18 +32,18 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="text-primary font-medium mb-6 tracking-wide"
+            className="text-primary font-semibold mb-6 tracking-widest uppercase text-sm"
           >
             Video Editor & Motion Designer
           </motion.p>
 
-          {/* Main headline - stacked with mixed weights */}
-          <div className="space-y-2 md:space-y-0">
+          {/* Main headline - aggressive, cinematic */}
+          <div className="space-y-1 md:space-y-0">
             <motion.h1 
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-[clamp(2.5rem,8vw,6rem)] font-bold leading-[1.05] tracking-tight"
+              className="text-[clamp(2.5rem,10vw,7rem)] font-black leading-[0.95] tracking-tight text-foreground"
             >
               I craft stories
             </motion.h1>
@@ -43,7 +51,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-[clamp(2.5rem,8vw,6rem)] font-light leading-[1.05] tracking-tight text-muted-foreground"
+              className="text-[clamp(2.5rem,10vw,7rem)] font-black leading-[0.95] tracking-tight text-foreground text-glow"
             >
               through motion.
             </motion.h1>

@@ -6,46 +6,46 @@
 
 @layer base {
   :root {
-    --background: 192 65% 28%;
+    --background: 0 0% 2%;
     --foreground: 0 0% 98%;
 
-    --card: 192 60% 22%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 192 60% 22%;
+    --popover: 0 0% 6%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 70% 45%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 142 100% 50%;
+    --primary-foreground: 0 0% 2%;
 
-    --secondary: 192 55% 18%;
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 192 50% 24%;
-    --muted-foreground: 192 20% 70%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 142 70% 45%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 142 100% 50%;
+    --accent-foreground: 0 0% 2%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 192 40% 35%;
-    --input: 192 40% 35%;
-    --ring: 142 70% 45%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 142 100% 50%;
 
     --radius: 0.75rem;
 
     /* Custom properties */
-    --glow-primary: 142 70% 45%;
-    --glass-bg: 192 55% 20%;
-    --glass-border: 192 35% 40%;
-    --gradient-start: 142 70% 45%;
-    --gradient-end: 160 75% 50%;
+    --glow-primary: 142 100% 50%;
+    --glass-bg: 0 0% 8%;
+    --glass-border: 0 0% 20%;
+    --gradient-start: 142 100% 50%;
+    --gradient-end: 160 100% 55%;
   }
 
   .dark {
-    --background: 192 65% 28%;
+    --background: 0 0% 2%;
     --foreground: 0 0% 98%;
   }
 }
@@ -66,9 +66,11 @@
 }
 
 @layer components {
-  /* Glassmorphism */
+  /* Glassmorphism - dark glass with subtle white border */
   .glass {
-    @apply bg-card/60 backdrop-blur-xl border border-glass rounded-xl;
+    @apply backdrop-blur-xl rounded-xl;
+    background: hsl(0 0% 5% / 0.8);
+    border: 1px solid hsl(0 0% 100% / 0.1);
   }
 
   .glass-hover {
@@ -76,8 +78,9 @@
   }
 
   .glass-hover:hover {
-    @apply bg-card/80 border-primary/40;
-    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.3);
+    background: hsl(0 0% 8% / 0.9);
+    border-color: hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
   }
 
   /* Glow Effects */
@@ -97,7 +100,14 @@
 
   /* Text Gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-300;
+  }
+
+  /* Neon text glow */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.8), 
+                 0 0 40px hsl(var(--primary) / 0.5), 
+                 0 0 60px hsl(var(--primary) / 0.3);
   }
 
   /* Background noise */
@@ -111,9 +121,9 @@
     background: linear-gradient(
       135deg,
       hsl(var(--background)) 0%,
-      hsl(192 60% 25%) 25%,
-      hsl(var(--primary) / 0.15) 50%,
-      hsl(192 60% 25%) 75%,
+      hsl(0 0% 6%) 25%,
+      hsl(var(--primary) / 0.08) 50%,
+      hsl(0 0% 6%) 75%,
       hsl(var(--background)) 100%
     );
     background-size: 400% 400%;

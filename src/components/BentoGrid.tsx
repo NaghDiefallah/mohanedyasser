@@ -18,7 +18,7 @@ const projects: Project[] = [
     id: 1,
     title: "Brand Commercial",
     category: "Commercial",
-    thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=800&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     span: "md:col-span-2 md:row-span-2",
   },
@@ -26,7 +26,7 @@ const projects: Project[] = [
     id: 2,
     title: "Music Video",
     category: "Music",
-    thumbnail: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     span: "md:col-span-1 md:row-span-1",
   },
@@ -34,7 +34,7 @@ const projects: Project[] = [
     id: 3,
     title: "Documentary",
     category: "Film",
-    thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     span: "md:col-span-1 md:row-span-1",
   },
@@ -42,7 +42,7 @@ const projects: Project[] = [
     id: 4,
     title: "Social Campaign",
     category: "Social Media",
-    thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     span: "md:col-span-1 md:row-span-1",
   },
@@ -50,7 +50,7 @@ const projects: Project[] = [
     id: 5,
     title: "Product Launch",
     category: "Commercial",
-    thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     span: "md:col-span-2 md:row-span-1",
   },
@@ -58,7 +58,7 @@ const projects: Project[] = [
     id: 6,
     title: "Motion Reel",
     category: "Motion Graphics",
-    thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     span: "md:col-span-1 md:row-span-1",
   },
@@ -68,7 +68,7 @@ const BentoGrid = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-32 md:py-40 px-6">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
         <ScrollReveal className="text-center mb-16 space-y-4">
@@ -89,6 +89,10 @@ const BentoGrid = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className={`group relative overflow-hidden rounded-2xl cursor-pointer card-hover-scale ${project.span}`}
+              style={{
+                background: 'hsl(0 0% 5% / 0.8)',
+                border: '1px solid hsl(0 0% 100% / 0.1)'
+              }}
               onClick={() => setSelectedProject(project)}
             >
               {/* Thumbnail */}
@@ -98,15 +102,15 @@ const BentoGrid = () => {
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+              {/* Dark cinematic overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-70 group-hover:opacity-85 transition-opacity duration-300" />
 
               {/* Glow border on hover */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-primary/50 transition-colors duration-300" />
+              <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-primary/50 transition-colors duration-300" />
               <div 
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
-                  boxShadow: 'inset 0 0 60px -20px hsl(142 70% 45% / 0.3)'
+                  boxShadow: 'inset 0 0 80px -20px hsl(142 100% 50% / 0.3)'
                 }}
               />
 
