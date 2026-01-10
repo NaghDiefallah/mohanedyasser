@@ -90,8 +90,8 @@ const BentoGrid = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className={`group relative overflow-hidden rounded-2xl cursor-pointer card-hover-scale ${project.span}`}
               style={{
-                background: 'hsl(0 0% 5% / 0.8)',
-                border: '1px solid hsl(0 0% 100% / 0.1)'
+                background: 'hsl(192 40% 14% / 0.85)',
+                border: '1px solid hsl(192 25% 35% / 0.5)'
               }}
               onClick={() => setSelectedProject(project)}
             >
@@ -110,7 +110,7 @@ const BentoGrid = () => {
               <div 
                 className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                 style={{
-                  boxShadow: 'inset 0 0 80px -20px hsl(142 100% 50% / 0.3)'
+                  boxShadow: 'inset 0 0 80px -20px hsl(142 70% 45% / 0.3)'
                 }}
               />
 

@@ -59,12 +59,12 @@ const Services = () => {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="p-8 flex flex-col h-full group rounded-2xl backdrop-blur-xl transition-all duration-300 hover:border-primary/40"
               style={{
-                background: 'hsl(0 0% 5% / 0.8)',
-                border: '1px solid hsl(0 0% 100% / 0.1)',
+                background: 'hsl(192 40% 14% / 0.85)',
+                border: '1px solid hsl(192 25% 35% / 0.5)',
                 boxShadow: 'none'
               }}
               whileHover={{
-                boxShadow: '0 0 50px -15px hsl(142 100% 50% / 0.4)'
+                boxShadow: '0 0 50px -15px hsl(142 70% 45% / 0.4)'
               }}
             >
               {/* Icon */}
