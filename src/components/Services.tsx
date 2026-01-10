@@ -29,27 +29,34 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-24 px-6 relative">
+    <section className="py-32 md:py-40 px-6 relative">
       {/* Background accent */}
       <div 
         className="absolute inset-0 opacity-30"
         style={{
-          background: 'radial-gradient(ellipse at 50% 100%, hsl(142 70% 45% / 0.1) 0%, transparent 50%)'
+          background: 'radial-gradient(ellipse at 50% 100%, hsl(142 70% 45% / 0.08) 0%, transparent 50%)'
         }}
       />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-16 space-y-4">
-          <span className="text-primary uppercase tracking-widest text-sm font-semibold">Services</span>
-          <h2 className="text-4xl md:text-6xl font-black">What I Offer</h2>
+        <ScrollReveal className="text-center mb-20 space-y-4">
+          <span 
+            className="text-primary uppercase tracking-widest text-sm font-semibold"
+            style={{
+              textShadow: '0 0 15px hsl(142 70% 45% / 0.5)'
+            }}
+          >
+            Services
+          </span>
+          <h2 className="text-4xl md:text-6xl font-black text-white">What I Offer</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             End-to-end post-production services tailored to your vision and budget.
           </p>
         </ScrollReveal>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
@@ -57,14 +64,15 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="p-8 flex flex-col h-full group rounded-2xl backdrop-blur-xl transition-all duration-300 hover:border-primary/40"
+              className="p-8 flex flex-col h-full group rounded-2xl backdrop-blur-xl transition-all duration-300"
               style={{
-                background: 'hsl(192 40% 14% / 0.85)',
-                border: '1px solid hsl(192 25% 35% / 0.5)',
+                background: 'hsl(0 0% 100% / 0.05)',
+                border: '1px solid hsl(192 25% 35% / 0.3)',
                 boxShadow: 'none'
               }}
               whileHover={{
-                boxShadow: '0 0 50px -15px hsl(142 70% 45% / 0.4)'
+                boxShadow: '0 0 50px -15px hsl(142 70% 45% / 0.4)',
+                borderColor: 'hsl(142 70% 45% / 0.4)'
               }}
             >
               {/* Icon */}
@@ -73,7 +81,7 @@ const Services = () => {
               </div>
 
               {/* Content */}
-              <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
+              <h3 className="text-2xl font-bold mb-3 text-white">{service.title}</h3>
               <p className="text-muted-foreground mb-6 flex-grow">{service.description}</p>
 
               {/* Features */}

@@ -5,25 +5,6 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-end pb-32 md:pb-40 overflow-hidden">
-      {/* Dark background */}
-      <div className="absolute inset-0 bg-background" />
-      
-      {/* Subtle neon glow - top right */}
-      <div 
-        className="absolute top-0 right-0 w-[800px] h-[800px] opacity-30 blur-[120px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 60%)'
-        }}
-      />
-      
-      {/* Secondary glow - bottom left */}
-      <div 
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-15 blur-[100px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)'
-        }}
-      />
-
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 md:px-12">
         <div className="max-w-6xl">
@@ -33,17 +14,20 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="text-primary font-semibold mb-6 tracking-widest uppercase text-sm"
+            style={{
+              textShadow: '0 0 20px hsl(142 70% 45% / 0.6)'
+            }}
           >
             Video Editor & Motion Designer
           </motion.p>
 
-          {/* Main headline - aggressive, cinematic */}
+          {/* Main headline - white text with lime green glowing keywords */}
           <div className="space-y-1 md:space-y-0">
             <motion.h1 
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-[clamp(2.5rem,10vw,7rem)] font-black leading-[0.95] tracking-tight text-foreground"
+              className="text-[clamp(2.5rem,10vw,7rem)] font-black leading-[0.95] tracking-tight text-white"
             >
               I craft stories
             </motion.h1>
@@ -51,9 +35,17 @@ const Hero = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-[clamp(2.5rem,10vw,7rem)] font-black leading-[0.95] tracking-tight text-foreground text-glow"
+              className="text-[clamp(2.5rem,10vw,7rem)] font-black leading-[0.95] tracking-tight"
             >
-              through motion.
+              <span className="text-white">through </span>
+              <span 
+                className="text-primary"
+                style={{
+                  textShadow: '0 0 30px hsl(142 70% 45% / 0.8), 0 0 60px hsl(142 70% 45% / 0.5), 0 0 90px hsl(142 70% 45% / 0.3)'
+                }}
+              >
+                motion.
+              </span>
             </motion.h1>
           </div>
 
