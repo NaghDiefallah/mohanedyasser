@@ -111,13 +111,13 @@ const Hero = () => {
             className="order-1 lg:order-2 relative flex justify-center lg:justify-end"
           >
             <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
-              {/* Noir-style portrait with gradient mask and fade */}
+              {/* Noir-style portrait with dramatic gradient mask and fade */}
               <div 
                 className="relative"
                 style={{
-                  maskImage: 'linear-gradient(to bottom, black 40%, transparent 95%), linear-gradient(to right, transparent 0%, black 15%, black 100%)',
+                  maskImage: 'linear-gradient(to bottom, black 30%, transparent 90%), linear-gradient(to right, transparent 0%, transparent 20%, black 45%, black 100%)',
                   maskComposite: 'intersect',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 95%), linear-gradient(to right, transparent 0%, black 15%, black 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 30%, transparent 90%), linear-gradient(to right, transparent 0%, transparent 20%, black 45%, black 100%)',
                   WebkitMaskComposite: 'source-in',
                 }}
               >
@@ -126,16 +126,16 @@ const Hero = () => {
                   alt="Portrait"
                   className="w-full h-auto object-cover"
                   style={{
-                    filter: 'grayscale(100%) contrast(1.3) brightness(0.9)',
+                    filter: 'grayscale(100%) contrast(1.4) brightness(0.85)',
                   }}
                 />
               </div>
               
-              {/* Ambient glow behind the portrait */}
+              {/* Stronger ambient glow behind the portrait */}
               <div 
-                className="absolute inset-0 -z-10 blur-3xl opacity-30"
+                className="absolute inset-0 -z-10 blur-3xl opacity-40"
                 style={{
-                  background: 'radial-gradient(ellipse at center, hsl(142 70% 45% / 0.3), transparent 70%)',
+                  background: 'radial-gradient(ellipse at 70% 40%, hsl(142 70% 45% / 0.35), transparent 60%)',
                 }}
               />
             </div>
