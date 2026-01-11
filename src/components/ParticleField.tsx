@@ -120,16 +120,14 @@ const GlowOrbs = () => {
 
 const ParticleField = () => {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none">
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 60 }}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: 'transparent' }}
-      >
-        <Particles />
-        <GlowOrbs />
-      </Canvas>
-    </div>
+    <Canvas
+      camera={{ position: [0, 0, 5], fov: 60 }}
+      gl={{ antialias: true, alpha: true }}
+      style={{ background: 'transparent', width: '100%', height: '100%' }}
+    >
+      <Particles />
+      <GlowOrbs />
+    </Canvas>
   );
 };
 
