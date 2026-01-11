@@ -110,30 +110,39 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.3 }}
             className="order-1 lg:order-2 relative flex justify-center lg:justify-end"
           >
-            <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
+            <div className="relative w-full max-w-lg lg:max-w-xl xl:max-w-2xl translate-x-4 lg:translate-x-8">
               {/* Noir-style portrait with gradient mask and fade */}
               <div 
                 className="relative"
                 style={{
-                  maskImage: 'radial-gradient(ellipse 80% 70% at 60% 40%, black 30%, transparent 70%)',
-                  WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 60% 40%, black 30%, transparent 70%)',
+                  maskImage: 'radial-gradient(ellipse 85% 75% at 55% 40%, black 35%, transparent 75%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 55% 40%, black 35%, transparent 75%)',
                 }}
               >
                 <img 
                   src={heroPortrait}
                   alt="Portrait"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover scale-110"
                   style={{
                     filter: 'grayscale(100%) contrast(1.2) brightness(0.85)',
                   }}
                 />
               </div>
               
-              {/* Ambient glow behind the portrait */}
-              <div 
-                className="absolute inset-0 -z-10 blur-3xl opacity-30"
+              {/* Animated glow pulse behind the portrait */}
+              <motion.div 
+                className="absolute inset-0 -z-10 blur-3xl"
+                animate={{
+                  opacity: [0.2, 0.4, 0.2],
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 style={{
-                  background: 'radial-gradient(ellipse at center, hsl(142 70% 45% / 0.3), transparent 70%)',
+                  background: 'radial-gradient(ellipse at center, hsl(142 70% 45% / 0.4), transparent 60%)',
                 }}
               />
             </div>
