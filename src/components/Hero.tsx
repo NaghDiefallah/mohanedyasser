@@ -111,12 +111,12 @@ const Hero = () => {
             className="order-1 lg:order-2 relative flex justify-center lg:justify-end"
           >
             <div className="relative w-full max-w-lg lg:max-w-xl xl:max-w-2xl translate-x-4 lg:translate-x-8">
-              {/* Noir-style portrait with aggressive gradient mask - mysterious emergence */}
+              {/* Noir-style portrait with gradient mask and fade */}
               <div 
                 className="relative"
                 style={{
-                  maskImage: 'radial-gradient(ellipse 75% 55% at 50% 25%, black 20%, transparent 70%)',
-                  WebkitMaskImage: 'radial-gradient(ellipse 75% 55% at 50% 25%, black 20%, transparent 70%)',
+                  maskImage: 'radial-gradient(ellipse 85% 75% at 55% 40%, black 35%, transparent 75%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 55% 40%, black 35%, transparent 75%)',
                 }}
               >
                 <img 
@@ -124,7 +124,7 @@ const Hero = () => {
                   alt="Portrait"
                   className="w-full h-auto object-cover scale-110"
                   style={{
-                    filter: 'grayscale(100%) contrast(1.5) brightness(0.75)',
+                    filter: 'grayscale(100%) contrast(1.2) brightness(0.85)',
                   }}
                 />
               </div>

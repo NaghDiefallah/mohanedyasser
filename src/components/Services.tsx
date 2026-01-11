@@ -55,7 +55,7 @@ const Services = () => {
           </p>
         </ScrollReveal>
 
-        {/* Services Grid - Glassmorphism Cards */}
+        {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
@@ -64,17 +64,15 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="relative p-8 flex flex-col h-full group rounded-2xl transition-all duration-500"
+              className="p-8 flex flex-col h-full group rounded-2xl backdrop-blur-xl transition-all duration-300"
               style={{
-                background: 'rgba(15, 35, 35, 0.4)',
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
-                border: '1px solid rgba(100, 150, 150, 0.15)',
-                boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.05), 0 4px 24px rgba(0,0,0,0.2)'
+                background: 'hsl(0 0% 100% / 0.05)',
+                border: '1px solid hsl(192 25% 35% / 0.3)',
+                boxShadow: 'none'
               }}
               whileHover={{
-                boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.05), 0 0 40px -10px hsl(142 70% 45% / 0.5), 0 4px 24px rgba(0,0,0,0.3)',
-                borderColor: 'hsl(142 70% 45% / 0.5)'
+                boxShadow: '0 0 50px -15px hsl(142 70% 45% / 0.4)',
+                borderColor: 'hsl(142 70% 45% / 0.4)'
               }}
             >
               {/* Icon */}
