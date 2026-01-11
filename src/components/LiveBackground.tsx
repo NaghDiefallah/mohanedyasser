@@ -29,7 +29,7 @@ const LiveBackground = () => {
       ref={containerRef}
       className="fixed inset-0 pointer-events-none overflow-hidden z-0"
       style={{
-        background: 'hsl(200 60% 3%)',
+        background: 'hsl(192 35% 22%)',
       }}
     >
       {/* Aurora Layer 1 - Large teal blob, top-right */}
