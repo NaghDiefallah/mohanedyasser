@@ -115,10 +115,8 @@ const Hero = () => {
               <div 
                 className="relative"
                 style={{
-                  maskImage: 'linear-gradient(to bottom, black 40%, transparent 95%), linear-gradient(to right, transparent 0%, black 15%, black 100%)',
-                  maskComposite: 'intersect',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 95%), linear-gradient(to right, transparent 0%, black 15%, black 100%)',
-                  WebkitMaskComposite: 'source-in',
+                  maskImage: 'radial-gradient(ellipse 80% 70% at 60% 40%, black 30%, transparent 70%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse 80% 70% at 60% 40%, black 30%, transparent 70%)',
                 }}
               >
                 <img 
@@ -126,7 +124,7 @@ const Hero = () => {
                   alt="Portrait"
                   className="w-full h-auto object-cover"
                   style={{
-                    filter: 'grayscale(100%) contrast(1.3) brightness(0.9)',
+                    filter: 'grayscale(100%) contrast(1.2) brightness(0.85)',
                   }}
                 />
               </div>
