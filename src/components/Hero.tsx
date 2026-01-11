@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Suspense, lazy } from "react";
+
+const ParticleField = lazy(() => import("./ParticleField"));
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* 3D Particle Effect Background */}
+      <Suspense fallback={null}>
+        <ParticleField />
+      </Suspense>
       {/* Content - Centered Layout */}
       <div className="relative z-10 container mx-auto px-6 md:px-12">
         <div className="max-w-4xl mx-auto text-center">
