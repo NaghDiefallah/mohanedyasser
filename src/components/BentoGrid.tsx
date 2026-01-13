@@ -66,35 +66,71 @@ const projects: Project[] = [
   },
 ];
 
+// Animated doodle wrapper
+const AnimatedDoodle = ({ children, animation = "wiggle", delay = 0 }: { children: React.ReactNode; animation?: "wiggle" | "pulse" | "bounce" | "spin"; delay?: number }) => {
+  const animations = {
+    wiggle: {
+      rotate: [0, -8, 8, -5, 5, 0],
+      transition: { duration: 0.6, ease: "easeInOut" as const, delay }
+    },
+    pulse: {
+      scale: [1, 1.2, 1],
+      opacity: [0.7, 1, 0.7],
+      transition: { duration: 0.8, ease: "easeInOut" as const, delay }
+    },
+    bounce: {
+      y: [0, -6, 0],
+      transition: { duration: 0.5, ease: "easeInOut" as const, delay }
+    },
+    spin: {
+      rotate: [0, 15, -15, 0],
+      transition: { duration: 0.7, ease: "easeInOut" as const, delay }
+    }
+  };
+
+  return (
+    <motion.div
+      whileHover={animations[animation]}
+      className="inline-block"
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 // Doodle components
-const HeartDoodle = ({ className }: { className?: string }) => (
-  <svg className={className} width="30" height="28" viewBox="0 0 30 28" fill="none">
-    <path
-      d="M 15 26 C 12 23, 3 17, 3 9 C 3 4, 7 2, 10 2 C 12 2, 14 3, 15 5 C 16 3, 18 2, 20 2 C 23 2, 27 4, 27 9 C 27 17, 18 23, 15 26 Z"
-      stroke="hsl(142 70% 45%)"
-      strokeWidth="2"
-      strokeLinecap="round"
-      fill="none"
-      className="drop-shadow-[0_0_6px_hsl(142_70%_45%_/_0.6)]"
-    />
-  </svg>
+const HeartDoodle = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
+  <AnimatedDoodle animation="pulse" delay={delay}>
+    <svg className={className} width="30" height="28" viewBox="0 0 30 28" fill="none">
+      <path
+        d="M 15 26 C 12 23, 3 17, 3 9 C 3 4, 7 2, 10 2 C 12 2, 14 3, 15 5 C 16 3, 18 2, 20 2 C 23 2, 27 4, 27 9 C 27 17, 18 23, 15 26 Z"
+        stroke="hsl(142 70% 45%)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        fill="none"
+        className="drop-shadow-[0_0_6px_hsl(142_70%_45%_/_0.6)]"
+      />
+    </svg>
+  </AnimatedDoodle>
 );
 
-const StarDoodle = ({ className }: { className?: string }) => (
-  <svg className={className} width="28" height="28" viewBox="0 0 28 28" fill="none">
-    <path
-      d="M 14 2 L 16 10 L 25 10 L 18 15 L 21 24 L 14 19 L 7 24 L 10 15 L 3 10 L 12 10 Z"
-      stroke="white"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      fill="none"
-      className="drop-shadow-[0_0_4px_rgba(255,255,255,0.5)]"
-    />
-  </svg>
+const StarDoodle = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
+  <AnimatedDoodle animation="spin" delay={delay}>
+    <svg className={className} width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path
+        d="M 14 2 L 16 10 L 25 10 L 18 15 L 21 24 L 14 19 L 7 24 L 10 15 L 3 10 L 12 10 Z"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        className="drop-shadow-[0_0_4px_rgba(255,255,255,0.5)]"
+      />
+    </svg>
+  </AnimatedDoodle>
 );
 
-const ArrowDoodle = ({ className, direction = "right" }: { className?: string; direction?: "right" | "left" | "up" | "down" }) => {
+const ArrowDoodle = ({ className, direction = "right", delay = 0 }: { className?: string; direction?: "right" | "left" | "up" | "down"; delay?: number }) => {
   const paths: Record<string, string> = {
     right: "M 2 15 C 8 14, 18 16, 28 15 M 22 10 L 28 15 L 22 20",
     left: "M 28 15 C 22 14, 12 16, 2 15 M 8 10 L 2 15 L 8 20",
@@ -102,29 +138,56 @@ const ArrowDoodle = ({ className, direction = "right" }: { className?: string; d
     down: "M 15 2 C 14 8, 16 18, 15 28 M 10 22 L 15 28 L 20 22",
   };
   return (
-    <svg className={className} width="30" height="30" viewBox="0 0 30 30" fill="none">
-      <path
-        d={paths[direction]}
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="drop-shadow-[0_0_4px_rgba(255,255,255,0.4)]"
-      />
-    </svg>
+    <AnimatedDoodle animation="bounce" delay={delay}>
+      <svg className={className} width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <path
+          d={paths[direction]}
+          stroke="white"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="drop-shadow-[0_0_4px_rgba(255,255,255,0.4)]"
+        />
+      </svg>
+    </AnimatedDoodle>
   );
 };
 
-const ScribbleDoodle = ({ className, variant = 1 }: { className?: string; variant?: number }) => {
+const ScribbleDoodle = ({ className, variant = 1, delay = 0 }: { className?: string; variant?: number; delay?: number }) => {
   const paths = [
     "M 2 15 C 8 5, 15 25, 22 10 C 28 0, 35 20, 40 15",
     "M 5 5 C 10 10, 5 15, 10 20 C 15 25, 20 15, 25 20",
     "M 2 10 Q 10 2, 20 12 Q 30 22, 40 10",
   ];
   return (
-    <svg className={className} width="42" height="28" viewBox="0 0 42 28" fill="none">
+    <AnimatedDoodle animation="wiggle" delay={delay}>
+      <svg className={className} width="42" height="28" viewBox="0 0 42 28" fill="none">
+        <path
+          d={paths[variant % paths.length]}
+          stroke="hsl(142 70% 45%)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          fill="none"
+          className="drop-shadow-[0_0_6px_hsl(142_70%_45%_/_0.5)]"
+        />
+      </svg>
+    </AnimatedDoodle>
+  );
+};
+
+const CrossDoodle = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
+  <AnimatedDoodle animation="spin" delay={delay}>
+    <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M 3 3 L 17 17 M 17 3 L 3 17" stroke="white" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  </AnimatedDoodle>
+);
+
+const CircleDoodle = ({ className, delay = 0 }: { className?: string; delay?: number }) => (
+  <AnimatedDoodle animation="pulse" delay={delay}>
+    <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none">
       <path
-        d={paths[variant % paths.length]}
+        d="M 16 3 C 25 2, 30 10, 29 16 C 28 24, 22 30, 16 29 C 8 28, 2 22, 3 16 C 4 8, 10 3, 16 3"
         stroke="hsl(142 70% 45%)"
         strokeWidth="2"
         strokeLinecap="round"
@@ -132,26 +195,7 @@ const ScribbleDoodle = ({ className, variant = 1 }: { className?: string; varian
         className="drop-shadow-[0_0_6px_hsl(142_70%_45%_/_0.5)]"
       />
     </svg>
-  );
-};
-
-const CrossDoodle = ({ className }: { className?: string }) => (
-  <svg className={className} width="20" height="20" viewBox="0 0 20 20" fill="none">
-    <path d="M 3 3 L 17 17 M 17 3 L 3 17" stroke="white" strokeWidth="2" strokeLinecap="round" />
-  </svg>
-);
-
-const CircleDoodle = ({ className }: { className?: string }) => (
-  <svg className={className} width="32" height="32" viewBox="0 0 32 32" fill="none">
-    <path
-      d="M 16 3 C 25 2, 30 10, 29 16 C 28 24, 22 30, 16 29 C 8 28, 2 22, 3 16 C 4 8, 10 3, 16 3"
-      stroke="hsl(142 70% 45%)"
-      strokeWidth="2"
-      strokeLinecap="round"
-      fill="none"
-      className="drop-shadow-[0_0_6px_hsl(142_70%_45%_/_0.5)]"
-    />
-  </svg>
+  </AnimatedDoodle>
 );
 
 // Doodle configurations for each card
