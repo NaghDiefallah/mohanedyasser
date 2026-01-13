@@ -93,6 +93,92 @@ const ArrowDoodle = () => (
   </motion.svg>
 );
 
+// Spray paint splatter effect
+const SpraySplatter = ({ className = "" }: { className?: string }) => (
+  <motion.svg 
+    viewBox="0 0 100 100" 
+    className={`w-24 h-24 ${className}`}
+    fill="currentColor"
+    initial={{ scale: 0, opacity: 0 }}
+    animate={{ scale: 1, opacity: 0.6 }}
+    transition={{ duration: 0.5, ease: "easeOut" }}
+  >
+    <circle cx="50" cy="50" r="18" className="text-primary" />
+    <circle cx="30" cy="35" r="6" className="text-primary" />
+    <circle cx="72" cy="40" r="8" className="text-primary" />
+    <circle cx="25" cy="60" r="4" className="text-primary" />
+    <circle cx="75" cy="65" r="5" className="text-primary" />
+    <circle cx="40" cy="75" r="7" className="text-primary" />
+    <circle cx="65" cy="25" r="4" className="text-primary" />
+    <circle cx="20" cy="45" r="3" className="text-primary" />
+    <circle cx="80" cy="55" r="3" className="text-primary" />
+    <circle cx="55" cy="80" r="5" className="text-primary" />
+    <circle cx="35" cy="22" r="2" className="text-primary" />
+    <circle cx="85" cy="35" r="2" className="text-primary" />
+    <circle cx="15" cy="70" r="2" className="text-primary" />
+    <circle cx="60" cy="15" r="3" className="text-primary" />
+    <circle cx="45" cy="30" r="2" className="text-primary" />
+    <circle cx="70" cy="75" r="2" className="text-primary" />
+  </motion.svg>
+);
+
+// Dripping ink effect
+const DrippingInk = ({ className = "" }: { className?: string }) => (
+  <motion.svg 
+    viewBox="0 0 40 120" 
+    className={`w-10 h-28 ${className}`}
+    fill="currentColor"
+    initial={{ scaleY: 0, originY: 0 }}
+    animate={{ scaleY: 1 }}
+    transition={{ duration: 1.2, ease: "easeOut" }}
+  >
+    <path 
+      d="M5 0 L35 0 L35 60 Q35 80 30 90 Q28 100 25 110 Q22 118 20 120 Q18 118 15 110 Q12 100 10 90 Q5 80 5 60 Z" 
+      className="text-primary"
+    />
+    <motion.circle 
+      cx="20" cy="115" r="4" 
+      className="text-primary"
+      animate={{ y: [0, 20, 0], opacity: [1, 0, 1] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+    />
+  </motion.svg>
+);
+
+// Small ink drops
+const InkDrops = ({ className = "" }: { className?: string }) => (
+  <motion.svg 
+    viewBox="0 0 60 80" 
+    className={`w-14 h-20 ${className}`}
+    fill="currentColor"
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 0.7, y: 0 }}
+    transition={{ duration: 0.6, ease: "easeOut" }}
+  >
+    <motion.ellipse 
+      cx="15" cy="20" rx="8" ry="12" 
+      className="text-primary"
+      animate={{ y: [0, 5, 0] }}
+      transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.ellipse 
+      cx="40" cy="35" rx="6" ry="10" 
+      className="text-primary"
+      animate={{ y: [0, 8, 0] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+    />
+    <motion.ellipse 
+      cx="25" cy="55" rx="10" ry="15" 
+      className="text-primary"
+      animate={{ y: [0, 3, 0] }}
+      transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+    />
+    <motion.circle cx="50" cy="15" r="4" className="text-primary" />
+    <motion.circle cx="8" cy="45" r="3" className="text-primary" />
+    <motion.circle cx="48" cy="60" r="5" className="text-primary" />
+  </motion.svg>
+);
+
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -125,6 +211,30 @@ const Hero = () => {
             {/* Sparkles doodle */}
             <div className="absolute top-1/3 -right-12 z-20">
               <SparklesDoodle />
+            </div>
+
+            {/* Spray paint splatters */}
+            <div className="absolute -bottom-6 -left-12 z-10 opacity-50">
+              <SpraySplatter />
+            </div>
+            <div className="absolute top-10 -right-16 z-10 opacity-40 rotate-45">
+              <SpraySplatter className="w-16 h-16" />
+            </div>
+
+            {/* Dripping ink effects */}
+            <div className="absolute -bottom-10 left-1/4 z-10 opacity-70">
+              <DrippingInk />
+            </div>
+            <div className="absolute -bottom-6 right-1/4 z-10 opacity-50">
+              <DrippingInk className="w-8 h-24" />
+            </div>
+
+            {/* Ink drops */}
+            <div className="absolute bottom-1/3 -right-16 z-10">
+              <InkDrops />
+            </div>
+            <div className="absolute top-20 -left-14 z-10 opacity-60 -rotate-12">
+              <InkDrops className="w-12 h-16" />
             </div>
 
             {/* Portrait glow */}
