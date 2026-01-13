@@ -3,80 +3,162 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import heroPortrait from "@/assets/hero-portrait.png";
 
-// Hand-drawn doodle SVG components
+// Simple animated doodle components
 const CrownDoodle = () => (
-  <svg viewBox="0 0 60 40" className="w-16 h-12" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 35 L10 15 L20 25 L30 8 L40 25 L50 15 L55 35 Z" className="text-primary" />
-    <circle cx="10" cy="12" r="3" className="fill-primary text-primary" />
-    <circle cx="30" cy="5" r="3" className="fill-primary text-primary" />
-    <circle cx="50" cy="12" r="3" className="fill-primary text-primary" />
-  </svg>
+  <motion.svg 
+    viewBox="0 0 80 50" 
+    className="w-20 h-14" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="3" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    animate={{ y: [-2, 2, -2], rotate: [-2, 2, -2] }}
+    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+  >
+    <path d="M10 40 L18 18 L30 30 L40 10 L50 30 L62 18 L70 40" className="text-primary" />
+    <path d="M10 40 L70 40" className="text-primary" />
+    <circle cx="18" cy="15" r="3" className="fill-primary text-primary" />
+    <circle cx="40" cy="7" r="3" className="fill-primary text-primary" />
+    <circle cx="62" cy="15" r="3" className="fill-primary text-primary" />
+  </motion.svg>
 );
 
 const HeartDoodle = () => (
-  <svg viewBox="0 0 40 40" className="w-10 h-10" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-    <path d="M20 35 C5 25 5 12 12 8 C18 5 20 10 20 15 C20 10 22 5 28 8 C35 12 35 25 20 35 Z" className="text-primary fill-primary/30" />
-  </svg>
+  <motion.svg 
+    viewBox="0 0 50 50" 
+    className="w-12 h-12" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="3" 
+    strokeLinecap="round"
+    animate={{ scale: [1, 1.15, 1] }}
+    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+  >
+    <path d="M25 42 C8 28 8 15 15 10 C22 6 25 12 25 18 C25 12 28 6 35 10 C42 15 42 28 25 42 Z" className="text-primary fill-primary/20" />
+  </motion.svg>
 );
 
 const StarDoodle = () => (
-  <svg viewBox="0 0 40 40" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-    <path d="M20 5 L23 15 L33 15 L25 22 L28 33 L20 26 L12 33 L15 22 L7 15 L17 15 Z" className="text-primary" />
-  </svg>
+  <motion.svg 
+    viewBox="0 0 50 50" 
+    className="w-10 h-10" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2.5" 
+    strokeLinecap="round"
+    animate={{ rotate: 360 }}
+    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+  >
+    <path d="M25 5 L29 18 L42 18 L31 27 L35 42 L25 32 L15 42 L19 27 L8 18 L21 18 Z" className="text-primary" />
+  </motion.svg>
 );
 
-const TicTacToeDoodle = () => (
-  <svg viewBox="0 0 50 50" className="w-14 h-14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-    <line x1="17" y1="5" x2="17" y2="45" className="text-muted-foreground/60" />
-    <line x1="33" y1="5" x2="33" y2="45" className="text-muted-foreground/60" />
-    <line x1="5" y1="17" x2="45" y2="17" className="text-muted-foreground/60" />
-    <line x1="5" y1="33" x2="45" y2="33" className="text-muted-foreground/60" />
-    {/* X marks */}
-    <line x1="7" y1="7" x2="14" y2="14" className="text-primary" strokeWidth="2.5" />
-    <line x1="14" y1="7" x2="7" y2="14" className="text-primary" strokeWidth="2.5" />
-    <line x1="36" y1="20" x2="43" y2="27" className="text-primary" strokeWidth="2.5" />
-    <line x1="43" y1="20" x2="36" y2="27" className="text-primary" strokeWidth="2.5" />
-    {/* O marks */}
-    <circle cx="25" cy="25" r="5" className="text-muted-foreground/80" strokeWidth="2" />
-    <circle cx="10" cy="40" r="4" className="text-muted-foreground/80" strokeWidth="2" />
-  </svg>
-);
-
-const ScribbleLine = () => (
-  <svg viewBox="0 0 100 20" className="w-24 h-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-    <path d="M5 10 Q20 5 35 12 T65 8 T95 10" className="text-muted-foreground/40" />
-  </svg>
+const SparklesDoodle = () => (
+  <motion.svg 
+    viewBox="0 0 60 60" 
+    className="w-14 h-14" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round"
+    animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
+    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+  >
+    <path d="M30 10 L30 20" className="text-primary" />
+    <path d="M30 40 L30 50" className="text-primary" />
+    <path d="M10 30 L20 30" className="text-primary" />
+    <path d="M40 30 L50 30" className="text-primary" />
+    <path d="M16 16 L22 22" className="text-primary" />
+    <path d="M38 38 L44 44" className="text-primary" />
+    <path d="M16 44 L22 38" className="text-primary" />
+    <path d="M38 22 L44 16" className="text-primary" />
+  </motion.svg>
 );
 
 const ArrowDoodle = () => (
-  <svg viewBox="0 0 60 30" className="w-16 h-8" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M5 15 Q25 8 45 15" className="text-primary" />
-    <path d="M38 8 L48 15 L38 22" className="text-primary" />
-  </svg>
+  <motion.svg 
+    viewBox="0 0 80 40" 
+    className="w-20 h-10" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="3" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    animate={{ x: [0, 5, 0] }}
+    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+  >
+    <path d="M5 20 Q30 10 55 20" className="text-primary" />
+    <path d="M48 12 L58 20 L48 28" className="text-primary" />
+  </motion.svg>
 );
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Grunge texture overlay */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <div className="absolute inset-0 bg-noise" />
-      </div>
-
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <div className="relative z-10 container mx-auto px-6 md:px-12 py-20">
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
           
-          {/* Left side - Text content */}
-          <div className="relative z-20 order-2 lg:order-1">
-            {/* Eyebrow with arrow */}
+          {/* Left side - Portrait */}
+          <motion.div 
+            className="relative flex-shrink-0"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Crown above portrait */}
+            <div className="absolute -top-16 left-1/2 -translate-x-1/2 z-20">
+              <CrownDoodle />
+            </div>
+
+            {/* Star doodle top-right */}
+            <div className="absolute -top-4 -right-8 z-20">
+              <StarDoodle />
+            </div>
+
+            {/* Heart doodle bottom-left */}
+            <div className="absolute bottom-20 -left-10 z-20">
+              <HeartDoodle />
+            </div>
+
+            {/* Sparkles doodle */}
+            <div className="absolute top-1/3 -right-12 z-20">
+              <SparklesDoodle />
+            </div>
+
+            {/* Portrait glow */}
+            <div 
+              className="absolute inset-0 blur-[80px] opacity-40 -z-10"
+              style={{
+                background: 'radial-gradient(circle, hsl(var(--primary) / 0.6) 0%, transparent 70%)'
+              }}
+            />
+            
+            {/* Portrait image */}
+            <div className="relative group">
+              <img 
+                src={heroPortrait}
+                alt="Video Editor Portrait"
+                className="w-[260px] sm:w-[320px] lg:w-[380px] h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                style={{
+                  filter: 'contrast(1.1)',
+                  maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)'
+                }}
+              />
+            </div>
+          </motion.div>
+
+          {/* Right side - Text content */}
+          <div className="relative flex-1 text-center lg:text-left">
+            {/* Eyebrow */}
             <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex items-center justify-center lg:justify-start gap-3 mb-6"
             >
-              <span className="text-primary font-semibold tracking-widest uppercase text-xs">
+              <span className="text-primary font-semibold tracking-[0.2em] uppercase text-xs">
                 Video Editor & Motion Designer
               </span>
               <ArrowDoodle />
@@ -86,174 +168,88 @@ const Hero = () => {
             <motion.div 
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="relative"
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="relative mb-8"
             >
               <h1 
-                className="text-[clamp(4rem,15vw,10rem)] leading-[0.85] text-foreground uppercase"
+                className="text-[clamp(5rem,18vw,14rem)] leading-[0.8] text-foreground uppercase"
                 style={{
                   fontFamily: "'Permanent Marker', cursive",
                   letterSpacing: '0.02em',
-                  textShadow: '4px 4px 0px hsl(var(--primary) / 0.4), 8px 8px 0px hsl(var(--primary) / 0.2)'
+                  textShadow: '6px 6px 0px hsl(var(--primary) / 0.4), 12px 12px 0px hsl(var(--primary) / 0.15)'
                 }}
               >
                 EDITOR
               </h1>
               
-              {/* Decorative scribble under text */}
-              <motion.div 
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="absolute -bottom-2 left-0 origin-left"
+              {/* Underline scribble */}
+              <motion.svg 
+                viewBox="0 0 300 20" 
+                className="w-full max-w-md h-6 mt-2"
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="4" 
+                strokeLinecap="round"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
               >
-                <svg viewBox="0 0 200 15" className="w-48 h-4" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-                  <path d="M5 8 Q50 3 100 10 T195 7" className="text-primary" />
-                </svg>
-              </motion.div>
+                <motion.path 
+                  d="M10 10 Q75 5 150 12 T290 8" 
+                  className="text-primary"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 0.8, delay: 0.7 }}
+                />
+              </motion.svg>
             </motion.div>
 
             {/* Description */}
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 text-base text-muted-foreground max-w-md leading-relaxed"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed mb-10"
             >
               Turning raw footage into cinematic experiences with DaVinci Resolve & After Effects.
             </motion.p>
 
-            {/* CTA with doodle */}
+            {/* CTA */}
             <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-8 flex items-center gap-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 mb-12"
             >
-              <Button variant="hero" size="lg" className="group gap-3">
+              <Button variant="hero" size="xl" className="group gap-3 text-lg px-10">
                 See my work
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Button>
               
-              {/* Heart doodle next to CTA */}
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                  rotate: [-5, 5, -5]
-                }}
-                transition={{ 
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              >
-                <HeartDoodle />
-              </motion.div>
+              <Button variant="outline" size="xl" className="gap-3 text-lg px-10 border-primary/30 hover:border-primary">
+                Let's talk
+              </Button>
             </motion.div>
 
             {/* Stats row */}
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="mt-12 flex gap-10 text-sm"
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="flex justify-center lg:justify-start gap-12"
             >
-              <div>
-                <span className="block text-2xl font-bold text-foreground">50+</span>
-                <span className="text-muted-foreground text-xs uppercase tracking-wide">Projects</span>
+              <div className="text-center lg:text-left">
+                <span className="block text-3xl font-bold text-foreground">50+</span>
+                <span className="text-muted-foreground text-xs uppercase tracking-wider">Projects</span>
               </div>
-              <div>
-                <span className="block text-2xl font-bold text-foreground">4 yrs</span>
-                <span className="text-muted-foreground text-xs uppercase tracking-wide">Experience</span>
+              <div className="text-center lg:text-left">
+                <span className="block text-3xl font-bold text-foreground">4 yrs</span>
+                <span className="text-muted-foreground text-xs uppercase tracking-wider">Experience</span>
               </div>
-              <div className="hidden sm:block">
-                <span className="block text-2xl font-bold text-foreground">24h</span>
-                <span className="text-muted-foreground text-xs uppercase tracking-wide">Response</span>
+              <div className="text-center lg:text-left">
+                <span className="block text-3xl font-bold text-foreground">24h</span>
+                <span className="text-muted-foreground text-xs uppercase tracking-wider">Response</span>
               </div>
-            </motion.div>
-          </div>
-
-          {/* Right side - Portrait with doodles */}
-          <div className="relative order-1 lg:order-2 flex justify-center lg:justify-end">
-            {/* Crown doodle above head */}
-            <motion.div 
-              className="absolute -top-8 left-1/2 -translate-x-1/2 lg:left-auto lg:right-1/3 z-30"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <motion.div
-                animate={{ y: [-3, 3, -3], rotate: [-2, 2, -2] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <CrownDoodle />
-              </motion.div>
-            </motion.div>
-
-            {/* Tic-tac-toe doodle */}
-            <motion.div 
-              className="absolute top-10 -right-4 lg:right-0 z-30"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1 }}
-            >
-              <motion.div
-                animate={{ rotate: [-3, 3, -3] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <TicTacToeDoodle />
-              </motion.div>
-            </motion.div>
-
-            {/* Star doodles */}
-            <motion.div 
-              className="absolute top-1/4 -left-4 lg:left-8 z-30"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-            >
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <StarDoodle />
-              </motion.div>
-            </motion.div>
-
-            {/* Scribble lines */}
-            <motion.div 
-              className="absolute bottom-1/4 -left-8 lg:left-0 z-30 opacity-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-            >
-              <ScribbleLine />
-            </motion.div>
-
-            {/* Portrait image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative"
-            >
-              {/* Glow behind portrait */}
-              <div 
-                className="absolute inset-0 blur-3xl opacity-30"
-                style={{
-                  background: 'radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)'
-                }}
-              />
-              
-              <img 
-                src={heroPortrait}
-                alt="Video Editor Portrait"
-                className="relative z-10 w-[280px] sm:w-[340px] lg:w-[420px] h-auto object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                style={{
-                  filter: 'contrast(1.1)',
-                  maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
-                }}
-              />
             </motion.div>
           </div>
         </div>
