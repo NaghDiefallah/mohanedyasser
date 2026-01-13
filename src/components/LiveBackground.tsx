@@ -29,24 +29,23 @@ const LiveBackground = () => {
       ref={containerRef}
       className="fixed inset-0 pointer-events-none overflow-hidden z-0"
       style={{
-        background: 'hsl(218 55% 12%)',
+        background: 'linear-gradient(180deg, hsl(218 55% 12%) 0%, hsl(215 55% 25%) 40%, hsl(207 65% 45%) 70%, hsl(200 80% 70%) 100%)',
       }}
     >
-      {/* Deep navy layer 1 - very slow drift, bottom heavy */}
+      {/* Deep navy overlay at top for depth */}
       <motion.div
         className="absolute"
         style={{
           width: '150vw',
-          height: '120vh',
-          bottom: '-40%',
+          height: '60vh',
+          top: '-10%',
           left: '-25%',
-          background: 'radial-gradient(ellipse 80% 60% at 40% 80%, hsl(218 60% 8% / 0.9) 0%, transparent 50%)',
-          filter: 'blur(80px)',
+          background: 'radial-gradient(ellipse 100% 80% at 50% 0%, hsl(218 60% 8% / 0.7) 0%, transparent 60%)',
+          filter: 'blur(40px)',
         }}
         animate={{
-          x: [0, 60, -30, 0],
-          y: [0, -20, 10, 0],
-          scale: [1, 1.1, 1.05, 1],
+          x: [0, 30, -20, 0],
+          scale: [1, 1.05, 1.02, 1],
         }}
         transition={{
           duration: 45,
@@ -55,45 +54,20 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Deep navy layer 2 - darker drift, top area */}
+      {/* Mid-blue glow band */}
       <motion.div
         className="absolute"
         style={{
           width: '140vw',
-          height: '100vh',
-          top: '-30%',
-          right: '-30%',
-          background: 'radial-gradient(ellipse 70% 50% at 60% 30%, hsl(220 50% 6% / 0.8) 0%, transparent 55%)',
-          filter: 'blur(100px)',
+          height: '50vh',
+          top: '30%',
+          left: '-20%',
+          background: 'radial-gradient(ellipse 100% 60% at 50% 50%, hsl(210 60% 35% / 0.4) 0%, transparent 70%)',
+          filter: 'blur(60px)',
         }}
         animate={{
-          x: [0, -50, 25, 0],
-          y: [0, 30, -15, 0],
-          scale: [1, 1.08, 0.98, 1],
-        }}
-        transition={{
-          duration: 50,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* Mid-blue aurora layer - subtle color injection */}
-      <motion.div
-        className="absolute"
-        style={{
-          width: '120vw',
-          height: '100vh',
-          top: '0%',
-          left: '-10%',
-          background: 'radial-gradient(ellipse 60% 80% at 30% 50%, hsl(215 65% 35% / 0.25) 0%, transparent 50%)',
-          filter: 'blur(120px)',
-        }}
-        animate={{
-          x: [0, 80, 40, 0],
-          y: [0, -40, 20, 0],
-          scale: [1, 1.15, 1.08, 1],
-          opacity: [0.6, 1, 0.7, 0.6],
+          x: [0, -40, 20, 0],
+          y: [0, 20, -10, 0],
         }}
         transition={{
           duration: 35,
@@ -102,21 +76,20 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Sky blue accent glow - right side */}
+      {/* Light sky blue glow at bottom */}
       <motion.div
         className="absolute"
         style={{
-          width: '80vw',
-          height: '80vh',
-          top: '10%',
-          right: '-10%',
-          background: 'radial-gradient(ellipse 50% 70% at 80% 40%, hsl(200 85% 75% / 0.12) 0%, transparent 50%)',
-          filter: 'blur(100px)',
+          width: '120vw',
+          height: '50vh',
+          bottom: '-10%',
+          left: '-10%',
+          background: 'radial-gradient(ellipse 80% 70% at 50% 100%, hsl(200 85% 75% / 0.5) 0%, transparent 60%)',
+          filter: 'blur(80px)',
         }}
         animate={{
-          x: [0, -60, -30, 0],
-          y: [0, 40, -20, 0],
-          scale: [1, 1.2, 1.1, 1],
+          x: [0, 50, 25, 0],
+          scale: [1, 1.1, 1.05, 1],
         }}
         transition={{
           duration: 40,
@@ -125,57 +98,57 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Moving smoke wisp 1 - horizontal drift */}
+      {/* Floating light wisps */}
       <motion.div
         className="absolute"
         style={{
           width: '60vw',
-          height: '40vh',
-          top: '20%',
-          left: '10%',
-          background: 'radial-gradient(ellipse 80% 40% at 50% 50%, hsl(215 50% 25% / 0.5) 0%, transparent 60%)',
-          filter: 'blur(60px)',
+          height: '30vh',
+          top: '50%',
+          left: '20%',
+          background: 'radial-gradient(ellipse 80% 50% at 50% 50%, hsl(205 70% 55% / 0.3) 0%, transparent 60%)',
+          filter: 'blur(50px)',
         }}
         animate={{
-          x: [0, 200, 100, 0],
-          opacity: [0.3, 0.6, 0.4, 0.3],
-        }}
-        transition={{
-          duration: 60,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      {/* Moving smoke wisp 2 - slower counter-drift */}
-      <motion.div
-        className="absolute"
-        style={{
-          width: '50vw',
-          height: '35vh',
-          bottom: '30%',
-          right: '5%',
-          background: 'radial-gradient(ellipse 70% 50% at 50% 50%, hsl(220 45% 18% / 0.6) 0%, transparent 55%)',
-          filter: 'blur(70px)',
-        }}
-        animate={{
-          x: [0, -150, -70, 0],
+          x: [0, 100, 50, 0],
+          y: [0, -30, 15, 0],
           opacity: [0.4, 0.7, 0.5, 0.4],
         }}
         transition={{
-          duration: 55,
+          duration: 50,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
 
-      {/* Mouse-reactive subtle glow - sky blue */}
+      {/* Subtle horizontal color band transitions */}
+      <motion.div
+        className="absolute"
+        style={{
+          width: '100vw',
+          height: '25vh',
+          top: '25%',
+          left: '0',
+          background: 'linear-gradient(180deg, transparent 0%, hsl(212 60% 30% / 0.3) 50%, transparent 100%)',
+          filter: 'blur(30px)',
+        }}
+        animate={{
+          y: [0, 20, -10, 0],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Mouse-reactive subtle glow */}
       <motion.div
         className="absolute"
         style={{
           width: '40vw',
           height: '40vh',
-          background: 'radial-gradient(circle, hsl(207 70% 55% / 0.06) 0%, transparent 50%)',
+          background: 'radial-gradient(circle, hsl(205 75% 60% / 0.08) 0%, transparent 50%)',
           filter: 'blur(60px)',
           left: `${mousePosition.x * 100 - 20}%`,
           top: `${mousePosition.y * 100 - 20}%`,
@@ -187,11 +160,11 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Heavy vignette - cinematic dark edges */}
+      {/* Soft vignette - subtle dark edges */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 70% 60% at 50% 40%, transparent 20%, hsl(220 60% 4% / 0.95) 100%)',
+          background: 'radial-gradient(ellipse 80% 70% at 50% 50%, transparent 30%, hsl(218 55% 8% / 0.4) 100%)',
         }}
       />
     </div>
