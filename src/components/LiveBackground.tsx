@@ -29,10 +29,10 @@ const LiveBackground = () => {
       ref={containerRef}
       className="fixed inset-0 pointer-events-none overflow-hidden z-0"
       style={{
-        background: 'hsl(195 50% 12%)',
+        background: 'hsl(218 55% 12%)',
       }}
     >
-      {/* Deep smoke layer 1 - very slow drift, bottom heavy */}
+      {/* Deep navy layer 1 - very slow drift, bottom heavy */}
       <motion.div
         className="absolute"
         style={{
@@ -40,7 +40,7 @@ const LiveBackground = () => {
           height: '120vh',
           bottom: '-40%',
           left: '-25%',
-          background: 'radial-gradient(ellipse 80% 60% at 40% 80%, hsl(195 60% 8% / 0.9) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse 80% 60% at 40% 80%, hsl(218 60% 8% / 0.9) 0%, transparent 50%)',
           filter: 'blur(80px)',
         }}
         animate={{
@@ -55,7 +55,7 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Deep smoke layer 2 - charcoal drift, top area */}
+      {/* Deep navy layer 2 - darker drift, top area */}
       <motion.div
         className="absolute"
         style={{
@@ -63,7 +63,7 @@ const LiveBackground = () => {
           height: '100vh',
           top: '-30%',
           right: '-30%',
-          background: 'radial-gradient(ellipse 70% 50% at 60% 30%, hsl(200 40% 6% / 0.8) 0%, transparent 55%)',
+          background: 'radial-gradient(ellipse 70% 50% at 60% 30%, hsl(220 50% 6% / 0.8) 0%, transparent 55%)',
           filter: 'blur(100px)',
         }}
         animate={{
@@ -78,7 +78,7 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Aurora teal layer - subtle color injection */}
+      {/* Mid-blue aurora layer - subtle color injection */}
       <motion.div
         className="absolute"
         style={{
@@ -86,7 +86,7 @@ const LiveBackground = () => {
           height: '100vh',
           top: '0%',
           left: '-10%',
-          background: 'radial-gradient(ellipse 60% 80% at 30% 50%, hsl(192 70% 20% / 0.25) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse 60% 80% at 30% 50%, hsl(215 65% 35% / 0.25) 0%, transparent 50%)',
           filter: 'blur(120px)',
         }}
         animate={{
@@ -102,7 +102,7 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Lime accent glow - very subtle, right side */}
+      {/* Sky blue accent glow - right side */}
       <motion.div
         className="absolute"
         style={{
@@ -110,7 +110,7 @@ const LiveBackground = () => {
           height: '80vh',
           top: '10%',
           right: '-10%',
-          background: 'radial-gradient(ellipse 50% 70% at 80% 40%, hsl(142 70% 45% / 0.08) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse 50% 70% at 80% 40%, hsl(200 85% 75% / 0.12) 0%, transparent 50%)',
           filter: 'blur(100px)',
         }}
         animate={{
@@ -133,7 +133,7 @@ const LiveBackground = () => {
           height: '40vh',
           top: '20%',
           left: '10%',
-          background: 'radial-gradient(ellipse 80% 40% at 50% 50%, hsl(195 50% 10% / 0.5) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse 80% 40% at 50% 50%, hsl(215 50% 25% / 0.5) 0%, transparent 60%)',
           filter: 'blur(60px)',
         }}
         animate={{
@@ -155,7 +155,7 @@ const LiveBackground = () => {
           height: '35vh',
           bottom: '30%',
           right: '5%',
-          background: 'radial-gradient(ellipse 70% 50% at 50% 50%, hsl(200 45% 8% / 0.6) 0%, transparent 55%)',
+          background: 'radial-gradient(ellipse 70% 50% at 50% 50%, hsl(220 45% 18% / 0.6) 0%, transparent 55%)',
           filter: 'blur(70px)',
         }}
         animate={{
@@ -169,13 +169,13 @@ const LiveBackground = () => {
         }}
       />
 
-      {/* Mouse-reactive subtle glow */}
+      {/* Mouse-reactive subtle glow - sky blue */}
       <motion.div
         className="absolute"
         style={{
           width: '40vw',
           height: '40vh',
-          background: 'radial-gradient(circle, hsl(142 70% 45% / 0.04) 0%, transparent 50%)',
+          background: 'radial-gradient(circle, hsl(207 70% 55% / 0.06) 0%, transparent 50%)',
           filter: 'blur(60px)',
           left: `${mousePosition.x * 100 - 20}%`,
           top: `${mousePosition.y * 100 - 20}%`,
@@ -191,7 +191,7 @@ const LiveBackground = () => {
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 70% 60% at 50% 40%, transparent 20%, hsl(200 60% 3% / 0.95) 100%)',
+          background: 'radial-gradient(ellipse 70% 60% at 50% 40%, transparent 20%, hsl(220 60% 4% / 0.95) 100%)',
         }}
       />
     </div>

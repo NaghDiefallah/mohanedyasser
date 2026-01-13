@@ -6,46 +6,46 @@
 
 @layer base {
   :root {
-    --background: 192 45% 22%;
+    --background: 218 55% 15%;
     --foreground: 0 0% 98%;
 
-    --card: 192 40% 18%;
+    --card: 218 50% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 192 40% 18%;
+    --popover: 218 50% 12%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 142 70% 45%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 207 70% 55%;
+    --primary-foreground: 218 55% 10%;
 
-    --secondary: 192 35% 15%;
+    --secondary: 218 45% 20%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 192 30% 20%;
-    --muted-foreground: 192 15% 65%;
+    --muted: 218 40% 18%;
+    --muted-foreground: 207 25% 70%;
 
-    --accent: 142 70% 45%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 207 80% 65%;
+    --accent-foreground: 218 55% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 192 30% 28%;
-    --input: 192 30% 28%;
-    --ring: 142 70% 45%;
+    --border: 218 35% 25%;
+    --input: 218 35% 25%;
+    --ring: 207 70% 55%;
 
     --radius: 0.75rem;
 
-    /* Custom properties */
-    --glow-primary: 142 70% 45%;
-    --glass-bg: 192 35% 16%;
-    --glass-border: 192 25% 32%;
-    --gradient-start: 142 70% 45%;
-    --gradient-end: 160 75% 50%;
+    /* Custom properties - Navy to Sky Blue palette */
+    --glow-primary: 207 70% 55%;
+    --glass-bg: 218 45% 12%;
+    --glass-border: 218 30% 30%;
+    --gradient-start: 207 70% 55%;
+    --gradient-end: 200 85% 75%;
   }
 
   .dark {
-    --background: 192 45% 22%;
+    --background: 218 55% 15%;
     --foreground: 0 0% 98%;
   }
 }
@@ -66,11 +66,11 @@
 }
 
 @layer components {
-  /* Glassmorphism - teal glass with subtle border */
+  /* Glassmorphism - navy glass with subtle border */
   .glass {
     @apply backdrop-blur-xl rounded-xl;
-    background: hsl(192 40% 14% / 0.85);
-    border: 1px solid hsl(192 25% 35% / 0.5);
+    background: hsl(218 50% 12% / 0.85);
+    border: 1px solid hsl(218 30% 35% / 0.5);
   }
 
   .glass-hover {
@@ -78,7 +78,7 @@
   }
 
   .glass-hover:hover {
-    background: hsl(192 40% 16% / 0.95);
+    background: hsl(218 50% 14% / 0.95);
     border-color: hsl(var(--primary) / 0.4);
     box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
   }
@@ -100,7 +100,7 @@
 
   /* Text Gradient */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-sky-300;
   }
 
   /* Neon text glow */
@@ -121,9 +121,9 @@
     background: linear-gradient(
       135deg,
       hsl(var(--background)) 0%,
-      hsl(192 40% 20%) 25%,
+      hsl(218 50% 18%) 25%,
       hsl(var(--primary) / 0.12) 50%,
-      hsl(192 40% 20%) 75%,
+      hsl(218 50% 18%) 75%,
       hsl(var(--background)) 100%
     );
     background-size: 400% 400%;
