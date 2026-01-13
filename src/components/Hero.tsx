@@ -90,12 +90,11 @@ const Hero = () => {
               className="relative"
             >
               <h1 
-                className="text-[clamp(4rem,15vw,10rem)] font-black leading-[0.85] tracking-tight text-foreground uppercase"
+                className="text-[clamp(4rem,15vw,10rem)] leading-[0.85] text-foreground uppercase"
                 style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontWeight: 900,
-                  letterSpacing: '-0.02em',
-                  textShadow: '4px 4px 0px hsl(var(--primary) / 0.3)'
+                  fontFamily: "'Permanent Marker', cursive",
+                  letterSpacing: '0.02em',
+                  textShadow: '4px 4px 0px hsl(var(--primary) / 0.4), 8px 8px 0px hsl(var(--primary) / 0.2)'
                 }}
               >
                 EDITOR
