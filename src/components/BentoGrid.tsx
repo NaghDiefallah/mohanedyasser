@@ -225,7 +225,7 @@ const BentoGrid = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-32 md:py-48 px-6 relative overflow-hidden">
+    <section className="py-16 md:py-24 px-6 relative overflow-hidden">
       {/* Scratchy background texture overlay */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-5"
@@ -236,7 +236,7 @@ const BentoGrid = () => {
       
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* ===== REELS SECTION ===== */}
-        <ScrollReveal className="text-center mb-24 space-y-6">
+        <ScrollReveal className="text-center mb-12 space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -292,7 +292,7 @@ const BentoGrid = () => {
         </ScrollReveal>
 
         {/* Reels Polaroid-style Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-16">
           {reelsProjects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -376,7 +376,7 @@ const BentoGrid = () => {
         </div>
 
         {/* ===== MOTION GRAPHICS SECTION ===== */}
-        <ScrollReveal className="text-center mb-24 space-y-6">
+        <ScrollReveal className="text-center mb-12 space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -432,7 +432,7 @@ const BentoGrid = () => {
         </ScrollReveal>
 
         {/* Motion Graphics Polaroid-style Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {motionGraphicsProjects.map((project, index) => (
             <motion.div
               key={project.id}

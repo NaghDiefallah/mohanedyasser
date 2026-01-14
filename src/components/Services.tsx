@@ -29,7 +29,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-32 md:py-40 px-6 relative">
+    <section className="py-16 md:py-24 px-6 relative">
       {/* Background accent */}
       <div 
         className="absolute inset-0 opacity-30"
@@ -40,7 +40,7 @@ const Services = () => {
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-20 space-y-4">
+        <ScrollReveal className="text-center mb-12 space-y-4">
           <span 
             className="text-primary uppercase tracking-widest text-sm font-semibold"
             style={{
