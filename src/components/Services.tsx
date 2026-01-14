@@ -29,7 +29,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-16 md:py-24 px-6 relative">
+    <section className="py-12 md:py-16 px-6 relative">
       {/* Background accent */}
       <div 
         className="absolute inset-0 opacity-30"
