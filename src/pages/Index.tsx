@@ -4,12 +4,16 @@ import Services from "@/components/Services";
 import StickyFooter from "@/components/StickyFooter";
 import LiveBackground from "@/components/LiveBackground";
 import Navbar from "@/components/Navbar";
+import MouseSpotlight from "@/components/MouseSpotlight";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground relative">
       {/* Live animated background */}
       <LiveBackground />
+      
+      {/* Mouse spotlight effect */}
+      <MouseSpotlight />
       
       {/* Scroll-triggered Navbar */}
       <Navbar />
