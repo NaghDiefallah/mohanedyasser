@@ -225,7 +225,7 @@ const BentoGrid = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 md:py-24 px-6 relative overflow-hidden">
+    <section className="py-12 md:py-16 px-6 relative overflow-hidden">
       {/* Scratchy background texture overlay */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-5"
