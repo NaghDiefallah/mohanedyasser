@@ -76,11 +76,11 @@ const ProjectCard = ({ project, index }: { project: typeof reelsProjects[0]; ind
 
 const BentoGrid = () => {
   return (
-    <section className="py-16 md:py-24 px-6 relative overflow-hidden">
+    <section className="py-12 md:py-16 px-6 relative overflow-hidden">
       <div className="container mx-auto max-w-7xl relative z-10">
         
         {/* ===== REELS SECTION ===== */}
-        <ScrollReveal className="text-center mb-12 space-y-4">
+        <ScrollReveal className="text-center mb-8 space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -105,14 +105,14 @@ const BentoGrid = () => {
         </ScrollReveal>
 
         {/* Reels Grid - Clean, flat */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {reelsProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
 
         {/* ===== MOTION GRAPHICS SECTION ===== */}
-        <ScrollReveal className="text-center mb-12 space-y-4">
+        <ScrollReveal className="text-center mb-8 space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
