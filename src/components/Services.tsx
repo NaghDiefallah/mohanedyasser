@@ -29,73 +29,50 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-12 md:py-16 px-6 relative">
-      {/* Background accent */}
-      <div 
-        className="absolute inset-0 opacity-30"
-        style={{
-          background: 'radial-gradient(ellipse at 50% 100%, hsl(142 70% 45% / 0.08) 0%, transparent 50%)'
-        }}
-      />
-
+    <section className="py-16 md:py-24 px-6 relative">
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-12 space-y-4">
-          <span 
-            className="text-primary uppercase tracking-widest text-sm font-semibold"
-            style={{
-              textShadow: '0 0 15px hsl(142 70% 45% / 0.5)'
-            }}
-          >
-            Services
-          </span>
-          <h2 className="text-4xl md:text-6xl font-black text-white">What I Offer</h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+        <ScrollReveal className="text-center mb-14 space-y-4">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-primary" />
+            <span className="text-primary uppercase tracking-[0.3em] text-xs font-bold">
+              Services
+            </span>
+            <div className="h-px w-12 bg-primary" />
+          </div>
+          <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tight">
+            What I <span className="text-primary text-glow">Offer</span>
+          </h2>
+          <p className="text-muted-foreground max-w-md mx-auto">
             End-to-end post-production services tailored to your vision and budget.
           </p>
         </ScrollReveal>
 
-        {/* Services Grid - Glassmorphism Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Services Grid - Clean cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="p-8 flex flex-col h-full group rounded-2xl transition-all duration-500 relative overflow-hidden"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="p-8 flex flex-col h-full group rounded-lg transition-all duration-300 bg-card border border-border hover:border-primary/50"
               style={{
-                background: 'hsl(192 40% 12% / 0.3)',
-                backdropFilter: 'blur(24px)',
-                WebkitBackdropFilter: 'blur(24px)',
-                border: '1px solid hsl(192 30% 40% / 0.15)',
-                boxShadow: 'inset 0 1px 1px hsl(0 0% 100% / 0.05)',
-              }}
-              whileHover={{
-                boxShadow: '0 0 60px -10px hsl(142 70% 45% / 0.35), inset 0 1px 1px hsl(0 0% 100% / 0.1)',
-                borderColor: 'hsl(142 70% 45% / 0.5)',
+                boxShadow: '0 4px 20px -4px hsl(0 0% 0% / 0.5)',
               }}
             >
-              {/* Subtle inner glow on hover */}
-              <div 
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(ellipse at 50% 0%, hsl(142 70% 45% / 0.08) 0%, transparent 60%)',
-                }}
-              />
-
               {/* Icon */}
-              <div className="relative z-10 w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300 border border-primary/20 group-hover:border-primary/40">
+              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300 border border-primary/20">
                 <service.icon className="w-7 h-7 text-primary" />
               </div>
 
               {/* Content */}
-              <h3 className="relative z-10 text-2xl font-bold mb-3 text-white">{service.title}</h3>
-              <p className="relative z-10 text-muted-foreground mb-6 flex-grow">{service.description}</p>
+              <h3 className="text-2xl font-bold mb-3 text-white">{service.title}</h3>
+              <p className="text-muted-foreground mb-6 flex-grow text-sm leading-relaxed">{service.description}</p>
 
               {/* Features */}
-              <ul className="relative z-10 space-y-2 mb-6">
+              <ul className="space-y-2 mb-6">
                 {service.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
@@ -105,9 +82,12 @@ const Services = () => {
               </ul>
 
               {/* Price & CTA */}
-              <div className="relative z-10 pt-6 border-t border-border/30">
-                <p className="text-2xl font-bold text-gradient mb-4">{service.price}</p>
-                <Button variant="outline" className="w-full group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
+              <div className="pt-6 border-t border-border">
+                <p className="text-2xl font-bold text-primary mb-4">{service.price}</p>
+                <Button 
+                  variant="outline" 
+                  className="w-full border-border hover:border-primary hover:bg-primary/10 transition-all duration-300 uppercase tracking-wider text-sm font-semibold"
+                >
                   Get Quote
                 </Button>
               </div>
