@@ -20,7 +20,7 @@ const techTools = [{
 }];
 const TechStack = () => {
   return (
-    <ScrollReveal className="py-20 px-6">
+    <ScrollReveal className="py-12 px-6">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <span className="text-primary uppercase tracking-[0.3em] text-sm font-bold">

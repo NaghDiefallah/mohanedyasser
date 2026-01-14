@@ -166,7 +166,7 @@ const InkDrops = ({
     <motion.circle cx="48" cy="60" r="5" className="text-primary" />
   </motion.svg>;
 const Hero = () => {
-  return <section className="relative min-h-screen flex items-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center overflow-hidden px-0">
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 md:px-12 py-20">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
