@@ -1,75 +1,11 @@
-import { useState } from "react";
-import { Play, X } from "lucide-react";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
+import { Play } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 import { motion } from "framer-motion";
+import { getReelsProjects, getMotionGraphicsProjects } from "@/data/projects";
 
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  thumbnail: string;
-  videoUrl: string;
-  rotation: number;
-}
-
-import brandCommercialImg from "@/assets/brand-commercial.jpg";
-
-// Reels projects
-const reelsProjects: Project[] = [
-  {
-    id: 1,
-    title: "Brand Commercial",
-    category: "Commercial",
-    thumbnail: brandCommercialImg,
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    rotation: -2,
-  },
-  {
-    id: 2,
-    title: "Music Video",
-    category: "Music",
-    thumbnail: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    rotation: 3,
-  },
-  {
-    id: 3,
-    title: "Documentary",
-    category: "Film",
-    thumbnail: "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=600&q=80",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    rotation: -1.5,
-  },
-];
-
-// Motion Graphics projects
-const motionGraphicsProjects: Project[] = [
-  {
-    id: 4,
-    title: "Social Campaign",
-    category: "Social Media",
-    thumbnail: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600&q=80",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    rotation: 2.5,
-  },
-  {
-    id: 5,
-    title: "Product Launch",
-    category: "Commercial",
-    thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&q=80",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    rotation: -3,
-  },
-  {
-    id: 6,
-    title: "Motion Reel",
-    category: "Animation",
-    thumbnail: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=600&q=80",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    rotation: 1.5,
-  },
-];
+const reelsProjects = getReelsProjects();
+const motionGraphicsProjects = getMotionGraphicsProjects();
 
 // Animated doodle wrapper
 const AnimatedDoodle = ({ children, animation = "wiggle", delay = 0 }: { children: React.ReactNode; animation?: "wiggle" | "pulse" | "bounce" | "spin"; delay?: number }) => {
@@ -286,7 +222,7 @@ const PolaroidFrame = ({ rotation, children, className, doodleIndex }: { rotatio
 };
 
 const BentoGrid = () => {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const navigate = useNavigate();
 
   return (
     <section className="py-32 md:py-48 px-6 relative overflow-hidden">
@@ -368,7 +304,7 @@ const BentoGrid = () => {
               <PolaroidFrame rotation={project.rotation} doodleIndex={index}>
                 <div 
                   className="group relative cursor-pointer bg-black p-3 pb-16"
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => navigate(`/project/${project.slug}`)}
                 >
                   {/* Photo area */}
                   <div className="relative aspect-[4/5] overflow-hidden">
@@ -508,7 +444,7 @@ const BentoGrid = () => {
               <PolaroidFrame rotation={project.rotation} doodleIndex={index + 3}>
                 <div 
                   className="group relative cursor-pointer bg-black p-3 pb-16"
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => navigate(`/project/${project.slug}`)}
                 >
                   {/* Photo area */}
                   <div className="relative aspect-[4/5] overflow-hidden">
@@ -595,24 +531,6 @@ const BentoGrid = () => {
         </div>
       </div>
 
-      {/* Video Modal */}
-      <Dialog open={!!selectedProject} onOpenChange={() => setSelectedProject(null)}>
-        <DialogContent className="max-w-4xl w-full p-0 overflow-hidden bg-black border-2 border-white/20">
-          <DialogClose className="absolute right-4 top-4 z-50 rounded-full bg-black/80 backdrop-blur-sm p-2 hover:bg-primary transition-colors">
-            <X className="w-5 h-5" />
-          </DialogClose>
-          {selectedProject && (
-            <div className="aspect-video w-full">
-              <iframe
-                src={selectedProject.videoUrl}
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
