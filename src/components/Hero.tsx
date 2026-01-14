@@ -10,18 +10,28 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-6 md:px-12">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           
-          {/* Left side - Portrait - Clean circular frame */}
+          {/* Left side - Portrait with pulsing backlight */}
           <motion.div 
             className="relative flex-shrink-0"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
+            {/* Pulsing radial glow behind portrait */}
+            <div 
+              className="absolute inset-0 pulse-glow -z-10"
+              style={{
+                background: 'radial-gradient(circle at 50% 40%, hsl(142 70% 45% / 0.35) 0%, hsl(142 70% 45% / 0.15) 30%, transparent 60%)',
+                filter: 'blur(60px)',
+                transform: 'scale(1.5)',
+              }}
+            />
+            
             {/* Portrait image - balanced size, blended into background */}
             <img 
               src={heroPortrait} 
               alt="Video Editor Portrait" 
-              className="w-[280px] sm:w-[320px] lg:w-[400px] h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
+              className="relative w-[280px] sm:w-[320px] lg:w-[400px] h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
               style={{
                 filter: 'contrast(1.1) brightness(0.9)',
                 maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
@@ -53,15 +63,19 @@ const Hero = () => {
               className="relative mb-8"
             >
               <h1 
-                className="text-[clamp(4rem,15vw,12rem)] leading-[0.85] text-white uppercase font-black tracking-tight glitch-hover"
-                data-text="VIDEO EDITOR"
+                className="text-[clamp(4rem,15vw,12rem)] leading-[0.85] text-white uppercase font-black tracking-tight headline-hover-outline"
                 style={{
                   fontFamily: 'Inter, system-ui, sans-serif',
                   letterSpacing: '-0.03em',
                 }}
               >
                 VIDEO<br />
-                <span className="text-primary text-glow">EDITOR</span>
+                <span 
+                  className="text-primary text-glow glitch-hover inline-block"
+                  data-text="EDITOR"
+                >
+                  EDITOR
+                </span>
               </h1>
               
               {/* Minimal accent line */}
