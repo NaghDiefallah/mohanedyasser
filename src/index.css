@@ -2,50 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
-    --background: 218 55% 15%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
 
-    --card: 218 50% 12%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 218 50% 12%;
+    --popover: 0 0% 6%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 207 70% 55%;
-    --primary-foreground: 218 55% 10%;
+    --primary: 142 70% 45%;
+    --primary-foreground: 0 0% 3%;
 
-    --secondary: 218 45% 20%;
+    --secondary: 0 0% 10%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 218 40% 18%;
-    --muted-foreground: 207 25% 70%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 207 80% 65%;
-    --accent-foreground: 218 55% 10%;
+    --accent: 142 70% 45%;
+    --accent-foreground: 0 0% 3%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 218 35% 25%;
-    --input: 218 35% 25%;
-    --ring: 207 70% 55%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 142 70% 45%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Custom properties - Navy to Sky Blue palette */
-    --glow-primary: 207 70% 55%;
-    --glass-bg: 218 45% 12%;
-    --glass-border: 218 30% 30%;
-    --gradient-start: 207 70% 55%;
-    --gradient-end: 200 85% 75%;
+    /* Custom properties - Dark charcoal with neon green accents */
+    --glow-primary: 142 70% 45%;
+    --glass-bg: 0 0% 6%;
+    --glass-border: 0 0% 20%;
   }
 
   .dark {
-    --background: 218 55% 15%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
   }
 }
@@ -68,11 +66,11 @@
 }
 
 @layer components {
-  /* Glassmorphism - navy glass with subtle border */
+  /* Clean glass effect */
   .glass {
-    @apply backdrop-blur-xl rounded-xl;
-    background: hsl(218 50% 12% / 0.85);
-    border: 1px solid hsl(218 30% 35% / 0.5);
+    @apply backdrop-blur-xl rounded-lg;
+    background: hsl(0 0% 6% / 0.9);
+    border: 1px solid hsl(0 0% 20% / 0.5);
   }
 
   .glass-hover {
@@ -80,90 +78,106 @@
   }
 
   .glass-hover:hover {
-    background: hsl(218 50% 14% / 0.95);
+    background: hsl(0 0% 8% / 0.95);
     border-color: hsl(var(--primary) / 0.4);
-    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.3);
   }
 
-  /* Glow Effects */
+  /* Minimal glow effects */
   .glow-border {
     @apply relative overflow-hidden;
   }
 
   .glow-border::before {
     content: '';
-    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.4), transparent 50%);
+    @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.2), transparent 50%);
   }
 
   .glow-border:hover::before {
     @apply opacity-100;
   }
 
-  /* Text Gradient */
+  /* Text Gradient - neon green */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-sky-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400;
   }
 
-  /* Neon text glow */
+  /* Subtle neon text glow */
   .text-glow {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.8), 
-                 0 0 40px hsl(var(--primary) / 0.5), 
-                 0 0 60px hsl(var(--primary) / 0.3);
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.6), 
+                 0 0 40px hsl(var(--primary) / 0.3);
   }
 
-  /* Background noise */
+  /* Glitch effect for headlines */
+  .glitch-hover {
+    position: relative;
+  }
+
+  .glitch-hover::before,
+  .glitch-hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  .glitch-hover::before {
+    color: hsl(var(--primary));
+    z-index: -1;
+  }
+
+  .glitch-hover::after {
+    color: hsl(0 100% 50%);
+    z-index: -2;
+  }
+
+  .glitch-hover:hover::before {
+    opacity: 0.8;
+    animation: glitch-1 0.3s infinite linear alternate-reverse;
+  }
+
+  .glitch-hover:hover::after {
+    opacity: 0.8;
+    animation: glitch-2 0.3s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-1 {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+  }
+
+  @keyframes glitch-2 {
+    0% { transform: translate(0); }
+    20% { transform: translate(2px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    60% { transform: translate(-2px, -2px); }
+    80% { transform: translate(-2px, 2px); }
+    100% { transform: translate(0); }
+  }
+
+  /* Background noise - very subtle */
   .bg-noise {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    opacity: 0.02;
   }
 
-  /* Animated gradient background */
-  .animated-gradient {
-    background: linear-gradient(
-      135deg,
-      hsl(var(--background)) 0%,
-      hsl(218 50% 18%) 25%,
-      hsl(var(--primary) / 0.12) 50%,
-      hsl(218 50% 18%) 75%,
-      hsl(var(--background)) 100%
-    );
-    background-size: 400% 400%;
-    animation: gradient-shift 15s ease infinite;
-  }
-
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Ticker animation */
-  .ticker-wrapper {
-    @apply overflow-hidden;
-  }
-
-  .ticker-content {
-    @apply flex gap-12 animate-ticker;
-  }
-
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  .animate-ticker {
-    animation: ticker 30s linear infinite;
-  }
-
-  /* Card scale on hover */
+  /* Card scale on hover - subtle */
   .card-hover-scale {
     @apply transition-all duration-300 ease-out;
   }
 
   .card-hover-scale:hover {
     @apply scale-[1.02];
-    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 30px -10px hsl(var(--primary) / 0.3);
   }
 }
 

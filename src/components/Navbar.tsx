@@ -34,16 +34,16 @@ const Navbar = () => {
           className="fixed top-0 left-0 right-0 z-50 px-6 py-4"
         >
           <div 
-            className="container mx-auto max-w-7xl rounded-2xl px-6 py-3 backdrop-blur-xl"
+            className="container mx-auto max-w-7xl rounded-lg px-6 py-3 backdrop-blur-xl"
             style={{
-              background: 'hsl(192 40% 14% / 0.9)',
-              border: '1px solid hsl(192 25% 35% / 0.5)',
-              boxShadow: '0 10px 40px -10px hsl(0 0% 0% / 0.3)',
+              background: 'hsl(0 0% 6% / 0.95)',
+              border: '1px solid hsl(0 0% 20% / 0.5)',
+              boxShadow: '0 10px 40px -10px hsl(0 0% 0% / 0.5)',
             }}
           >
             <div className="flex items-center justify-between">
               {/* Logo */}
-              <a href="#" className="text-xl font-bold text-foreground">
+              <a href="#" className="text-xl font-black text-white uppercase tracking-wider">
                 STUDIO
               </a>
 
@@ -53,17 +53,19 @@ const Navbar = () => {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 relative group"
+                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200 uppercase tracking-wider"
                   >
                     {link.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                   </a>
                 ))}
               </div>
 
               {/* CTA Button */}
               <div className="hidden md:block">
-                <Button variant="default" size="sm" className="font-medium">
+                <Button 
+                  size="sm" 
+                  className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90"
+                >
                   Let's Talk
                 </Button>
               </div>
@@ -92,13 +94,16 @@ const Navbar = () => {
                       <a
                         key={link.label}
                         href={link.href}
-                        className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                        className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 uppercase tracking-wider"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {link.label}
                       </a>
                     ))}
-                    <Button variant="default" size="sm" className="w-full mt-2">
+                    <Button 
+                      size="sm" 
+                      className="w-full mt-2 font-bold uppercase tracking-wider bg-primary text-primary-foreground"
+                    >
                       Let's Talk
                     </Button>
                   </div>
