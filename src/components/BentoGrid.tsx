@@ -15,7 +15,8 @@ interface Project {
 
 import brandCommercialImg from "@/assets/brand-commercial.jpg";
 
-const projects: Project[] = [
+// Reels projects
+const reelsProjects: Project[] = [
   {
     id: 1,
     title: "Brand Commercial",
@@ -40,6 +41,10 @@ const projects: Project[] = [
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: -1.5,
   },
+];
+
+// Motion Graphics projects
+const motionGraphicsProjects: Project[] = [
   {
     id: 4,
     title: "Social Campaign",
@@ -59,7 +64,7 @@ const projects: Project[] = [
   {
     id: 6,
     title: "Motion Reel",
-    category: "Motion Graphics",
+    category: "Animation",
     thumbnail: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: 1.5,
@@ -294,7 +299,7 @@ const BentoGrid = () => {
       />
       
       <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Section Header - Brush stroke style */}
+        {/* ===== REELS SECTION ===== */}
         <ScrollReveal className="text-center mb-24 space-y-6">
           <motion.div
             initial={{ scaleX: 0 }}
@@ -307,7 +312,7 @@ const BentoGrid = () => {
             <span 
               className="text-primary uppercase tracking-[0.3em] text-sm font-bold"
               style={{
-                textShadow: '0 0 20px hsl(142 70% 45% / 0.6)'
+                textShadow: '0 0 20px hsl(var(--primary) / 0.6)'
               }}
             >
               Latest Work
@@ -325,7 +330,7 @@ const BentoGrid = () => {
                 textShadow: '4px 4px 0 hsl(0 0% 0% / 0.3)',
               }}
             >
-              EDITS & <span className="text-primary" style={{ textShadow: '0 0 30px hsl(142 70% 45% / 0.7), 4px 4px 0 hsl(0 0% 0% / 0.3)' }}>REELS</span>
+              <span className="text-primary" style={{ textShadow: '0 0 30px hsl(var(--primary) / 0.7), 4px 4px 0 hsl(0 0% 0% / 0.3)' }}>REELS</span>
             </h2>
             
             {/* Decorative underline scribble */}
@@ -337,7 +342,7 @@ const BentoGrid = () => {
               <path
                 d="M 0 10 C 30 5, 60 15, 90 10 C 120 5, 150 12, 180 8 C 210 4, 240 14, 270 10 C 290 7, 300 10, 300 10"
                 fill="none"
-                stroke="hsl(142 70% 45%)"
+                stroke="hsl(var(--primary))"
                 strokeWidth="3"
                 strokeLinecap="round"
                 className="opacity-60"
@@ -350,9 +355,9 @@ const BentoGrid = () => {
           </p>
         </ScrollReveal>
 
-        {/* Polaroid-style Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16">
-          {projects.map((project, index) => (
+        {/* Reels Polaroid-style Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 mb-32">
+          {reelsProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 50, rotate: project.rotation * 2 }}
@@ -391,7 +396,7 @@ const BentoGrid = () => {
                         className="w-16 h-16 rounded-full bg-primary flex items-center justify-center"
                         whileHover={{ scale: 1.1 }}
                         style={{
-                          boxShadow: '0 0 40px hsl(142 70% 45% / 0.6)'
+                          boxShadow: '0 0 40px hsl(var(--primary) / 0.6)'
                         }}
                       >
                         <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
@@ -415,7 +420,7 @@ const BentoGrid = () => {
                     </p>
                     <span 
                       className="text-primary text-xs uppercase tracking-[0.2em] font-semibold"
-                      style={{ textShadow: '0 0 10px hsl(142 70% 45% / 0.5)' }}
+                      style={{ textShadow: '0 0 10px hsl(var(--primary) / 0.5)' }}
                     >
                       {project.category}
                     </span>
@@ -425,7 +430,147 @@ const BentoGrid = () => {
                   <div 
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
-                      boxShadow: 'inset 0 0 60px -10px hsl(142 70% 45% / 0.2), 0 0 80px -20px hsl(142 70% 45% / 0.4)'
+                      boxShadow: 'inset 0 0 60px -10px hsl(var(--primary) / 0.2), 0 0 80px -20px hsl(var(--primary) / 0.4)'
+                    }}
+                  />
+                </div>
+              </PolaroidFrame>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ===== MOTION GRAPHICS SECTION ===== */}
+        <ScrollReveal className="text-center mb-24 space-y-6">
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center justify-center gap-4"
+          >
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
+            <span 
+              className="text-primary uppercase tracking-[0.3em] text-sm font-bold"
+              style={{
+                textShadow: '0 0 20px hsl(var(--primary) / 0.6)'
+              }}
+            >
+              Animation & Graphics
+            </span>
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
+          </motion.div>
+          
+          {/* Grunge-style title */}
+          <div className="relative inline-block">
+            <h2 
+              className="text-5xl md:text-8xl font-black text-white tracking-tight"
+              style={{
+                fontFamily: 'Inter, system-ui, sans-serif',
+                letterSpacing: '-0.03em',
+                textShadow: '4px 4px 0 hsl(0 0% 0% / 0.3)',
+              }}
+            >
+              MOTION <span className="text-primary" style={{ textShadow: '0 0 30px hsl(var(--primary) / 0.7), 4px 4px 0 hsl(0 0% 0% / 0.3)' }}>GRAPHICS</span>
+            </h2>
+            
+            {/* Decorative underline scribble */}
+            <svg 
+              className="absolute -bottom-4 left-0 w-full h-8"
+              viewBox="0 0 300 20"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M 0 10 C 30 5, 60 15, 90 10 C 120 5, 150 12, 180 8 C 210 4, 240 14, 270 10 C 290 7, 300 10, 300 10"
+                fill="none"
+                stroke="hsl(var(--primary))"
+                strokeWidth="3"
+                strokeLinecap="round"
+                className="opacity-60"
+              />
+            </svg>
+          </div>
+          
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg mt-8">
+            Dynamic visuals. Seamless motion. Bringing ideas to life.
+          </p>
+        </ScrollReveal>
+
+        {/* Motion Graphics Polaroid-style Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16">
+          {motionGraphicsProjects.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 50, rotate: project.rotation * 2 }}
+              whileInView={{ opacity: 1, y: 0, rotate: project.rotation }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <PolaroidFrame rotation={project.rotation} doodleIndex={index + 3}>
+                <div 
+                  className="group relative cursor-pointer bg-black p-3 pb-16"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  {/* Photo area */}
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110 grayscale group-hover:grayscale-0"
+                    />
+                    
+                    {/* Cinematic bars */}
+                    <div className="absolute top-0 left-0 right-0 h-6 bg-black/80" />
+                    <div className="absolute bottom-0 left-0 right-0 h-6 bg-black/80" />
+                    
+                    {/* Scan lines effect */}
+                    <div 
+                      className="absolute inset-0 pointer-events-none opacity-20 mix-blend-overlay"
+                      style={{
+                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
+                      }}
+                    />
+                    
+                    {/* Play button */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <motion.div 
+                        className="w-16 h-16 rounded-full bg-primary flex items-center justify-center"
+                        whileHover={{ scale: 1.1 }}
+                        style={{
+                          boxShadow: '0 0 40px hsl(var(--primary) / 0.6)'
+                        }}
+                      >
+                        <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
+                      </motion.div>
+                    </div>
+                    
+                    {/* Corner marks */}
+                    <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-white/50" />
+                    <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-white/50" />
+                    <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-white/50" />
+                    <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-white/50" />
+                  </div>
+                  
+                  {/* Polaroid caption area */}
+                  <div className="absolute bottom-2 left-0 right-0 px-4 text-center">
+                    <p 
+                      className="text-white font-bold text-lg tracking-wide"
+                      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+                    >
+                      {project.title}
+                    </p>
+                    <span 
+                      className="text-primary text-xs uppercase tracking-[0.2em] font-semibold"
+                      style={{ textShadow: '0 0 10px hsl(var(--primary) / 0.5)' }}
+                    >
+                      {project.category}
+                    </span>
+                  </div>
+                  
+                  {/* Glow effect on hover */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      boxShadow: 'inset 0 0 60px -10px hsl(var(--primary) / 0.2), 0 0 80px -20px hsl(var(--primary) / 0.4)'
                     }}
                   />
                 </div>
