@@ -25,23 +25,25 @@ const Hero = () => {
               }}
             />
             
-            {/* Portrait image - clean circular frame */}
+            {/* Portrait image - rounded rectangle frame with neon glow */}
             <div className="relative">
-              {/* Border ring */}
+              {/* Neon glow border */}
               <div 
-                className="absolute -inset-2 rounded-full opacity-30"
+                className="absolute -inset-1 rounded-2xl opacity-60"
                 style={{
-                  background: 'linear-gradient(135deg, hsl(var(--primary) / 0.5), transparent 50%)',
+                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.3))',
+                  filter: 'blur(8px)',
                 }}
               />
               
               <img 
                 src={heroPortrait} 
                 alt="Video Editor Portrait" 
-                className="w-[240px] sm:w-[280px] lg:w-[340px] h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-full"
+                className="relative w-[240px] sm:w-[280px] lg:w-[320px] h-[320px] sm:h-[380px] lg:h-[440px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-2xl"
                 style={{
                   filter: 'contrast(1.15) brightness(0.95)',
-                  border: '2px solid hsl(0 0% 20%)',
+                  border: '2px solid hsl(var(--primary) / 0.5)',
+                  boxShadow: '0 0 40px hsl(var(--primary) / 0.3)',
                 }}
               />
             </div>

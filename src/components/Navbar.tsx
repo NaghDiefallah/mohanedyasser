@@ -60,11 +60,14 @@ const Navbar = () => {
                 ))}
               </div>
 
-              {/* CTA Button */}
+              {/* CTA Button - Neon Green styling */}
               <div className="hidden md:block">
                 <Button 
                   size="sm" 
                   className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90"
+                  style={{
+                    boxShadow: '0 0 20px hsl(var(--primary) / 0.4)',
+                  }}
                 >
                   Let's Talk
                 </Button>
@@ -103,6 +106,9 @@ const Navbar = () => {
                     <Button 
                       size="sm" 
                       className="w-full mt-2 font-bold uppercase tracking-wider bg-primary text-primary-foreground"
+                      style={{
+                        boxShadow: '0 0 20px hsl(var(--primary) / 0.4)',
+                      }}
                     >
                       Let's Talk
                     </Button>
