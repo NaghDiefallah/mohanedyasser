@@ -17,11 +17,11 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Portrait image - large, blended into background */}
+            {/* Portrait image - balanced size, blended into background */}
             <img 
               src={heroPortrait} 
               alt="Video Editor Portrait" 
-              className="w-[320px] sm:w-[380px] lg:w-[480px] h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
+              className="w-[280px] sm:w-[320px] lg:w-[400px] h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
               style={{
                 filter: 'contrast(1.1) brightness(0.9)',
                 maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
@@ -30,8 +30,8 @@ const Hero = () => {
             />
           </motion.div>
 
-          {/* Right side - Text content */}
-          <div className="relative flex-1 text-center lg:text-left">
+          {/* Right side - Text content - shifted for balance */}
+          <div className="relative flex-1 text-center lg:text-left lg:-ml-8 lg:mt-6">
             {/* Eyebrow */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -79,7 +79,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed mb-10"
+              className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed mb-10"
             >
               Turning raw footage into cinematic experiences with DaVinci Resolve & After Effects.
             </motion.p>
@@ -102,7 +102,7 @@ const Hero = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="gap-3 text-lg px-8 border-border hover:border-primary hover:text-primary uppercase tracking-wider font-medium"
+                className="gap-3 text-lg px-8 border-primary/60 text-primary hover:border-primary hover:bg-primary/10 uppercase tracking-wider font-medium transition-all duration-300 hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)]"
               >
                 Let's talk
               </Button>
