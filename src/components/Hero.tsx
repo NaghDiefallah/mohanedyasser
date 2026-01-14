@@ -5,10 +5,10 @@ import heroPortrait from "@/assets/hero-portrait.png";
 
 const Hero = () => {
   return (
-    <section className="relative pt-16 pb-10 md:pt-20 md:pb-12 flex items-center overflow-hidden">
+    <section className="relative pt-12 pb-6 md:pt-14 md:pb-8 flex items-center overflow-hidden">
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 md:px-12">
-        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
           
           {/* Left side - Portrait with pulsing backlight */}
           <motion.div 
@@ -41,13 +41,13 @@ const Hero = () => {
           </motion.div>
 
           {/* Right side - Text content - shifted for balance */}
-          <div className="relative flex-1 text-center lg:text-left lg:-ml-8 lg:mt-3">
+          <div className="relative flex-1 text-center lg:text-left lg:-ml-8 lg:mt-2">
             {/* Eyebrow */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex items-center justify-center lg:justify-start gap-3 mb-5"
+              className="flex items-center justify-center lg:justify-start gap-3 mb-3"
             >
               <div className="h-px w-8 bg-primary" />
               <span className="text-primary font-semibold tracking-[0.2em] uppercase text-xs">
@@ -60,10 +60,10 @@ const Hero = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="relative mb-6"
+              className="relative mb-3"
             >
               <h1 
-                className="text-[clamp(4rem,15vw,12rem)] leading-[0.85] text-white uppercase font-black tracking-tight headline-hover-outline"
+                className="text-[clamp(3rem,12vw,9rem)] leading-[0.85] text-white uppercase font-black tracking-tight headline-hover-outline"
                 style={{
                   fontFamily: 'Inter, system-ui, sans-serif',
                   letterSpacing: '-0.03em',
@@ -80,11 +80,11 @@ const Hero = () => {
               
               {/* Minimal accent line */}
               <motion.div 
-                className="h-1 bg-primary mt-3"
+                className="h-1 bg-primary mt-2"
                 initial={{ scaleX: 0, originX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
-                style={{ maxWidth: '200px' }}
+                style={{ maxWidth: '160px' }}
               />
             </motion.div>
 
@@ -93,7 +93,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8"
+              className="text-lg text-muted-foreground max-w-md mx-auto lg:mx-0 leading-relaxed mb-4"
             >
               Turning raw footage into cinematic experiences with DaVinci Resolve & After Effects.
             </motion.p>
@@ -103,7 +103,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
             >
               <Button 
                 size="lg" 
@@ -127,18 +127,18 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex justify-center lg:justify-start gap-10 mt-8"
+              className="flex justify-center lg:justify-start gap-8 mt-5"
             >
               <div className="text-center lg:text-left">
-                <span className="block text-4xl font-black text-white">50+</span>
+                <span className="block text-3xl font-black text-white">50+</span>
                 <span className="text-muted-foreground text-xs uppercase tracking-wider">Projects</span>
               </div>
               <div className="text-center lg:text-left">
-                <span className="block text-4xl font-black text-white">4 yrs</span>
+                <span className="block text-3xl font-black text-white">4 yrs</span>
                 <span className="text-muted-foreground text-xs uppercase tracking-wider">Experience</span>
               </div>
               <div className="text-center lg:text-left">
-                <span className="block text-4xl font-black text-white">24h</span>
+                <span className="block text-3xl font-black text-white">24h</span>
                 <span className="text-muted-foreground text-xs uppercase tracking-wider">Response</span>
               </div>
             </motion.div>
