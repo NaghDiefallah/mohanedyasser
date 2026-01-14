@@ -17,36 +17,17 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* Subtle glow behind portrait */}
-            <div 
-              className="absolute inset-0 blur-[100px] opacity-30 -z-10"
+            {/* Portrait image - large, blended into background */}
+            <img 
+              src={heroPortrait} 
+              alt="Video Editor Portrait" 
+              className="w-[320px] sm:w-[380px] lg:w-[480px] h-auto object-contain grayscale hover:grayscale-0 transition-all duration-700"
               style={{
-                background: 'radial-gradient(circle, hsl(var(--primary) / 0.5) 0%, transparent 70%)'
+                filter: 'contrast(1.1) brightness(0.9)',
+                maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
               }}
             />
-            
-            {/* Portrait image - rounded rectangle frame with neon glow */}
-            <div className="relative">
-              {/* Neon glow border */}
-              <div 
-                className="absolute -inset-1 rounded-2xl opacity-60"
-                style={{
-                  background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.3))',
-                  filter: 'blur(8px)',
-                }}
-              />
-              
-              <img 
-                src={heroPortrait} 
-                alt="Video Editor Portrait" 
-                className="relative w-[240px] sm:w-[280px] lg:w-[320px] h-[320px] sm:h-[380px] lg:h-[440px] object-cover grayscale hover:grayscale-0 transition-all duration-700 rounded-2xl"
-                style={{
-                  filter: 'contrast(1.15) brightness(0.95)',
-                  border: '2px solid hsl(var(--primary) / 0.5)',
-                  boxShadow: '0 0 40px hsl(var(--primary) / 0.3)',
-                }}
-              />
-            </div>
           </motion.div>
 
           {/* Right side - Text content */}
