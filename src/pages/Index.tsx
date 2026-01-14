@@ -19,7 +19,7 @@ const Index = () => {
       <Navbar />
       
       {/* Main content */}
-      <main className="pb-24 relative z-10">
+      <main className="pb-16 relative z-10">
         <Hero />
         <section id="work">
           <BentoGrid />

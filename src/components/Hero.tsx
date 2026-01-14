@@ -5,10 +5,10 @@ import heroPortrait from "@/assets/hero-portrait.png";
 
 const Hero = () => {
   return (
-    <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 flex items-center overflow-hidden">
+    <section className="relative pt-16 pb-10 md:pt-20 md:pb-12 flex items-center overflow-hidden">
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 md:px-12">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           
           {/* Left side - Portrait with pulsing backlight */}
           <motion.div 
@@ -41,13 +41,13 @@ const Hero = () => {
           </motion.div>
 
           {/* Right side - Text content - shifted for balance */}
-          <div className="relative flex-1 text-center lg:text-left lg:-ml-8 lg:mt-6">
+          <div className="relative flex-1 text-center lg:text-left lg:-ml-8 lg:mt-3">
             {/* Eyebrow */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex items-center justify-center lg:justify-start gap-3 mb-6"
+              className="flex items-center justify-center lg:justify-start gap-3 mb-5"
             >
               <div className="h-px w-8 bg-primary" />
               <span className="text-primary font-semibold tracking-[0.2em] uppercase text-xs">
@@ -60,7 +60,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="relative mb-8"
+              className="relative mb-6"
             >
               <h1 
                 className="text-[clamp(4rem,15vw,12rem)] leading-[0.85] text-white uppercase font-black tracking-tight headline-hover-outline"
@@ -80,7 +80,7 @@ const Hero = () => {
               
               {/* Minimal accent line */}
               <motion.div 
-                className="h-1 bg-primary mt-4"
+                className="h-1 bg-primary mt-3"
                 initial={{ scaleX: 0, originX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
@@ -93,7 +93,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed mb-10"
+              className="text-xl text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8"
             >
               Turning raw footage into cinematic experiences with DaVinci Resolve & After Effects.
             </motion.p>
@@ -127,7 +127,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex justify-center lg:justify-start gap-12 mt-12"
+              className="flex justify-center lg:justify-start gap-10 mt-8"
             >
               <div className="text-center lg:text-left">
                 <span className="block text-4xl font-black text-white">50+</span>

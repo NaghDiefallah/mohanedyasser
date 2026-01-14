@@ -29,10 +29,10 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-16 md:py-24 px-6 relative">
+    <section className="py-12 md:py-16 px-6 relative">
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <ScrollReveal className="text-center mb-14 space-y-4">
+        <ScrollReveal className="text-center mb-10 space-y-4">
           <div className="flex items-center justify-center gap-4">
             <div className="h-px w-12 bg-primary" />
             <span className="text-primary uppercase tracking-[0.3em] text-xs font-bold">
