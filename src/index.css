@@ -3,48 +3,55 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 3%;
-    --foreground: 0 0% 98%;
+    /* Cinematic dark studio palette */
+    --background: 0 0% 5%;
+    --foreground: 0 0% 92%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 92%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 92%;
 
-    --primary: 142 70% 45%;
-    --primary-foreground: 0 0% 3%;
+    /* Warm amber accent - film industry feel */
+    --primary: 35 90% 55%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 92%;
 
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 142 70% 45%;
-    --accent-foreground: 0 0% 3%;
+    --accent: 35 90% 55%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 142 70% 45%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 35 90% 55%;
 
     --radius: 0.5rem;
 
-    /* Custom properties - Dark charcoal with neon green accents */
-    --glow-primary: 142 70% 45%;
-    --glass-bg: 0 0% 6%;
-    --glass-border: 0 0% 20%;
+    /* Cinematic custom properties */
+    --glow-primary: 35 90% 55%;
+    --glass-bg: 0 0% 8%;
+    --glass-border: 0 0% 22%;
+    
+    /* Volumetric light colors */
+    --light-warm: 40 60% 70%;
+    --light-cool: 220 30% 60%;
   }
 
   .dark {
-    --background: 0 0% 3%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 5%;
+    --foreground: 0 0% 92%;
   }
 }
 
@@ -66,11 +73,124 @@
 }
 
 @layer components {
-  /* Clean glass effect */
+  /* ===== CINEMATIC EFFECTS ===== */
+
+  /* Film grain overlay */
+  .film-grain {
+    position: relative;
+  }
+
+  .film-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 100;
+    mix-blend-mode: overlay;
+  }
+
+  /* Volumetric light rays */
+  .volumetric-light {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .volumetric-light::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 200%;
+    background: conic-gradient(
+      from 180deg at 50% 50%,
+      transparent 0deg,
+      hsl(40 50% 90% / 0.03) 20deg,
+      hsl(40 40% 80% / 0.06) 40deg,
+      hsl(40 50% 90% / 0.03) 60deg,
+      transparent 80deg,
+      transparent 180deg,
+      hsl(40 50% 90% / 0.02) 200deg,
+      hsl(40 40% 80% / 0.04) 220deg,
+      hsl(40 50% 90% / 0.02) 240deg,
+      transparent 260deg
+    );
+    transform: rotate(-15deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Cinematic vignette - heavy at edges */
+  .cinematic-vignette {
+    position: relative;
+  }
+
+  .cinematic-vignette::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 50%,
+      transparent 20%,
+      hsl(0 0% 3% / 0.4) 70%,
+      hsl(0 0% 2% / 0.8) 100%
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Studio depth background - not flat black */
+  .studio-depth {
+    background: 
+      radial-gradient(ellipse 120% 80% at 70% 30%, hsl(220 15% 12% / 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse 100% 100% at 20% 80%, hsl(20 20% 8% / 0.3) 0%, transparent 40%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, hsl(0 0% 8% / 0.5) 0%, transparent 50%),
+      hsl(0 0% 5%);
+  }
+
+  /* Warm key light effect */
+  .key-light {
+    position: absolute;
+    top: 0;
+    right: 10%;
+    width: 60%;
+    height: 100%;
+    background: radial-gradient(
+      ellipse 60% 80% at 80% 20%,
+      hsl(35 60% 60% / 0.08) 0%,
+      hsl(35 50% 50% / 0.04) 30%,
+      transparent 60%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Rim light effect for subjects */
+  .rim-light {
+    position: relative;
+  }
+
+  .rim-light::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 40%,
+      hsl(35 80% 70% / 0.1) 60%,
+      hsl(35 70% 60% / 0.15) 80%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ===== GLASS EFFECTS ===== */
   .glass {
     @apply backdrop-blur-xl rounded-lg;
-    background: hsl(0 0% 6% / 0.9);
-    border: 1px solid hsl(0 0% 20% / 0.5);
+    background: hsl(0 0% 8% / 0.9);
+    border: 1px solid hsl(0 0% 22% / 0.5);
   }
 
   .glass-hover {
@@ -78,12 +198,93 @@
   }
 
   .glass-hover:hover {
-    background: hsl(0 0% 8% / 0.95);
-    border-color: hsl(var(--primary) / 0.4);
-    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.3);
+    background: hsl(0 0% 10% / 0.95);
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.2);
   }
 
-  /* Minimal glow effects */
+  /* ===== TYPOGRAPHY EFFECTS ===== */
+  
+  /* Cinematic headline - elegant, not aggressive */
+  .headline-cinematic {
+    font-family: 'Bebas Neue', 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Subtle text glow - warm, not neon */
+  .text-glow-warm {
+    text-shadow: 
+      0 0 40px hsl(var(--primary) / 0.3),
+      0 0 80px hsl(var(--primary) / 0.15);
+  }
+
+  /* Text gradient - warm cinematic */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(0 0% 95%) 0%,
+      hsl(35 30% 80%) 50%,
+      hsl(0 0% 90%) 100%
+    );
+  }
+
+  /* Accent text - warm amber */
+  .text-accent-warm {
+    color: hsl(var(--primary));
+  }
+
+  /* High contrast text shadow for readability */
+  .text-shadow-deep {
+    text-shadow: 
+      0 2px 4px hsl(0 0% 0% / 0.5),
+      0 4px 8px hsl(0 0% 0% / 0.3);
+  }
+
+  /* ===== BUTTON STYLES ===== */
+  
+  .btn-cinematic {
+    @apply relative overflow-hidden transition-all duration-300;
+    background: hsl(0 0% 12%);
+    border: 1px solid hsl(0 0% 25%);
+    color: hsl(0 0% 90%);
+  }
+
+  .btn-cinematic:hover {
+    background: hsl(0 0% 15%);
+    border-color: hsl(var(--primary) / 0.5);
+    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.25);
+  }
+
+  .btn-primary-cinematic {
+    @apply relative overflow-hidden transition-all duration-300;
+    background: hsl(var(--primary));
+    color: hsl(0 0% 5%);
+    font-weight: 600;
+  }
+
+  .btn-primary-cinematic:hover {
+    background: hsl(35 90% 60%);
+    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.4);
+  }
+
+  /* ===== DIVIDER STYLES ===== */
+  
+  .divider-warm {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--primary) / 0.4) 20%,
+      hsl(var(--primary) / 0.6) 50%,
+      hsl(var(--primary) / 0.4) 80%,
+      transparent
+    );
+  }
+
+  /* ===== LEGACY EFFECTS (for compatibility) ===== */
+  
   .glow-border {
     @apply relative overflow-hidden;
   }
@@ -91,171 +292,31 @@
   .glow-border::before {
     content: '';
     @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.2), transparent 50%);
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.15), transparent 50%);
   }
 
   .glow-border:hover::before {
     @apply opacity-100;
   }
 
-  /* Text Gradient - neon green */
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-emerald-400;
-  }
-
-  /* Subtle neon text glow */
+  /* Minimal glow for accents */
   .text-glow {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.6), 
-                 0 0 40px hsl(var(--primary) / 0.3);
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.4), 
+                 0 0 40px hsl(var(--primary) / 0.2);
   }
 
-  /* Glitch effect for headlines - auto-triggers every 5s */
-  .glitch-hover {
-    position: relative;
-    animation: glitch-trigger 5s infinite;
-  }
-
-  .glitch-hover::before,
-  .glitch-hover::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
-
-  .glitch-hover::before {
-    color: hsl(142 70% 45%);
-    z-index: -1;
-    animation: glitch-1-auto 5s infinite;
-  }
-
-  .glitch-hover::after {
-    color: hsl(0 100% 50%);
-    z-index: -2;
-    animation: glitch-2-auto 5s infinite;
-  }
-
-  /* Hover override for stronger effect */
-  .glitch-hover:hover::before,
-  .glitch-hover:hover::after {
-    opacity: 0.8;
-  }
-
-  .glitch-hover:hover::before {
-    animation: glitch-1 0.3s infinite linear alternate-reverse;
-  }
-
-  .glitch-hover:hover::after {
-    animation: glitch-2 0.3s infinite linear alternate-reverse;
-  }
-
-  @keyframes glitch-trigger {
-    0%, 90%, 100% { transform: translate(0); }
-    91% { transform: translate(-2px, 1px); }
-    92% { transform: translate(2px, -1px); }
-    93% { transform: translate(-1px, 2px); }
-    94% { transform: translate(1px, -2px); }
-  }
-
-  @keyframes glitch-1-auto {
-    0%, 89%, 95%, 100% { 
-      opacity: 0;
-      transform: translate(0); 
-    }
-    90% { 
-      opacity: 0.7;
-      transform: translate(-3px, 0); 
-    }
-    91% { 
-      opacity: 0.5;
-      transform: translate(3px, 0); 
-    }
-    92% { 
-      opacity: 0.7;
-      transform: translate(-2px, 0); 
-    }
-    93% { 
-      opacity: 0.5;
-      transform: translate(2px, 0); 
-    }
-    94% { 
-      opacity: 0.3;
-      transform: translate(-1px, 0); 
-    }
-  }
-
-  @keyframes glitch-2-auto {
-    0%, 89%, 95%, 100% { 
-      opacity: 0;
-      transform: translate(0); 
-    }
-    90% { 
-      opacity: 0.5;
-      transform: translate(3px, 0); 
-    }
-    91% { 
-      opacity: 0.7;
-      transform: translate(-3px, 0); 
-    }
-    92% { 
-      opacity: 0.5;
-      transform: translate(2px, 0); 
-    }
-    93% { 
-      opacity: 0.7;
-      transform: translate(-2px, 0); 
-    }
-    94% { 
-      opacity: 0.3;
-      transform: translate(1px, 0); 
-    }
-  }
-
-  @keyframes glitch-1 {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 2px); }
-    40% { transform: translate(-3px, -2px); }
-    60% { transform: translate(3px, 2px); }
-    80% { transform: translate(3px, -2px); }
-    100% { transform: translate(0); }
-  }
-
-  @keyframes glitch-2 {
-    0% { transform: translate(0); }
-    20% { transform: translate(3px, -2px); }
-    40% { transform: translate(3px, 2px); }
-    60% { transform: translate(-3px, -2px); }
-    80% { transform: translate(-3px, 2px); }
-    100% { transform: translate(0); }
-  }
-
-  /* Outline text on hover */
-  .headline-hover-outline {
-    transition: all 0.3s ease;
-  }
-
-  .headline-hover-outline:hover {
-    -webkit-text-stroke: 2px hsl(142 70% 45%);
-    color: transparent !important;
-  }
-
-  /* Pulsing glow animation */
-  @keyframes pulse-glow {
+  /* Pulsing glow animation - subtle warm */
+  @keyframes pulse-glow-warm {
     0%, 100% {
-      transform: scale(1);
-      opacity: 0.5;
+      opacity: 0.4;
     }
     50% {
-      transform: scale(1.1);
-      opacity: 0.7;
+      opacity: 0.6;
     }
   }
 
   .pulse-glow {
-    animation: pulse-glow 4s ease-in-out infinite;
+    animation: pulse-glow-warm 4s ease-in-out infinite;
   }
 
   /* Background noise - very subtle */
@@ -271,7 +332,17 @@
 
   .card-hover-scale:hover {
     @apply scale-[1.02];
-    box-shadow: 0 0 30px -10px hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 30px -10px hsl(var(--primary) / 0.2);
+  }
+
+  /* Headline hover outline - warm */
+  .headline-hover-outline {
+    transition: all 0.3s ease;
+  }
+
+  .headline-hover-outline:hover {
+    -webkit-text-stroke: 1px hsl(var(--primary) / 0.6);
+    color: transparent !important;
   }
 }
 

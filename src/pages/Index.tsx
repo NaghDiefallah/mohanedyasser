@@ -2,24 +2,20 @@ import Hero from "@/components/Hero";
 import BentoGrid from "@/components/BentoGrid";
 import Services from "@/components/Services";
 import StickyFooter from "@/components/StickyFooter";
-import LiveBackground from "@/components/LiveBackground";
+import CinematicBackground from "@/components/CinematicBackground";
 import Navbar from "@/components/Navbar";
-import MouseSpotlight from "@/components/MouseSpotlight";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground relative">
-      {/* Live animated background */}
-      <LiveBackground />
-      
-      {/* Mouse spotlight effect */}
-      <MouseSpotlight />
+      {/* Cinematic background with volumetric light and grain */}
+      <CinematicBackground />
       
       {/* Scroll-triggered Navbar */}
       <Navbar />
       
       {/* Main content */}
-      <main className="pb-16 relative z-10">
+      <main className="relative z-10">
         <Hero />
         <section id="work">
           <BentoGrid />
