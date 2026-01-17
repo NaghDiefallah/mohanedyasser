@@ -1,22 +1,22 @@
-import Hero from "@/components/Hero";
+import CinematicHero from "@/components/CinematicHero";
 import BentoGrid from "@/components/BentoGrid";
 import Services from "@/components/Services";
 import StickyFooter from "@/components/StickyFooter";
-import CinematicBackground from "@/components/CinematicBackground";
+import CinematicScene from "@/components/three/CinematicScene";
 import Navbar from "@/components/Navbar";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
-      {/* Cinematic background with volumetric light and grain */}
-      <CinematicBackground />
+    <div className="min-h-screen text-white relative" style={{ background: '#0a0a0a' }}>
+      {/* Three.js cinematic background with volumetric light, particles, and grain */}
+      <CinematicScene />
       
       {/* Scroll-triggered Navbar */}
       <Navbar />
       
       {/* Main content */}
       <main className="relative z-10">
-        <Hero />
+        <CinematicHero />
         <section id="work">
           <BentoGrid />
         </section>
