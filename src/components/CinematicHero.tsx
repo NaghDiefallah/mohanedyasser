@@ -1,33 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { ArrowRight, Play } from 'lucide-react';
 import heroPortrait from '@/assets/hero-portrait.png';
 
 const CinematicHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [phase, setPhase] = useState<'silence' | 'reveal' | 'complete'>('silence');
 
   // Mouse tracking for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
-  // Smooth spring physics for cursor following
-  const springConfig = { damping: 25, stiffness: 150 };
+  const springConfig = { damping: 30, stiffness: 100 };
   const smoothMouseX = useSpring(mouseX, springConfig);
   const smoothMouseY = useSpring(mouseY, springConfig);
 
-  // Transform values for parallax layers
-  const portraitX = useTransform(smoothMouseX, [-1, 1], [20, -20]);
-  const portraitY = useTransform(smoothMouseY, [-1, 1], [15, -15]);
-  const portraitRotate = useTransform(smoothMouseX, [-1, 1], [2, -2]);
-  
-  const textX = useTransform(smoothMouseX, [-1, 1], [-10, 10]);
-  const textY = useTransform(smoothMouseY, [-1, 1], [-8, 8]);
-
-  const lightX = useTransform(smoothMouseX, [-1, 1], [-30, 30]);
-  const lightY = useTransform(smoothMouseY, [-1, 1], [-20, 20]);
+  const portraitX = useTransform(smoothMouseX, [-1, 1], [15, -15]);
+  const portraitY = useTransform(smoothMouseY, [-1, 1], [10, -10]);
+  const portraitRotate = useTransform(smoothMouseX, [-1, 1], [1.5, -1.5]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -41,318 +31,194 @@ const CinematicHero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // GSAP cinematic entrance animation
+  // Cinematic reveal with silence
   useEffect(() => {
+    // 1.5 seconds of silence
+    const silenceTimer = setTimeout(() => {
+      setPhase('reveal');
+    }, 1500);
+
+    return () => clearTimeout(silenceTimer);
+  }, []);
+
+  useEffect(() => {
+    if (phase !== 'reveal') return;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         defaults: { ease: 'power4.out' },
-        onComplete: () => setIsLoaded(true),
+        onComplete: () => setPhase('complete'),
       });
 
-      // Initial state
-      gsap.set('.hero-line', { y: 120, opacity: 0, rotationX: -40 });
-      gsap.set('.hero-eyebrow', { x: -100, opacity: 0 });
-      gsap.set('.hero-description', { y: 40, opacity: 0 });
-      gsap.set('.hero-cta', { y: 60, opacity: 0 });
-      gsap.set('.hero-stat', { y: 40, opacity: 0 });
-      gsap.set('.hero-portrait', { scale: 1.1, opacity: 0, x: 50 });
-      gsap.set('.hero-light-sweep', { x: '-100%' });
+      // Words emerge from darkness
+      gsap.set('.hero-word', { 
+        y: 80, 
+        opacity: 0,
+        filter: 'blur(8px)',
+      });
+      gsap.set('.hero-portrait-container', { 
+        opacity: 0, 
+        scale: 1.05,
+        filter: 'blur(4px)',
+      });
+      gsap.set('.hero-accent-line', { scaleX: 0 });
 
-      // Light sweep across screen
-      tl.to('.hero-light-sweep', {
-        x: '100%',
-        duration: 1.5,
-        ease: 'power2.inOut',
-      }, 0.3);
-
-      // Portrait emerges
-      tl.to('.hero-portrait', {
+      // Portrait bleeds in first
+      tl.to('.hero-portrait-container', {
+        opacity: 1,
         scale: 1,
-        opacity: 1,
-        x: 0,
-        duration: 1.8,
-        ease: 'power3.out',
-      }, 0.5);
+        filter: 'blur(0px)',
+        duration: 2,
+        ease: 'power2.out',
+      }, 0);
 
-      // Eyebrow slides in
-      tl.to('.hero-eyebrow', {
-        x: 0,
+      // Words cut in with weight
+      tl.to('.hero-word', {
+        y: 0,
         opacity: 1,
-        duration: 0.8,
+        filter: 'blur(0px)',
+        duration: 1.4,
+        stagger: 0.3,
+        ease: 'power3.out',
       }, 0.8);
 
-      // Headline lines stagger in cinematically
-      tl.to('.hero-line', {
-        y: 0,
-        opacity: 1,
-        rotationX: 0,
+      // Accent line slices across
+      tl.to('.hero-accent-line', {
+        scaleX: 1,
         duration: 1.2,
-        stagger: 0.15,
-      }, 1);
-
-      // Description fades up
-      tl.to('.hero-description', {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-      }, 1.8);
-
-      // CTAs appear
-      tl.to('.hero-cta', {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.1,
-      }, 2);
-
-      // Stats roll in
-      tl.to('.hero-stat', {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        stagger: 0.08,
-      }, 2.3);
+        ease: 'power2.inOut',
+      }, 2.2);
 
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [phase]);
 
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ perspective: '1000px' }}
+      className="relative min-h-screen flex items-center overflow-hidden bg-black"
+      style={{ perspective: '1200px' }}
     >
-      {/* Cinematic light sweep effect */}
+      {/* Heavy vignette */}
       <div 
-        className="hero-light-sweep absolute inset-0 pointer-events-none z-30"
+        className="absolute inset-0 pointer-events-none z-40"
         style={{
-          background: 'linear-gradient(90deg, transparent 0%, rgba(255,200,150,0.08) 40%, rgba(255,220,180,0.15) 50%, rgba(255,200,150,0.08) 60%, transparent 100%)',
+          background: 'radial-gradient(ellipse 50% 50% at 50% 50%, transparent 0%, rgba(0,0,0,0.7) 100%)',
         }}
       />
 
-      {/* Dynamic light source that follows mouse */}
+      {/* Subtle top light */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: 'radial-gradient(ellipse 80% 40% at 30% -10%, rgba(255,255,255,0.03) 0%, transparent 60%)',
+        }}
+      />
+
+      {/* Portrait - dominant, emerging from shadow */}
       <motion.div 
-        className="absolute pointer-events-none z-0"
+        className="hero-portrait-container absolute inset-0 flex items-center justify-end z-10"
         style={{
-          x: lightX,
-          y: lightY,
-          width: '60%',
-          height: '80%',
-          top: '-20%',
-          right: '-10%',
-          background: 'radial-gradient(ellipse at center, rgba(255,180,120,0.08) 0%, rgba(255,150,100,0.03) 40%, transparent 70%)',
-          filter: 'blur(60px)',
+          x: portraitX,
+          y: portraitY,
+          rotateY: portraitRotate,
+          transformStyle: 'preserve-3d',
         }}
-      />
-
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 lg:px-20 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center min-h-[85vh]">
-          
-          {/* Left - Text content */}
-          <motion.div 
-            className="lg:col-span-7 relative"
-            style={{ x: textX, y: textY }}
-          >
-            {/* Eyebrow */}
-            <div className="hero-eyebrow flex items-center gap-4 mb-10">
-              <div className="w-16 h-px bg-gradient-to-r from-amber-500/60 to-transparent" />
-              <span 
-                className="tracking-[0.4em] uppercase text-[10px] font-medium"
-                style={{ color: 'rgba(255,200,150,0.7)' }}
-              >
-                Video Editor & Motion Designer
-              </span>
-            </div>
-
-            {/* Headline container */}
-            <div ref={headlineRef} className="mb-10 overflow-hidden">
-              <div className="hero-line origin-bottom">
-                <h1 
-                  className="text-[clamp(2.8rem,7vw,6.5rem)] leading-[0.9] font-bold tracking-[-0.02em]"
-                  style={{ 
-                    fontFamily: "'Bebas Neue', 'Inter', sans-serif",
-                    color: 'rgba(255,255,255,0.95)',
-                    textShadow: '0 4px 30px rgba(0,0,0,0.5)',
-                  }}
-                >
-                  CRAFTING CINEMA
-                </h1>
-              </div>
-              <div className="hero-line origin-bottom">
-                <h1 
-                  className="text-[clamp(2.8rem,7vw,6.5rem)] leading-[0.9] font-bold tracking-[-0.02em] inline-block"
-                  style={{ 
-                    fontFamily: "'Bebas Neue', 'Inter', sans-serif",
-                    background: 'linear-gradient(135deg, #f5a623 0%, #e8932c 50%, #d4820f 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    textShadow: 'none',
-                    filter: 'drop-shadow(0 0 40px rgba(245,166,35,0.3))',
-                  }}
-                >
-                  FRAME BY FRAME
-                </h1>
-              </div>
-            </div>
-
-            {/* Description */}
-            <p 
-              className="hero-description text-lg md:text-xl max-w-xl leading-relaxed mb-12 font-light"
-              style={{ color: 'rgba(255,255,255,0.55)' }}
-            >
-              Transforming raw footage into cinematic experiences. 
-              Commercial, documentary & narrative work for brands that demand excellence.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-5 mb-16">
-              <motion.button 
-                className="hero-cta group relative px-8 py-4 overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                style={{
-                  background: 'linear-gradient(135deg, #c4891f 0%, #a06d15 100%)',
-                  borderRadius: '2px',
-                }}
-              >
-                <span className="relative z-10 flex items-center gap-3 text-black font-semibold tracking-wide text-sm uppercase">
-                  View Portfolio
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </span>
-                <motion.div 
-                  className="absolute inset-0 bg-white/20"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.5 }}
-                />
-              </motion.button>
-              
-              <motion.button 
-                className="hero-cta group flex items-center gap-4 px-6 py-4"
-                whileHover={{ x: 5 }}
-              >
-                <div 
-                  className="w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 group-hover:border-amber-500/50 group-hover:bg-amber-500/10"
-                  style={{ borderColor: 'rgba(255,255,255,0.2)' }}
-                >
-                  <Play className="w-4 h-4 ml-0.5" style={{ color: 'rgba(255,255,255,0.8)' }} />
-                </div>
-                <span 
-                  className="text-sm uppercase tracking-wider font-medium transition-colors group-hover:text-amber-400"
-                  style={{ color: 'rgba(255,255,255,0.6)' }}
-                >
-                  Watch Showreel
-                </span>
-              </motion.button>
-            </div>
-
-            {/* Stats */}
-            <div 
-              className="flex items-center gap-10 pt-8"
-              style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
-            >
-              {[
-                { value: '50+', label: 'Projects' },
-                { value: '4', label: 'Years' },
-                { value: '24h', label: 'Response' },
-              ].map((stat, i) => (
-                <div key={i} className="hero-stat">
-                  <span 
-                    className="block text-3xl font-light tracking-tight"
-                    style={{ color: 'rgba(255,255,255,0.9)' }}
-                  >
-                    {stat.value}
-                  </span>
-                  <span 
-                    className="text-xs uppercase tracking-widest"
-                    style={{ color: 'rgba(255,255,255,0.4)' }}
-                  >
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right - Portrait with parallax */}
-          <motion.div 
-            className="hero-portrait lg:col-span-5 relative flex justify-center lg:justify-end"
+      >
+        <div className="relative w-full h-full flex items-center justify-center lg:justify-end lg:pr-[5%]">
+          <img 
+            src={heroPortrait} 
+            alt="" 
+            className="h-[85vh] max-h-[900px] w-auto object-contain"
             style={{
-              x: portraitX,
-              y: portraitY,
-              rotateY: portraitRotate,
-              transformStyle: 'preserve-3d',
+              filter: 'contrast(1.15) brightness(0.75) saturate(0.7)',
+              maskImage: 'radial-gradient(ellipse 70% 80% at 50% 40%, black 30%, transparent 80%)',
+              WebkitMaskImage: 'radial-gradient(ellipse 70% 80% at 50% 40%, black 30%, transparent 80%)',
             }}
-          >
-            {/* Ambient glow */}
-            <div 
-              className="absolute inset-0 -z-10"
-              style={{
-                background: 'radial-gradient(ellipse 80% 70% at 50% 30%, rgba(200,140,80,0.15) 0%, rgba(180,120,60,0.05) 40%, transparent 70%)',
-                filter: 'blur(50px)',
-                transform: 'scale(1.4)',
-              }}
-            />
-            
-            {/* Portrait */}
-            <div className="relative">
-              <img 
-                src={heroPortrait} 
-                alt="Video Editor" 
-                className="relative w-[320px] sm:w-[380px] lg:w-[460px] h-auto object-contain"
-                style={{
-                  filter: 'contrast(1.1) brightness(0.9) saturate(0.85)',
-                  maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
-                }}
-              />
-              
-              {/* Rim light overlay */}
-              <div 
-                className="absolute inset-0 pointer-events-none mix-blend-overlay"
-                style={{
-                  background: 'linear-gradient(120deg, transparent 40%, rgba(255,180,120,0.15) 70%, transparent 100%)',
-                }}
-              />
+          />
+          
+          {/* Cold rim light */}
+          <div 
+            className="absolute inset-0 pointer-events-none mix-blend-overlay"
+            style={{
+              background: 'linear-gradient(110deg, transparent 50%, rgba(180,200,220,0.08) 80%, transparent 100%)',
+            }}
+          />
+        </div>
+      </motion.div>
 
-              {/* Edge highlight */}
-              <div 
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(90deg, transparent 60%, rgba(255,200,150,0.08) 90%, transparent 100%)',
+      {/* Text - minimal, positioned with intent */}
+      <div className="relative z-30 container mx-auto px-8 md:px-16 lg:px-24">
+        <div className="max-w-[50%]">
+          {/* The statement - 3 words max per line */}
+          <div className="space-y-2">
+            <div className="hero-word overflow-hidden">
+              <h1 
+                className="text-[clamp(3rem,8vw,8rem)] leading-[0.85] font-bold tracking-[-0.03em] uppercase"
+                style={{ 
+                  fontFamily: "'Bebas Neue', 'Inter', sans-serif",
+                  color: 'rgba(255,255,255,0.95)',
                 }}
-              />
+              >
+                I
+              </h1>
             </div>
-          </motion.div>
+            <div className="hero-word overflow-hidden">
+              <h1 
+                className="text-[clamp(3rem,8vw,8rem)] leading-[0.85] font-bold tracking-[-0.03em] uppercase"
+                style={{ 
+                  fontFamily: "'Bebas Neue', 'Inter', sans-serif",
+                  color: 'rgba(255,255,255,0.95)',
+                }}
+              >
+                Cut
+              </h1>
+            </div>
+            <div className="hero-word overflow-hidden">
+              <h1 
+                className="text-[clamp(3rem,8vw,8rem)] leading-[0.85] font-bold tracking-[-0.03em] uppercase"
+                style={{ 
+                  fontFamily: "'Bebas Neue', 'Inter', sans-serif",
+                  color: 'rgba(255,255,255,0.9)',
+                }}
+              >
+                <span style={{ color: 'rgba(255,255,255,0.4)' }}>The</span>{' '}
+                <span>Noise.</span>
+              </h1>
+            </div>
+          </div>
+
+          {/* Accent line */}
+          <div 
+            className="hero-accent-line mt-12 h-[1px] w-32 origin-left"
+            style={{ 
+              background: 'linear-gradient(90deg, rgba(255,255,255,0.5) 0%, transparent 100%)',
+            }}
+          />
         </div>
       </div>
 
-      {/* Bottom gradient fade */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none z-20"
-        style={{
-          background: 'linear-gradient(to top, #0a0a0a 0%, transparent 100%)',
-        }}
-      />
-
-      {/* Scroll indicator */}
+      {/* Scroll hint - appears late */}
       <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 3, duration: 0.8 }}
+        className="absolute bottom-12 left-8 md:left-16 z-30"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: phase === 'complete' ? 1 : 0 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
       >
-        <motion.div 
-          className="w-5 h-8 rounded-full border flex items-start justify-center pt-2"
-          style={{ borderColor: 'rgba(255,255,255,0.2)' }}
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-0.5 h-2 rounded-full bg-white/40" />
-        </motion.div>
+        <div className="flex items-center gap-4">
+          <motion.div 
+            className="w-[1px] h-12 bg-white/20 origin-top"
+            animate={{ scaleY: [1, 0.5, 1] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <span 
+            className="text-[10px] uppercase tracking-[0.3em] font-light"
+            style={{ color: 'rgba(255,255,255,0.3)' }}
+          >
+            Scroll
+          </span>
+        </div>
       </motion.div>
     </section>
   );
