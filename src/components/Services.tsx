@@ -59,7 +59,7 @@ const Services = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="p-8 flex flex-col h-full group rounded-lg transition-all duration-300 bg-card border border-border hover:border-primary/50"
               style={{
-                boxShadow: '0 4px 20px -4px hsl(0 0% 0% / 0.5)',
+                boxShadow: '0 4px 20px -4px hsl(202 75% 5% / 0.5)',
               }}
             >
               {/* Icon */}

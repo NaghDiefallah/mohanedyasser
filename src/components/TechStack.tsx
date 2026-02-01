@@ -33,7 +33,7 @@ const TechStack = () => {
               key={tool.name}
               className="flex flex-col items-center gap-2 group"
             >
-              <div className="w-16 h-16 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white font-bold text-lg group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
+              <div className="w-16 h-16 rounded-xl bg-secondary/50 backdrop-blur-sm border border-border flex items-center justify-center text-foreground font-bold text-lg group-hover:bg-primary/20 group-hover:border-primary/50 transition-all duration-300">
                 {tool.icon}
               </div>
               <span className="text-muted-foreground text-xs">{tool.name}</span>
