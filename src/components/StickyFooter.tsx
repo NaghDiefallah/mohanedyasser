@@ -42,7 +42,7 @@ const StickyFooter = () => {
             <div className="container mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4">
               {/* Left - Branding */}
               <div className="flex items-center gap-3">
-                <span className="text-lg font-bold text-gradient">STUDIO</span>
+                <span className="text-lg font-bold text-primary">MOHANED YASER</span>
                 <span className="text-muted-foreground text-sm hidden sm:block">© 2025</span>
               </div>
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logoImage from "@/assets/logo.jpg";
 
 const navLinks = [
   { label: "Work", href: "#work" },
@@ -36,15 +37,15 @@ const Navbar = () => {
           <div 
             className="container mx-auto max-w-7xl rounded-lg px-6 py-3 backdrop-blur-xl"
             style={{
-              background: 'hsl(0 0% 6% / 0.95)',
-              border: '1px solid hsl(0 0% 20% / 0.5)',
-              boxShadow: '0 10px 40px -10px hsl(0 0% 0% / 0.5)',
+              background: 'hsl(202 75% 12% / 0.95)',
+              border: '1px solid hsl(202 50% 25% / 0.5)',
+              boxShadow: '0 10px 40px -10px hsl(202 75% 5% / 0.5)',
             }}
           >
             <div className="flex items-center justify-between">
               {/* Logo */}
-              <a href="#" className="text-xl font-black text-white uppercase tracking-wider">
-                STUDIO
+              <a href="#" className="flex items-center">
+                <img src={logoImage} alt="Logo" className="h-8 w-auto" />
               </a>
 
               {/* Desktop Navigation */}

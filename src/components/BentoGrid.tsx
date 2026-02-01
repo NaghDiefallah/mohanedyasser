@@ -24,7 +24,7 @@ const ProjectCard = ({ project, index }: { project: typeof reelsProjects[0]; ind
       <div 
         className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300 group-hover:border-primary/50"
         style={{
-          boxShadow: '0 4px 20px -4px hsl(0 0% 0% / 0.5)',
+          boxShadow: '0 4px 20px -4px hsl(202 75% 5% / 0.5)',
         }}
       >
         {/* Image area */}
