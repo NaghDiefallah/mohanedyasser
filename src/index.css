@@ -7,51 +7,51 @@
 
 @layer base {
   :root {
-    /* Cinematic dark studio palette */
-    --background: 0 0% 5%;
-    --foreground: 0 0% 92%;
+    /* Mohaned Yaser Brand Identity - Deep Navy & Cyan */
+    --background: 202 75% 12%;
+    --foreground: 0 0% 95%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 92%;
+    --card: 202 70% 15%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 92%;
+    --popover: 202 70% 15%;
+    --popover-foreground: 0 0% 95%;
 
-    /* Warm amber accent - film industry feel */
-    --primary: 35 90% 55%;
-    --primary-foreground: 0 0% 5%;
+    /* Primary: Bright Cyan - brand accent */
+    --primary: 195 100% 45%;
+    --primary-foreground: 202 75% 12%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 92%;
+    --secondary: 202 65% 20%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
+    --muted: 202 50% 25%;
+    --muted-foreground: 195 30% 60%;
 
-    --accent: 35 90% 55%;
-    --accent-foreground: 0 0% 5%;
+    --accent: 195 100% 45%;
+    --accent-foreground: 202 75% 12%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 35 90% 55%;
+    --border: 202 50% 25%;
+    --input: 202 50% 25%;
+    --ring: 195 100% 45%;
 
     --radius: 0.5rem;
 
-    /* Cinematic custom properties */
-    --glow-primary: 35 90% 55%;
-    --glass-bg: 0 0% 8%;
-    --glass-border: 0 0% 22%;
+    /* Brand custom properties */
+    --glow-primary: 195 100% 45%;
+    --glass-bg: 202 70% 15%;
+    --glass-border: 202 40% 30%;
     
-    /* Volumetric light colors */
-    --light-warm: 40 60% 70%;
-    --light-cool: 220 30% 60%;
+    /* Volumetric light colors - cool blue tones */
+    --light-warm: 195 80% 60%;
+    --light-cool: 202 60% 50%;
   }
 
   .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 92%;
+    --background: 202 75% 12%;
+    --foreground: 0 0% 95%;
   }
 }
 
