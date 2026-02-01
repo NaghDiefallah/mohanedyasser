@@ -7,7 +7,7 @@ import Navbar from "@/components/Navbar";
 
 const Index = () => {
   return (
-    <div className="min-h-screen text-white relative" style={{ background: '#0a0a0a' }}>
+    <div className="min-h-screen text-white relative" style={{ background: 'hsl(202 75% 12%)' }}>
       {/* Three.js cinematic background with volumetric light, particles, and grain */}
       <CinematicScene />
       
