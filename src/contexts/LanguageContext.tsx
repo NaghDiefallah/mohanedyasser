@@ -6,19 +6,19 @@ interface Translations {
   nav: {
     work: string;
     services: string;
-    contact: string;
+    skills: string;
     letsTalk: string;
   };
   hero: {
-    line1: string;
-    line2: string;
-    line3a: string;
-    line3b: string;
-    subtitle: string;
-    description: string;
-    viewWork: string;
-    playReel: string;
-    scroll: string;
+    name: string;
+    title1: string;
+    title2: string;
+    software: string;
+    seeMyWork: string;
+    letsTalk: string;
+    projects: string;
+    experience: string;
+    response: string;
   };
   settings: {
     theme: string;
@@ -35,19 +35,19 @@ const translations: Record<Language, Translations> = {
     nav: {
       work: 'Work',
       services: 'Services',
-      contact: 'Contact',
+      skills: 'Skills',
       letsTalk: "Let's Talk",
     },
     hero: {
-      line1: 'I',
-      line2: 'CUT',
-      line3a: 'THE ',
-      line3b: 'NOISE.',
-      subtitle: 'Video Editor & Motion Designer',
-      description: 'Crafting cinematic experiences for brands that refuse to blend in. From concept to final cut.',
-      viewWork: 'View Work',
-      playReel: 'Play Reel',
-      scroll: 'Scroll',
+      name: 'Mohaned Yasser',
+      title1: 'VIDEO',
+      title2: 'EDITOR',
+      software: 'Adobe After Effects, Adobe Premiere Pro, Adobe Photoshop, Adobe Audition',
+      seeMyWork: 'See My Work',
+      letsTalk: "Let's Talk",
+      projects: '+50 Projects',
+      experience: '1 yr Experience',
+      response: '24h Response',
     },
     settings: {
       theme: 'Theme',
@@ -62,19 +62,19 @@ const translations: Record<Language, Translations> = {
     nav: {
       work: 'أعمالي',
       services: 'الخدمات',
-      contact: 'تواصل',
+      skills: 'المهارات',
       letsTalk: 'تواصل معي',
     },
     hero: {
-      line1: 'أنا',
-      line2: 'أقطع',
-      line3a: 'كل ',
-      line3b: 'الضوضاء.',
-      subtitle: 'محرر فيديو ومصمم موشن',
-      description: 'أصنع تجارب سينمائية للعلامات التجارية التي ترفض الذوبان في الحشد. من الفكرة إلى القص النهائي.',
-      viewWork: 'شاهد أعمالي',
-      playReel: 'شاهد الريل',
-      scroll: 'اسحب للأسفل',
+      name: 'مهند ياسر',
+      title1: 'محرر',
+      title2: 'فيديو',
+      software: 'أدوبي أفتر إفكتس، أدوبي بريمير برو، أدوبي فوتوشوب، أدوبي أوديشن',
+      seeMyWork: 'شاهد أعمالي',
+      letsTalk: 'تواصل معي',
+      projects: '+50 مشروع',
+      experience: '1 سنة خبرة',
+      response: 'رد خلال 24 ساعة',
     },
     settings: {
       theme: 'المظهر',
