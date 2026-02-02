@@ -3,16 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logoImage from "@/assets/logo-icon.png";
-
-const navLinks = [
-  { label: "Work", href: "#work" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t, isRTL } = useLanguage();
+  const { theme } = useTheme();
+
+  const navLinks = [
+    { label: t.nav.work, href: "#work" },
+    { label: t.nav.services, href: "#services" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +27,18 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navBg = theme === 'light' 
+    ? 'hsl(210 20% 98% / 0.95)' 
+    : 'hsl(220 30% 8% / 0.95)';
+  
+  const navBorder = theme === 'light'
+    ? '1px solid hsl(214 20% 85% / 0.5)'
+    : '1px solid hsl(220 20% 20% / 0.5)';
+  
+  const navShadow = theme === 'light'
+    ? '0 10px 40px -10px hsl(210 20% 50% / 0.2)'
+    : '0 10px 40px -10px hsl(220 30% 5% / 0.5)';
 
   return (
     <AnimatePresence>
@@ -37,19 +53,19 @@ const Navbar = () => {
           <div 
             className="container mx-auto max-w-7xl rounded-lg px-6 py-3 backdrop-blur-xl"
             style={{
-              background: 'hsl(202 75% 12% / 0.95)',
-              border: '1px solid hsl(202 50% 25% / 0.5)',
-              boxShadow: '0 10px 40px -10px hsl(202 75% 5% / 0.5)',
+              background: navBg,
+              border: navBorder,
+              boxShadow: navShadow,
             }}
           >
-            <div className="flex items-center justify-between">
+            <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
               {/* Logo */}
               <a href="#" className="flex items-center">
                 <img src={logoImage} alt="Logo" className="h-8 w-auto" />
               </a>
 
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center gap-8">
+              <div className={`hidden md:flex items-center gap-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
                 {navLinks.map((link) => (
                   <a
                     key={link.label}
@@ -61,7 +77,7 @@ const Navbar = () => {
                 ))}
               </div>
 
-              {/* CTA Button - Neon Green styling */}
+              {/* CTA Button */}
               <div className="hidden md:block">
                 <Button 
                   size="sm" 
@@ -70,7 +86,7 @@ const Navbar = () => {
                     boxShadow: '0 0 20px hsl(var(--primary) / 0.4)',
                   }}
                 >
-                  Let's Talk
+                  {t.nav.letsTalk}
                 </Button>
               </div>
 
@@ -93,7 +109,7 @@ const Navbar = () => {
                   transition={{ duration: 0.2 }}
                   className="md:hidden overflow-hidden"
                 >
-                  <div className="pt-4 pb-2 flex flex-col gap-4">
+                  <div className={`pt-4 pb-2 flex flex-col gap-4 ${isRTL ? 'items-end' : 'items-start'}`}>
                     {navLinks.map((link) => (
                       <a
                         key={link.label}
@@ -111,7 +127,7 @@ const Navbar = () => {
                         boxShadow: '0 0 20px hsl(var(--primary) / 0.4)',
                       }}
                     >
-                      Let's Talk
+                      {t.nav.letsTalk}
                     </Button>
                   </div>
                 </motion.div>
