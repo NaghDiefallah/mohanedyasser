@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -8,6 +8,34 @@ import { Button } from '@/components/ui/button';
 import AnimatedText from './AnimatedText';
 
 const CinematicHero = () => {
+  const logoRef = useRef<HTMLDivElement>(null);
+  
+  // Magnetic hover effect for logo
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springConfig = { stiffness: 150, damping: 15 };
+  const x = useSpring(mouseX, springConfig);
+  const y = useSpring(mouseY, springConfig);
+
+  const handleLogoMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!logoRef.current) return;
+    const rect = logoRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // Calculate offset from center (max 15px movement)
+    const offsetX = (e.clientX - centerX) * 0.08;
+    const offsetY = (e.clientY - centerY) * 0.08;
+    
+    mouseX.set(offsetX);
+    mouseY.set(offsetY);
+  };
+
+  const handleLogoMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
   const containerRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<'silence' | 'reveal' | 'complete'>('silence');
   const {
@@ -76,6 +104,7 @@ const CinematicHero = () => {
           <div className={`lg:col-span-5 flex flex-col items-center gap-8 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}>
             {/* MASSIVE Logo - Centered, stable position with Magnetic Hover */}
             <motion.div 
+              ref={logoRef}
               className="hero-element flex justify-center"
               initial={{ opacity: 0, y: 30 }}
               animate={{ 
@@ -87,6 +116,9 @@ const CinematicHero = () => {
                 delay: 0.2, 
                 ease: "easeOut"
               }}
+              onMouseMove={handleLogoMouseMove}
+              onMouseLeave={handleLogoMouseLeave}
+              style={{ x, y }}
             >
               <motion.img 
                 alt="Mohaned Yasser Logo" 
