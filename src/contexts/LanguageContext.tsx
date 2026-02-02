@@ -104,8 +104,16 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     localStorage.setItem('language', language);
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
-    document.documentElement.lang = language;
+    
+    // Smooth RTL/LTR transition
+    const root = document.documentElement;
+    root.style.transition = 'none';
+    root.dir = language === 'ar' ? 'rtl' : 'ltr';
+    root.lang = language;
+    
+    // Force reflow to apply direction change instantly
+    void root.offsetHeight;
+    root.style.transition = '';
   }, [language]);
 
   const setLanguage = (lang: Language) => {
