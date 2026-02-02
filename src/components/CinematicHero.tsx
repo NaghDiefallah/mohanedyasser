@@ -81,21 +81,38 @@ const CinematicHero = () => {
           duration: 0.8,
           delay: 0.3
         }}>
-            {/* MASSIVE Logo - No container/border - 3x-4x scale */}
-            <div className="hero-element">
-              <img alt="Mohaned Yasser Logo" className="w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px] object-contain rounded-none shadow-md" style={{
-              filter: theme === 'dark' ? 'drop-shadow(0 0 50px hsl(195 100% 50% / 0.35)) drop-shadow(0 0 100px hsl(195 100% 50% / 0.2))' : 'drop-shadow(0 15px 40px hsl(210 20% 40% / 0.25))'
-            }} src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png" />
-            </div>
+            {/* MASSIVE Logo - No container/border/shadow - clean on background */}
+            <motion.div 
+              className="hero-element"
+              initial={{ opacity: 0, x: isRTL ? 80 : -80 }}
+              animate={{ opacity: phase !== 'silence' ? 1 : 0, x: phase !== 'silence' ? 0 : isRTL ? 80 : -80 }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
+            >
+              <img 
+                alt="Mohaned Yasser Logo" 
+                className="w-72 h-72 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px] object-contain" 
+                style={{
+                  filter: theme === 'dark' 
+                    ? 'drop-shadow(0 0 60px hsl(195 100% 50% / 0.4)) drop-shadow(0 0 120px hsl(195 100% 50% / 0.25))' 
+                    : 'none'
+                }} 
+                src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png" 
+              />
+            </motion.div>
 
-            {/* Stats - Clean, floating on background */}
-            <div className="hero-element flex flex-row lg:flex-col gap-6 lg:gap-4">
-              <span className="text-lg md:text-xl font-bold text-primary tracking-wide">{t.hero.projects}</span>
-              <div className="w-px lg:w-20 h-6 lg:h-px bg-primary/20" />
-              <span className="text-lg md:text-xl font-bold text-primary tracking-wide">{t.hero.experience}</span>
-              <div className="w-px lg:w-20 h-6 lg:h-px bg-primary/20" />
-              <span className="text-lg md:text-xl font-bold text-primary tracking-wide">{t.hero.response}</span>
-            </div>
+            {/* Stats - Clean, floating on background - no containers */}
+            <motion.div 
+              className="hero-element flex flex-row lg:flex-col gap-8 lg:gap-5 mt-4"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: phase !== 'silence' ? 1 : 0, y: phase !== 'silence' ? 0 : 30 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <span className="text-base md:text-lg font-bold text-primary tracking-widest uppercase">{t.hero.projects}</span>
+              <div className="w-px lg:w-16 h-5 lg:h-px bg-primary/30" />
+              <span className="text-base md:text-lg font-bold text-primary tracking-widest uppercase">{t.hero.experience}</span>
+              <div className="w-px lg:w-16 h-5 lg:h-px bg-primary/30" />
+              <span className="text-base md:text-lg font-bold text-primary tracking-widest uppercase">{t.hero.response}</span>
+            </motion.div>
           </motion.div>
 
           {/* Main Content - Right */}

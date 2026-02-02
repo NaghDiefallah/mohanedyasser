@@ -87,10 +87,11 @@ const Navbar = () => {
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-secondary/50 transition-all duration-300 text-sm font-bold"
+              aria-label="Toggle language"
             >
               <Globe className="w-4 h-4 text-primary" />
-              <span className="text-foreground min-w-[60px] text-center">
-                {language === 'ar' ? 'العربية' : 'English'}
+              <span className="text-foreground font-bold">
+                {language === 'ar' ? 'EN' : 'AR'}
               </span>
             </button>
           </div>
