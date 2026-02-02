@@ -1,0 +1,99 @@
+import { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+
+interface TiltCardProps {
+  children: React.ReactNode;
+  className?: string;
+  tiltAmount?: number;
+  glowColor?: string;
+  onClick?: () => void;
+}
+
+const TiltCard = ({ 
+  children, 
+  className = "", 
+  tiltAmount = 10,
+  glowColor = "hsl(195 100% 50%)",
+  onClick 
+}: TiltCardProps) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [tiltAmount, -tiltAmount]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-tiltAmount, tiltAmount]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+    setIsHovered(false);
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className={`relative cursor-pointer ${className}`}
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+        perspective: 1000,
+      }}
+      whileHover={{ 
+        scale: 1.03,
+        transition: { type: "spring", stiffness: 300, damping: 20 }
+      }}
+    >
+      {/* Inner glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-lg pointer-events-none z-10"
+        animate={{
+          opacity: isHovered ? 1 : 0,
+          boxShadow: isHovered 
+            ? `inset 0 0 40px ${glowColor} / 0.15, 0 0 30px ${glowColor} / 0.25` 
+            : "none"
+        }}
+        transition={{ duration: 0.3 }}
+      />
+      
+      {/* Highlight gradient that follows mouse */}
+      <motion.div
+        className="absolute inset-0 rounded-lg pointer-events-none z-10 opacity-0 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle at ${(x.get() + 0.5) * 100}% ${(y.get() + 0.5) * 100}%, ${glowColor} / 0.1 0%, transparent 50%)`,
+          opacity: isHovered ? 1 : 0,
+        }}
+      />
+      
+      {children}
+    </motion.div>
+  );
+};
+
+export default TiltCard;

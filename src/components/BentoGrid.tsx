@@ -1,76 +1,81 @@
 import { useNavigate } from "react-router-dom";
 import { Play, Check } from "lucide-react";
-import ScrollReveal from "./ScrollReveal";
 import { motion } from "framer-motion";
 import { getReelsProjects, getMotionGraphicsProjects } from "@/data/projects";
+import TiltCard from "./TiltCard";
+import ViewportReveal from "./ViewportReveal";
 
 const reelsProjects = getReelsProjects();
 const motionGraphicsProjects = getMotionGraphicsProjects();
 
-// Clean, minimal project card
+// Premium project card with 3D tilt
 const ProjectCard = ({ project, index }: { project: typeof reelsProjects[0]; index: number }) => {
   const navigate = useNavigate();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative cursor-pointer"
-      onClick={() => navigate(`/project/${project.slug}`)}
-    >
-      {/* Card container - flat, clean */}
-      <div 
-        className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300 group-hover:border-primary/50"
-        style={{
-          boxShadow: '0 4px 20px -4px hsl(202 75% 5% / 0.5)',
-        }}
+    <ViewportReveal delay={index * 0.1}>
+      <TiltCard
+        className="group"
+        onClick={() => navigate(`/project/${project.slug}`)}
+        tiltAmount={8}
       >
-        {/* Image area */}
-        <div className="relative aspect-video overflow-hidden">
-          <img
-            src={project.thumbnail}
-            alt={project.title}
-            className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
-          />
-          
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          
-          {/* Play button */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-            <motion.div 
-              className="w-16 h-16 rounded-full bg-primary flex items-center justify-center"
-              whileHover={{ scale: 1.1 }}
-              style={{
-                boxShadow: '0 0 30px hsl(var(--primary) / 0.5)'
-              }}
-            >
-              <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
-            </motion.div>
-          </div>
+        {/* Card container */}
+        <div 
+          className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300 group-hover:border-primary/50"
+          style={{
+            boxShadow: '0 4px 20px -4px hsl(202 75% 5% / 0.5)',
+          }}
+        >
+          {/* Image area */}
+          <div className="relative aspect-video overflow-hidden">
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+            />
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            
+            {/* Play button */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <motion.div 
+                className="w-16 h-16 rounded-full bg-primary flex items-center justify-center"
+                whileHover={{ scale: 1.1 }}
+                style={{
+                  boxShadow: '0 0 30px hsl(var(--primary) / 0.5)'
+                }}
+              >
+                <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
+              </motion.div>
+            </div>
 
-          {/* Neon border on hover */}
-          <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-            style={{
-              boxShadow: 'inset 0 0 0 1px hsl(var(--primary) / 0.5)',
-            }}
-          />
+            {/* Neon border on hover */}
+            <div 
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{
+                boxShadow: 'inset 0 0 0 1px hsl(var(--primary) / 0.5)',
+              }}
+            />
+          </div>
+          
+          {/* Content area with slide-up animation */}
+          <motion.div 
+            className="p-5"
+            initial={{ y: 0 }}
+            whileHover={{ y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3 className="text-lg font-bold text-white mb-1 group-hover:text-primary transition-colors duration-300">
+              {project.title}
+            </h3>
+            <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
+              {project.category}
+            </span>
+          </motion.div>
         </div>
-        
-        {/* Content area */}
-        <div className="p-5">
-          <h3 className="text-lg font-bold text-white mb-1 group-hover:text-primary transition-colors duration-300">
-            {project.title}
-          </h3>
-          <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
-            {project.category}
-          </span>
-        </div>
-      </div>
-    </motion.div>
+      </TiltCard>
+    </ViewportReveal>
   );
 };
 
@@ -80,7 +85,7 @@ const BentoGrid = () => {
       <div className="container mx-auto max-w-7xl relative z-10">
         
         {/* ===== REELS SECTION ===== */}
-        <ScrollReveal className="text-center mb-8 space-y-4">
+        <ViewportReveal className="text-center mb-8 space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -95,16 +100,31 @@ const BentoGrid = () => {
             <div className="h-px w-12 bg-primary" />
           </motion.div>
           
-          <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tight">
+          {/* Section title with glow-up animation */}
+          <motion.h2 
+            className="text-5xl md:text-7xl font-black text-white uppercase tracking-tight"
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            whileInView={{ 
+              opacity: 1, 
+              filter: "blur(0px)",
+              textShadow: [
+                "0 0 0px hsl(195 100% 50% / 0)",
+                "0 0 30px hsl(195 100% 50% / 0.4)",
+                "0 0 10px hsl(195 100% 50% / 0.2)"
+              ]
+            }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             REELS
-          </h2>
+          </motion.h2>
           
           <p className="text-muted-foreground max-w-md mx-auto">
             Raw cuts. Pure creativity. Each frame tells a story.
           </p>
-        </ScrollReveal>
+        </ViewportReveal>
 
-        {/* Reels Grid - Clean, flat */}
+        {/* Reels Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {reelsProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
@@ -112,7 +132,7 @@ const BentoGrid = () => {
         </div>
 
         {/* ===== MOTION GRAPHICS SECTION ===== */}
-        <ScrollReveal className="text-center mb-8 space-y-4">
+        <ViewportReveal className="text-center mb-8 space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -127,101 +147,124 @@ const BentoGrid = () => {
             <div className="h-px w-12 bg-primary" />
           </motion.div>
           
-          <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tight">
-            MOTION <span className="text-primary text-glow">GRAPHICS</span>
-          </h2>
+          {/* Section title with glow-up animation */}
+          <motion.h2 
+            className="text-5xl md:text-7xl font-black text-white uppercase tracking-tight"
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            whileInView={{ 
+              opacity: 1, 
+              filter: "blur(0px)"
+            }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            MOTION <motion.span 
+              className="text-primary"
+              initial={{ textShadow: "0 0 0px hsl(195 100% 50% / 0)" }}
+              whileInView={{ 
+                textShadow: [
+                  "0 0 0px hsl(195 100% 50% / 0)",
+                  "0 0 40px hsl(195 100% 50% / 0.6)",
+                  "0 0 20px hsl(195 100% 50% / 0.4)"
+                ]
+              }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.4 }}
+            >GRAPHICS</motion.span>
+          </motion.h2>
           
           <p className="text-muted-foreground max-w-md mx-auto">
             Dynamic visuals. Seamless motion. Bringing ideas to life.
           </p>
-        </ScrollReveal>
+        </ViewportReveal>
 
         {/* Motion Graphics - Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* Left: Featured Video */}
           <div className="lg:col-span-1">
             {motionGraphicsProjects[0] && (
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="group relative cursor-pointer"
-                onClick={() => window.location.href = `/project/${motionGraphicsProjects[0].slug}`}
-              >
-                <div 
-                  className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300 group-hover:border-primary/50"
-                  style={{ boxShadow: '0 4px 20px -4px hsl(0 0% 0% / 0.5)' }}
+              <ViewportReveal>
+                <TiltCard
+                  className="group"
+                  onClick={() => window.location.href = `/project/${motionGraphicsProjects[0].slug}`}
+                  tiltAmount={6}
                 >
-                  <div className="relative aspect-video overflow-hidden">
-                    <img
-                      src={motionGraphicsProjects[0].thumbnail}
-                      alt={motionGraphicsProjects[0].title}
-                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <motion.div 
-                        className="w-20 h-20 rounded-full bg-primary flex items-center justify-center"
-                        whileHover={{ scale: 1.1 }}
-                        style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.5)' }}
-                      >
-                        <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
-                      </motion.div>
+                  <div 
+                    className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300 group-hover:border-primary/50"
+                    style={{ boxShadow: '0 4px 20px -4px hsl(0 0% 0% / 0.5)' }}
+                  >
+                    <div className="relative aspect-video overflow-hidden">
+                      <img
+                        src={motionGraphicsProjects[0].thumbnail}
+                        alt={motionGraphicsProjects[0].title}
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <motion.div 
+                          className="w-20 h-20 rounded-full bg-primary flex items-center justify-center"
+                          whileHover={{ scale: 1.1 }}
+                          style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.5)' }}
+                        >
+                          <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
+                        </motion.div>
+                      </div>
                     </div>
+                    <motion.div 
+                      className="p-6"
+                      initial={{ y: 0 }}
+                      whileHover={{ y: -5 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <h3 className="text-xl font-bold text-white mb-1 group-hover:text-primary transition-colors duration-300">
+                        {motionGraphicsProjects[0].title}
+                      </h3>
+                      <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
+                        {motionGraphicsProjects[0].category}
+                      </span>
+                    </motion.div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-white mb-1 group-hover:text-primary transition-colors duration-300">
-                      {motionGraphicsProjects[0].title}
-                    </h3>
-                    <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
-                      {motionGraphicsProjects[0].category}
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
+                </TiltCard>
+              </ViewportReveal>
             )}
           </div>
 
           {/* Right: Skills/Specs List */}
           <div className="lg:col-span-1 flex flex-col justify-center">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="space-y-6"
-            >
-              <h3 className="text-2xl font-bold text-white uppercase tracking-tight mb-8">
-                What I Create
-              </h3>
-              
-              {[
-                "3D Modeling & Animation",
-                "Kinetic Typography",
-                "Logo Reveals & Intros",
-                "Visual Effects (VFX)",
-                "Lower Thirds & Graphics",
-                "Social Media Animations"
-              ].map((skill, index) => (
-                <motion.div
-                  key={skill}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.1 * index }}
-                  className="flex items-center gap-4"
-                >
-                  <div 
-                    className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0"
-                    style={{ boxShadow: '0 0 10px hsl(var(--primary) / 0.3)' }}
+            <ViewportReveal delay={0.2}>
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-white uppercase tracking-tight mb-8">
+                  What I Create
+                </h3>
+                
+                {[
+                  "3D Modeling & Animation",
+                  "Kinetic Typography",
+                  "Logo Reveals & Intros",
+                  "Visual Effects (VFX)",
+                  "Lower Thirds & Graphics",
+                  "Social Media Animations"
+                ].map((skill, index) => (
+                  <motion.div
+                    key={skill}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: 0.1 * index }}
+                    className="flex items-center gap-4"
                   >
-                    <Check className="w-4 h-4 text-primary" />
-                  </div>
-                  <span className="text-muted-foreground text-lg font-medium">{skill}</span>
-                </motion.div>
-              ))}
-            </motion.div>
+                    <motion.div 
+                      className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0"
+                      whileHover={{ scale: 1.2, backgroundColor: "hsl(195 100% 50% / 0.4)" }}
+                      style={{ boxShadow: '0 0 10px hsl(var(--primary) / 0.3)' }}
+                    >
+                      <Check className="w-4 h-4 text-primary" />
+                    </motion.div>
+                    <span className="text-muted-foreground text-lg font-medium">{skill}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </ViewportReveal>
 
             {/* Additional project cards */}
             <div className="grid grid-cols-2 gap-4 mt-8">
