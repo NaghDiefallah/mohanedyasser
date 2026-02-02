@@ -117,12 +117,13 @@ const CinematicHero = () => {
 
           {/* Vertical Divider Line */}
           <motion.div 
-            className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-px h-[60%] bg-gradient-to-b from-transparent via-primary/40 to-transparent ${isRTL ? 'right-[41.66%]' : 'left-[41.66%]'}`}
+            className={`hidden lg:block absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent ${isRTL ? 'right-[41.66%]' : 'left-[41.66%]'}`}
             initial={{ opacity: 0, scaleY: 0 }}
             animate={{ 
               opacity: phase !== 'silence' ? 1 : 0, 
               scaleY: phase !== 'silence' ? 1 : 0 
             }}
+            style={{ transformOrigin: 'top' }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           />
 
