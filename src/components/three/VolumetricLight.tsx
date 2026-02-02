@@ -36,22 +36,22 @@ const fragmentShader = `
     for(float i = 0.0; i < 6.0; i++) {
       float rayAngle = angle + i * 0.5 + uTime * 0.02;
       float rayStrength = sin(rayAngle * 3.0 + uTime * 0.5) * 0.5 + 0.5;
-      rays += rayStrength * (1.0 - dist) * 0.15;
+      rays += rayStrength * (1.0 - dist) * 0.12;
     }
     
     // Falloff
-    float falloff = 1.0 / (1.0 + dist * 3.0);
+    float falloff = 1.0 / (1.0 + dist * 3.5);
     
-    // Warm light color
-    vec3 warmLight = vec3(1.0, 0.85, 0.6);
-    vec3 coolLight = vec3(0.7, 0.8, 1.0);
-    vec3 lightColor = mix(coolLight, warmLight, 0.7);
+    // Cyan-blue light colors matching brand
+    vec3 cyanLight = vec3(0.0, 0.72, 0.83);
+    vec3 deepBlue = vec3(0.1, 0.25, 0.4);
+    vec3 lightColor = mix(deepBlue, cyanLight, 0.6);
     
     // Final color
     float intensity = (falloff + rays) * uIntensity;
     vec3 color = lightColor * intensity;
     
-    gl_FragColor = vec4(color, intensity * 0.3);
+    gl_FragColor = vec4(color, intensity * 0.25);
   }
 `;
 

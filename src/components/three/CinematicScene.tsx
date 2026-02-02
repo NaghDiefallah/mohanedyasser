@@ -3,6 +3,7 @@ import { Suspense, useState, useEffect } from 'react';
 import FilmGrainShader from './FilmGrainShader';
 import VolumetricLight from './VolumetricLight';
 import DepthParticles from './DepthParticles';
+import InteractiveGeometry from './InteractiveGeometry';
 
 const CinematicScene = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -32,16 +33,19 @@ const CinematicScene = () => {
       >
         <Suspense fallback={null}>
           {/* Deep background color */}
-          <color attach="background" args={['#0a0a0a']} />
+          <color attach="background" args={['#0d1f2d']} />
           
           {/* Ambient depth */}
-          <ambientLight intensity={0.1} />
+          <ambientLight intensity={0.15} />
           
-          {/* Key light - warm */}
-          <pointLight position={[5, 5, 5]} intensity={0.3} color="#ffaa66" />
+          {/* Key light - cyan tint */}
+          <pointLight position={[5, 5, 5]} intensity={0.4} color="#00b8d4" />
           
-          {/* Fill light - cool */}
-          <pointLight position={[-5, -2, 3]} intensity={0.1} color="#6688ff" />
+          {/* Fill light - deep blue */}
+          <pointLight position={[-5, -2, 3]} intensity={0.2} color="#1a365d" />
+          
+          {/* Interactive 3D geometric shapes */}
+          <InteractiveGeometry mousePosition={mousePosition} />
           
           {/* Volumetric light rays */}
           <VolumetricLight mousePosition={mousePosition} />
@@ -62,8 +66,8 @@ const CinematicScene = () => {
             radial-gradient(
               ellipse 70% 50% at 50% 50%,
               transparent 0%,
-              rgba(0,0,0,0.3) 60%,
-              rgba(0,0,0,0.8) 100%
+              rgba(13,31,45,0.4) 60%,
+              rgba(13,31,45,0.9) 100%
             )
           `,
         }}
