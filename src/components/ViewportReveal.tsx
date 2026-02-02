@@ -32,11 +32,11 @@ const ViewportReveal = ({
         scale: 1,
         filter: "blur(0px)"
       }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: false, amount: 0.3 }}
       transition={{ 
-        duration,
+        duration: 0.6,
         delay,
-        ease: [0.25, 0.4, 0.25, 1]
+        ease: "easeOut"
       }}
     >
       {children}
