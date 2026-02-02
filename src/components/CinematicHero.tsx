@@ -115,6 +115,17 @@ const CinematicHero = () => {
             </motion.div>
           </div>
 
+          {/* Vertical Divider Line */}
+          <motion.div 
+            className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-px h-[60%] bg-gradient-to-b from-transparent via-primary/40 to-transparent ${isRTL ? 'right-[41.66%]' : 'left-[41.66%]'}`}
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ 
+              opacity: phase !== 'silence' ? 1 : 0, 
+              scaleY: phase !== 'silence' ? 1 : 0 
+            }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          />
+
           {/* Main Content - Right */}
           <div className={`lg:col-span-7 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
             {/* Name - Centered above heading */}
@@ -125,8 +136,9 @@ const CinematicHero = () => {
             opacity: phase !== 'silence' ? 1 : 0,
             y: phase !== 'silence' ? 0 : 30
           }} transition={{
-            duration: 0.8,
-            delay: 0.4
+            duration: 0.6,
+            delay: 0.4,
+            ease: "easeOut"
           }} style={{
             textAlign: isRTL ? 'right' : 'left'
           }}>
@@ -136,20 +148,21 @@ const CinematicHero = () => {
             {/* Main Heading */}
             <motion.div className="hero-element mb-6" initial={{
             opacity: 0,
-            y: 50
+            y: 40
           }} animate={{
             opacity: phase !== 'silence' ? 1 : 0,
-            y: phase !== 'silence' ? 0 : 50
+            y: phase !== 'silence' ? 0 : 40
           }} transition={{
-            duration: 0.9,
-            delay: 0.5
+            duration: 0.6,
+            delay: 0.5,
+            ease: "easeOut"
           }}>
               <h1 className="text-[clamp(3.5rem,12vw,10rem)] leading-[0.9] font-bold tracking-[-0.02em] whitespace-nowrap" style={{
               fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif"
             }}>
                 <span className="block text-foreground">
                   {phase !== 'silence' ? (
-                    <AnimatedText text={t.hero.title1} delay={0.3} staggerChildren={0.04} />
+                    <AnimatedText text={t.hero.title1} delay={0.3} />
                   ) : t.hero.title1}
                 </span>
                 <span className="block whitespace-nowrap" style={{
@@ -157,7 +170,7 @@ const CinematicHero = () => {
                 textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3), 0 0 180px hsl(300 50% 50% / 0.15)' : 'none'
               }}>
                   {phase !== 'silence' ? (
-                    <AnimatedText text={t.hero.title2} delay={0.5} staggerChildren={0.04} />
+                    <AnimatedText text={t.hero.title2} delay={0.4} />
                   ) : t.hero.title2}
                 </span>
               </h1>
@@ -166,13 +179,14 @@ const CinematicHero = () => {
             {/* Software Stack - Only software names */}
             <motion.p className="hero-element text-sm md:text-base text-muted-foreground mb-10 max-w-xl leading-relaxed" initial={{
             opacity: 0,
-            y: 30
+            y: 20
           }} animate={{
             opacity: phase !== 'silence' ? 1 : 0,
-            y: phase !== 'silence' ? 0 : 30
+            y: phase !== 'silence' ? 0 : 20
           }} transition={{
-            duration: 0.8,
-            delay: 0.6
+            duration: 0.6,
+            delay: 0.6,
+            ease: "easeOut"
           }}>
               {t.hero.software}
             </motion.p>
@@ -180,13 +194,14 @@ const CinematicHero = () => {
             {/* CTA Buttons */}
             <motion.div className={`hero-element flex flex-col sm:flex-row gap-5 ${isRTL ? 'sm:flex-row-reverse' : ''}`} initial={{
             opacity: 0,
-            y: 30
+            y: 20
           }} animate={{
             opacity: phase !== 'silence' ? 1 : 0,
-            y: phase !== 'silence' ? 0 : 30
+            y: phase !== 'silence' ? 0 : 20
           }} transition={{
-            duration: 0.8,
-            delay: 0.7
+            duration: 0.6,
+            delay: 0.7,
+            ease: "easeOut"
           }}>
               <Button size="lg" className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base" style={{
               backgroundColor: '#00a8e8',
