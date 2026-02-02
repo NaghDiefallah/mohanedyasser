@@ -76,65 +76,62 @@ const CinematicHero = () => {
       )}
 
       {/* Main content */}
-      <div className={`relative z-10 container mx-auto px-6 md:px-12 lg:px-24 xl:px-32 ${isRTL ? 'font-arabic' : ''}`}>
-        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center ${isRTL ? 'direction-rtl' : ''}`}>
+      <div className={`relative z-10 container mx-auto px-6 md:px-12 lg:px-20 xl:px-28 ${isRTL ? 'font-arabic' : ''}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center ${isRTL ? 'direction-rtl' : ''}`}>
           
-          {/* Left Sidebar - Logo & Stats - No containers */}
+          {/* Left Sidebar - Massive Logo & Stats - No containers */}
           <motion.div 
-            className={`lg:col-span-4 flex flex-col items-center lg:items-start gap-10 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}
-            initial={{ opacity: 0, x: isRTL ? 40 : -40 }}
+            className={`lg:col-span-5 flex flex-col items-center lg:items-start gap-12 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}
+            initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
             animate={{ 
               opacity: phase !== 'silence' ? 1 : 0, 
-              x: phase !== 'silence' ? 0 : (isRTL ? 40 : -40) 
+              x: phase !== 'silence' ? 0 : (isRTL ? 50 : -50) 
             }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* Large Logo - No container/border */}
+            {/* MASSIVE Logo - No container/border - 3x-4x scale */}
             <div className="hero-element">
               <img 
                 alt="Mohaned Yasser Logo" 
-                className="w-40 h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 object-contain drop-shadow-2xl"
+                className="w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px] object-contain"
                 style={{
-                  filter: theme === 'dark' ? 'drop-shadow(0 0 30px hsl(195 100% 50% / 0.3))' : 'drop-shadow(0 10px 30px hsl(210 20% 40% / 0.2))'
+                  filter: theme === 'dark' 
+                    ? 'drop-shadow(0 0 50px hsl(195 100% 50% / 0.35)) drop-shadow(0 0 100px hsl(195 100% 50% / 0.2))' 
+                    : 'drop-shadow(0 15px 40px hsl(210 20% 40% / 0.25))'
                 }}
                 src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png" 
               />
             </div>
 
-            {/* Stats - Clean, no boxes */}
-            <div className="hero-element flex flex-row lg:flex-col gap-6 lg:gap-5">
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="text-xl md:text-2xl font-bold text-primary tracking-tight">{t.hero.projects}</span>
-              </div>
-              <div className="w-px lg:w-16 h-8 lg:h-px bg-primary/20" />
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="text-xl md:text-2xl font-bold text-primary tracking-tight">{t.hero.experience}</span>
-              </div>
-              <div className="w-px lg:w-16 h-8 lg:h-px bg-primary/20" />
-              <div className="flex flex-col items-center lg:items-start">
-                <span className="text-xl md:text-2xl font-bold text-primary tracking-tight">{t.hero.response}</span>
-              </div>
+            {/* Stats - Clean, floating on background */}
+            <div className="hero-element flex flex-row lg:flex-col gap-6 lg:gap-4">
+              <span className="text-lg md:text-xl font-bold text-primary tracking-wide">{t.hero.projects}</span>
+              <div className="w-px lg:w-20 h-6 lg:h-px bg-primary/20" />
+              <span className="text-lg md:text-xl font-bold text-primary tracking-wide">{t.hero.experience}</span>
+              <div className="w-px lg:w-20 h-6 lg:h-px bg-primary/20" />
+              <span className="text-lg md:text-xl font-bold text-primary tracking-wide">{t.hero.response}</span>
             </div>
           </motion.div>
 
           {/* Main Content - Right */}
-          <div className={`lg:col-span-8 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
-            {/* Name */}
+          <div className={`lg:col-span-7 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
+            {/* Name - Centered above heading */}
             <motion.p 
-              className="hero-element text-sm md:text-base uppercase tracking-[0.35em] text-muted-foreground mb-6"
+              className="hero-element text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4 text-center lg:text-left"
               initial={{ opacity: 0, y: 30 }}
               animate={{ 
                 opacity: phase !== 'silence' ? 1 : 0, 
                 y: phase !== 'silence' ? 0 : 30 
               }}
               transition={{ duration: 0.8, delay: 0.4 }}
+              style={{ textAlign: isRTL ? 'right' : 'left' }}
             >
               {t.hero.name}
             </motion.p>
 
             {/* Main Heading */}
             <motion.div 
-              className="hero-element mb-8"
+              className="hero-element mb-6"
               initial={{ opacity: 0, y: 50 }}
               animate={{ 
                 opacity: phase !== 'silence' ? 1 : 0, 
@@ -143,14 +140,17 @@ const CinematicHero = () => {
               transition={{ duration: 0.9, delay: 0.5 }}
             >
               <h1 
-                className="text-[clamp(4.5rem,14vw,12rem)] leading-[0.85] font-bold tracking-[-0.02em]"
+                className="text-[clamp(5rem,15vw,13rem)] leading-[0.85] font-bold tracking-[-0.02em]"
                 style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
               >
                 <span className="block text-foreground">{t.hero.title1}</span>
                 <span 
-                  className="block text-primary"
+                  className="block"
                   style={{
-                    textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.5), 0 0 120px hsl(195 100% 50% / 0.3)' : 'none'
+                    color: '#00a8e8',
+                    textShadow: theme === 'dark' 
+                      ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3), 0 0 180px hsl(300 50% 50% / 0.15)' 
+                      : 'none'
                   }}
                 >
                   {t.hero.title2}
@@ -158,9 +158,9 @@ const CinematicHero = () => {
               </h1>
             </motion.div>
 
-            {/* Software Stack */}
+            {/* Software Stack - Only software names */}
             <motion.p 
-              className="hero-element text-base md:text-lg text-muted-foreground mb-12 max-w-2xl leading-relaxed"
+              className="hero-element text-sm md:text-base text-muted-foreground mb-10 max-w-xl leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ 
                 opacity: phase !== 'silence' ? 1 : 0, 
@@ -185,7 +185,8 @@ const CinematicHero = () => {
                 size="lg" 
                 className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base"
                 style={{
-                  boxShadow: '0 0 35px hsl(195 100% 50% / 0.4), 0 0 70px hsl(195 100% 50% / 0.2)'
+                  backgroundColor: '#00a8e8',
+                  boxShadow: '0 0 40px hsl(195 100% 50% / 0.5), 0 0 80px hsl(195 100% 50% / 0.25)'
                 }}
               >
                 {t.hero.seeMyWork}
@@ -195,9 +196,10 @@ const CinematicHero = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base border-primary/30 hover:border-primary hover:bg-primary/5"
+                className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base hover:bg-primary/5"
                 style={{
-                  boxShadow: theme === 'dark' ? '0 0 20px hsl(195 100% 50% / 0.1)' : 'none'
+                  borderColor: 'hsl(195 100% 50% / 0.4)',
+                  boxShadow: theme === 'dark' ? '0 0 25px hsl(195 100% 50% / 0.15), 0 0 50px hsl(300 50% 50% / 0.05)' : 'none'
                 }}
               >
                 <MessageCircle className="w-5 h-5" />
