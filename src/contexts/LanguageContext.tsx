@@ -66,7 +66,7 @@ const translations: Record<Language, Translations> = {
       arabic: 'العربية',
     },
     contact: {
-      header: 'Contact Us',
+      header: 'Contact Me',
       subHeader: "Let's Talk",
       tagline: 'Professional video editing services. Elevate your content with cinematic quality.',
       copyright: 'All Rights Reserved.',
