@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Globe } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { t, isRTL } = useLanguage();
+  const { t, isRTL, language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
@@ -17,6 +17,10 @@ const Navbar = () => {
     { label: t.nav.services, href: "#services" },
     { label: t.nav.skills, href: "#skills" },
   ];
+
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'ar' : 'en');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,18 +70,28 @@ const Navbar = () => {
         }}
       >
         <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
-          {/* Left - Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-5 h-5 text-primary" />
-            ) : (
-              <Moon className="w-5 h-5 text-foreground" />
-            )}
-          </button>
+          {/* Left - Theme & Language Toggles */}
+          <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-primary" />
+              ) : (
+                <Moon className="w-5 h-5 text-foreground" />
+              )}
+            </button>
+            
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200 text-sm font-bold uppercase tracking-wider"
+            >
+              <Globe className="w-4 h-4 text-primary" />
+              <span className="text-foreground">{language === 'en' ? 'AR' : 'EN'}</span>
+            </button>
+          </div>
 
           {/* Center - Navigation Links */}
           <div className={`hidden md:flex items-center gap-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
