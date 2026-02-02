@@ -73,10 +73,10 @@ const CinematicHero = () => {
         <div className={`grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center ${isRTL ? 'direction-rtl' : ''}`}>
           
           {/* Left Sidebar - Massive Logo & Stats - No containers */}
-          <div className={`lg:col-span-5 flex flex-col items-center lg:items-start gap-8 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}>
-            {/* MASSIVE Logo - Stable position, smooth fade-slide entry */}
+          <div className={`lg:col-span-5 flex flex-col items-center gap-8 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}>
+            {/* MASSIVE Logo - Centered, stable position */}
             <motion.div 
-              className="hero-element"
+              className="hero-element flex justify-center"
               initial={{ opacity: 0, y: 30 }}
               animate={{ 
                 opacity: phase !== 'silence' ? 1 : 0, 
@@ -90,7 +90,7 @@ const CinematicHero = () => {
             >
               <img 
                 alt="Mohaned Yasser Logo" 
-                className="w-64 h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px] xl:w-[480px] xl:h-[480px] object-contain" 
+                className="w-48 h-48 md:w-64 md:h-64 lg:w-[320px] lg:h-[320px] xl:w-[380px] xl:h-[380px] object-contain" 
                 style={{
                   filter: theme === 'dark' 
                     ? 'drop-shadow(0 0 60px hsl(195 100% 50% / 0.4)) drop-shadow(0 0 120px hsl(195 100% 50% / 0.25))' 
@@ -100,9 +100,9 @@ const CinematicHero = () => {
               />
             </motion.div>
 
-            {/* Stats - Vertically stacked below logo */}
+            {/* Stats - Vertically stacked below logo, centered */}
             <motion.div 
-              className="hero-element flex flex-col gap-4"
+              className="hero-element flex flex-col items-center gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: phase !== 'silence' ? 1 : 0, y: phase !== 'silence' ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
@@ -144,7 +144,7 @@ const CinematicHero = () => {
             duration: 0.9,
             delay: 0.5
           }}>
-              <h1 className="text-[clamp(5rem,15vw,13rem)] leading-[0.85] font-bold tracking-[-0.02em]" style={{
+              <h1 className="text-[clamp(3.5rem,12vw,10rem)] leading-[0.9] font-bold tracking-[-0.02em] whitespace-nowrap" style={{
               fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif"
             }}>
                 <span className="block text-foreground">
@@ -152,7 +152,7 @@ const CinematicHero = () => {
                     <AnimatedText text={t.hero.title1} delay={0.3} staggerChildren={0.04} />
                   ) : t.hero.title1}
                 </span>
-                <span className="block" style={{
+                <span className="block whitespace-nowrap" style={{
                 color: '#00a8e8',
                 textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3), 0 0 180px hsl(300 50% 50% / 0.15)' : 'none'
               }}>
