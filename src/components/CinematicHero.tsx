@@ -262,10 +262,18 @@ const CinematicHero = () => {
                 <ArrowRight className={`w-5 h-5 transition-transform group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`} />
               </Button>
               
-              <Button variant="outline" size="lg" className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base hover:bg-primary/5" style={{
-              borderColor: 'hsl(195 100% 50% / 0.4)',
-              boxShadow: theme === 'dark' ? '0 0 25px hsl(195 100% 50% / 0.15), 0 0 50px hsl(300 50% 50% / 0.05)' : 'none'
-            }}>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base hover:bg-primary/5" 
+                style={{
+                  borderColor: 'hsl(195 100% 50% / 0.4)',
+                  boxShadow: theme === 'dark' ? '0 0 25px hsl(195 100% 50% / 0.15), 0 0 50px hsl(300 50% 50% / 0.05)' : 'none'
+                }}
+                onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 <MessageCircle className="w-5 h-5" />
                 {t.hero.letsTalk}
               </Button>

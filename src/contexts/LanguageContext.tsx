@@ -32,6 +32,8 @@ interface Translations {
   contact: {
     header: string;
     subHeader: string;
+    tagline: string;
+    copyright: string;
   };
 }
 
@@ -64,8 +66,10 @@ const translations: Record<Language, Translations> = {
       arabic: 'العربية',
     },
     contact: {
-      header: 'READY TO ELEVATE YOUR CONTENT?',
+      header: 'Contact Us',
       subHeader: "Let's Talk",
+      tagline: 'Professional video editing services. Elevate your content with cinematic quality.',
+      copyright: 'All Rights Reserved.',
     },
   },
   ar: {
@@ -96,8 +100,10 @@ const translations: Record<Language, Translations> = {
       arabic: 'العربية',
     },
     contact: {
-      header: 'مستعد لرفع مستوى محتواك؟',
+      header: 'تواصل معنا',
       subHeader: 'تواصل معي',
+      tagline: 'خدمات مونتاج فيديو احترافية. ارتقِ بمحتواك بجودة سينمائية.',
+      copyright: 'جميع الحقوق محفوظة.',
     },
   },
 };

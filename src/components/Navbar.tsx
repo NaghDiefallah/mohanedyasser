@@ -130,6 +130,9 @@ const Navbar = () => {
               <Button 
                 size="sm" 
                 className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-6"
+                onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 {t.nav.letsTalk}
               </Button>
@@ -171,6 +174,10 @@ const Navbar = () => {
                   className="w-full mt-2 font-bold uppercase tracking-wider bg-primary text-primary-foreground"
                   style={{
                     boxShadow: '0 0 25px hsl(195 100% 50% / 0.5)',
+                  }}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
                   {t.nav.letsTalk}
