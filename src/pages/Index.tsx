@@ -1,6 +1,7 @@
 import CinematicHero from "@/components/CinematicHero";
 import BentoGrid from "@/components/BentoGrid";
 import Services from "@/components/Services";
+import Contact from "@/components/Contact";
 import StickyFooter from "@/components/StickyFooter";
 import CinematicScene from "@/components/three/CinematicScene";
 import Navbar from "@/components/Navbar";
@@ -43,6 +44,9 @@ const Index = () => {
         </section>
         <section id="services">
           <Services />
+        </section>
+        <section id="contact">
+          <Contact />
         </section>
       </main>
 
