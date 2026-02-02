@@ -90,7 +90,7 @@ const Navbar = () => {
             >
               <Globe className="w-4 h-4 text-primary" />
               <span className="text-foreground min-w-[60px] text-center">
-                {language === 'en' ? 'العربية' : 'English'}
+                {language === 'ar' ? 'English' : 'العربية'}
               </span>
             </button>
           </div>
