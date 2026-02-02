@@ -5,6 +5,8 @@ import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
+import AnimatedText from './AnimatedText';
+
 const CinematicHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [phase, setPhase] = useState<'silence' | 'reveal' | 'complete'>('silence');
@@ -81,12 +83,22 @@ const CinematicHero = () => {
           duration: 0.8,
           delay: 0.3
         }}>
-            {/* MASSIVE Logo - No container/border/shadow - clean on background */}
+            {/* MASSIVE Logo - Magnetic entry with bounce */}
             <motion.div 
               className="hero-element"
-              initial={{ opacity: 0, x: isRTL ? 80 : -80 }}
-              animate={{ opacity: phase !== 'silence' ? 1 : 0, x: phase !== 'silence' ? 0 : isRTL ? 80 : -80 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
+              initial={{ opacity: 0, x: isRTL ? 120 : -120, scale: 0.9 }}
+              animate={{ 
+                opacity: phase !== 'silence' ? 1 : 0, 
+                x: phase !== 'silence' ? 0 : isRTL ? 120 : -120,
+                scale: phase !== 'silence' ? 1 : 0.9
+              }}
+              transition={{ 
+                duration: 1.2, 
+                delay: 0.2, 
+                type: "spring",
+                stiffness: 100,
+                damping: 15
+              }}
             >
               <img 
                 alt="Mohaned Yasser Logo" 
@@ -147,12 +159,18 @@ const CinematicHero = () => {
               <h1 className="text-[clamp(5rem,15vw,13rem)] leading-[0.85] font-bold tracking-[-0.02em]" style={{
               fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif"
             }}>
-                <span className="block text-foreground">{t.hero.title1}</span>
+                <span className="block text-foreground">
+                  {phase !== 'silence' ? (
+                    <AnimatedText text={t.hero.title1} delay={0.3} staggerChildren={0.04} />
+                  ) : t.hero.title1}
+                </span>
                 <span className="block" style={{
                 color: '#00a8e8',
                 textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3), 0 0 180px hsl(300 50% 50% / 0.15)' : 'none'
               }}>
-                  {t.hero.title2}
+                  {phase !== 'silence' ? (
+                    <AnimatedText text={t.hero.title2} delay={0.5} staggerChildren={0.04} />
+                  ) : t.hero.title2}
                 </span>
               </h1>
             </motion.div>

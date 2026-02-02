@@ -109,17 +109,30 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right - CTA Button */}
+          {/* Right - CTA Button with Pulse Glow */}
           <div className="hidden md:block">
-            <Button 
-              size="sm" 
-              className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-6"
-              style={{
-                boxShadow: '0 0 25px hsl(195 100% 50% / 0.5), 0 0 50px hsl(195 100% 50% / 0.3)',
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
+                  '0 0 30px hsl(195 100% 50% / 0.6), 0 0 60px hsl(195 100% 50% / 0.35)',
+                  '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
+                ]
               }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="rounded-md"
             >
-              {t.nav.letsTalk}
-            </Button>
+              <Button 
+                size="sm" 
+                className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-6"
+              >
+                {t.nav.letsTalk}
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Toggle */}
