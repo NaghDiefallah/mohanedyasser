@@ -33,7 +33,7 @@ const CinematicScene = () => {
       >
         <Suspense fallback={null}>
           {/* Deep background color */}
-          <color attach="background" args={['#0d1f2d']} />
+          <color attach="background" args={['#030508']} />
           
           {/* Ambient depth */}
           <ambientLight intensity={0.15} />
@@ -58,16 +58,16 @@ const CinematicScene = () => {
         </Suspense>
       </Canvas>
       
-      {/* CSS vignette overlay */}
+      {/* CSS gradient overlay - black gradient */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
             radial-gradient(
-              ellipse 70% 50% at 50% 50%,
-              transparent 0%,
-              rgba(13,31,45,0.4) 60%,
-              rgba(13,31,45,0.9) 100%
+              ellipse 80% 60% at 50% 50%,
+              rgba(8,15,20,0.3) 0%,
+              rgba(3,5,8,0.7) 60%,
+              rgba(0,0,0,0.95) 100%
             )
           `,
         }}
