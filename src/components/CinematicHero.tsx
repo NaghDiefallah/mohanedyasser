@@ -83,7 +83,7 @@ const CinematicHero = () => {
         }}>
             {/* MASSIVE Logo - No container/border - 3x-4x scale */}
             <div className="hero-element">
-              <img alt="Mohaned Yasser Logo" className="w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px] object-contain rounded-none shadow-2xl" style={{
+              <img alt="Mohaned Yasser Logo" className="w-64 h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] xl:w-[450px] xl:h-[450px] object-contain rounded-none shadow-md" style={{
               filter: theme === 'dark' ? 'drop-shadow(0 0 50px hsl(195 100% 50% / 0.35)) drop-shadow(0 0 100px hsl(195 100% 50% / 0.2))' : 'drop-shadow(0 15px 40px hsl(210 20% 40% / 0.25))'
             }} src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png" />
             </div>
