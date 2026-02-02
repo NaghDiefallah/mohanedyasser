@@ -73,36 +73,24 @@ const CinematicHero = () => {
         <div className={`grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center ${isRTL ? 'direction-rtl' : ''}`}>
           
           {/* Left Sidebar - Massive Logo & Stats - No containers */}
-          <motion.div className={`lg:col-span-5 flex flex-col items-center lg:items-start gap-12 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`} initial={{
-          opacity: 0,
-          x: isRTL ? 50 : -50
-        }} animate={{
-          opacity: phase !== 'silence' ? 1 : 0,
-          x: phase !== 'silence' ? 0 : isRTL ? 50 : -50
-        }} transition={{
-          duration: 0.8,
-          delay: 0.3
-        }}>
-            {/* MASSIVE Logo - Magnetic entry with bounce */}
+          <div className={`lg:col-span-5 flex flex-col items-center lg:items-start gap-8 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}>
+            {/* MASSIVE Logo - Stable position, smooth fade-slide entry */}
             <motion.div 
               className="hero-element"
-              initial={{ opacity: 0, x: isRTL ? 120 : -120, scale: 0.9 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ 
                 opacity: phase !== 'silence' ? 1 : 0, 
-                x: phase !== 'silence' ? 0 : isRTL ? 120 : -120,
-                scale: phase !== 'silence' ? 1 : 0.9
+                y: phase !== 'silence' ? 0 : 30
               }}
               transition={{ 
-                duration: 1.2, 
+                duration: 0.6, 
                 delay: 0.2, 
-                type: "spring",
-                stiffness: 100,
-                damping: 15
+                ease: "easeOut"
               }}
             >
               <img 
                 alt="Mohaned Yasser Logo" 
-                className="w-72 h-72 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] xl:w-[520px] xl:h-[520px] object-contain" 
+                className="w-64 h-64 md:w-80 md:h-80 lg:w-[420px] lg:h-[420px] xl:w-[480px] xl:h-[480px] object-contain" 
                 style={{
                   filter: theme === 'dark' 
                     ? 'drop-shadow(0 0 60px hsl(195 100% 50% / 0.4)) drop-shadow(0 0 120px hsl(195 100% 50% / 0.25))' 
@@ -112,20 +100,20 @@ const CinematicHero = () => {
               />
             </motion.div>
 
-            {/* Stats - Clean, floating on background - no containers */}
+            {/* Stats - Vertically stacked below logo */}
             <motion.div 
-              className="hero-element flex flex-row lg:flex-col gap-8 lg:gap-5 mt-4"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: phase !== 'silence' ? 1 : 0, y: phase !== 'silence' ? 0 : 30 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              className="hero-element flex flex-col gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: phase !== 'silence' ? 1 : 0, y: phase !== 'silence' ? 0 : 20 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             >
-              <span className="text-base md:text-lg font-bold text-primary tracking-widest uppercase">{t.hero.projects}</span>
-              <div className="w-px lg:w-16 h-5 lg:h-px bg-primary/30" />
-              <span className="text-base md:text-lg font-bold text-primary tracking-widest uppercase">{t.hero.experience}</span>
-              <div className="w-px lg:w-16 h-5 lg:h-px bg-primary/30" />
-              <span className="text-base md:text-lg font-bold text-primary tracking-widest uppercase">{t.hero.response}</span>
+              <span className="text-sm md:text-base font-bold text-primary tracking-widest uppercase">{t.hero.projects}</span>
+              <div className="w-16 h-px bg-primary/30" />
+              <span className="text-sm md:text-base font-bold text-primary tracking-widest uppercase">{t.hero.experience}</span>
+              <div className="w-16 h-px bg-primary/30" />
+              <span className="text-sm md:text-base font-bold text-primary tracking-widest uppercase">{t.hero.response}</span>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Main Content - Right */}
           <div className={`lg:col-span-7 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
