@@ -29,6 +29,10 @@ interface Translations {
     english: string;
     arabic: string;
   };
+  contact: {
+    header: string;
+    subHeader: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -59,6 +63,10 @@ const translations: Record<Language, Translations> = {
       english: 'English',
       arabic: 'العربية',
     },
+    contact: {
+      header: 'READY TO ELEVATE YOUR CONTENT?',
+      subHeader: "Let's Talk",
+    },
   },
   ar: {
     nav: {
@@ -86,6 +94,10 @@ const translations: Record<Language, Translations> = {
       language: 'اللغة',
       english: 'English',
       arabic: 'العربية',
+    },
+    contact: {
+      header: 'مستعد لرفع مستوى محتواك؟',
+      subHeader: 'تواصل معي',
     },
   },
 };
