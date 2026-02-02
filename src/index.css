@@ -4,54 +4,91 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
-    /* Mohaned Yaser Brand Identity - Deep Navy & Cyan */
-    --background: 202 75% 12%;
-    --foreground: 0 0% 95%;
+    /* Light Mode - Clean & Professional */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
 
-    --card: 202 70% 15%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 202 70% 15%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
     /* Primary: Bright Cyan - brand accent */
-    --primary: 195 100% 45%;
-    --primary-foreground: 202 75% 12%;
+    --primary: 195 100% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 202 65% 20%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 210 20% 93%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 202 50% 25%;
-    --muted-foreground: 195 30% 60%;
+    --muted: 210 20% 90%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 195 100% 45%;
-    --accent-foreground: 202 75% 12%;
+    --accent: 195 100% 40%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 202 50% 25%;
-    --input: 202 50% 25%;
-    --ring: 195 100% 45%;
+    --border: 214 20% 85%;
+    --input: 214 20% 85%;
+    --ring: 195 100% 40%;
 
     --radius: 0.5rem;
 
-    /* Brand custom properties */
-    --glow-primary: 195 100% 45%;
-    --glass-bg: 202 70% 15%;
-    --glass-border: 202 40% 30%;
+    /* Brand custom properties - Light Mode */
+    --glow-primary: 195 100% 40%;
+    --glass-bg: 0 0% 100%;
+    --glass-border: 214 20% 90%;
     
-    /* Volumetric light colors - cool blue tones */
-    --light-warm: 195 80% 60%;
-    --light-cool: 202 60% 50%;
+    /* Volumetric light colors */
+    --light-warm: 195 80% 50%;
+    --light-cool: 210 60% 45%;
   }
 
   .dark {
-    --background: 202 75% 12%;
+    /* Dark Mode - Mohaned Yaser Brand Identity - Deep Navy & Cyan */
+    --background: 220 30% 6%;
     --foreground: 0 0% 95%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Primary: Bright Cyan - brand accent */
+    --primary: 195 100% 45%;
+    --primary-foreground: 220 30% 6%;
+
+    --secondary: 220 25% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 20% 20%;
+    --muted-foreground: 195 30% 60%;
+
+    --accent: 195 100% 45%;
+    --accent-foreground: 220 30% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 195 100% 45%;
+
+    /* Brand custom properties - Dark Mode */
+    --glow-primary: 195 100% 45%;
+    --glass-bg: 220 25% 10%;
+    --glass-border: 220 20% 25%;
+    
+    /* Volumetric light colors - cool blue tones */
+    --light-warm: 195 80% 60%;
+    --light-cool: 220 60% 50%;
   }
 }
 
