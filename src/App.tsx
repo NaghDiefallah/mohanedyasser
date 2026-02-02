@@ -7,6 +7,7 @@ import AnimatedRoutes from "./components/AnimatedRoutes";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import SettingsPopup from "./components/SettingsPopup";
+import LanguageSelectionPopup from "./components/LanguageSelectionPopup";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
           <BrowserRouter>
             <AnimatedRoutes />
             <SettingsPopup />
+            <LanguageSelectionPopup />
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>
