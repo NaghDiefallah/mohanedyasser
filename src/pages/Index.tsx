@@ -35,7 +35,9 @@ const Index = () => {
       
       {/* Main content */}
       <main className="relative z-10">
-        <CinematicHero />
+        <section id="home">
+          <CinematicHero />
+        </section>
         <section id="work">
           <BentoGrid />
         </section>

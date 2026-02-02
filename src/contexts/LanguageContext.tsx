@@ -4,6 +4,7 @@ type Language = 'en' | 'ar';
 
 interface Translations {
   nav: {
+    home: string;
     work: string;
     services: string;
     skills: string;
@@ -33,6 +34,7 @@ interface Translations {
 const translations: Record<Language, Translations> = {
   en: {
     nav: {
+      home: 'Home',
       work: 'Work',
       services: 'Services',
       skills: 'Skills',
@@ -60,6 +62,7 @@ const translations: Record<Language, Translations> = {
   },
   ar: {
     nav: {
+      home: 'الرئيسية',
       work: 'أعمالي',
       services: 'الخدمات',
       skills: 'المهارات',

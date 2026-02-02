@@ -13,6 +13,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
+    { label: t.nav.home, href: "#home" },
     { label: t.nav.work, href: "#work" },
     { label: t.nav.services, href: "#services" },
     { label: t.nav.skills, href: "#skills" },
