@@ -254,10 +254,17 @@ const CinematicHero = () => {
             delay: 0.7,
             ease: "easeOut"
           }}>
-              <Button size="lg" className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base" style={{
-              backgroundColor: '#00a8e8',
-              boxShadow: '0 0 40px hsl(195 100% 50% / 0.5), 0 0 80px hsl(195 100% 50% / 0.25)'
-            }}>
+              <Button 
+                size="lg" 
+                className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base" 
+                style={{
+                  backgroundColor: '#00a8e8',
+                  boxShadow: '0 0 40px hsl(195 100% 50% / 0.5), 0 0 80px hsl(195 100% 50% / 0.25)'
+                }}
+                onClick={() => {
+                  document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 {t.hero.seeMyWork}
                 <ArrowRight className={`w-5 h-5 transition-transform group-hover:translate-x-1 ${isRTL ? 'rotate-180' : ''}`} />
               </Button>
