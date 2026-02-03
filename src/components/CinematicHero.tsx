@@ -4,6 +4,11 @@ import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import adobeAe from '@/assets/adobe-after-effects.svg';
+import adobePr from '@/assets/adobe-premiere-pro.svg';
+import adobePs from '@/assets/adobe-photoshop.svg';
+import adobeAu from '@/assets/adobe-audition.svg';
 
 const CinematicHero = () => {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -140,10 +145,33 @@ const CinematicHero = () => {
               </h1>
             </div>
 
-            {/* Software Stack */}
-            <p className={`text-sm md:text-base text-muted-foreground mb-10 max-w-xl leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
-              {t.hero.software}
-            </p>
+            {/* Software Stack - Logos */}
+            <div className={`flex items-center gap-4 mb-10 ${isRTL ? 'flex-row-reverse justify-end' : 'justify-start'}`}>
+              {[
+                { src: adobeAe, name: 'After Effects' },
+                { src: adobePr, name: 'Premiere Pro' },
+                { src: adobePs, name: 'Photoshop' },
+                { src: adobeAu, name: 'Audition' },
+              ].map((software) => (
+                <Tooltip key={software.name}>
+                  <TooltipTrigger asChild>
+                    <motion.img
+                      src={software.src}
+                      alt={software.name}
+                      className="w-10 h-10 md:w-12 md:h-12 cursor-pointer"
+                      whileHover={{ scale: 1.15 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent 
+                    side="bottom" 
+                    className="bg-card/95 backdrop-blur-xl border-primary/30 text-foreground"
+                  >
+                    <p className="font-medium">{software.name}</p>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
 
             {/* CTA Buttons */}
             <div className={`flex flex-col sm:flex-row gap-5 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
