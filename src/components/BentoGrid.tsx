@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Play, Check } from "lucide-react";
+import { Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { getReelsProjects, getMotionGraphicsProjects } from "@/data/projects";
 import TiltCard from "./TiltCard";
@@ -232,38 +232,10 @@ const BentoGrid = () => {
             )}
           </div>
 
-          {/* Right: Skills/Specs List */}
+          {/* Right: Additional project cards only */}
           <div className={`lg:col-span-1 flex flex-col justify-center ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-            <ViewportReveal delay={0.2}>
-              <div className="space-y-6">
-                <h3 className={`text-2xl font-bold text-foreground uppercase tracking-tight mb-8 ${isRTL ? 'text-right' : ''}`}>
-                  {t.work.whatICreate}
-                </h3>
-                
-                {t.work.skills.map((skill, index) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.1 * index }}
-                    className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}
-                  >
-                    <motion.div 
-                      className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0"
-                      whileHover={{ scale: 1.2, backgroundColor: "hsl(195 100% 50% / 0.4)" }}
-                      style={{ boxShadow: '0 0 10px hsl(var(--primary) / 0.3)' }}
-                    >
-                      <Check className="w-4 h-4 text-primary" />
-                    </motion.div>
-                    <span className="text-muted-foreground text-lg font-medium">{skill}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </ViewportReveal>
-
-            {/* Additional project cards */}
-            <div className="grid grid-cols-2 gap-4 mt-8">
+            {/* Project cards */}
+            <div className="grid grid-cols-2 gap-4">
               {motionGraphicsProjects.slice(1, 3).map((project, index) => (
                 <ProjectCard key={project.id} project={project} index={index} />
               ))}

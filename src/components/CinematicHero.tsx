@@ -182,15 +182,15 @@ const CinematicHero = () => {
           </div>
         </div>
 
-        {/* Desktop Layout: Two columns */}
-        <div className="hidden lg:grid grid-cols-12 gap-16 lg:gap-24 items-center relative">
-          {/* Vertical Divider Line - positioned based on RTL */}
+        {/* Desktop Layout: Two columns - proper RTL flip */}
+        <div className={`hidden lg:grid grid-cols-12 gap-8 lg:gap-12 items-center relative ${isRTL ? 'direction-rtl' : ''}`}>
+          {/* Vertical Divider Line */}
           <div 
-            className={`absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent ${isRTL ? 'left-[58.33%]' : 'left-[41.66%]'}`}
+            className="absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent left-1/2 -translate-x-1/2"
           />
 
-          {/* Logo & Stats Column */}
-          <div className={`col-span-5 flex flex-col items-center gap-8 ${isRTL ? 'col-start-8' : 'col-start-1'}`}>
+          {/* Logo & Stats Column - Always on LEFT in LTR, RIGHT in RTL (handled by grid order) */}
+          <div className={`col-span-5 flex flex-col items-center gap-8 ${isRTL ? 'order-2' : 'order-1'}`}>
             <motion.div 
               ref={!logoRef.current ? logoRef : undefined}
               className="flex justify-center"
@@ -200,7 +200,7 @@ const CinematicHero = () => {
             >
               <motion.img 
                 alt="Mohaned Yasser Logo" 
-                className="w-[320px] h-[320px] xl:w-[380px] xl:h-[380px] object-contain cursor-pointer" 
+                className="w-[280px] h-[280px] xl:w-[340px] xl:h-[340px] object-contain cursor-pointer" 
                 style={{
                   filter: theme === 'dark' 
                     ? 'drop-shadow(0 0 60px hsl(195 100% 50% / 0.4)) drop-shadow(0 0 120px hsl(195 100% 50% / 0.25))' 
@@ -226,15 +226,15 @@ const CinematicHero = () => {
             </div>
           </div>
 
-          {/* Main Content Column */}
-          <div className={`col-span-7 ${isRTL ? 'col-start-1 text-right' : 'col-start-6 text-left'}`}>
-            <p className="text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4">
+          {/* Main Content Column - Always on RIGHT in LTR, LEFT in RTL */}
+          <div className={`col-span-7 ${isRTL ? 'order-1 text-right' : 'order-2 text-left'}`}>
+            <p className={`text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4`}>
               {t.hero.name}
             </p>
 
             <div className="mb-6">
               <h1 
-                className="text-[clamp(4rem,10vw,10rem)] leading-[0.9] font-bold tracking-[-0.02em]" 
+                className="text-[clamp(4rem,9vw,9rem)] leading-[0.9] font-bold tracking-[-0.02em]" 
                 style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
               >
                 <span className="block text-foreground">{t.hero.title1}</span>
@@ -250,7 +250,7 @@ const CinematicHero = () => {
               </h1>
             </div>
 
-            <div className={`flex items-center gap-4 mb-10 ${isRTL ? 'justify-end' : 'justify-start'}`}>
+            <div className={`flex items-center gap-4 mb-10 ${isRTL ? 'justify-end flex-row-reverse' : 'justify-start'}`}>
               {[
                 { src: adobeAe, name: 'After Effects' },
                 { src: adobePr, name: 'Premiere Pro' },
@@ -274,7 +274,7 @@ const CinematicHero = () => {
               ))}
             </div>
 
-            <div className={`flex flex-col sm:flex-row gap-5 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
+            <div className={`flex flex-col sm:flex-row gap-5 ${isRTL ? 'sm:flex-row-reverse items-end' : 'items-start'}`}>
               <Button 
                 size="lg" 
                 className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base" 
