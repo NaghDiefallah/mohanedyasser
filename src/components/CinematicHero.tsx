@@ -171,9 +171,9 @@ const CinematicHero = () => {
           />
 
           {/* Main Content - Right */}
-          <div className={`lg:col-span-7 ${isRTL ? 'lg:order-1 text-right' : 'lg:order-2 text-left'}`}>
+          <div className={`lg:col-span-7 ${isRTL ? 'lg:order-1' : 'lg:order-2'}`}>
             {/* Name - Centered above heading */}
-            <motion.p className="hero-element text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4 text-center lg:text-left" initial={{
+            <motion.p className={`hero-element text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4 ${isRTL ? 'text-right' : 'text-left'}`} initial={{
             opacity: 0,
             y: 30
           }} animate={{
@@ -183,8 +183,6 @@ const CinematicHero = () => {
             duration: 0.6,
             delay: 0.4,
             ease: "easeOut"
-          }} style={{
-            textAlign: isRTL ? 'right' : 'left'
           }}>
               {t.hero.name}
             </motion.p>
@@ -201,7 +199,7 @@ const CinematicHero = () => {
             delay: 0.5,
             ease: "easeOut"
           }}>
-              <h1 className="text-[clamp(3.5rem,12vw,10rem)] leading-[0.9] font-bold tracking-[-0.02em]" style={{
+              <h1 className={`text-[clamp(3.5rem,12vw,10rem)] leading-[0.9] font-bold tracking-[-0.02em] ${isRTL ? 'text-right' : 'text-left'}`} style={{
               fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif"
             }}>
                 <motion.span 
@@ -228,7 +226,7 @@ const CinematicHero = () => {
             </motion.div>
 
             {/* Software Stack - Only software names */}
-            <motion.p className="hero-element text-sm md:text-base text-muted-foreground mb-10 max-w-xl leading-relaxed" initial={{
+            <motion.p className={`hero-element text-sm md:text-base text-muted-foreground mb-10 max-w-xl leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`} initial={{
             opacity: 0,
             y: 20
           }} animate={{
