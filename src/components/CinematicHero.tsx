@@ -183,9 +183,14 @@ const CinematicHero = () => {
         </div>
 
         {/* Desktop Layout: Two columns */}
-        <div className={`hidden lg:grid grid-cols-12 gap-16 lg:gap-24 items-center ${isRTL ? 'direction-rtl' : ''}`}>
-          {/* Left Sidebar - Logo & Stats */}
-          <div className={`col-span-5 flex flex-col items-center gap-8 ${isRTL ? 'order-2' : 'order-1'}`}>
+        <div className="hidden lg:grid grid-cols-12 gap-16 lg:gap-24 items-center relative">
+          {/* Vertical Divider Line - positioned based on RTL */}
+          <div 
+            className={`absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent ${isRTL ? 'left-[58.33%]' : 'left-[41.66%]'}`}
+          />
+
+          {/* Logo & Stats Column */}
+          <div className={`col-span-5 flex flex-col items-center gap-8 ${isRTL ? 'col-start-8' : 'col-start-1'}`}>
             <motion.div 
               ref={!logoRef.current ? logoRef : undefined}
               className="flex justify-center"
@@ -221,13 +226,8 @@ const CinematicHero = () => {
             </div>
           </div>
 
-          {/* Vertical Divider Line */}
-          <div 
-            className={`absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent ${isRTL ? 'right-[41.66%]' : 'left-[41.66%]'}`}
-          />
-
-          {/* Main Content - Right */}
-          <div className={`col-span-7 ${isRTL ? 'order-1 text-right' : 'order-2 text-left'}`}>
+          {/* Main Content Column */}
+          <div className={`col-span-7 ${isRTL ? 'col-start-1 text-right' : 'col-start-6 text-left'}`}>
             <p className="text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4">
               {t.hero.name}
             </p>
@@ -250,7 +250,7 @@ const CinematicHero = () => {
               </h1>
             </div>
 
-            <div className={`flex items-center gap-4 mb-10 ${isRTL ? 'flex-row-reverse justify-end' : 'justify-start'}`}>
+            <div className={`flex items-center gap-4 mb-10 ${isRTL ? 'justify-end' : 'justify-start'}`}>
               {[
                 { src: adobeAe, name: 'After Effects' },
                 { src: adobePr, name: 'Premiere Pro' },
