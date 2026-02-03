@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
-import AnimatedText from './AnimatedText';
 
 const CinematicHero = () => {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -36,86 +34,44 @@ const CinematicHero = () => {
     mouseX.set(0);
     mouseY.set(0);
   };
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [phase, setPhase] = useState<'silence' | 'reveal' | 'complete'>('silence');
-  const {
-    t,
-    isRTL,
-    language
-  } = useLanguage();
-  const {
-    theme
-  } = useTheme();
 
-  // Cinematic reveal with silence
-  useEffect(() => {
-    const silenceTimer = setTimeout(() => {
-      setPhase('reveal');
-    }, 600);
-    return () => clearTimeout(silenceTimer);
-  }, []);
-  useEffect(() => {
-    if (phase !== 'reveal') return;
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        defaults: {
-          ease: 'power4.out'
-        },
-        onComplete: () => setPhase('complete')
-      });
-      gsap.set('.hero-element', {
-        y: 60,
-        opacity: 0
-      });
-      tl.to('.hero-element', {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.12,
-        ease: 'power3.out'
-      }, 0.2);
-    }, containerRef);
-    return () => ctx.revert();
-  }, [phase]);
+  const { t, isRTL, language } = useLanguage();
+  const { theme } = useTheme();
 
   // Dynamic background based on theme
-  const bgOverlay = theme === 'light' ? 'radial-gradient(ellipse 80% 60% at 50% 40%, hsl(195 50% 95% / 0.3) 0%, transparent 60%)' : 'radial-gradient(ellipse 80% 60% at 30% 50%, hsl(195 100% 50% / 0.06) 0%, transparent 50%)';
-  return <section ref={containerRef} className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20" key={language}>
+  const bgOverlay = theme === 'light' 
+    ? 'radial-gradient(ellipse 80% 60% at 50% 40%, hsl(195 50% 95% / 0.3) 0%, transparent 60%)' 
+    : 'radial-gradient(ellipse 80% 60% at 30% 50%, hsl(195 100% 50% / 0.06) 0%, transparent 50%)';
+
+  return (
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-16 md:pt-32 md:pb-20" key={language}>
       {/* Subtle background overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-      background: bgOverlay
-    }} />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: bgOverlay }} />
       
       {/* Geometric light streaks - only in dark mode */}
-      {theme === 'dark' && <>
-          <div className="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-15" style={{
-        background: 'linear-gradient(135deg, transparent 30%, hsl(195 100% 50% / 0.08) 50%, transparent 70%)'
-      }} />
-          <div className="absolute bottom-0 left-1/4 w-1/3 h-1/2 pointer-events-none opacity-10" style={{
-        background: 'radial-gradient(ellipse at center, hsl(300 50% 50% / 0.15) 0%, transparent 70%)'
-      }} />
-        </>}
+      {theme === 'dark' && (
+        <>
+          <div 
+            className="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-15" 
+            style={{ background: 'linear-gradient(135deg, transparent 30%, hsl(195 100% 50% / 0.08) 50%, transparent 70%)' }} 
+          />
+          <div 
+            className="absolute bottom-0 left-1/4 w-1/3 h-1/2 pointer-events-none opacity-10" 
+            style={{ background: 'radial-gradient(ellipse at center, hsl(300 50% 50% / 0.15) 0%, transparent 70%)' }} 
+          />
+        </>
+      )}
 
       {/* Main content */}
       <div className={`relative z-10 container mx-auto px-6 md:px-12 lg:px-20 xl:px-28 ${isRTL ? 'font-arabic' : ''}`}>
         <div className={`grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center ${isRTL ? 'direction-rtl' : ''}`}>
           
-          {/* Left Sidebar - Massive Logo & Stats - No containers */}
+          {/* Left Sidebar - Massive Logo & Stats */}
           <div className={`lg:col-span-5 flex flex-col items-center gap-8 ${isRTL ? 'lg:order-2' : 'lg:order-1'}`}>
-            {/* MASSIVE Logo - Centered, stable position with Magnetic Hover */}
+            {/* MASSIVE Logo with Magnetic Hover */}
             <motion.div 
               ref={logoRef}
-              className="hero-element flex justify-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ 
-                opacity: phase !== 'silence' ? 1 : 0, 
-                y: phase !== 'silence' ? 0 : 30
-              }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.2, 
-                ease: "easeOut"
-              }}
+              className="flex justify-center"
               onMouseMove={handleLogoMouseMove}
               onMouseLeave={handleLogoMouseLeave}
               style={{ x, y }}
@@ -143,115 +99,54 @@ const CinematicHero = () => {
               />
             </motion.div>
 
-            {/* Stats - Vertically stacked below logo, centered */}
-            <motion.div 
-              className="hero-element flex flex-col items-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: phase !== 'silence' ? 1 : 0, y: phase !== 'silence' ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            >
+            {/* Stats - Vertically stacked below logo */}
+            <div className="flex flex-col items-center gap-4">
               <span className="text-sm md:text-base font-bold text-primary tracking-widest uppercase">{t.hero.projects}</span>
               <div className="w-16 h-px bg-primary/30" />
               <span className="text-sm md:text-base font-bold text-primary tracking-widest uppercase">{t.hero.experience}</span>
               <div className="w-16 h-px bg-primary/30" />
               <span className="text-sm md:text-base font-bold text-primary tracking-widest uppercase">{t.hero.response}</span>
-            </motion.div>
+            </div>
           </div>
 
           {/* Vertical Divider Line */}
-          <motion.div 
+          <div 
             className={`hidden lg:block absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent ${isRTL ? 'right-[41.66%]' : 'left-[41.66%]'}`}
-            initial={{ opacity: 0, scaleY: 0 }}
-            animate={{ 
-              opacity: phase !== 'silence' ? 1 : 0, 
-              scaleY: phase !== 'silence' ? 1 : 0 
-            }}
-            style={{ transformOrigin: 'top' }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           />
 
           {/* Main Content - Right */}
           <div className={`lg:col-span-7 ${isRTL ? 'lg:order-1' : 'lg:order-2'}`}>
-            {/* Name - Centered above heading */}
-            <motion.p className={`hero-element text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4 ${isRTL ? 'text-right' : 'text-left'}`} initial={{
-            opacity: 0,
-            y: 30
-          }} animate={{
-            opacity: phase !== 'silence' ? 1 : 0,
-            y: phase !== 'silence' ? 0 : 30
-          }} transition={{
-            duration: 0.6,
-            delay: 0.4,
-            ease: "easeOut"
-          }}>
+            {/* Name */}
+            <p className={`text-sm md:text-base uppercase tracking-[0.4em] text-muted-foreground mb-4 ${isRTL ? 'text-right' : 'text-left'}`}>
               {t.hero.name}
-            </motion.p>
+            </p>
 
             {/* Main Heading */}
-            <motion.div className="hero-element mb-6" initial={{
-            opacity: 0,
-            y: 40
-          }} animate={{
-            opacity: phase !== 'silence' ? 1 : 0,
-            y: phase !== 'silence' ? 0 : 40
-          }} transition={{
-            duration: 0.6,
-            delay: 0.5,
-            ease: "easeOut"
-          }}>
-              <h1 className={`text-[clamp(3.5rem,12vw,10rem)] leading-[0.9] font-bold tracking-[-0.02em] ${isRTL ? 'text-right' : 'text-left'}`} style={{
-              fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif"
-            }}>
-                <motion.span 
-                  className="block text-foreground"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: phase !== 'silence' ? 1 : 0, x: phase !== 'silence' ? 0 : -20 }}
-                  transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
-                >
-                  {t.hero.title1}
-                </motion.span>
-                <motion.span 
+            <div className="mb-6">
+              <h1 
+                className={`text-[clamp(3.5rem,12vw,10rem)] leading-[0.9] font-bold tracking-[-0.02em] ${isRTL ? 'text-right' : 'text-left'}`} 
+                style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
+              >
+                <span className="block text-foreground">{t.hero.title1}</span>
+                <span 
                   className="block"
                   style={{
                     color: '#00a8e8',
                     textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3), 0 0 180px hsl(300 50% 50% / 0.15)' : 'none'
                   }}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: phase !== 'silence' ? 1 : 0, x: phase !== 'silence' ? 0 : -20 }}
-                  transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
                 >
                   {t.hero.title2}
-                </motion.span>
+                </span>
               </h1>
-            </motion.div>
+            </div>
 
-            {/* Software Stack - Only software names */}
-            <motion.p className={`hero-element text-sm md:text-base text-muted-foreground mb-10 max-w-xl leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`} initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: phase !== 'silence' ? 1 : 0,
-            y: phase !== 'silence' ? 0 : 20
-          }} transition={{
-            duration: 0.6,
-            delay: 0.6,
-            ease: "easeOut"
-          }}>
+            {/* Software Stack */}
+            <p className={`text-sm md:text-base text-muted-foreground mb-10 max-w-xl leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
               {t.hero.software}
-            </motion.p>
+            </p>
 
             {/* CTA Buttons */}
-            <motion.div className={`hero-element flex flex-col sm:flex-row gap-5 ${isRTL ? 'sm:flex-row-reverse' : ''}`} initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: phase !== 'silence' ? 1 : 0,
-            y: phase !== 'silence' ? 0 : 20
-          }} transition={{
-            duration: 0.6,
-            delay: 0.7,
-            ease: "easeOut"
-          }}>
+            <div className={`flex flex-col sm:flex-row gap-5 ${isRTL ? 'sm:flex-row-reverse' : ''}`}>
               <Button 
                 size="lg" 
                 className="group gap-3 px-10 py-7 font-bold uppercase tracking-wider text-base" 
@@ -282,10 +177,12 @@ const CinematicHero = () => {
                 <MessageCircle className="w-5 h-5" />
                 {t.hero.letsTalk}
               </Button>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default CinematicHero;
