@@ -7,7 +7,7 @@ interface Translations {
     home: string;
     work: string;
     services: string;
-    skills: string;
+    about: string;
     letsTalk: string;
   };
   hero: {
@@ -75,7 +75,7 @@ const translations: Record<Language, Translations> = {
       home: 'Home',
       work: 'Work',
       services: 'Services',
-      skills: 'Skills',
+      about: 'About',
       letsTalk: "Let's Talk",
     },
     hero: {
@@ -162,7 +162,7 @@ const translations: Record<Language, Translations> = {
       home: 'الرئيسية',
       work: 'أعمالي',
       services: 'خدماتي',
-      skills: 'المهارات',
+      about: 'عني',
       letsTalk: 'تواصل معي',
     },
     hero: {
