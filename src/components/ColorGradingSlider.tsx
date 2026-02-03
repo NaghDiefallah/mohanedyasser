@@ -20,8 +20,13 @@ const ColorGradingSlider = () => {
     setSliderPosition(percentage);
   };
 
-  const handleMouseDown = () => setIsDragging(true);
-  const handleMouseUp = () => setIsDragging(false);
+  const handleStart = (clientX: number) => {
+    setIsDragging(true);
+    handleMove(clientX);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => handleStart(e.clientX);
+  const handleTouchStart = (e: React.TouchEvent) => handleStart(e.touches[0].clientX);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
@@ -30,24 +35,25 @@ const ColorGradingSlider = () => {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging) return;
+    e.preventDefault();
     handleMove(e.touches[0].clientX);
   };
 
   useEffect(() => {
-    const handleGlobalMouseUp = () => setIsDragging(false);
-    window.addEventListener("mouseup", handleGlobalMouseUp);
-    window.addEventListener("touchend", handleGlobalMouseUp);
+    const handleGlobalEnd = () => setIsDragging(false);
+    window.addEventListener("mouseup", handleGlobalEnd);
+    window.addEventListener("touchend", handleGlobalEnd);
     return () => {
-      window.removeEventListener("mouseup", handleGlobalMouseUp);
-      window.removeEventListener("touchend", handleGlobalMouseUp);
+      window.removeEventListener("mouseup", handleGlobalEnd);
+      window.removeEventListener("touchend", handleGlobalEnd);
     };
   }, []);
 
   return (
-    <section className="py-12 md:py-16 px-6 relative overflow-hidden">
+    <section className="py-10 md:py-16 px-4 sm:px-6 relative overflow-hidden">
       <div className="container mx-auto max-w-5xl relative z-10">
         {/* Section Header */}
-        <ViewportReveal className="text-center mb-8 space-y-4">
+        <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -55,23 +61,23 @@ const ColorGradingSlider = () => {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-center gap-4"
           >
-            <div className="h-px w-12 bg-primary" />
-            <span className="text-primary uppercase tracking-[0.3em] text-xs font-bold">
+            <div className="h-px w-8 md:w-12 bg-primary" />
+            <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
               {t.colorGrading?.label || "Color Correction"}
             </span>
-            <div className="h-px w-12 bg-primary" />
+            <div className="h-px w-8 md:w-12 bg-primary" />
           </motion.div>
           
           <motion.h2 
-            className="text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight"
+            className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight"
             initial={{ opacity: 0, filter: "blur(10px)" }}
             whileInView={{ opacity: 1, filter: "blur(0px)" }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {t.colorGrading?.title || "COLOR"}{" "}
+            <span className="whitespace-nowrap">{t.colorGrading?.title || "COLOR"}</span>{" "}
             <motion.span 
-              className="text-primary"
+              className="text-primary whitespace-nowrap"
               initial={{ textShadow: "0 0 0px hsl(195 100% 50% / 0)" }}
               whileInView={{ 
                 textShadow: [
@@ -87,22 +93,22 @@ const ColorGradingSlider = () => {
             </motion.span>
           </motion.h2>
           
-          <p className="text-muted-foreground max-w-md mx-auto">
+          <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
             {t.colorGrading?.description || "Drag the slider to see the before and after transformation."}
           </p>
         </ViewportReveal>
 
-        {/* Before/After Slider */}
+        {/* Before/After Slider - Touch optimized */}
         <ViewportReveal delay={0.2}>
           <div
             ref={containerRef}
-            className="relative aspect-[9/16] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none"
+            className="relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none touch-none"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
-            onTouchStart={handleMouseDown}
+            onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             style={{
-              boxShadow: '0 0 60px hsl(195 100% 50% / 0.15), 0 4px 40px -10px hsl(0 0% 0% / 0.5)',
+              boxShadow: '0 0 40px hsl(195 100% 50% / 0.15), 0 4px 30px -10px hsl(0 0% 0% / 0.5)',
             }}
           >
             {/* After Image (Full width, behind) */}
@@ -116,9 +122,7 @@ const ColorGradingSlider = () => {
             {/* Before Image (Clipped) */}
             <div
               className="absolute inset-0 overflow-hidden"
-              style={{ 
-                width: `${sliderPosition}%`,
-              }}
+              style={{ width: `${sliderPosition}%` }}
             >
               <img
                 src={beforeImage}
@@ -132,23 +136,23 @@ const ColorGradingSlider = () => {
               />
             </div>
 
-            {/* Slider Handle */}
+            {/* Slider Handle - Larger touch target */}
             <div
               className="absolute top-0 bottom-0 z-10"
               style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
             >
               {/* Neon Blue Line */}
               <div 
-                className="w-0.5 h-full"
+                className="w-0.5 md:w-1 h-full"
                 style={{
                   background: '#00a8e8',
                   boxShadow: '0 0 10px #00a8e8, 0 0 20px #00a8e8, 0 0 30px hsl(195 100% 50% / 0.5)',
                 }}
               />
               
-              {/* Glowing Circle Handle */}
+              {/* Glowing Circle Handle - Larger on mobile */}
               <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center"
                 style={{
                   background: 'linear-gradient(135deg, #00a8e8 0%, #0077b6 100%)',
                   boxShadow: '0 0 20px #00a8e8, 0 0 40px hsl(195 100% 50% / 0.5)',
@@ -157,7 +161,6 @@ const ColorGradingSlider = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {/* Arrows */}
                 <div className="flex items-center gap-1">
                   <svg width="8" height="12" viewBox="0 0 8 12" fill="white">
                     <path d="M6 0L0 6L6 12V0Z" />
@@ -171,7 +174,7 @@ const ColorGradingSlider = () => {
 
             {/* Before Label */}
             <motion.div
-              className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'} px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider`}
+              className={`absolute top-3 md:top-4 ${isRTL ? 'right-3 md:right-4' : 'left-3 md:left-4'} px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider`}
               style={{
                 background: 'hsl(0 0% 0% / 0.6)',
                 backdropFilter: 'blur(10px)',
@@ -187,7 +190,7 @@ const ColorGradingSlider = () => {
 
             {/* After Label */}
             <motion.div
-              className={`absolute top-4 ${isRTL ? 'left-4' : 'right-4'} px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider`}
+              className={`absolute top-3 md:top-4 ${isRTL ? 'left-3 md:left-4' : 'right-3 md:right-4'} px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider`}
               style={{
                 background: 'hsl(195 100% 50% / 0.2)',
                 backdropFilter: 'blur(10px)',

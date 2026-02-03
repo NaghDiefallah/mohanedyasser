@@ -102,6 +102,15 @@
     overflow-x: hidden;
   }
 
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+
+  html[dir="rtl"] body {
+    font-family: 'Cairo', sans-serif;
+    text-align: right;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
