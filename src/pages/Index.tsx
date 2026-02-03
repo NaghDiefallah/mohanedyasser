@@ -5,6 +5,7 @@ import Contact from "@/components/Contact";
 import StickyFooter from "@/components/StickyFooter";
 import CinematicScene from "@/components/three/CinematicScene";
 import Navbar from "@/components/Navbar";
+import ColorGradingSlider from "@/components/ColorGradingSlider";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const Index = () => {
@@ -41,6 +42,10 @@ const Index = () => {
         </section>
         <section id="work">
           <BentoGrid />
+        </section>
+        {/* Color Grading Slider - After Motion Graphics */}
+        <section id="color-grading">
+          <ColorGradingSlider />
         </section>
         <section id="services">
           <Services />
