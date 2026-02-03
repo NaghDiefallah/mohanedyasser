@@ -65,7 +65,7 @@ const Contact = () => {
     : 'hsl(220 30% 8%)';
 
   return (
-    <footer id="contact" className="relative mt-20">
+    <footer id="contact" className="relative mt-12 md:mt-20">
       {/* Top accent line */}
       <div 
         className="h-px w-full"
@@ -76,7 +76,7 @@ const Contact = () => {
       
       {/* Main footer content */}
       <motion.div
-        className="py-16 px-6"
+        className="py-10 md:py-16 px-4 sm:px-6"
         style={{ background: bgStyle }}
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ const Contact = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="container mx-auto max-w-7xl">
-          <div className={`flex flex-col md:flex-row items-center justify-between gap-12 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
+          <div className={`flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
             
             {/* Left side - Contact section */}
             <motion.div 
