@@ -70,35 +70,45 @@ const Navbar = () => {
           boxShadow: navShadow,
         }}
       >
-        <div className={`flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
-          {/* Theme & Language Toggles - Flip position for RTL */}
-          <div className={`flex items-center gap-1 sm:gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <button
-              onClick={toggleTheme}
-              className="p-1.5 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-              ) : (
-                <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-foreground" />
-              )}
-            </button>
-            
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-secondary/50 transition-all duration-300 text-xs sm:text-sm font-bold"
-              aria-label="Toggle language"
-            >
-              <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
-              <span className="text-foreground font-bold">
-                {language === 'ar' ? 'EN' : 'AR'}
-              </span>
-            </button>
+        <div className="flex items-center justify-between">
+          {/* LEFT side: In LTR = Toggles, In RTL = Logo/Brand */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {isRTL ? (
+              // RTL: Logo on LEFT
+              <img 
+                src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png" 
+                alt="Logo" 
+                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
+              />
+            ) : (
+              // LTR: Toggles on LEFT
+              <>
+                <button
+                  onClick={toggleTheme}
+                  className="p-1.5 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? (
+                    <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  ) : (
+                    <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-foreground" />
+                  )}
+                </button>
+                
+                <button
+                  onClick={toggleLanguage}
+                  className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-secondary/50 transition-all duration-300 text-xs sm:text-sm font-bold"
+                  aria-label="Toggle language"
+                >
+                  <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
+                  <span className="text-foreground font-bold">AR</span>
+                </button>
+              </>
+            )}
           </div>
 
-          {/* Center - Navigation Links (Desktop only) */}
-          <div className={`hidden md:flex items-center gap-6 lg:gap-8 ${isRTL ? 'flex-row-reverse' : ''}`}>
+          {/* CENTER - Navigation Links (Desktop only) */}
+          <div className={`hidden md:flex items-center gap-6 lg:gap-8 ${isRTL ? 'flex-row-reverse font-arabic' : ''}`}>
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -108,6 +118,62 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
+          </div>
+
+          {/* RIGHT side: In LTR = CTA, In RTL = Toggles */}
+          <div className="hidden md:flex items-center gap-2">
+            {isRTL ? (
+              // RTL: Toggles on RIGHT
+              <>
+                <button
+                  onClick={toggleLanguage}
+                  className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-secondary/50 transition-all duration-300 text-xs sm:text-sm font-bold"
+                  aria-label="Toggle language"
+                >
+                  <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
+                  <span className="text-foreground font-bold">EN</span>
+                </button>
+                
+                <button
+                  onClick={toggleTheme}
+                  className="p-1.5 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200"
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? (
+                    <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  ) : (
+                    <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-foreground" />
+                  )}
+                </button>
+              </>
+            ) : (
+              // LTR: CTA on RIGHT
+              <motion.div
+                animate={{
+                  boxShadow: [
+                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
+                    '0 0 30px hsl(195 100% 50% / 0.6), 0 0 60px hsl(195 100% 50% / 0.35)',
+                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
+                  ]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="rounded-md"
+              >
+                <Button 
+                  size="sm" 
+                  className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-4 lg:px-6 text-xs lg:text-sm"
+                  onClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  {t.nav.letsTalk}
+                </Button>
+              </motion.div>
+            )}
           </div>
 
           {/* CTA Button (Desktop only) */}
@@ -139,13 +205,35 @@ const Navbar = () => {
             </motion.div>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-1.5 sm:p-2 text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {/* Mobile: Toggles + Menu */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-1.5 rounded-lg hover:bg-secondary/50 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-primary" />
+              ) : (
+                <Moon className="w-4 h-4 text-foreground" />
+              )}
+            </button>
+            
+            <button
+              onClick={toggleLanguage}
+              className="px-2 py-1.5 rounded-lg hover:bg-secondary/50 text-xs font-bold"
+              aria-label="Toggle language"
+            >
+              {language === 'ar' ? 'EN' : 'AR'}
+            </button>
+            
+            <button
+              className="p-1.5 text-foreground"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
