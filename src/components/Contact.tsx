@@ -73,76 +73,46 @@ const Contact = () => {
         style={{ background: bgStyle }}
       >
         <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
-            
-            {/* Left side - Contact section */}
-            <div 
-              className={`flex flex-col items-center md:items-start gap-6 ${isRTL ? 'md:items-end' : ''}`}
-            >
-              {/* Contact header with underline */}
-              <div className="relative">
-                <h3 
-                  className="text-lg font-semibold text-white/90 mb-1"
-                  style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Inter, sans-serif' }}
-                >
-                  {t.contact.header}
-                </h3>
-                <div 
-                  className="h-0.5 w-full"
-                  style={{
-                    background: 'linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.3) 100%)',
-                  }}
-                />
-              </div>
-
-              {/* Social icons */}
-              <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
-                {contactLinks.map((link) => (
-                  <Tooltip key={link.label}>
-                    <TooltipTrigger asChild>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 rounded-full border border-white/20 text-white/70 bg-white/5 transition-all duration-300 hover:scale-110 hover:border-primary hover:text-primary"
-                        style={{
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        {link.icon}
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent 
-                      side="bottom" 
-                      className="bg-card/95 backdrop-blur-xl border-primary/30 text-foreground"
-                    >
-                      <p className="font-medium">{link.handle}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </div>
+          {/* Centered contact section */}
+          <div className="flex flex-col items-center gap-6">
+            {/* Contact header with underline */}
+            <div className="relative">
+              <h3 
+                className="text-lg font-semibold text-white/90 mb-1"
+                style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Inter, sans-serif' }}
+              >
+                {t.contact.header}
+              </h3>
+              <div 
+                className="h-0.5 w-full"
+                style={{
+                  background: 'linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.3) 100%)',
+                }}
+              />
             </div>
 
-            {/* Right side - Brand info */}
-            <div 
-              className={`flex flex-col items-center md:items-end gap-3 ${isRTL ? 'md:items-start' : ''}`}
-            >
-              {/* Brand name with accent */}
-              <h2 
-                className="text-2xl md:text-3xl font-bold"
-                style={{ 
-                  fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif",
-                  letterSpacing: isRTL ? '0' : '0.05em'
-                }}
-              >
-                <span className="text-white/90">{isRTL ? 'مهند' : 'MOHANED'}</span>
-                <span className="text-primary">{isRTL ? ' ياسر' : ' YASSER'}</span>
-              </h2>
-              
-              {/* Tagline */}
-              <p className="text-sm text-white/50 text-center md:text-right max-w-xs" style={{ textAlign: isRTL ? 'left' : 'right' }}>
-                {t.contact.tagline}
-              </p>
+            {/* Social icons */}
+            <div className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+              {contactLinks.map((link) => (
+                <Tooltip key={link.label}>
+                  <TooltipTrigger asChild>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 rounded-full border border-white/20 text-white/70 bg-white/5 transition-all duration-300 hover:scale-110 hover:border-primary hover:text-primary"
+                    >
+                      {link.icon}
+                    </a>
+                  </TooltipTrigger>
+                  <TooltipContent 
+                    side="bottom" 
+                    className="bg-card/95 backdrop-blur-xl border-primary/30 text-foreground"
+                  >
+                    <p className="font-medium">{link.handle}</p>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
             </div>
           </div>
 

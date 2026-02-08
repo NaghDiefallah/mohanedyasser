@@ -35,6 +35,15 @@ interface Translations {
     tagline: string;
     copyright: string;
   };
+  about: {
+    label: string;
+    title: string;
+    titleHighlight: string;
+    description: string;
+    bio: string;
+    stats: { label: string; value: string }[];
+    skills: string[];
+  };
   work: {
     reelsLabel: string;
     reelsTitle: string;
@@ -114,6 +123,19 @@ const translations: Record<Language, Translations> = {
       subHeader: "Let's Talk",
       tagline: 'Professional video editing services. Elevate your content with cinematic quality.',
       copyright: 'All Rights Reserved.',
+    },
+    about: {
+      label: 'About Me',
+      title: 'About',
+      titleHighlight: 'Me',
+      description: 'Passionate video editor with a cinematic eye and a love for storytelling.',
+      bio: "I'm Mohaned Yasser — a professional video editor specializing in cinematic editing, motion graphics, color grading, and audio enhancement. I bring stories to life through precision editing and creative visual design. Every frame matters, every cut counts.",
+      stats: [
+        { label: 'Projects Completed', value: '+50' },
+        { label: 'Years of Experience', value: '1+' },
+        { label: 'Response Time', value: '24h' },
+      ],
+      skills: ['Video Editing', 'Motion Graphics', 'Color Grading', 'Sound Design', 'VFX', 'Animation'],
     },
     work: {
       reelsLabel: 'Latest Work',
@@ -219,6 +241,19 @@ const translations: Record<Language, Translations> = {
       subHeader: 'تواصل معي',
       tagline: 'خدمات مونتاج فيديو احترافية. ارتقِ بمحتواك بجودة سينمائية.',
       copyright: 'جميع الحقوق محفوظة.',
+    },
+    about: {
+      label: 'عني',
+      title: 'عن',
+      titleHighlight: 'مهند',
+      description: 'محرر فيديو شغوف بعين سينمائية وحب للسرد القصصي.',
+      bio: 'أنا مهند ياسر — محرر فيديو محترف متخصص في المونتاج السينمائي، الموشن جرافيك، تلوين الفيديوهات، وتحسين الصوت. أحول القصص إلى واقع من خلال المونتاج الدقيق والتصميم البصري الإبداعي. كل إطار مهم، كل قطع محسوب.',
+      stats: [
+        { label: 'مشروع مكتمل', value: '+50' },
+        { label: 'سنوات الخبرة', value: '+1' },
+        { label: 'وقت الاستجابة', value: '24 ساعة' },
+      ],
+      skills: ['مونتاج الفيديو', 'موشن جرافيك', 'تلوين الفيديوهات', 'تصميم الصوت', 'مؤثرات بصرية', 'أنيميشن'],
     },
     work: {
       reelsLabel: 'أحدث الأعمال',
