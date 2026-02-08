@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
-import { getReelsProjects, getMotionGraphicsProjects } from "@/data/projects";
+import { getMotionGraphicsProjects } from "@/data/projects";
 import TiltCard from "./TiltCard";
 import ViewportReveal from "./ViewportReveal";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const reelsProjects = getReelsProjects();
 const motionGraphicsProjects = getMotionGraphicsProjects();
 
 // Premium project card with 3D tilt
-const ProjectCard = ({ project, index }: { project: typeof reelsProjects[0]; index: number }) => {
+const ProjectCard = ({ project, index }: { project: typeof motionGraphicsProjects[0]; index: number }) => {
   const navigate = useNavigate();
 
   return (
@@ -81,32 +80,6 @@ const BentoGrid = () => {
   return (
     <section className="py-10 md:py-16 px-4 sm:px-6 relative overflow-hidden">
       <div className="container mx-auto max-w-7xl relative z-10">
-        
-        {/* ===== REELS SECTION ===== */}
-        <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-8 md:w-12 bg-primary" />
-            <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
-              {t.work.reelsLabel}
-            </span>
-            <div className="h-px w-8 md:w-12 bg-primary" />
-          </div>
-          
-          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
-            {t.work.reelsTitle}
-          </h2>
-          
-          <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
-            {t.work.reelsDescription}
-          </p>
-        </ViewportReveal>
-
-        {/* Reels Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 md:mb-12">
-          {reelsProjects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
 
         {/* ===== MOTION GRAPHICS SECTION ===== */}
         <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">

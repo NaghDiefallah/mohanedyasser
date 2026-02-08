@@ -1,4 +1,5 @@
 import CinematicHero from "@/components/CinematicHero";
+import StackedReelsPreview from "@/components/StackedReelsPreview";
 import BentoGrid from "@/components/BentoGrid";
 import Services from "@/components/Services";
 import Contact from "@/components/Contact";
@@ -42,6 +43,7 @@ const Index = () => {
           <CinematicHero />
         </section>
         <section id="work">
+          <StackedReelsPreview />
           <BentoGrid />
         </section>
         {/* Color Grading Slider - After Motion Graphics */}
