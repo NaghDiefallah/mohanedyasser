@@ -6,6 +6,7 @@ import StickyFooter from "@/components/StickyFooter";
 import CinematicScene from "@/components/three/CinematicScene";
 import Navbar from "@/components/Navbar";
 import ColorGradingSlider from "@/components/ColorGradingSlider";
+import VocalEnhance from "@/components/VocalEnhance";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const Index = () => {
@@ -46,6 +47,10 @@ const Index = () => {
         {/* Color Grading Slider - After Motion Graphics */}
         <section id="color-grading">
           <ColorGradingSlider />
+        </section>
+        {/* Vocal Enhance - After Color Grading */}
+        <section id="vocal-enhance">
+          <VocalEnhance />
         </section>
         <section id="services">
           <Services />
