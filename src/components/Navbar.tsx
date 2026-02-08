@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Moon, Sun, Globe } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import WorkDropdown from "@/components/WorkDropdown";
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -120,15 +121,29 @@ const Navbar = () => {
 
           {/* CENTER - Navigation Links (Desktop only) */}
           <div className={`hidden md:flex items-center gap-6 lg:gap-8 ${isRTL ? 'flex-row-reverse font-arabic' : ''}`}>
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-xs lg:text-sm font-bold text-muted-foreground hover:text-primary transition-colors duration-200 tracking-[0.15em] lg:tracking-[0.2em]"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const linkClass = "text-xs lg:text-sm font-bold text-muted-foreground hover:text-primary transition-colors duration-200 tracking-[0.15em] lg:tracking-[0.2em]";
+              
+              if (link.href === "#work") {
+                return (
+                  <WorkDropdown
+                    key={link.label}
+                    label={link.label}
+                    className={linkClass}
+                  />
+                );
+              }
+              
+              return (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={linkClass}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </div>
 
           {/* RIGHT side: In LTR = CTA, In RTL = Toggles */}
