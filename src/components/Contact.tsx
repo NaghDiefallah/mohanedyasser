@@ -157,12 +157,12 @@ const Contact = () => {
               <h2 
                 className="text-2xl md:text-3xl font-bold"
                 style={{ 
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  letterSpacing: '0.05em'
+                  fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif",
+                  letterSpacing: isRTL ? '0' : '0.05em'
                 }}
               >
-                <span className="text-white/90">MOHANED</span>
-                <span className="text-primary"> YASSER</span>
+                <span className="text-white/90">{isRTL ? 'مهند' : 'MOHANED'}</span>
+                <span className="text-primary">{isRTL ? ' ياسر' : ' YASSER'}</span>
               </h2>
               
               {/* Tagline */}
