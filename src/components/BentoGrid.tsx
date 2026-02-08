@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Play, Check } from "lucide-react";
+import { Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { getReelsProjects, getMotionGraphicsProjects } from "@/data/projects";
 import TiltCard from "./TiltCard";
@@ -181,94 +181,11 @@ const BentoGrid = () => {
           </p>
         </ViewportReveal>
 
-        {/* Motion Graphics - Single column on mobile, two columns on desktop */}
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start ${isRTL ? 'lg:grid-flow-dense' : ''}`}>
-          {/* Left: Featured Video */}
-          <div className={`lg:col-span-1 ${isRTL ? 'lg:col-start-2' : ''}`}>
-            {motionGraphicsProjects[0] && (
-              <ViewportReveal>
-                <TiltCard
-                  className="group"
-                  onClick={() => window.location.href = `/project/${motionGraphicsProjects[0].slug}`}
-                  tiltAmount={6}
-                >
-                  <div 
-                    className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300 group-hover:border-primary/50"
-                    style={{ boxShadow: '0 4px 20px -4px hsl(0 0% 0% / 0.5)' }}
-                  >
-                    <div className="relative aspect-video overflow-hidden">
-                      <img
-                        src={motionGraphicsProjects[0].thumbnail}
-                        alt={motionGraphicsProjects[0].title}
-                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <motion.div 
-                          className="w-20 h-20 rounded-full bg-primary flex items-center justify-center"
-                          whileHover={{ scale: 1.1 }}
-                          style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.5)' }}
-                        >
-                          <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
-                        </motion.div>
-                      </div>
-                    </div>
-                    <motion.div 
-                      className="p-6"
-                      initial={{ y: 0 }}
-                      whileHover={{ y: -5 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
-                        {motionGraphicsProjects[0].title}
-                      </h3>
-                      <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
-                        {motionGraphicsProjects[0].category}
-                      </span>
-                    </motion.div>
-                  </div>
-                </TiltCard>
-              </ViewportReveal>
-            )}
-          </div>
-
-          {/* Right: Skills/Specs List */}
-          <div className={`lg:col-span-1 flex flex-col justify-center ${isRTL ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-            <ViewportReveal delay={0.2}>
-              <div className="space-y-6">
-                <h3 className={`text-2xl font-bold text-foreground uppercase tracking-tight mb-8 ${isRTL ? 'text-right' : ''}`}>
-                  {t.work.whatICreate}
-                </h3>
-                
-                {t.work.skills.map((skill, index) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.1 * index }}
-                    className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}
-                  >
-                    <motion.div 
-                      className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0"
-                      whileHover={{ scale: 1.2, backgroundColor: "hsl(195 100% 50% / 0.4)" }}
-                      style={{ boxShadow: '0 0 10px hsl(var(--primary) / 0.3)' }}
-                    >
-                      <Check className="w-4 h-4 text-primary" />
-                    </motion.div>
-                    <span className="text-muted-foreground text-lg font-medium">{skill}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </ViewportReveal>
-
-            {/* Additional project cards */}
-            <div className="grid grid-cols-2 gap-4 mt-8">
-              {motionGraphicsProjects.slice(1, 3).map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
-              ))}
-            </div>
-          </div>
+        {/* Motion Graphics Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {motionGraphicsProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
         </div>
 
       </div>
