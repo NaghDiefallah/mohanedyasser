@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import Index from "@/pages/Index";
 import ProjectDetail from "@/pages/ProjectDetail";
 import ReelsGallery from "@/pages/ReelsGallery";
+import MotionGraphicsGallery from "@/pages/MotionGraphicsGallery";
 import NotFound from "@/pages/NotFound";
 import PageTransition from "./PageTransition";
 
@@ -25,6 +26,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <ReelsGallery />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/motion-graphics"
+          element={
+            <PageTransition>
+              <MotionGraphicsGallery />
             </PageTransition>
           }
         />
