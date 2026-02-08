@@ -119,7 +119,7 @@ const BentoGrid = () => {
           </div>
           
           <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
-            {t.work.motionTitle} <span className="text-primary text-glow">{t.work.motionTitleHighlight}</span>
+            {t.work.motionTitle} <span className="text-primary">{t.work.motionTitleHighlight}</span>
           </h2>
           
           <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">

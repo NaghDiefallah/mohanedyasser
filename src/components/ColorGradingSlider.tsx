@@ -50,7 +50,7 @@ const ColorGradingSlider = () => {
           
           <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
             <span className="whitespace-nowrap">{t.colorGrading?.title || "COLOR"}</span>{" "}
-            <span className="text-primary text-glow whitespace-nowrap">
+            <span className="text-primary whitespace-nowrap">
               {t.colorGrading?.titleHighlight || "GRADING"}
             </span>
           </h2>

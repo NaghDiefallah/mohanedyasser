@@ -51,7 +51,7 @@ const Hero = () => {
                 <span className="block text-[clamp(3.5rem,10vw,8rem)] leading-[0.9] text-foreground/95">
                   Visual
                 </span>
-                <span className="block text-[clamp(3.5rem,10vw,8rem)] leading-[0.9] text-primary text-glow-warm">
+                <span className="block text-[clamp(3.5rem,10vw,8rem)] leading-[0.9] text-primary">
                   Stories
                 </span>
               </h1>
