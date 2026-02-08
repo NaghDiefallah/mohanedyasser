@@ -76,9 +76,6 @@ const CinematicHero = () => {
             onMouseMove={handleLogoMouseMove}
             onMouseLeave={handleLogoMouseLeave}
             style={{ x, y }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
           >
             <motion.img
               alt="Mohaned Yasser Logo"
@@ -95,21 +92,12 @@ const CinematicHero = () => {
           </motion.div>
 
           {/* Name */}
-          <motion.p
-            className={`text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground ${isRTL ? 'font-arabic' : ''}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
+          <p className={`text-xs sm:text-sm uppercase tracking-[0.3em] text-muted-foreground ${isRTL ? 'font-arabic' : ''}`}>
             {t.hero.name}
-          </motion.p>
+          </p>
 
           {/* Heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div>
             <h1
               className="text-[clamp(3.5rem,14vw,7rem)] leading-[0.9] font-bold tracking-[-0.02em]"
               style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
@@ -121,15 +109,10 @@ const CinematicHero = () => {
                 {t.hero.title2}
               </span>
             </h1>
-          </motion.div>
+          </div>
 
           {/* Software icons */}
-          <motion.div
-            className="flex items-center justify-center gap-3 sm:gap-4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
+          <div className="flex items-center justify-center gap-3 sm:gap-4">
             {softwareList.map((software) => (
               <Tooltip key={software.name}>
                 <TooltipTrigger asChild>
@@ -146,29 +129,19 @@ const CinematicHero = () => {
                 </TooltipContent>
               </Tooltip>
             ))}
-          </motion.div>
+          </div>
 
           {/* Stats */}
-          <motion.div
-            className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-          >
+          <div className="flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
             <span className={`text-xs sm:text-sm font-bold text-primary tracking-widest uppercase ${isRTL ? 'font-arabic' : ''}`}>{t.hero.projects}</span>
             <div className="w-px h-4 bg-primary/30" />
             <span className={`text-xs sm:text-sm font-bold text-primary tracking-widest uppercase ${isRTL ? 'font-arabic' : ''}`}>{t.hero.experience}</span>
             <div className="w-px h-4 bg-primary/30" />
             <span className={`text-xs sm:text-sm font-bold text-primary tracking-widest uppercase ${isRTL ? 'font-arabic' : ''}`}>{t.hero.response}</span>
-          </motion.div>
+          </div>
 
           {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto sm:justify-center"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto sm:justify-center">
             <Button
               size="lg"
               className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base w-full sm:w-auto ${isRTL ? 'font-arabic' : ''}`}
@@ -195,30 +168,20 @@ const CinematicHero = () => {
               <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5" />
               {t.hero.letsTalk}
             </Button>
-          </motion.div>
+          </div>
         </div>
 
         {/* ===== DESKTOP: Two-column layout with center divider (>= 1024px) ===== */}
         <div className={`hidden lg:grid lg:grid-cols-[1fr_1px_1fr] gap-0 items-center min-h-[70vh] ${isRTL ? 'direction-ltr' : ''}`}>
           
           {/* LEFT COLUMN: Logo + Stats (in LTR) / Content (in RTL) */}
-          <motion.div
-            className={`flex flex-col items-center justify-center gap-8 px-8 ${isRTL ? 'order-3' : 'order-1'}`}
-            initial={{ opacity: 0, x: isRTL ? 30 : -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-          >
+          <div className={`flex flex-col items-center justify-center gap-8 px-8 ${isRTL ? 'order-3' : 'order-1'}`}>
             {isRTL ? (
               /* RTL: Right side shows content */
               <>
-                <motion.p
-                  className="text-sm uppercase tracking-[0.3em] text-muted-foreground font-arabic"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
+                <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground font-arabic">
                   {t.hero.name}
-                </motion.p>
+                </p>
 
                 <h1
                   className="text-[clamp(5rem,8vw,9rem)] leading-[0.9] font-bold tracking-[-0.02em] text-center"
@@ -319,9 +282,9 @@ const CinematicHero = () => {
                 </div>
               </>
             )}
-          </motion.div>
+          </div>
 
-          {/* CENTER DIVIDER — always at grid column 2 */}
+          {/* CENTER DIVIDER */}
           <div className="order-2 relative h-[60vh] flex items-center justify-center">
             <div
               className="w-px h-full"
@@ -334,12 +297,7 @@ const CinematicHero = () => {
           </div>
 
           {/* RIGHT COLUMN: Content (in LTR) / Logo + Stats (in RTL) */}
-          <motion.div
-            className={`flex flex-col gap-6 px-8 ${isRTL ? 'order-1 items-center text-center' : 'order-3 items-start'}`}
-            initial={{ opacity: 0, x: isRTL ? -30 : 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
+          <div className={`flex flex-col gap-6 px-8 ${isRTL ? 'order-1 items-center text-center' : 'order-3 items-start'}`}>
             {isRTL ? (
               /* RTL: Left side shows Logo + Stats */
               <>
@@ -380,14 +338,9 @@ const CinematicHero = () => {
             ) : (
               /* LTR: Right side shows content */
               <>
-                <motion.p
-                  className="text-sm uppercase tracking-[0.3em] text-muted-foreground"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.25 }}
-                >
+                <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
                   {t.hero.name}
-                </motion.p>
+                </p>
 
                 <h1
                   className="text-[clamp(5rem,8vw,9rem)] leading-[0.9] font-bold tracking-[-0.02em]"
@@ -450,7 +403,7 @@ const CinematicHero = () => {
                 </div>
               </>
             )}
-          </motion.div>
+          </div>
         </div>
 
       </div>
