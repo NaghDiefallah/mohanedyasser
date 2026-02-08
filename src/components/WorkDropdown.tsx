@@ -70,7 +70,12 @@ const WorkDropdown = ({ label, className }: WorkDropdownProps) => {
                     key={item.label}
                     href={item.href}
                     className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-primary hover:bg-primary/5 transition-all duration-200 ${isRTL ? 'flex-row-reverse font-arabic' : ''}`}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsOpen(false);
+                      const target = document.querySelector(item.href);
+                      target?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                   >
                     <Icon className="w-4 h-4 text-primary/70" />
                     <span>{isRTL ? item.labelAr : item.label}</span>

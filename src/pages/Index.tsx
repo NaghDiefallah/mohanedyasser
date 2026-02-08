@@ -44,8 +44,12 @@ const Index = () => {
           <CinematicHero />
         </section>
         <section id="work">
-          <StackedReelsPreview />
-          <StackedMotionPreview />
+          <div id="reels">
+            <StackedReelsPreview />
+          </div>
+          <div id="motion">
+            <StackedMotionPreview />
+          </div>
         </section>
         {/* Color Grading Slider - After Motion Graphics */}
         <section id="color-grading">
