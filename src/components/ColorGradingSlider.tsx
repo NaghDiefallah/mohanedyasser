@@ -8,6 +8,7 @@ import afterImage from "@/assets/color-grading-after.png";
 const ColorGradingSlider = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { t, isRTL } = useLanguage();
 
@@ -47,6 +48,22 @@ const ColorGradingSlider = () => {
       window.removeEventListener("mouseup", handleGlobalEnd);
       window.removeEventListener("touchend", handleGlobalEnd);
     };
+  }, []);
+
+  // Fix initialization: mark ready after images load and layout settles
+  useEffect(() => {
+    const timer = setTimeout(() => setIsReady(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Recalculate on resize
+  useEffect(() => {
+    const handleResize = () => {
+      // Force re-render to update image width calculation
+      setSliderPosition(prev => prev);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -102,7 +119,7 @@ const ColorGradingSlider = () => {
         <ViewportReveal delay={0.2}>
           <div
             ref={containerRef}
-            className="relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none touch-none"
+            className={`relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none touch-none transition-opacity duration-300 ${isReady ? 'opacity-100' : 'opacity-0'}`}
             dir="ltr"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
