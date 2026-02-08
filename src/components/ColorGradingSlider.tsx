@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ViewportReveal from "./ViewportReveal";
 import { motion } from "framer-motion";
@@ -100,7 +100,7 @@ const ColorGradingSlider = () => {
               cursor: 'ew-resize',
             }}
           >
-            {/* After Image (Full width, behind) */}
+            {/* After Image — full container, object-fit cover */}
             <img
               src={afterImage}
               alt={isRTL ? "بعد" : "After"}
@@ -108,19 +108,15 @@ const ColorGradingSlider = () => {
               draggable={false}
             />
 
-            {/* Before Image (Clipped) */}
+            {/* Before Image — clipped by width%, same positioning as After */}
             <div
               className="absolute inset-0 overflow-hidden pointer-events-none"
-              style={{ width: `${sliderPosition}%` }}
+              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
               <img
                 src={beforeImage}
                 alt={isRTL ? "قبل" : "Before"}
-                className="absolute inset-0 h-full object-cover"
-                style={{
-                  width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%',
-                  maxWidth: 'none',
-                }}
+                className="absolute inset-0 w-full h-full object-cover"
                 draggable={false}
               />
             </div>
@@ -143,7 +139,7 @@ const ColorGradingSlider = () => {
                 }}
               />
 
-              {/* Circular handle — centered on line via absolute positioning */}
+              {/* Circular handle — centered on line */}
               <div
                 className="absolute left-1/2 top-1/2"
                 style={{
@@ -182,7 +178,7 @@ const ColorGradingSlider = () => {
                 border: sliderPosition > 50
                   ? '1px solid hsl(195 100% 50% / 0.3)'
                   : '1px solid hsl(0 0% 100% / 0.1)',
-                transition: 'background 0.3s ease, border 0.3s ease, color 0.3s ease',
+                transition: 'background 0.3s ease, border 0.3s ease',
               }}
             >
               <span
