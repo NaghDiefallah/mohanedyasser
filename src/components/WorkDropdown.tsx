@@ -39,12 +39,13 @@ const WorkDropdown = ({ label, className }: WorkDropdownProps) => {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <a
-        href="#work"
+      <button
+        type="button"
         className={className}
+        style={{ cursor: 'default' }}
       >
         {label}
-      </a>
+      </button>
 
       <AnimatePresence>
         {isOpen && (
