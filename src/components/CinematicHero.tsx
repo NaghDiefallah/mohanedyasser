@@ -141,10 +141,11 @@ const CinematicHero = () => {
             <Button
               size="lg"
               className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base w-full sm:w-auto ${isRTL ? 'font-arabic' : ''}`}
-              style={{
-                backgroundColor: '#00a8e8',
-              }}
-              onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
+                    style={{
+                      backgroundColor: '#00a8e8',
+                      boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
+                    }}
+                    onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
             >
               {t.hero.seeMyWork}
               <ArrowRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${isRTL ? 'group-hover:-translate-x-1 rotate-180' : 'group-hover:translate-x-1'}`} />
@@ -212,6 +213,7 @@ const CinematicHero = () => {
                     className="group gap-3 px-8 py-7 font-bold font-arabic uppercase tracking-wider text-base"
                     style={{
                       backgroundColor: '#00a8e8',
+                      boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
                   >
@@ -353,6 +355,7 @@ const CinematicHero = () => {
                     className="group gap-3 px-8 py-7 font-bold uppercase tracking-wider text-base"
                     style={{
                       backgroundColor: '#00a8e8',
+                      boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
                   >
