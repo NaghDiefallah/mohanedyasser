@@ -59,6 +59,8 @@ const Index = () => {
         <section id="vocal-enhance">
           <VocalEnhance />
         </section>
+        {/* Mixing & Sound Design placeholder section */}
+        <section id="mixing" />
         <section id="services">
           <Services />
         </section>

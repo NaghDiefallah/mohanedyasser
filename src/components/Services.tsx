@@ -1,9 +1,9 @@
-import { Film, Palette, Sparkles, Mic } from "lucide-react";
+import { Film, Palette, Sparkles, Mic, Music } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const serviceIcons = [Film, Palette, Sparkles, Mic];
+const serviceIcons = [Film, Palette, Sparkles, Mic, Music];
 
 const Services = () => {
   const { t, isRTL } = useLanguage();

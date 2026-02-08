@@ -186,6 +186,12 @@ const translations: Record<Language, Translations> = {
           price: 'Starting at $200',
           features: ['Noise removal', 'EQ balancing', 'Dynamic range', 'Voice clarity'],
         },
+        {
+          title: 'Mixing & Sound Design',
+          description: 'Professional audio mixing and creative sound design that adds depth and emotion to your projects.',
+          price: 'Starting at $400',
+          features: ['Multi-track mixing', 'Foley & SFX', 'Spatial audio', 'Master output'],
+        },
       ],
     },
     colorGrading: {
@@ -303,6 +309,12 @@ const translations: Record<Language, Translations> = {
           description: 'تنظيف ومعالجة صوتية احترافية لصوت نقي وجاهز للبث.',
           price: 'يبدأ من 200$',
           features: ['إزالة الضوضاء', 'توازن الترددات', 'ضغط ديناميكي', 'وضوح الصوت'],
+        },
+        {
+          title: 'مكساج وتصميم صوتي',
+          description: 'مكساج صوتي احترافي وتصميم صوتي إبداعي يضيف عمقاً وإحساساً لمشاريعك.',
+          price: 'يبدأ من 400$',
+          features: ['مكساج متعدد المسارات', 'مؤثرات صوتية', 'صوت مكاني', 'ماستر نهائي'],
         },
       ],
     },
