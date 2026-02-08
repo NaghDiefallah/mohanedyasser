@@ -84,7 +84,7 @@ const Contact = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="container mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
+          <div className={`flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
             
             {/* Left side - Contact section */}
             <motion.div 
