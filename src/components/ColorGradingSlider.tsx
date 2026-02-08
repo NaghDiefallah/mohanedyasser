@@ -1,69 +1,39 @@
-import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ViewportReveal from "./ViewportReveal";
+import { motion } from "framer-motion";
 import beforeImage from "@/assets/color-grading-before.png";
 import afterImage from "@/assets/color-grading-after.png";
 
 const ColorGradingSlider = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
-  const [isReady, setIsReady] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { t, isRTL } = useLanguage();
 
-  const handleMove = (clientX: number) => {
-    if (!containerRef.current) return;
-    
+  const getPosition = useCallback((clientX: number) => {
+    if (!containerRef.current) return null;
     const rect = containerRef.current.getBoundingClientRect();
     const x = clientX - rect.left;
-    const percentage = Math.min(Math.max((x / rect.width) * 100, 0), 100);
-    setSliderPosition(percentage);
-  };
+    return Math.min(Math.max((x / rect.width) * 100, 0), 100);
+  }, []);
 
-  const handleStart = (clientX: number) => {
-    setIsDragging(true);
-    handleMove(clientX);
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => handleStart(e.clientX);
-  const handleTouchStart = (e: React.TouchEvent) => handleStart(e.touches[0].clientX);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    handleMove(e.clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
     e.preventDefault();
-    handleMove(e.touches[0].clientX);
-  };
+    setIsDragging(true);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    const pos = getPosition(e.clientX);
+    if (pos !== null) setSliderPosition(pos);
+  }, [getPosition]);
 
-  useEffect(() => {
-    const handleGlobalEnd = () => setIsDragging(false);
-    window.addEventListener("mouseup", handleGlobalEnd);
-    window.addEventListener("touchend", handleGlobalEnd);
-    return () => {
-      window.removeEventListener("mouseup", handleGlobalEnd);
-      window.removeEventListener("touchend", handleGlobalEnd);
-    };
-  }, []);
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!isDragging) return;
+    const pos = getPosition(e.clientX);
+    if (pos !== null) setSliderPosition(pos);
+  }, [isDragging, getPosition]);
 
-  // Fix initialization: mark ready after images load and layout settles
-  useEffect(() => {
-    const timer = setTimeout(() => setIsReady(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Recalculate on resize
-  useEffect(() => {
-    const handleResize = () => {
-      // Force re-render to update image width calculation
-      setSliderPosition(prev => prev);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+  const handlePointerUp = useCallback(() => {
+    setIsDragging(false);
   }, []);
 
   return (
@@ -115,37 +85,38 @@ const ColorGradingSlider = () => {
           </p>
         </ViewportReveal>
 
-        {/* Before/After Slider - Touch optimized, RTL-safe */}
+        {/* Before/After Slider */}
         <ViewportReveal delay={0.2}>
           <div
             ref={containerRef}
-            className={`relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none touch-none transition-opacity duration-300 ${isReady ? 'opacity-100' : 'opacity-0'}`}
+            className="relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden select-none touch-none"
             dir="ltr"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
             style={{
               boxShadow: '0 0 40px hsl(195 100% 50% / 0.15), 0 4px 30px -10px hsl(0 0% 0% / 0.5)',
+              cursor: 'ew-resize',
             }}
           >
             {/* After Image (Full width, behind) */}
             <img
               src={afterImage}
               alt={isRTL ? "بعد" : "After"}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               draggable={false}
             />
 
             {/* Before Image (Clipped) */}
             <div
-              className="absolute inset-0 overflow-hidden"
+              className="absolute inset-0 overflow-hidden pointer-events-none"
               style={{ width: `${sliderPosition}%` }}
             >
               <img
                 src={beforeImage}
                 alt={isRTL ? "قبل" : "Before"}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 h-full object-cover"
                 style={{
                   width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '100%',
                   maxWidth: 'none',
@@ -154,30 +125,42 @@ const ColorGradingSlider = () => {
               />
             </div>
 
-            {/* Slider Handle */}
+            {/* Slider Line + Handle — single positioning anchor */}
             <div
-              className="absolute top-0 bottom-0 z-10"
-              style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
+              className="absolute top-0 bottom-0 z-10 pointer-events-none"
+              style={{
+                left: `${sliderPosition}%`,
+                transform: 'translateX(-50%)',
+                width: '4px',
+              }}
             >
+              {/* Vertical neon line */}
               <div
-                className="w-0.5 md:w-1 h-full mx-auto"
+                className="absolute inset-0 w-[2px] md:w-[3px] mx-auto"
                 style={{
                   background: '#00a8e8',
                   boxShadow: '0 0 10px #00a8e8, 0 0 20px #00a8e8, 0 0 30px hsl(195 100% 50% / 0.5)',
                 }}
               />
 
-              <motion.div
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center"
+              {/* Circular handle — centered on line via absolute positioning */}
+              <div
+                className="absolute left-1/2 top-1/2"
                 style={{
+                  width: '44px',
+                  height: '44px',
+                  transform: 'translate(-50%, -50%)',
+                  borderRadius: '50%',
                   background: 'linear-gradient(135deg, #00a8e8 0%, #0077b6 100%)',
                   boxShadow: '0 0 20px #00a8e8, 0 0 40px hsl(195 100% 50% / 0.5)',
                   border: '2px solid rgba(255,255,255,0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxSizing: 'border-box',
                 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
               >
-                <div className="flex items-center gap-1">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '2px' }}>
                   <svg width="8" height="12" viewBox="0 0 8 12" fill="white">
                     <path d="M6 0L0 6L6 12V0Z" />
                   </svg>
@@ -185,12 +168,12 @@ const ColorGradingSlider = () => {
                     <path d="M2 0L8 6L2 12V0Z" />
                   </svg>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
-            {/* Dynamic Label - always top-right, text changes based on slider */}
-            <motion.div
-              className="absolute top-3 md:top-4 right-3 md:right-4 px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider"
+            {/* Dynamic Label — top-right, text changes based on slider */}
+            <div
+              className="absolute top-3 md:top-4 right-3 md:right-4 px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider pointer-events-none"
               style={{
                 background: sliderPosition > 50
                   ? 'hsl(195 100% 50% / 0.2)'
@@ -199,12 +182,8 @@ const ColorGradingSlider = () => {
                 border: sliderPosition > 50
                   ? '1px solid hsl(195 100% 50% / 0.3)'
                   : '1px solid hsl(0 0% 100% / 0.1)',
-                transition: 'background 0.3s ease, border 0.3s ease',
+                transition: 'background 0.3s ease, border 0.3s ease, color 0.3s ease',
               }}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
             >
               <span
                 className={sliderPosition > 50 ? 'text-primary' : 'text-white/80'}
@@ -215,7 +194,7 @@ const ColorGradingSlider = () => {
                   : (t.colorGrading?.before || "BEFORE")
                 }
               </span>
-            </motion.div>
+            </div>
           </div>
         </ViewportReveal>
       </div>
