@@ -86,6 +86,7 @@ const CinematicHero = () => {
               src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             />
           </motion.div>
 
@@ -254,6 +255,7 @@ const CinematicHero = () => {
                       scale: 1.05,
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
                   />
                 </motion.div>
 
@@ -302,6 +304,7 @@ const CinematicHero = () => {
                       scale: 1.05,
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
                   />
                 </motion.div>
 

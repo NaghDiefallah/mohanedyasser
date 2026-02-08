@@ -75,20 +75,11 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-1 sm:gap-2">
             {isRTL ? (
               // RTL: CTA on LEFT (appears on right visually)
-              <motion.div
-                animate={{
-                  boxShadow: [
-                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
-                    '0 0 30px hsl(195 100% 50% / 0.6), 0 0 60px hsl(195 100% 50% / 0.35)',
-                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
-                  ]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+              <div
                 className="rounded-md"
+                style={{
+                  boxShadow: '0 0 15px hsl(195 100% 50% / 0.25), 0 0 30px hsl(195 100% 50% / 0.1)',
+                }}
               >
                 <Button 
                   size="sm" 
@@ -99,7 +90,7 @@ const Navbar = () => {
                 >
                   {t.nav.letsTalk}
                 </Button>
-              </motion.div>
+              </div>
             ) : (
               // LTR: Toggles on LEFT
               <>
@@ -133,7 +124,7 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-xs lg:text-sm font-bold text-muted-foreground hover:text-primary transition-colors duration-200 uppercase tracking-[0.15em] lg:tracking-[0.2em]"
+                className="text-xs lg:text-sm font-bold text-muted-foreground hover:text-primary transition-colors duration-200 tracking-[0.15em] lg:tracking-[0.2em]"
               >
                 {link.label}
               </a>
@@ -168,20 +159,11 @@ const Navbar = () => {
               </>
             ) : (
               // LTR: CTA on RIGHT
-              <motion.div
-                animate={{
-                  boxShadow: [
-                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
-                    '0 0 30px hsl(195 100% 50% / 0.6), 0 0 60px hsl(195 100% 50% / 0.35)',
-                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
-                  ]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
+              <div
                 className="rounded-md"
+                style={{
+                  boxShadow: '0 0 15px hsl(195 100% 50% / 0.25), 0 0 30px hsl(195 100% 50% / 0.1)',
+                }}
               >
                 <Button 
                   size="sm" 
@@ -192,7 +174,7 @@ const Navbar = () => {
                 >
                   {t.nav.letsTalk}
                 </Button>
-              </motion.div>
+              </div>
             )}
           </div>
 
@@ -243,7 +225,7 @@ const Navbar = () => {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors py-2 uppercase tracking-[0.15em]"
+                    className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors py-2 tracking-[0.15em]"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
@@ -253,7 +235,7 @@ const Navbar = () => {
                   size="sm" 
                   className="w-full mt-2 font-bold uppercase tracking-wider bg-primary text-primary-foreground py-5"
                   style={{
-                    boxShadow: '0 0 25px hsl(195 100% 50% / 0.5)',
+                    boxShadow: '0 0 15px hsl(195 100% 50% / 0.25), 0 0 30px hsl(195 100% 50% / 0.1)',
                   }}
                   onClick={() => {
                     setIsMobileMenuOpen(false);
