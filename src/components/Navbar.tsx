@@ -176,34 +176,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* CTA Button (Desktop only) */}
-          <div className="hidden md:block">
-            <motion.div
-              animate={{
-                boxShadow: [
-                  '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
-                  '0 0 30px hsl(195 100% 50% / 0.6), 0 0 60px hsl(195 100% 50% / 0.35)',
-                  '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
-                ]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="rounded-md"
-            >
-              <Button 
-                size="sm" 
-                className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-4 lg:px-6 text-xs lg:text-sm"
-                onClick={() => {
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                {t.nav.letsTalk}
-              </Button>
-            </motion.div>
-          </div>
 
           {/* Mobile: Toggles + Menu */}
           <div className="md:hidden flex items-center gap-2">
