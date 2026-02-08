@@ -278,11 +278,9 @@
     text-transform: uppercase;
   }
 
-  /* Subtle text glow - warm, not neon */
+  /* Text glow removed */
   .text-glow-warm {
-    text-shadow: 
-      0 0 40px hsl(var(--primary) / 0.3),
-      0 0 80px hsl(var(--primary) / 0.15);
+    text-shadow: none;
   }
 
   /* Text gradient - warm cinematic */
@@ -365,10 +363,9 @@
     @apply opacity-100;
   }
 
-  /* Minimal glow for accents */
+  /* Text glow removed */
   .text-glow {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.4), 
-                 0 0 40px hsl(var(--primary) / 0.2);
+    text-shadow: none;
   }
 
   /* Pulsing glow animation - subtle warm */

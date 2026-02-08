@@ -34,7 +34,7 @@ const VocalEnhance = () => {
             className={`text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight ${isRTL ? 'font-arabic' : ''}`}
           >
             <span className="whitespace-nowrap">{isRTL ? "تحسين" : "VOCAL"}</span>{" "}
-            <span className="text-primary text-glow whitespace-nowrap">
+            <span className="text-primary whitespace-nowrap">
               {isRTL ? "الأصوات" : "ENHANCE"}
             </span>
           </h2>

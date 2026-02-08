@@ -21,7 +21,7 @@ const Services = () => {
             <div className="h-px w-8 md:w-12 bg-primary" />
           </div>
           <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
-            {t.services.title} <span className="text-primary text-glow">{t.services.titleHighlight}</span>
+            {t.services.title} <span className="text-primary">{t.services.titleHighlight}</span>
           </h2>
           <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
             {t.services.description}
