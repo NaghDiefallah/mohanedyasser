@@ -108,7 +108,7 @@ const translations: Record<Language, Translations> = {
       letsTalk: "Let's Talk",
       projects: '+50 Projects',
       experience: '1 yr Experience',
-      response: '24h Response',
+      response: '6h Response',
     },
     settings: {
       theme: 'Theme',
@@ -133,7 +133,7 @@ const translations: Record<Language, Translations> = {
       stats: [
         { label: 'Projects Completed', value: '+50' },
         { label: 'Years of Experience', value: '1+' },
-        { label: 'Response Time', value: '24h' },
+        { label: 'Response Time', value: '6h' },
       ],
       skills: ['Video Editing', 'Motion Graphics', 'Color Grading', 'Sound Design', 'VFX', 'Animation'],
     },
@@ -226,7 +226,7 @@ const translations: Record<Language, Translations> = {
       letsTalk: 'تواصل معي',
       projects: '+50 مشروع',
       experience: '1 سنة خبرة',
-      response: 'رد خلال 24 ساعة',
+      response: 'رد خلال 6 ساعات',
     },
     settings: {
       theme: 'المظهر',
@@ -251,7 +251,7 @@ const translations: Record<Language, Translations> = {
       stats: [
         { label: 'مشروع مكتمل', value: '+50' },
         { label: 'سنوات الخبرة', value: '+1' },
-        { label: 'وقت الاستجابة', value: '24 ساعة' },
+        { label: 'وقت الاستجابة', value: '6 ساعات' },
       ],
       skills: ['مونتاج الفيديو', 'موشن جرافيك', 'تلوين الفيديوهات', 'تصميم الصوت', 'مؤثرات بصرية', 'أنيميشن'],
     },

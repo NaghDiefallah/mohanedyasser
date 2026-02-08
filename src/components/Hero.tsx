@@ -113,7 +113,7 @@ const Hero = () => {
               </div>
               <div className="w-px h-10 bg-border/50 hidden sm:block" />
               <div className="hidden sm:block">
-                <span className="block text-3xl font-light text-foreground tracking-tight">24h</span>
+                <span className="block text-3xl font-light text-foreground tracking-tight">6h</span>
                 <span className="text-muted-foreground text-sm tracking-wide">Response Time</span>
               </div>
             </motion.div>
