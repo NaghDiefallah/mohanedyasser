@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Film, Sparkles, Palette, Mic } from "lucide-react";
+import { Film, Sparkles, Palette, Mic, Music } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -19,6 +19,7 @@ const WorkDropdown = ({ label, className }: WorkDropdownProps) => {
     { label: "Motion Graphics", labelAr: "موشن جرافيك", href: "#motion", icon: Sparkles },
     { label: "Color Grading", labelAr: "تلوين الفيديو", href: "#color-grading", icon: Palette },
     { label: "Vocal Enhance", labelAr: "تحسين الصوت", href: "#vocal-enhance", icon: Mic },
+    { label: "Mixing & Sound Design", labelAr: "مكساج وتصميم صوتي", href: "#mixing", icon: Music },
   ];
 
   const dropdownBg = theme === 'light'
