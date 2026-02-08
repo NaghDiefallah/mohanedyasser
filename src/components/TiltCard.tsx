@@ -70,26 +70,7 @@ const TiltCard = ({
         transition: { type: "spring", stiffness: 300, damping: 20 }
       }}
     >
-      {/* Inner glow effect */}
-      <motion.div
-        className="absolute inset-0 rounded-lg pointer-events-none z-10"
-        animate={{
-          opacity: isHovered ? 1 : 0,
-          boxShadow: isHovered 
-            ? `inset 0 0 40px ${glowColor} / 0.15, 0 0 30px ${glowColor} / 0.25` 
-            : "none"
-        }}
-        transition={{ duration: 0.3 }}
-      />
-      
-      {/* Highlight gradient that follows mouse */}
-      <motion.div
-        className="absolute inset-0 rounded-lg pointer-events-none z-10 opacity-0 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(circle at ${(x.get() + 0.5) * 100}% ${(y.get() + 0.5) * 100}%, ${glowColor} / 0.1 0%, transparent 50%)`,
-          opacity: isHovered ? 1 : 0,
-        }}
-      />
+      {/* Tilt card inner overlays removed — glow stripped */}
       
       {children}
     </motion.div>
