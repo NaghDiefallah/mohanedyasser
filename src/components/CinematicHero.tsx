@@ -79,11 +79,9 @@ const CinematicHero = () => {
           >
             <motion.img
               alt="Mohaned Yasser Logo"
-              className="w-36 h-36 sm:w-44 sm:h-44 object-contain cursor-pointer"
-              style={{
-                filter: theme === 'dark'
-                  ? 'drop-shadow(0 0 40px hsl(195 100% 50% / 0.4)) drop-shadow(0 0 80px hsl(195 100% 50% / 0.25))'
-                  : 'none'
+            className="w-36 h-36 sm:w-44 sm:h-44 object-contain cursor-pointer"
+            style={{
+              filter: 'none'
               }}
               src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png"
               whileHover={{ scale: 1.05 }}
@@ -103,9 +101,7 @@ const CinematicHero = () => {
               style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
             >
               <span className="block text-foreground">{t.hero.title1}</span>
-              <span className="block whitespace-nowrap text-primary" style={{
-                textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3)' : 'none'
-              }}>
+              <span className="block whitespace-nowrap text-primary">
                 {t.hero.title2}
               </span>
             </h1>
@@ -147,7 +143,6 @@ const CinematicHero = () => {
               className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base w-full sm:w-auto ${isRTL ? 'font-arabic' : ''}`}
               style={{
                 backgroundColor: '#00a8e8',
-                boxShadow: '0 0 30px hsl(195 100% 50% / 0.5), 0 0 60px hsl(195 100% 50% / 0.25)'
               }}
               onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
             >
@@ -161,7 +156,6 @@ const CinematicHero = () => {
               className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base hover:bg-primary/5 w-full sm:w-auto ${isRTL ? 'font-arabic' : ''}`}
               style={{
                 borderColor: 'hsl(195 100% 50% / 0.4)',
-                boxShadow: theme === 'dark' ? '0 0 25px hsl(195 100% 50% / 0.15)' : 'none'
               }}
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
@@ -188,9 +182,7 @@ const CinematicHero = () => {
                   style={{ fontFamily: "'Cairo', sans-serif" }}
                 >
                   <span className="block text-foreground">{t.hero.title1}</span>
-                  <span className="block whitespace-nowrap text-primary" style={{
-                    textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3)' : 'none'
-                  }}>
+                  <span className="block whitespace-nowrap text-primary">
                     {t.hero.title2}
                   </span>
                 </h1>
@@ -220,7 +212,6 @@ const CinematicHero = () => {
                     className="group gap-3 px-8 py-7 font-bold font-arabic uppercase tracking-wider text-base"
                     style={{
                       backgroundColor: '#00a8e8',
-                      boxShadow: '0 0 30px hsl(195 100% 50% / 0.5), 0 0 60px hsl(195 100% 50% / 0.25)'
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
                   >
@@ -234,7 +225,6 @@ const CinematicHero = () => {
                     className="group gap-3 px-8 py-7 font-bold font-arabic uppercase tracking-wider text-base hover:bg-primary/5"
                     style={{
                       borderColor: 'hsl(195 100% 50% / 0.4)',
-                      boxShadow: theme === 'dark' ? '0 0 25px hsl(195 100% 50% / 0.15)' : 'none'
                     }}
                     onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
@@ -256,17 +246,10 @@ const CinematicHero = () => {
                   <motion.img
                     alt="Mohaned Yasser Logo"
                     className="w-56 h-56 xl:w-72 xl:h-72 object-contain cursor-pointer"
-                    style={{
-                      filter: theme === 'dark'
-                        ? 'drop-shadow(0 0 40px hsl(195 100% 50% / 0.4)) drop-shadow(0 0 80px hsl(195 100% 50% / 0.25))'
-                        : 'none'
-                    }}
+                    style={{ filter: 'none' }}
                     src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png"
                     whileHover={{
                       scale: 1.05,
-                      filter: theme === 'dark'
-                        ? 'drop-shadow(0 0 60px hsl(195 100% 50% / 0.7)) drop-shadow(0 0 100px hsl(195 100% 50% / 0.5))'
-                        : 'drop-shadow(0 0 30px hsl(195 100% 50% / 0.4))'
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   />
@@ -311,17 +294,10 @@ const CinematicHero = () => {
                   <motion.img
                     alt="Mohaned Yasser Logo"
                     className="w-56 h-56 xl:w-72 xl:h-72 object-contain cursor-pointer"
-                    style={{
-                      filter: theme === 'dark'
-                        ? 'drop-shadow(0 0 40px hsl(195 100% 50% / 0.4)) drop-shadow(0 0 80px hsl(195 100% 50% / 0.25))'
-                        : 'none'
-                    }}
+                    style={{ filter: 'none' }}
                     src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png"
                     whileHover={{
                       scale: 1.05,
-                      filter: theme === 'dark'
-                        ? 'drop-shadow(0 0 60px hsl(195 100% 50% / 0.7)) drop-shadow(0 0 100px hsl(195 100% 50% / 0.5))'
-                        : 'drop-shadow(0 0 30px hsl(195 100% 50% / 0.4))'
                     }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   />
@@ -347,9 +323,7 @@ const CinematicHero = () => {
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
                   <span className="block text-foreground">{t.hero.title1}</span>
-                  <span className="block whitespace-nowrap text-primary" style={{
-                    textShadow: theme === 'dark' ? '0 0 60px hsl(195 100% 50% / 0.6), 0 0 120px hsl(195 100% 50% / 0.3)' : 'none'
-                  }}>
+                  <span className="block whitespace-nowrap text-primary">
                     {t.hero.title2}
                   </span>
                 </h1>
@@ -379,7 +353,6 @@ const CinematicHero = () => {
                     className="group gap-3 px-8 py-7 font-bold uppercase tracking-wider text-base"
                     style={{
                       backgroundColor: '#00a8e8',
-                      boxShadow: '0 0 30px hsl(195 100% 50% / 0.5), 0 0 60px hsl(195 100% 50% / 0.25)'
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
                   >
@@ -393,7 +366,6 @@ const CinematicHero = () => {
                     className="group gap-3 px-8 py-7 font-bold uppercase tracking-wider text-base hover:bg-primary/5"
                     style={{
                       borderColor: 'hsl(195 100% 50% / 0.4)',
-                      boxShadow: theme === 'dark' ? '0 0 25px hsl(195 100% 50% / 0.15)' : 'none'
                     }}
                     onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >

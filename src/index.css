@@ -266,7 +266,6 @@
   .glass-hover:hover {
     background: hsl(0 0% 10% / 0.95);
     border-color: hsl(var(--primary) / 0.3);
-    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.2);
   }
 
   /* ===== TYPOGRAPHY EFFECTS ===== */
@@ -318,7 +317,6 @@
   .btn-cinematic:hover {
     background: hsl(0 0% 15%);
     border-color: hsl(var(--primary) / 0.5);
-    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.25);
   }
 
   .btn-primary-cinematic {
@@ -330,7 +328,6 @@
 
   .btn-primary-cinematic:hover {
     background: hsl(35 90% 60%);
-    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.4);
   }
 
   /* ===== DIVIDER STYLES ===== */
@@ -354,13 +351,11 @@
   }
 
   .glow-border::before {
-    content: '';
-    @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.15), transparent 50%);
+    display: none;
   }
 
   .glow-border:hover::before {
-    @apply opacity-100;
+    display: none;
   }
 
   /* Text glow removed */
@@ -368,18 +363,9 @@
     text-shadow: none;
   }
 
-  /* Pulsing glow animation - subtle warm */
-  @keyframes pulse-glow-warm {
-    0%, 100% {
-      opacity: 0.4;
-    }
-    50% {
-      opacity: 0.6;
-    }
-  }
-
+  /* Pulsing glow removed */
   .pulse-glow {
-    animation: pulse-glow-warm 4s ease-in-out infinite;
+    animation: none;
   }
 
   /* Background noise - very subtle */
@@ -395,7 +381,6 @@
 
   .card-hover-scale:hover {
     @apply scale-[1.02];
-    box-shadow: 0 0 30px -10px hsl(var(--primary) / 0.2);
   }
 
   /* Headline hover outline - warm */
