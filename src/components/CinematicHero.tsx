@@ -9,6 +9,7 @@ import adobeAe from '@/assets/adobe-after-effects.svg';
 import adobePr from '@/assets/adobe-premiere-pro.svg';
 import adobePs from '@/assets/adobe-photoshop.svg';
 import adobeAu from '@/assets/adobe-audition.svg';
+import davinciResolve from '@/assets/davinci-resolve.svg';
 
 const CinematicHero = () => {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -125,8 +126,9 @@ const CinematicHero = () => {
             {[
               { src: adobeAe, name: 'After Effects' },
               { src: adobePr, name: 'Premiere Pro' },
-              { src: adobePs, name: 'Photoshop' },
               { src: adobeAu, name: 'Audition' },
+              { src: davinciResolve, name: 'DaVinci Resolve' },
+              { src: adobePs, name: 'Photoshop' },
             ].map((software) => (
               <Tooltip key={software.name}>
                 <TooltipTrigger asChild>
@@ -182,11 +184,12 @@ const CinematicHero = () => {
           </div>
         </div>
 
-        {/* Desktop Layout: Two columns with proper RTL support */}
-        <div className={`hidden lg:grid grid-cols-12 gap-8 xl:gap-16 items-center relative ${isRTL ? 'direction-rtl' : ''}`}>
-          {/* Vertical Divider Line */}
+        {/* Desktop Layout: Symmetric columns with centered divider */}
+        <div className={`hidden lg:grid grid-cols-12 gap-6 xl:gap-8 items-center relative ${isRTL ? 'direction-rtl' : ''}`}>
+          {/* Vertical Divider Line - always at true visual center */}
           <div 
-            className="absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent left-1/2 -translate-x-1/2"
+            className="absolute top-[10%] w-px h-[80%] bg-gradient-to-b from-primary/50 via-primary/30 to-transparent"
+            style={{ left: '50%', transform: 'translateX(-0.5px)' }}
           />
 
           {/* In RTL: Logo on RIGHT (col 7-12), Content on LEFT (col 1-6) */}
@@ -194,9 +197,9 @@ const CinematicHero = () => {
           
           {isRTL ? (
             <>
-              {/* RTL: Main Content - LEFT side */}
+              {/* RTL: Main Content - LEFT side (visually RIGHT in RTL) */}
               <motion.div 
-                className="col-span-6 col-start-1 flex flex-col items-center text-center"
+                className="col-span-5 col-start-1 flex flex-col items-center text-center"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -223,13 +226,14 @@ const CinematicHero = () => {
                   </h1>
                 </div>
 
-                {/* Software Icons - Centered */}
-                <div className="flex items-center justify-center gap-4 mb-10">
+                {/* Software Icons - Centered, Ps always last */}
+                <div className="flex items-center justify-center gap-3 mb-10">
                   {[
                     { src: adobeAe, name: 'After Effects' },
                     { src: adobePr, name: 'Premiere Pro' },
-                    { src: adobePs, name: 'Photoshop' },
                     { src: adobeAu, name: 'Audition' },
+                    { src: davinciResolve, name: 'DaVinci Resolve' },
+                    { src: adobePs, name: 'Photoshop' },
                   ].map((software) => (
                     <Tooltip key={software.name}>
                       <TooltipTrigger asChild>
@@ -279,7 +283,7 @@ const CinematicHero = () => {
                 </div>
               </motion.div>
 
-              {/* RTL: Logo & Stats - RIGHT side */}
+              {/* RTL: Logo & Stats - RIGHT side (visually LEFT in RTL) */}
               <motion.div 
                 className="col-span-5 col-start-8 flex flex-col items-center gap-8"
                 initial={{ opacity: 0, x: 30 }}
@@ -367,7 +371,7 @@ const CinematicHero = () => {
 
               {/* LTR: Main Content - RIGHT side */}
               <motion.div 
-                className="col-span-7 col-start-6 text-left"
+                className="col-span-5 col-start-8 text-left"
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -394,12 +398,13 @@ const CinematicHero = () => {
                   </h1>
                 </div>
 
-                <div className="flex items-center gap-4 mb-10">
+                <div className="flex items-center gap-3 mb-10">
                   {[
                     { src: adobeAe, name: 'After Effects' },
                     { src: adobePr, name: 'Premiere Pro' },
-                    { src: adobePs, name: 'Photoshop' },
                     { src: adobeAu, name: 'Audition' },
+                    { src: davinciResolve, name: 'DaVinci Resolve' },
+                    { src: adobePs, name: 'Photoshop' },
                   ].map((software) => (
                     <Tooltip key={software.name}>
                       <TooltipTrigger asChild>

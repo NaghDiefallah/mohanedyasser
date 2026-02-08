@@ -172,36 +172,33 @@ const ColorGradingSlider = () => {
               </motion.div>
             </div>
 
-            {/* Before Label */}
-            <motion.div
-              className={`absolute top-3 md:top-4 ${isRTL ? 'right-3 md:right-4' : 'left-3 md:left-4'} px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider`}
-              style={{
-                background: 'hsl(0 0% 0% / 0.6)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid hsl(0 0% 100% / 0.1)',
-              }}
-              initial={{ opacity: 0, x: isRTL ? 20 : -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-            >
-              <span className="text-white/80">{t.colorGrading?.before || "BEFORE"}</span>
-            </motion.div>
-
-            {/* After Label */}
+            {/* Dynamic Label - stays in top-right, text changes based on slider position */}
             <motion.div
               className={`absolute top-3 md:top-4 ${isRTL ? 'left-3 md:left-4' : 'right-3 md:right-4'} px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider`}
               style={{
-                background: 'hsl(195 100% 50% / 0.2)',
+                background: sliderPosition > 50
+                  ? 'hsl(195 100% 50% / 0.2)'
+                  : 'hsl(0 0% 0% / 0.6)',
                 backdropFilter: 'blur(10px)',
-                border: '1px solid hsl(195 100% 50% / 0.3)',
+                border: sliderPosition > 50
+                  ? '1px solid hsl(195 100% 50% / 0.3)'
+                  : '1px solid hsl(0 0% 100% / 0.1)',
+                transition: 'background 0.3s ease, border 0.3s ease',
               }}
               initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              <span className="text-primary">{t.colorGrading?.after || "AFTER"}</span>
+              <span 
+                className={sliderPosition > 50 ? 'text-primary' : 'text-white/80'}
+                style={{ transition: 'color 0.3s ease' }}
+              >
+                {sliderPosition > 50 
+                  ? (t.colorGrading?.after || "AFTER")
+                  : (t.colorGrading?.before || "BEFORE")
+                }
+              </span>
             </motion.div>
           </div>
         </ViewportReveal>

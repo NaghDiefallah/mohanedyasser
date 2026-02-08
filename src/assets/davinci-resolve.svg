@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 240 234" xmlns="http://www.w3.org/2000/svg">
+<title>DaVinci Resolve</title>
+<rect width="240" height="234" rx="42.5" fill="#1a1a2e"/>
+<g transform="translate(120,117)">
+  <circle cx="0" cy="0" r="70" fill="none" stroke="#E8712B" stroke-width="8"/>
+  <path d="M-35,-60.6 L0,70 L35,-60.6 Z" fill="none" stroke="#E8712B" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="0" cy="0" r="18" fill="#E8712B"/>
+</g>
+</svg>
