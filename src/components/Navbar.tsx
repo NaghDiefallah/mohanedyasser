@@ -71,15 +71,35 @@ const Navbar = () => {
         }}
       >
         <div className="flex items-center justify-between">
-          {/* LEFT side: In LTR = Toggles, In RTL = Logo/Brand */}
-          <div className="flex items-center gap-1 sm:gap-2">
+          {/* LEFT side: In LTR = Toggles, In RTL = CTA */}
+          <div className="hidden md:flex items-center gap-1 sm:gap-2">
             {isRTL ? (
-              // RTL: Logo on LEFT
-              <img 
-                src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png" 
-                alt="Logo" 
-                className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
-              />
+              // RTL: CTA on LEFT (appears on right visually)
+              <motion.div
+                animate={{
+                  boxShadow: [
+                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
+                    '0 0 30px hsl(195 100% 50% / 0.6), 0 0 60px hsl(195 100% 50% / 0.35)',
+                    '0 0 20px hsl(195 100% 50% / 0.4), 0 0 40px hsl(195 100% 50% / 0.2)',
+                  ]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="rounded-md"
+              >
+                <Button 
+                  size="sm" 
+                  className="font-bold font-arabic tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-4 lg:px-6 text-xs lg:text-sm"
+                  onClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  {t.nav.letsTalk}
+                </Button>
+              </motion.div>
             ) : (
               // LTR: Toggles on LEFT
               <>
