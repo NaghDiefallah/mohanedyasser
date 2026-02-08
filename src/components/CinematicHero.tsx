@@ -9,7 +9,7 @@ import adobeAe from '@/assets/adobe-after-effects.svg';
 import adobePr from '@/assets/adobe-premiere-pro.svg';
 import adobePs from '@/assets/adobe-photoshop.svg';
 import adobeAu from '@/assets/adobe-audition.svg';
-import davinciResolve from '@/assets/davinci-resolve.svg';
+import davinciResolve from '@/assets/davinci-resolve.png';
 
 const softwareList = [
   { src: adobeAe, name: 'After Effects' },
