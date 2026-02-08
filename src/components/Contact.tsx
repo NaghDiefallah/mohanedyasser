@@ -76,7 +76,7 @@ const Contact = () => {
       
       {/* Main footer content */}
       <motion.div
-        className="py-10 md:py-16 px-4 sm:px-6"
+        className="py-10 md:py-16 px-6 sm:px-8"
         style={{ background: bgStyle }}
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -88,7 +88,7 @@ const Contact = () => {
             
             {/* Left side - Contact section */}
             <motion.div 
-              className={`flex flex-col items-center md:items-start gap-6 ${isRTL ? 'md:items-end md:pe-4' : ''}`}
+              className={`flex flex-col items-center md:items-start gap-6 ${isRTL ? 'md:items-end' : ''}`}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: false }}
