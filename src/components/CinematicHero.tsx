@@ -282,7 +282,7 @@ const CinematicHero = () => {
           </div>
 
           {/* RIGHT COLUMN: Content (in LTR) / Logo + Stats (in RTL) */}
-          <div className={`flex flex-col gap-6 px-8 ${isRTL ? 'order-1 items-center text-center' : 'order-3 items-start'}`}>
+          <div className={`flex flex-col gap-6 px-8 ${isRTL ? 'order-1 items-end text-right' : 'order-3 items-start'}`}>
             {isRTL ? (
               /* RTL: Left side shows Logo + Stats */
               <>
