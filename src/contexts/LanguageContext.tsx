@@ -67,6 +67,18 @@ interface Translations {
     before: string;
     after: string;
   };
+  projectDetail: {
+    notFound: string;
+    backToWork: string;
+    reel: string;
+    motionGraphics: string;
+    toolsUsed: string;
+    behindTheScenes: string;
+    behindTheScenesHighlight: string;
+    credits: string;
+    relatedWork: string;
+    relatedWorkHighlight: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -162,6 +174,18 @@ const translations: Record<Language, Translations> = {
       before: 'BEFORE',
       after: 'AFTER',
     },
+    projectDetail: {
+      notFound: 'Project Not Found',
+      backToWork: 'Back to Work',
+      reel: 'Reel',
+      motionGraphics: 'Motion Graphics',
+      toolsUsed: 'Tools Used',
+      behindTheScenes: 'Behind The',
+      behindTheScenesHighlight: 'Scenes',
+      credits: 'Credits',
+      relatedWork: 'Related',
+      relatedWorkHighlight: 'Work',
+    },
   },
   ar: {
     nav: {
@@ -254,6 +278,18 @@ const translations: Record<Language, Translations> = {
       description: 'اسحب الشريط لرؤية الفرق بين قبل وبعد.',
       before: 'قبل',
       after: 'بعد',
+    },
+    projectDetail: {
+      notFound: 'المشروع غير موجود',
+      backToWork: 'العودة للأعمال',
+      reel: 'ريلز',
+      motionGraphics: 'موشن جرافيك',
+      toolsUsed: 'الأدوات المستخدمة',
+      behindTheScenes: 'خلف',
+      behindTheScenesHighlight: 'الكواليس',
+      credits: 'فريق العمل',
+      relatedWork: 'أعمال',
+      relatedWorkHighlight: 'مشابهة',
     },
   },
 };

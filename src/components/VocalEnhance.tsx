@@ -21,7 +21,7 @@ const VocalEnhance = () => {
   return (
     <section className="py-10 md:py-16 px-4 sm:px-6 relative overflow-hidden">
       <div className="container mx-auto max-w-5xl relative z-10">
-        {/* Section Header - matching Color Grading style */}
+        {/* Section Header */}
         <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">
           <motion.div
             initial={{ scaleX: 0 }}
@@ -47,12 +47,12 @@ const VocalEnhance = () => {
             <span className="whitespace-nowrap">{isRTL ? "تحسين" : "VOCAL"}</span>{" "}
             <motion.span
               className="text-primary whitespace-nowrap"
-              initial={{ textShadow: "0 0 0px hsl(195 100% 50% / 0)" }}
+              initial={{ textShadow: "0 0 0px hsl(var(--primary) / 0)" }}
               whileInView={{
                 textShadow: [
-                  "0 0 0px hsl(195 100% 50% / 0)",
-                  "0 0 40px hsl(195 100% 50% / 0.6)",
-                  "0 0 20px hsl(195 100% 50% / 0.4)",
+                  "0 0 0px hsl(var(--primary) / 0)",
+                  "0 0 40px hsl(var(--primary) / 0.6)",
+                  "0 0 20px hsl(var(--primary) / 0.4)",
                 ],
               }}
               viewport={{ once: true }}
@@ -77,32 +77,25 @@ const VocalEnhance = () => {
               return (
                 <motion.div
                   key={feature.title}
-                  className="relative group rounded-xl p-6 md:p-8 text-center"
+                  className="relative group rounded-xl p-6 md:p-8 text-center bg-card border border-border"
                   style={{
-                    background: "hsl(0 0% 0% / 0.3)",
                     backdropFilter: "blur(20px)",
-                    border: "1px solid hsl(195 100% 50% / 0.1)",
-                    boxShadow: "0 0 20px hsl(0 0% 0% / 0.3)",
                   }}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
                   whileHover={{
-                    borderColor: "hsl(195 100% 50% / 0.4)",
+                    borderColor: "hsl(var(--primary) / 0.4)",
                     boxShadow:
-                      "0 0 30px hsl(195 100% 50% / 0.15), 0 4px 20px -5px hsl(0 0% 0% / 0.5)",
+                      "0 0 30px hsl(var(--primary) / 0.15), 0 4px 20px -5px hsl(0 0% 0% / 0.3)",
                   }}
                 >
                   {/* Icon */}
                   <motion.div
-                    className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center"
-                    style={{
-                      background: "hsl(195 100% 50% / 0.1)",
-                      border: "1px solid hsl(195 100% 50% / 0.2)",
-                    }}
+                    className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center bg-primary/10 border border-primary/20"
                     whileHover={{
-                      boxShadow: "0 0 20px hsl(195 100% 50% / 0.4)",
+                      boxShadow: "0 0 20px hsl(var(--primary) / 0.4)",
                     }}
                   >
                     <Icon className="w-6 h-6 text-primary" />
@@ -131,13 +124,11 @@ const VocalEnhance = () => {
         <ViewportReveal delay={0.4}>
           <div className="mt-8 md:mt-12 max-w-3xl mx-auto">
             <div
-              className="relative rounded-xl overflow-hidden p-6 md:p-8"
+              className="relative rounded-xl overflow-hidden p-6 md:p-8 bg-card border border-border"
               style={{
-                background: "hsl(0 0% 0% / 0.4)",
                 backdropFilter: "blur(20px)",
-                border: "1px solid hsl(195 100% 50% / 0.15)",
                 boxShadow:
-                  "0 0 40px hsl(195 100% 50% / 0.1), 0 4px 30px -10px hsl(0 0% 0% / 0.5)",
+                  "0 0 40px hsl(var(--primary) / 0.1), 0 4px 30px -10px hsl(0 0% 0% / 0.3)",
               }}
             >
               {/* Waveform visualization */}
@@ -152,10 +143,10 @@ const VocalEnhance = () => {
                       style={{
                         width: "clamp(2px, 0.8vw, 4px)",
                         background: isCenter
-                          ? "hsl(195 100% 50%)"
-                          : "hsl(195 100% 50% / 0.3)",
+                          ? "hsl(var(--primary))"
+                          : "hsl(var(--primary) / 0.3)",
                         boxShadow: isCenter
-                          ? "0 0 8px hsl(195 100% 50% / 0.5)"
+                          ? "0 0 8px hsl(var(--primary) / 0.5)"
                           : "none",
                       }}
                       initial={{ height: "4px" }}
@@ -181,7 +172,7 @@ const VocalEnhance = () => {
                 <span
                   className="text-primary text-[10px] md:text-xs uppercase tracking-wider font-bold"
                   style={{
-                    textShadow: "0 0 10px hsl(195 100% 50% / 0.4)",
+                    textShadow: "0 0 10px hsl(var(--primary) / 0.4)",
                   }}
                 >
                   {isRTL ? "صوت محسّن" : "Enhanced"}

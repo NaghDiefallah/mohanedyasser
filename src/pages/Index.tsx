@@ -17,7 +17,7 @@ const Index = () => {
     : 'linear-gradient(180deg, #030508 0%, #0a1015 50%, #050810 100%)';
 
   return (
-    <div className="min-h-screen relative" style={{ background: bgStyle }}>
+    <div className="min-h-screen relative overflow-x-hidden w-full" style={{ background: bgStyle }}>
       {/* Three.js cinematic background - only show in dark mode */}
       {theme === 'dark' && <CinematicScene />}
       

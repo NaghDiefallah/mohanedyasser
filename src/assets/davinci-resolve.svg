@@ -3,8 +3,19 @@
 <title>DaVinci Resolve</title>
 <rect width="240" height="234" rx="42.5" fill="#1a1a2e"/>
 <g transform="translate(120,117)">
-  <circle cx="0" cy="0" r="70" fill="none" stroke="#E8712B" stroke-width="8"/>
-  <path d="M-35,-60.6 L0,70 L35,-60.6 Z" fill="none" stroke="#E8712B" stroke-width="7" stroke-linejoin="round"/>
-  <circle cx="0" cy="0" r="18" fill="#E8712B"/>
+  <!-- Outer ring -->
+  <circle cx="0" cy="0" r="70" fill="none" stroke="#E8712B" stroke-width="6"/>
+  <!-- Tri-blade fan (3 curved blades rotating clockwise) -->
+  <g fill="#E8712B">
+    <!-- Blade 1 - Top -->
+    <path d="M-4,0 C-4,-15 -12,-40 -5,-60 C-2,-68 2,-68 5,-60 C12,-40 4,-15 4,0 Z"/>
+    <!-- Blade 2 - Bottom Right -->
+    <path d="M0,4 C13,7 35,20 52,30 C59,34 57,38 50,38 C32,38 12,20 0,-4 Z" transform="rotate(0)"/>
+    <path d="M2,0 C13,8 36,18 52,30 C58,34 58,38 50,38 C33,37 14,22 2,4 Z"/>
+    <!-- Blade 3 - Bottom Left -->
+    <path d="M-2,0 C-13,8 -36,18 -52,30 C-58,34 -58,38 -50,38 C-33,37 -14,22 -2,4 Z"/>
+  </g>
+  <!-- Center dot -->
+  <circle cx="0" cy="0" r="8" fill="#E8712B"/>
 </g>
 </svg>
