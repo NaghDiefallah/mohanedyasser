@@ -3,6 +3,7 @@ import StackedReelsPreview from "@/components/StackedReelsPreview";
 import StackedMotionPreview from "@/components/StackedMotionPreview";
 import Services from "@/components/Services";
 import Contact from "@/components/Contact";
+import About from "@/components/About";
 import StickyFooter from "@/components/StickyFooter";
 import CinematicScene from "@/components/three/CinematicScene";
 import Navbar from "@/components/Navbar";
@@ -56,6 +57,9 @@ const Index = () => {
         </section>
         <section id="services">
           <Services />
+        </section>
+        <section id="about">
+          <About />
         </section>
         <section id="contact">
           <Contact />
