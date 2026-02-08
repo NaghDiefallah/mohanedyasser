@@ -146,6 +146,12 @@ const translations: Record<Language, Translations> = {
           price: 'Starting at $750',
           features: ['Logo animations', 'Kinetic typography', '2D/3D elements', 'Social media assets'],
         },
+        {
+          title: 'Vocal Enhance',
+          description: 'Professional audio cleanup and enhancement for crystal clear, broadcast-ready sound.',
+          price: 'Starting at $200',
+          features: ['Noise removal', 'EQ balancing', 'Dynamic range', 'Voice clarity'],
+        },
       ],
     },
     colorGrading: {
@@ -232,6 +238,12 @@ const translations: Record<Language, Translations> = {
           description: 'رسوم متحركة جذابة وعناوين ومؤثرات بصرية تحيي علامتك التجارية.',
           price: 'يبدأ من 750$',
           features: ['تحريك الشعارات', 'الطباعة الحركية', 'عناصر 2D/3D', 'محتوى السوشيال ميديا'],
+        },
+        {
+          title: 'تحسين الأصوات',
+          description: 'تنظيف ومعالجة صوتية احترافية لصوت نقي وجاهز للبث.',
+          price: 'يبدأ من 200$',
+          features: ['إزالة الضوضاء', 'توازن الترددات', 'ضغط ديناميكي', 'وضوح الصوت'],
         },
       ],
     },

@@ -98,11 +98,12 @@ const ColorGradingSlider = () => {
           </p>
         </ViewportReveal>
 
-        {/* Before/After Slider - Touch optimized */}
+        {/* Before/After Slider - Touch optimized, RTL-safe */}
         <ViewportReveal delay={0.2}>
           <div
             ref={containerRef}
             className="relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none touch-none"
+            dir="ltr"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onTouchStart={handleTouchStart}
@@ -136,21 +137,19 @@ const ColorGradingSlider = () => {
               />
             </div>
 
-            {/* Slider Handle - Larger touch target */}
+            {/* Slider Handle */}
             <div
               className="absolute top-0 bottom-0 z-10"
               style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
             >
-              {/* Neon Blue Line */}
-              <div 
-                className="w-0.5 md:w-1 h-full"
+              <div
+                className="w-0.5 md:w-1 h-full mx-auto"
                 style={{
                   background: '#00a8e8',
                   boxShadow: '0 0 10px #00a8e8, 0 0 20px #00a8e8, 0 0 30px hsl(195 100% 50% / 0.5)',
                 }}
               />
-              
-              {/* Glowing Circle Handle - Larger on mobile */}
+
               <motion.div
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 md:w-10 md:h-10 rounded-full flex items-center justify-center"
                 style={{
@@ -172,9 +171,9 @@ const ColorGradingSlider = () => {
               </motion.div>
             </div>
 
-            {/* Dynamic Label - stays in top-right, text changes based on slider position */}
+            {/* Dynamic Label - always top-right, text changes based on slider */}
             <motion.div
-              className={`absolute top-3 md:top-4 ${isRTL ? 'left-3 md:left-4' : 'right-3 md:right-4'} px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider`}
+              className="absolute top-3 md:top-4 right-3 md:right-4 px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider"
               style={{
                 background: sliderPosition > 50
                   ? 'hsl(195 100% 50% / 0.2)'
@@ -185,16 +184,16 @@ const ColorGradingSlider = () => {
                   : '1px solid hsl(0 0% 100% / 0.1)',
                 transition: 'background 0.3s ease, border 0.3s ease',
               }}
-              initial={{ opacity: 0, x: isRTL ? -20 : 20 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
             >
-              <span 
+              <span
                 className={sliderPosition > 50 ? 'text-primary' : 'text-white/80'}
                 style={{ transition: 'color 0.3s ease' }}
               >
-                {sliderPosition > 50 
+                {sliderPosition > 50
                   ? (t.colorGrading?.after || "AFTER")
                   : (t.colorGrading?.before || "BEFORE")
                 }
