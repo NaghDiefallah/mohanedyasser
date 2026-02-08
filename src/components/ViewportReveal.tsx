@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface ViewportRevealProps {
@@ -9,38 +8,15 @@ interface ViewportRevealProps {
   y?: number;
 }
 
-// Premium viewport reveal with unblur + scale effect
+// Static wrapper — no scroll animations
 const ViewportReveal = ({ 
   children, 
   className = "", 
-  delay = 0,
-  duration = 0.8,
-  y = 40
 }: ViewportRevealProps) => {
   return (
-    <motion.div
-      className={className}
-      initial={{ 
-        opacity: 0, 
-        y,
-        scale: 0.95,
-        filter: "blur(8px)"
-      }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0,
-        scale: 1,
-        filter: "blur(0px)"
-      }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ 
-        duration: 0.6,
-        delay,
-        ease: "easeOut"
-      }}
-    >
+    <div className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 };
 

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ViewportReveal from "./ViewportReveal";
 import { Mic, Volume2, AudioWaveform } from "lucide-react";
@@ -23,44 +22,22 @@ const VocalEnhance = () => {
       <div className="container mx-auto max-w-5xl relative z-10">
         {/* Section Header */}
         <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center justify-center gap-4"
-          >
+          <div className="flex items-center justify-center gap-4">
             <div className="h-px w-8 md:w-12 bg-primary" />
             <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
               {isRTL ? "معالجة الصوت" : "Audio Processing"}
             </span>
             <div className="h-px w-8 md:w-12 bg-primary" />
-          </motion.div>
+          </div>
 
-          <motion.h2
+          <h2
             className={`text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight ${isRTL ? 'font-arabic' : ''}`}
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, filter: "blur(0px)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="whitespace-nowrap">{isRTL ? "تحسين" : "VOCAL"}</span>{" "}
-            <motion.span
-              className="text-primary whitespace-nowrap"
-              initial={{ textShadow: "0 0 0px hsl(var(--primary) / 0)" }}
-              whileInView={{
-                textShadow: [
-                  "0 0 0px hsl(var(--primary) / 0)",
-                  "0 0 40px hsl(var(--primary) / 0.6)",
-                  "0 0 20px hsl(var(--primary) / 0.4)",
-                ],
-              }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >
+            <span className="text-primary text-glow whitespace-nowrap">
               {isRTL ? "الأصوات" : "ENHANCE"}
-            </motion.span>
-          </motion.h2>
+            </span>
+          </h2>
 
           <p className={`text-muted-foreground max-w-md mx-auto text-sm md:text-base ${isRTL ? 'font-arabic' : ''}`}>
             {isRTL
@@ -70,36 +47,22 @@ const VocalEnhance = () => {
         </ViewportReveal>
 
         {/* Audio Features Grid */}
-        <ViewportReveal delay={0.2}>
+        <ViewportReveal>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto">
-            {features.map((feature, index) => {
+            {features.map((feature) => {
               const Icon = feature.icon;
               return (
-                <motion.div
+                <div
                   key={feature.title}
-                  className="relative group rounded-xl p-6 md:p-8 text-center bg-card border border-border"
+                  className="relative group rounded-xl p-6 md:p-8 text-center bg-card border border-border transition-all duration-300 hover:border-primary/40"
                   style={{
                     backdropFilter: "blur(20px)",
                   }}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.1 * index }}
-                  whileHover={{
-                    borderColor: "hsl(var(--primary) / 0.4)",
-                    boxShadow:
-                      "0 0 30px hsl(var(--primary) / 0.15), 0 4px 20px -5px hsl(0 0% 0% / 0.3)",
-                  }}
                 >
                   {/* Icon */}
-                  <motion.div
-                    className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center bg-primary/10 border border-primary/20"
-                    whileHover={{
-                      boxShadow: "0 0 20px hsl(var(--primary) / 0.4)",
-                    }}
-                  >
+                  <div className="w-14 h-14 mx-auto mb-4 rounded-full flex items-center justify-center bg-primary/10 border border-primary/20 transition-all duration-300 group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
                     <Icon className="w-6 h-6 text-primary" />
-                  </motion.div>
+                  </div>
 
                   {/* Title */}
                   <h3
@@ -114,14 +77,14 @@ const VocalEnhance = () => {
                   >
                     {feature.desc}
                   </p>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </ViewportReveal>
 
         {/* Audio Waveform Visual */}
-        <ViewportReveal delay={0.4}>
+        <ViewportReveal>
           <div className="mt-8 md:mt-12 max-w-3xl mx-auto">
             <div
               className="relative rounded-xl overflow-hidden p-6 md:p-8 bg-card border border-border"
@@ -131,33 +94,24 @@ const VocalEnhance = () => {
                   "0 0 40px hsl(var(--primary) / 0.1), 0 4px 30px -10px hsl(0 0% 0% / 0.3)",
               }}
             >
-              {/* Waveform visualization */}
+              {/* Waveform visualization — static bars */}
               <div className="flex items-center justify-center gap-[2px] md:gap-1 h-20 md:h-28">
                 {Array.from({ length: 60 }).map((_, i) => {
                   const height = Math.sin((i / 60) * Math.PI * 3) * 0.6 + 0.4;
                   const isCenter = i > 20 && i < 40;
                   return (
-                    <motion.div
+                    <div
                       key={i}
                       className="rounded-full"
                       style={{
                         width: "clamp(2px, 0.8vw, 4px)",
+                        height: `${height * 100}%`,
                         background: isCenter
                           ? "hsl(var(--primary))"
                           : "hsl(var(--primary) / 0.3)",
                         boxShadow: isCenter
                           ? "0 0 8px hsl(var(--primary) / 0.5)"
                           : "none",
-                      }}
-                      initial={{ height: "4px" }}
-                      whileInView={{
-                        height: `${height * 100}%`,
-                      }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 0.6,
-                        delay: i * 0.015,
-                        ease: "easeOut",
                       }}
                     />
                   );

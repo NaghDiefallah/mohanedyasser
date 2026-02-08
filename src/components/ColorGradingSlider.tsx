@@ -1,7 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ViewportReveal from "./ViewportReveal";
-import { motion } from "framer-motion";
 import beforeImage from "@/assets/color-grading-before.png";
 import afterImage from "@/assets/color-grading-after.png";
 
@@ -41,44 +40,20 @@ const ColorGradingSlider = () => {
       <div className="container mx-auto max-w-5xl relative z-10">
         {/* Section Header */}
         <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center justify-center gap-4"
-          >
+          <div className="flex items-center justify-center gap-4">
             <div className="h-px w-8 md:w-12 bg-primary" />
             <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
               {t.colorGrading?.label || "Color Correction"}
             </span>
             <div className="h-px w-8 md:w-12 bg-primary" />
-          </motion.div>
+          </div>
           
-          <motion.h2 
-            className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight"
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, filter: "blur(0px)" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
             <span className="whitespace-nowrap">{t.colorGrading?.title || "COLOR"}</span>{" "}
-            <motion.span 
-              className="text-primary whitespace-nowrap"
-              initial={{ textShadow: "0 0 0px hsl(195 100% 50% / 0)" }}
-              whileInView={{ 
-                textShadow: [
-                  "0 0 0px hsl(195 100% 50% / 0)",
-                  "0 0 40px hsl(195 100% 50% / 0.6)",
-                  "0 0 20px hsl(195 100% 50% / 0.4)"
-                ]
-              }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >
+            <span className="text-primary text-glow whitespace-nowrap">
               {t.colorGrading?.titleHighlight || "GRADING"}
-            </motion.span>
-          </motion.h2>
+            </span>
+          </h2>
           
           <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
             {t.colorGrading?.description || "Drag the slider to see the before and after transformation."}
@@ -86,7 +61,7 @@ const ColorGradingSlider = () => {
         </ViewportReveal>
 
         {/* Before/After Slider */}
-        <ViewportReveal delay={0.2}>
+        <ViewportReveal>
           <div
             ref={containerRef}
             className="relative aspect-[9/16] sm:aspect-[4/5] md:aspect-video max-w-3xl mx-auto rounded-xl overflow-hidden select-none touch-none"
@@ -100,7 +75,7 @@ const ColorGradingSlider = () => {
               cursor: 'ew-resize',
             }}
           >
-            {/* After Image — full container, object-fit cover */}
+            {/* After Image */}
             <img
               src={afterImage}
               alt={isRTL ? "بعد" : "After"}
@@ -108,7 +83,7 @@ const ColorGradingSlider = () => {
               draggable={false}
             />
 
-            {/* Before Image — clipped by width%, same positioning as After */}
+            {/* Before Image — clipped */}
             <div
               className="absolute inset-0 overflow-hidden pointer-events-none"
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
@@ -121,7 +96,7 @@ const ColorGradingSlider = () => {
               />
             </div>
 
-            {/* Slider Line + Handle — single positioning anchor */}
+            {/* Slider Line + Handle */}
             <div
               className="absolute top-0 bottom-0 z-10 pointer-events-none"
               style={{
@@ -139,7 +114,7 @@ const ColorGradingSlider = () => {
                 }}
               />
 
-              {/* Circular handle — centered on line */}
+              {/* Circular handle */}
               <div
                 className="absolute left-1/2 top-1/2"
                 style={{
@@ -167,7 +142,7 @@ const ColorGradingSlider = () => {
               </div>
             </div>
 
-            {/* Dynamic Label — top-right, text changes based on slider */}
+            {/* Dynamic Label */}
             <div
               className="absolute top-3 md:top-4 right-3 md:right-4 px-2 md:px-3 py-1 md:py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider pointer-events-none"
               style={{

@@ -14,7 +14,7 @@ const ProjectCard = ({ project, index }: { project: typeof reelsProjects[0]; ind
   const navigate = useNavigate();
 
   return (
-    <ViewportReveal delay={index * 0.1}>
+    <ViewportReveal>
       <TiltCard
         className="group"
         onClick={() => navigate(`/project/${project.slug}`)}
@@ -60,20 +60,15 @@ const ProjectCard = ({ project, index }: { project: typeof reelsProjects[0]; ind
             />
           </div>
           
-          {/* Content area with slide-up animation */}
-          <motion.div 
-            className="p-5"
-            initial={{ y: 0 }}
-            whileHover={{ y: -5 }}
-            transition={{ duration: 0.3 }}
-          >
+          {/* Content area */}
+          <div className="p-5">
             <h3 className="text-lg font-bold text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
               {project.title}
             </h3>
             <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
               {project.category}
             </span>
-          </motion.div>
+          </div>
         </div>
       </TiltCard>
     </ViewportReveal>
@@ -89,45 +84,24 @@ const BentoGrid = () => {
         
         {/* ===== REELS SECTION ===== */}
         <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center justify-center gap-4"
-          >
+          <div className="flex items-center justify-center gap-4">
             <div className="h-px w-8 md:w-12 bg-primary" />
             <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
               {t.work.reelsLabel}
             </span>
             <div className="h-px w-8 md:w-12 bg-primary" />
-          </motion.div>
+          </div>
           
-          {/* Section title with glow-up animation */}
-          <motion.h2 
-            className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight"
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ 
-              opacity: 1, 
-              filter: "blur(0px)",
-              textShadow: [
-                "0 0 0px hsl(195 100% 50% / 0)",
-                "0 0 30px hsl(195 100% 50% / 0.4)",
-                "0 0 10px hsl(195 100% 50% / 0.2)"
-              ]
-            }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
             {t.work.reelsTitle}
-          </motion.h2>
+          </h2>
           
           <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
             {t.work.reelsDescription}
           </p>
         </ViewportReveal>
 
-        {/* Reels Grid - Single column on mobile */}
+        {/* Reels Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-10 md:mb-12">
           {reelsProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
@@ -136,45 +110,17 @@ const BentoGrid = () => {
 
         {/* ===== MOTION GRAPHICS SECTION ===== */}
         <ViewportReveal className="text-center mb-6 md:mb-8 space-y-3 md:space-y-4">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center justify-center gap-4"
-          >
+          <div className="flex items-center justify-center gap-4">
             <div className="h-px w-8 md:w-12 bg-primary" />
             <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
               {t.work.motionLabel}
             </span>
             <div className="h-px w-8 md:w-12 bg-primary" />
-          </motion.div>
+          </div>
           
-          {/* Section title with glow-up animation */}
-          <motion.h2 
-            className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight"
-            initial={{ opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ 
-              opacity: 1, 
-              filter: "blur(0px)"
-            }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {t.work.motionTitle} <motion.span 
-              className="text-primary"
-              initial={{ textShadow: "0 0 0px hsl(195 100% 50% / 0)" }}
-              whileInView={{ 
-                textShadow: [
-                  "0 0 0px hsl(195 100% 50% / 0)",
-                  "0 0 40px hsl(195 100% 50% / 0.6)",
-                  "0 0 20px hsl(195 100% 50% / 0.4)"
-                ]
-              }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >{t.work.motionTitleHighlight}</motion.span>
-          </motion.h2>
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
+            {t.work.motionTitle} <span className="text-primary text-glow">{t.work.motionTitleHighlight}</span>
+          </h2>
           
           <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
             {t.work.motionDescription}
