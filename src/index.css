@@ -104,6 +104,12 @@
     width: 100%;
     max-width: 100vw;
     height: auto !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   html[dir="rtl"] {
