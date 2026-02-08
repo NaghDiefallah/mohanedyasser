@@ -84,11 +84,11 @@ const Contact = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="container mx-auto max-w-7xl">
-          <div className={`flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12 ${isRTL ? 'md:flex-row-reverse' : ''}`}>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             
             {/* Left side - Contact section */}
             <motion.div 
-              className={`flex flex-col items-center md:items-start gap-6 ${isRTL ? 'md:items-end' : ''}`}
+              className={`flex flex-col items-center md:items-start gap-6 ${isRTL ? 'md:items-end md:pe-4' : ''}`}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: false }}
