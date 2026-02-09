@@ -87,13 +87,21 @@ const ProfileCard = () => {
           {/* Rating - dynamic from reviews */}
           <div className="flex items-center gap-2 mt-1">
             <div className="flex items-center gap-0.5">
-              {[1, 2, 3, 4, 5].map((s) => (
-                <Star
-                  key={s}
-                  size={14}
-                  className={s <= Math.round(avgRating) ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30'}
-                />
-              ))}
+              {[1, 2, 3, 4, 5].map((s) => {
+                const diff = avgRating - s + 1;
+                const isFull = diff >= 1;
+                const isHalf = !isFull && diff >= 0.5;
+                return (
+                  <span key={s} className="relative" style={{ width: 14, height: 14 }}>
+                    <Star size={14} className="absolute inset-0 text-muted-foreground/30" />
+                    {(isFull || isHalf) && (
+                      <span className="absolute inset-0 overflow-hidden" style={{ width: isHalf ? '50%' : '100%' }}>
+                        <Star size={14} className="fill-amber-400 text-amber-400" />
+                      </span>
+                    )}
+                  </span>
+                );
+              })}
             </div>
             <span className="text-sm font-semibold text-foreground">
               {totalReviews > 0 ? avgRating.toFixed(1) : '—'}
