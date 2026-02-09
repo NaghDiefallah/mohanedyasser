@@ -13,11 +13,26 @@ const StarRating = ({ rating, onRate, size = 18, interactive = false }: StarRati
 
   const displayRating = interactive ? (hovered || rating) : rating;
 
+  const handleClick = (star: number, e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!interactive || !onRate) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const isLeftHalf = clickX < rect.width / 2;
+    onRate(isLeftHalf ? star - 0.5 : star);
+  };
+
+  const handleMouseMove = (star: number, e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!interactive) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const isLeftHalf = mouseX < rect.width / 2;
+    setHovered(isLeftHalf ? star - 0.5 : star);
+  };
+
   return (
     <div className="flex items-center gap-0.5">
       {[1, 2, 3, 4, 5].map((star) => {
         const diff = displayRating - star + 1;
-        // full if diff >= 1, half if diff >= 0.5, empty otherwise
         const isFull = diff >= 1;
         const isHalf = !isFull && diff >= 0.5;
 
@@ -26,8 +41,8 @@ const StarRating = ({ rating, onRate, size = 18, interactive = false }: StarRati
             key={star}
             type="button"
             disabled={!interactive}
-            onClick={() => onRate?.(star)}
-            onMouseEnter={() => interactive && setHovered(star)}
+            onClick={(e) => handleClick(star, e)}
+            onMouseMove={(e) => handleMouseMove(star, e)}
             onMouseLeave={() => interactive && setHovered(0)}
             className={`relative transition-colors duration-150 ${interactive ? 'cursor-pointer hover:scale-110' : 'cursor-default'}`}
             style={{ width: size, height: size }}
