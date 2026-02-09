@@ -71,6 +71,8 @@ const Reviews = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (session) {
+        // Auto-bootstrap first admin (one-time, secure server-side)
+        await supabase.rpc('bootstrap_admin');
         const { data } = await supabase.rpc('is_admin');
         setIsOwner(!!data);
       } else {

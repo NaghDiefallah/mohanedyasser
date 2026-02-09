@@ -99,6 +99,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      bootstrap_admin: { Args: never; Returns: boolean }
       delete_review: {
         Args: { p_delete_token: string; p_review_id: string }
         Returns: boolean
