@@ -26,24 +26,24 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
 
     setSubmitting(true);
     try {
-      // Generate a delete token for this review
+      // Generate IDs client-side (no SELECT access on reviews for security)
+      const reviewId = crypto.randomUUID();
       const deleteToken = crypto.randomUUID();
 
-      const { data, error } = await supabase.from('reviews').insert({
+      const { error } = await supabase.from('reviews').insert({
+        id: reviewId,
         name: name.trim(),
         rating,
         comment: comment.trim(),
         delete_token: deleteToken,
-      }).select('id').single();
+      });
 
       if (error) throw error;
 
       // Store the token in localStorage so the user can delete their review later
-      if (data) {
-        const stored = JSON.parse(localStorage.getItem('my_review_tokens') || '{}');
-        stored[data.id] = deleteToken;
-        localStorage.setItem('my_review_tokens', JSON.stringify(stored));
-      }
+      const stored = JSON.parse(localStorage.getItem('my_review_tokens') || '{}');
+      stored[reviewId] = deleteToken;
+      localStorage.setItem('my_review_tokens', JSON.stringify(stored));
 
       toast({
         title: isRTL ? 'تم إرسال التقييم!' : 'Review submitted!',

@@ -103,6 +103,22 @@ export type Database = {
         Args: { p_delete_token: string; p_review_id: string }
         Returns: boolean
       }
+      get_public_reviews: {
+        Args: never
+        Returns: {
+          comment: string
+          created_at: string
+          id: string
+          name: string
+          rating: number
+        }[]
+      }
+      get_review_ratings: {
+        Args: never
+        Returns: {
+          rating: number
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

@@ -46,10 +46,10 @@ const Reviews = () => {
 
   const fetchData = useCallback(async () => {
     const [reviewsRes, repliesRes] = await Promise.all([
-      supabase.from('reviews').select('id, name, rating, comment, created_at').order('created_at', { ascending: false }),
+      supabase.rpc('get_public_reviews'),
       supabase.from('owner_replies').select('id, review_id, reply, owner_user_id, created_at, updated_at'),
     ]);
-    if (reviewsRes.data) setReviews(reviewsRes.data);
+    if (reviewsRes.data) setReviews(reviewsRes.data as Review[]);
     if (repliesRes.data) setReplies(repliesRes.data);
     setLoading(false);
   }, []);
@@ -78,10 +78,9 @@ const Reviews = () => {
       }
     });
 
-    // Realtime subscription
+    // Realtime subscription (owner_replies only — reviews use secure RPC)
     const channel = supabase
       .channel('reviews-realtime')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'reviews' }, () => fetchData())
       .on('postgres_changes', { event: '*', schema: 'public', table: 'owner_replies' }, () => fetchData())
       .subscribe();
 
