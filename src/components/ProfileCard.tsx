@@ -15,9 +15,9 @@ const ProfileCard = () => {
 
   useEffect(() => {
     const fetchRatings = async () => {
-      const { data } = await supabase.from('reviews').select('rating');
+      const { data } = await supabase.rpc('get_review_ratings');
       if (data && data.length > 0) {
-        const avg = data.reduce((sum, r) => sum + r.rating, 0) / data.length;
+        const avg = data.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) / data.length;
         setAvgRating(Math.round(avg * 10) / 10);
         setTotalReviews(data.length);
       }
