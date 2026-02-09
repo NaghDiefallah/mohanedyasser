@@ -13,7 +13,6 @@ type SortOption = 'newest' | 'highest' | 'lowest';
 interface Review {
   id: string;
   name: string;
-  email: string | null;
   rating: number;
   comment: string;
   created_at: string;
@@ -23,6 +22,7 @@ interface OwnerReply {
   id: string;
   review_id: string;
   reply: string;
+  owner_user_id: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -46,8 +46,8 @@ const Reviews = () => {
 
   const fetchData = useCallback(async () => {
     const [reviewsRes, repliesRes] = await Promise.all([
-      supabase.from('reviews').select('*').order('created_at', { ascending: false }),
-      supabase.from('owner_replies').select('*'),
+      supabase.from('reviews').select('id, name, rating, comment, created_at').order('created_at', { ascending: false }),
+      supabase.from('owner_replies').select('id, review_id, reply, owner_user_id, created_at, updated_at'),
     ]);
     if (reviewsRes.data) setReviews(reviewsRes.data);
     if (repliesRes.data) setReplies(repliesRes.data);
@@ -57,15 +57,25 @@ const Reviews = () => {
   useEffect(() => {
     fetchData();
 
-    // Check auth state
-    const checkAuth = async () => {
+    // Check admin role (server-side verified)
+    const checkAdmin = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      setIsOwner(!!session);
+      if (session) {
+        const { data } = await supabase.rpc('is_admin');
+        setIsOwner(!!data);
+      } else {
+        setIsOwner(false);
+      }
     };
-    checkAuth();
+    checkAdmin();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setIsOwner(!!session);
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session) {
+        const { data } = await supabase.rpc('is_admin');
+        setIsOwner(!!data);
+      } else {
+        setIsOwner(false);
+      }
     });
 
     // Realtime subscription

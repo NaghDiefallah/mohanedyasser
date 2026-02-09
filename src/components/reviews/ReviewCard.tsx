@@ -9,6 +9,7 @@ import { toast } from '@/hooks/use-toast';
 interface OwnerReply {
   id: string;
   reply: string;
+  owner_user_id: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -198,7 +199,7 @@ const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }
         >
           <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
             <span className={`text-xs font-semibold text-primary ${isRTL ? 'font-arabic' : ''}`}>
-              {rv.ownerLabel}
+              {isRTL ? 'محمد ياسر — المالك' : 'Mohamed Yasser — Owner'}
             </span>
             {isOwner && (
               <button

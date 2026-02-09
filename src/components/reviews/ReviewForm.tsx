@@ -31,7 +31,6 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
 
       const { data, error } = await supabase.from('reviews').insert({
         name: name.trim(),
-        email: null,
         rating,
         comment: comment.trim(),
         delete_token: deleteToken,
@@ -104,6 +103,7 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={rv.namePlaceholder}
+          maxLength={100}
           className={`w-full px-4 py-2.5 rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-primary/40 ${isRTL ? 'font-arabic text-right' : ''}`}
           style={{ background: inputBg, border: inputBorder }}
         />
@@ -127,6 +127,7 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
           onChange={(e) => setComment(e.target.value)}
           placeholder={rv.commentPlaceholder}
           rows={4}
+          maxLength={2000}
           className={`w-full px-4 py-2.5 rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-primary/40 resize-none ${isRTL ? 'font-arabic text-right' : ''}`}
           style={{ background: inputBg, border: inputBorder }}
         />
