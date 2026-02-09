@@ -7,6 +7,7 @@ interface Translations {
     home: string;
     work: string;
     services: string;
+    reviews: string;
     about: string;
     letsTalk: string;
   };
@@ -138,6 +139,7 @@ const translations: Record<Language, Translations> = {
       home: 'Home',
       work: 'Work',
       services: 'Services',
+      reviews: 'Reviews',
       about: 'About',
       letsTalk: "Let's Talk",
     },
@@ -310,6 +312,7 @@ const translations: Record<Language, Translations> = {
       home: 'الرئيسية',
       work: 'أعمالي',
       services: 'خدماتي',
+      reviews: 'التقييمات',
       about: 'عني',
       letsTalk: 'تواصل معي',
     },

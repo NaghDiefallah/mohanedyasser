@@ -66,7 +66,7 @@ const Reviews = () => {
     : '1px solid hsl(220 20% 22%)';
 
   return (
-    <div className="py-20 md:py-32 px-6 sm:px-8">
+    <div id="reviews" className="py-20 md:py-32 px-6 sm:px-8">
       <div className="container mx-auto max-w-5xl">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-12 md:mb-16">
