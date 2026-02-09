@@ -60,57 +60,8 @@ const About = () => {
           <ProfileCard />
         </motion.div>
 
-        {/* Stats row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-14 md:mb-20"
-        >
-          {t.about.stats.map((stat, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center gap-2 py-6 md:py-8 rounded-xl backdrop-blur-md"
-              style={{
-                background: cardBg,
-                border: cardBorder,
-              }}
-            >
-              <span
-                className="text-3xl md:text-4xl font-bold text-primary"
-                style={{ fontFamily: "'Bebas Neue', sans-serif" }}
-              >
-                {stat.value}
-              </span>
-              <span className={`text-sm text-muted-foreground font-medium tracking-wide ${isRTL ? 'font-arabic' : 'uppercase'}`}>
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
 
-        {/* Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-3 md:gap-4"
-        >
-          {t.about.skills.map((skill, index) => (
-            <span
-              key={index}
-              className={`px-4 py-2 rounded-full text-sm font-medium text-foreground/80 backdrop-blur-md transition-colors duration-200 hover:text-primary hover:border-primary/40 ${isRTL ? 'font-arabic' : ''}`}
-              style={{
-                background: cardBg,
-                border: cardBorder,
-              }}
-            >
-              {skill}
-            </span>
-          ))}
-        </motion.div>
+
       </div>
     </div>
   );

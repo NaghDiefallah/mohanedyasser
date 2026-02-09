@@ -57,8 +57,6 @@ interface Translations {
       experienceValue: string;
       responseLabel: string;
       responseValue: string;
-      deliveryLabel: string;
-      deliveryValue: string;
       languagesLabel: string;
       languages: string;
       description: string;
@@ -128,7 +126,7 @@ const translations: Record<Language, Translations> = {
       letsTalk: "Let's Talk",
       projects: '+50 Projects',
       experience: '1 yr Experience',
-      response: '6h Response',
+      response: '1h Response',
     },
     settings: {
       theme: 'Theme',
@@ -153,7 +151,7 @@ const translations: Record<Language, Translations> = {
       stats: [
         { label: 'Projects Completed', value: '+50' },
         { label: 'Years of Experience', value: '1+' },
-        { label: 'Response Time', value: '6h' },
+        { label: 'Response Time', value: '1h' },
       ],
       skills: ['Video Editing', 'Motion Graphics', 'Color Grading', 'Sound Design', 'VFX', 'Animation'],
       profile: {
@@ -169,9 +167,7 @@ const translations: Record<Language, Translations> = {
         experienceLabel: 'Experience',
         experienceValue: '1+ Years',
         responseLabel: 'Avg. response time',
-        responseValue: '6 Hours',
-        deliveryLabel: 'Last delivery',
-        deliveryValue: 'Fast',
+        responseValue: '1 Hour',
         languagesLabel: 'Languages',
         languages: 'Arabic, English',
         description: "Welcome to my profile! I'm Mohamed Yasser, a passionate and professional video editor specializing in cinematic storytelling, color grading, and high-quality post-production. I focus on delivering visually engaging and polished content tailored to each client's vision.",
@@ -278,7 +274,7 @@ const translations: Record<Language, Translations> = {
       letsTalk: 'تواصل معي',
       projects: '+50 مشروع',
       experience: '1 سنة خبرة',
-      response: 'رد خلال 6 ساعات',
+      response: 'رد خلال ساعة',
     },
     settings: {
       theme: 'المظهر',
@@ -303,7 +299,7 @@ const translations: Record<Language, Translations> = {
       stats: [
         { label: 'مشروع مكتمل', value: '+50' },
         { label: 'سنوات الخبرة', value: '+1' },
-        { label: 'وقت الاستجابة', value: '6 ساعات' },
+        { label: 'وقت الاستجابة', value: 'ساعة' },
       ],
       skills: ['مونتاج الفيديو', 'موشن جرافيك', 'تلوين الفيديوهات', 'تصميم الصوت', 'مؤثرات بصرية', 'أنيميشن'],
       profile: {
@@ -319,9 +315,7 @@ const translations: Record<Language, Translations> = {
         experienceLabel: 'الخبرة',
         experienceValue: '+1 سنة',
         responseLabel: 'متوسط وقت الرد',
-        responseValue: '6 ساعات',
-        deliveryLabel: 'آخر تسليم',
-        deliveryValue: 'سريع',
+        responseValue: 'ساعة واحدة',
         languagesLabel: 'اللغات',
         languages: 'العربية، الإنجليزية',
         description: 'مرحبًا بك في ملفي الشخصي! أنا محمد ياسر، محرر فيديو شغوف ومحترف متخصص في السرد السينمائي، تلوين الفيديوهات، وما بعد الإنتاج عالي الجودة. أركز على تقديم محتوى بصري جذاب ومصقول يتناسب مع رؤية كل عميل.',
