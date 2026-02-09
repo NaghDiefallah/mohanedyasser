@@ -50,6 +50,7 @@ export type Database = {
         Row: {
           comment: string
           created_at: string
+          delete_token: string | null
           email: string | null
           id: string
           name: string
@@ -58,6 +59,7 @@ export type Database = {
         Insert: {
           comment: string
           created_at?: string
+          delete_token?: string | null
           email?: string | null
           id?: string
           name: string
@@ -66,6 +68,7 @@ export type Database = {
         Update: {
           comment?: string
           created_at?: string
+          delete_token?: string | null
           email?: string | null
           id?: string
           name?: string
@@ -78,7 +81,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      delete_review: {
+        Args: { p_delete_token: string; p_review_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
