@@ -54,6 +54,7 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
       setRating(0);
       setComment('');
       onReviewAdded();
+      window.dispatchEvent(new Event('review-updated'));
     } catch {
       toast({
         title: isRTL ? 'خطأ' : 'Error',
