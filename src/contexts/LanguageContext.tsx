@@ -192,6 +192,12 @@ const translations: Record<Language, Translations> = {
           price: 'Starting at $400',
           features: ['Multi-track mixing', 'Foley & SFX', 'Spatial audio', 'Master output'],
         },
+        {
+          title: 'AI-Powered Editing',
+          description: 'Leveraging cutting-edge AI tools to speed up workflows, enhance visuals, and deliver smarter edits.',
+          price: 'Starting at $350',
+          features: ['AI video upscaling', 'Auto scene detection', 'AI voice cloning', 'Smart object removal'],
+        },
       ],
     },
     colorGrading: {
@@ -315,6 +321,12 @@ const translations: Record<Language, Translations> = {
           description: 'مكساج صوتي احترافي وتصميم صوتي إبداعي يضيف عمقاً وإحساساً لمشاريعك.',
           price: 'يبدأ من 400$',
           features: ['مكساج متعدد المسارات', 'مؤثرات صوتية', 'صوت مكاني', 'ماستر نهائي'],
+        },
+        {
+          title: 'مونتاج بالذكاء الاصطناعي',
+          description: 'استخدام أحدث أدوات الذكاء الاصطناعي لتسريع العمل وتحسين الجودة وتقديم نتائج أذكى.',
+          price: 'يبدأ من 350$',
+          features: ['تحسين جودة الفيديو بالـ AI', 'كشف المشاهد تلقائياً', 'استنساخ الصوت بالـ AI', 'إزالة العناصر الذكية'],
         },
       ],
     },
