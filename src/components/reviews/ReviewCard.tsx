@@ -73,6 +73,7 @@ const ReviewCard = ({ review, isOwnReview, onDeleted }: ReviewCardProps) => {
         description: isRTL ? 'تم حذف تقييمك بنجاح.' : 'Your review has been removed.',
       });
       onDeleted();
+      window.dispatchEvent(new Event('review-updated'));
     } catch {
       toast({
         title: isRTL ? 'خطأ' : 'Error',
@@ -121,6 +122,7 @@ const ReviewCard = ({ review, isOwnReview, onDeleted }: ReviewCardProps) => {
       });
       setEditing(false);
       onDeleted(); // refresh list
+      window.dispatchEvent(new Event('review-updated'));
     } catch {
       toast({
         title: isRTL ? 'خطأ' : 'Error',
