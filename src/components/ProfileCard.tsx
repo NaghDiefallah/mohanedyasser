@@ -1,12 +1,36 @@
+import { useState, useEffect } from 'react';
 import { Star, MapPin, Clock, Globe, Award } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { supabase } from '@/integrations/supabase/client';
 import heroPortrait from '@/assets/hero-portrait.png';
 
 const ProfileCard = () => {
   const { t, isRTL } = useLanguage();
   const { theme } = useTheme();
   const profile = t.about.profile;
+
+  const [avgRating, setAvgRating] = useState(0);
+  const [totalReviews, setTotalReviews] = useState(0);
+
+  useEffect(() => {
+    const fetchRatings = async () => {
+      const { data } = await supabase.from('reviews').select('rating');
+      if (data && data.length > 0) {
+        const avg = data.reduce((sum, r) => sum + r.rating, 0) / data.length;
+        setAvgRating(Math.round(avg * 10) / 10);
+        setTotalReviews(data.length);
+      }
+    };
+    fetchRatings();
+
+    const channel = supabase
+      .channel('profile-reviews')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'reviews' }, () => fetchRatings())
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
+  }, []);
 
   const cardBg = theme === 'light'
     ? 'hsl(210 20% 96% / 0.7)'
@@ -60,15 +84,23 @@ const ProfileCard = () => {
             {profile.tagline}
           </p>
 
-          {/* Rating */}
+          {/* Rating - dynamic from reviews */}
           <div className="flex items-center gap-2 mt-1">
             <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Star
+                  key={s}
+                  size={14}
+                  className={s <= Math.round(avgRating) ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30'}
+                />
               ))}
             </div>
-            <span className="text-sm font-semibold text-foreground">{profile.rating}</span>
-            <span className="text-xs text-muted-foreground">({profile.reviews})</span>
+            <span className="text-sm font-semibold text-foreground">
+              {totalReviews > 0 ? avgRating.toFixed(1) : '—'}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              ({totalReviews > 0 ? `${totalReviews}` : '0'})
+            </span>
             <span className="text-muted-foreground/40 mx-1">|</span>
             <span className="text-xs font-medium text-primary">{profile.level}</span>
           </div>
