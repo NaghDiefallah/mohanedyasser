@@ -25,16 +25,20 @@ const Reviews = () => {
   const [loading, setLoading] = useState(true);
   const [myTokens, setMyTokens] = useState<Record<string, string>>({});
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem('my_review_tokens') || '{}');
-    setMyTokens(stored);
+  const refreshTokens = useCallback(() => {
+    setMyTokens(JSON.parse(localStorage.getItem('my_review_tokens') || '{}'));
   }, []);
+
+  useEffect(() => {
+    refreshTokens();
+  }, [refreshTokens]);
 
   const fetchData = useCallback(async () => {
     const { data } = await supabase.rpc('get_public_reviews');
     if (data) setReviews(data as Review[]);
     setLoading(false);
-  }, []);
+    refreshTokens();
+  }, [refreshTokens]);
 
   useEffect(() => {
     fetchData();
@@ -133,10 +137,7 @@ const Reviews = () => {
                 key={review.id}
                 review={review}
                 isOwnReview={!!myTokens[review.id]}
-                onDeleted={() => {
-                  fetchData();
-                  setMyTokens(JSON.parse(localStorage.getItem('my_review_tokens') || '{}'));
-                }}
+                onDeleted={fetchData}
               />
             ))}
           </div>
