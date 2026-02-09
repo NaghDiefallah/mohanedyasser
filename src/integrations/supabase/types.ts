@@ -128,6 +128,16 @@ export type Database = {
         Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
+      update_review: {
+        Args: {
+          p_comment: string
+          p_delete_token: string
+          p_name: string
+          p_rating: number
+          p_review_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
