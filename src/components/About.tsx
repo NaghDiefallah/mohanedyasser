@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import ProfileCard from './ProfileCard';
 
 const About = () => {
   const { t, isRTL } = useLanguage();
@@ -47,6 +48,17 @@ const About = () => {
         >
           {t.about.bio}
         </motion.p>
+
+        {/* Profile Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="mb-14 md:mb-20"
+        >
+          <ProfileCard />
+        </motion.div>
 
         {/* Stats row */}
         <motion.div

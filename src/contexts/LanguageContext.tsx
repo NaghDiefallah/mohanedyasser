@@ -43,6 +43,26 @@ interface Translations {
     bio: string;
     stats: { label: string; value: string }[];
     skills: string[];
+    profile: {
+      name: string;
+      badge: string;
+      tagline: string;
+      rating: string;
+      reviews: string;
+      level: string;
+      contactBtn: string;
+      fromLabel: string;
+      from: string;
+      experienceLabel: string;
+      experienceValue: string;
+      responseLabel: string;
+      responseValue: string;
+      deliveryLabel: string;
+      deliveryValue: string;
+      languagesLabel: string;
+      languages: string;
+      description: string;
+    };
   };
   work: {
     reelsLabel: string;
@@ -136,6 +156,26 @@ const translations: Record<Language, Translations> = {
         { label: 'Response Time', value: '6h' },
       ],
       skills: ['Video Editing', 'Motion Graphics', 'Color Grading', 'Sound Design', 'VFX', 'Animation'],
+      profile: {
+        name: 'Mohamed Yasser',
+        badge: 'Professional Video Editor',
+        tagline: 'Elevating Your Vision: Masterful Video Editing',
+        rating: '4.9',
+        reviews: '50+',
+        level: 'Pro Editor',
+        contactBtn: 'Contact Me',
+        fromLabel: 'From',
+        from: 'Egypt',
+        experienceLabel: 'Experience',
+        experienceValue: '1+ Years',
+        responseLabel: 'Avg. response time',
+        responseValue: '6 Hours',
+        deliveryLabel: 'Last delivery',
+        deliveryValue: 'Fast',
+        languagesLabel: 'Languages',
+        languages: 'Arabic, English',
+        description: "Welcome to my profile! I'm Mohamed Yasser, a passionate and professional video editor specializing in cinematic storytelling, color grading, and high-quality post-production. I focus on delivering visually engaging and polished content tailored to each client's vision.",
+      },
     },
     work: {
       reelsLabel: 'Latest Work',
@@ -266,6 +306,26 @@ const translations: Record<Language, Translations> = {
         { label: 'وقت الاستجابة', value: '6 ساعات' },
       ],
       skills: ['مونتاج الفيديو', 'موشن جرافيك', 'تلوين الفيديوهات', 'تصميم الصوت', 'مؤثرات بصرية', 'أنيميشن'],
+      profile: {
+        name: 'محمد ياسر',
+        badge: 'محرر فيديو محترف',
+        tagline: 'ارتقِ برؤيتك: مونتاج فيديو احترافي',
+        rating: '4.9',
+        reviews: '+50',
+        level: 'محرر محترف',
+        contactBtn: 'تواصل معي',
+        fromLabel: 'من',
+        from: 'مصر',
+        experienceLabel: 'الخبرة',
+        experienceValue: '+1 سنة',
+        responseLabel: 'متوسط وقت الرد',
+        responseValue: '6 ساعات',
+        deliveryLabel: 'آخر تسليم',
+        deliveryValue: 'سريع',
+        languagesLabel: 'اللغات',
+        languages: 'العربية، الإنجليزية',
+        description: 'مرحبًا بك في ملفي الشخصي! أنا محمد ياسر، محرر فيديو شغوف ومحترف متخصص في السرد السينمائي، تلوين الفيديوهات، وما بعد الإنتاج عالي الجودة. أركز على تقديم محتوى بصري جذاب ومصقول يتناسب مع رؤية كل عميل.',
+      },
     },
     work: {
       reelsLabel: 'أحدث الأعمال',
