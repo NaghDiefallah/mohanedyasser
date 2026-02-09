@@ -9,6 +9,7 @@ import CinematicScene from "@/components/three/CinematicScene";
 import Navbar from "@/components/Navbar";
 import ColorGradingSlider from "@/components/ColorGradingSlider";
 import VocalEnhance from "@/components/VocalEnhance";
+import Reviews from "@/components/reviews/Reviews";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const Index = () => {
@@ -66,6 +67,9 @@ const Index = () => {
         </section>
         <section id="about">
           <About />
+        </section>
+        <section id="reviews">
+          <Reviews />
         </section>
         <section id="contact">
           <Contact />
