@@ -36,6 +36,13 @@ const Reviews = () => {
   const [isOwner, setIsOwner] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [myTokens, setMyTokens] = useState<Record<string, string>>({});
+
+  // Load own review tokens from localStorage
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('my_review_tokens') || '{}');
+    setMyTokens(stored);
+  }, []);
 
   const fetchData = useCallback(async () => {
     const [reviewsRes, repliesRes] = await Promise.all([
@@ -187,7 +194,11 @@ const Reviews = () => {
                   review={review}
                   ownerReply={reply}
                   isOwner={isOwner}
-                  onReplyUpdated={fetchData}
+                  isOwnReview={!!myTokens[review.id]}
+                  onReplyUpdated={() => {
+                    fetchData();
+                    setMyTokens(JSON.parse(localStorage.getItem('my_review_tokens') || '{}'));
+                  }}
                 />
               );
             })}

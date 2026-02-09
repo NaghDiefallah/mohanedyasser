@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageSquare, Edit2, Check, X } from 'lucide-react';
+import { MessageSquare, Edit2, Check, X, Trash2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import StarRating from './StarRating';
@@ -23,6 +23,7 @@ interface ReviewCardProps {
   };
   ownerReply?: OwnerReply | null;
   isOwner: boolean;
+  isOwnReview: boolean;
   onReplyUpdated: () => void;
 }
 
@@ -48,13 +49,14 @@ function timeAgo(dateStr: string, isRTL: boolean): string {
   return isRTL ? `منذ ${mo} شهر` : `${mo}mo ago`;
 }
 
-const ReviewCard = ({ review, ownerReply, isOwner, onReplyUpdated }: ReviewCardProps) => {
+const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }: ReviewCardProps) => {
   const { t, isRTL } = useLanguage();
   const { theme } = useTheme();
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [replyText, setReplyText] = useState(ownerReply?.reply || '');
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const rv = t.reviews;
 
@@ -88,6 +90,41 @@ const ReviewCard = ({ review, ownerReply, isOwner, onReplyUpdated }: ReviewCardP
     }
   };
 
+  const handleDelete = async () => {
+    const stored = JSON.parse(localStorage.getItem('my_review_tokens') || '{}');
+    const token = stored[review.id];
+    if (!token) return;
+
+    setDeleting(true);
+    try {
+      const { data, error } = await supabase.rpc('delete_review', {
+        p_review_id: review.id,
+        p_delete_token: token,
+      });
+
+      if (error) throw error;
+      if (!data) throw new Error('Token mismatch');
+
+      // Remove token from localStorage
+      delete stored[review.id];
+      localStorage.setItem('my_review_tokens', JSON.stringify(stored));
+
+      toast({
+        title: isRTL ? 'تم حذف التقييم' : 'Review deleted',
+        description: isRTL ? 'تم حذف تقييمك بنجاح.' : 'Your review has been removed.',
+      });
+      onReplyUpdated();
+    } catch {
+      toast({
+        title: isRTL ? 'خطأ' : 'Error',
+        description: isRTL ? 'فشل حذف التقييم.' : 'Failed to delete review.',
+        variant: 'destructive',
+      });
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   const cardBg = theme === 'light'
     ? 'hsl(210 20% 96% / 0.7)'
     : 'hsl(220 30% 8% / 0.8)';
@@ -114,7 +151,7 @@ const ReviewCard = ({ review, ownerReply, isOwner, onReplyUpdated }: ReviewCardP
       className="rounded-2xl backdrop-blur-xl p-5 md:p-6 space-y-4"
       style={{ background: cardBg, border: cardBorder }}
     >
-      {/* Header: Avatar + Name + Rating + Time */}
+      {/* Header: Avatar + Name + Rating + Time + Delete */}
       <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
         {/* Avatar */}
         <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
@@ -134,6 +171,18 @@ const ReviewCard = ({ review, ownerReply, isOwner, onReplyUpdated }: ReviewCardP
             <StarRating rating={review.rating} size={14} />
           </div>
         </div>
+
+        {/* Delete button for own review */}
+        {isOwnReview && (
+          <button
+            onClick={handleDelete}
+            disabled={deleting}
+            className="text-muted-foreground/40 hover:text-destructive transition-colors shrink-0 p-1"
+            title={isRTL ? 'حذف تقييمك' : 'Delete your review'}
+          >
+            <Trash2 size={14} />
+          </button>
+        )}
       </div>
 
       {/* Comment */}
