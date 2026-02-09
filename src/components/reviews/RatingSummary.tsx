@@ -46,13 +46,24 @@ const RatingSummary = ({ reviews }: RatingSummaryProps) => {
             {avg.toFixed(1)}
           </span>
           <div className="flex items-center gap-0.5">
-            {[1, 2, 3, 4, 5].map((s) => (
-              <Star
-                key={s}
-                size={16}
-                className={s <= Math.round(avg) ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30'}
-              />
-            ))}
+            {[1, 2, 3, 4, 5].map((s) => {
+              const diff = avg - s + 1;
+              const isFull = diff >= 1;
+              const isHalf = !isFull && diff >= 0.5;
+              return (
+                <div key={s} className="relative" style={{ width: 16, height: 16 }}>
+                  <Star size={16} className="absolute inset-0 text-muted-foreground/30" />
+                  {(isFull || isHalf) && (
+                    <div
+                      className="absolute inset-0 overflow-hidden"
+                      style={{ width: isHalf ? '50%' : '100%' }}
+                    >
+                      <Star size={16} className="fill-amber-400 text-amber-400" />
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
           <span className={`text-xs text-muted-foreground ${isRTL ? 'font-arabic' : ''}`}>
             {total} {rv.totalReviews}
