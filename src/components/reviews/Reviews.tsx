@@ -1,12 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ArrowUpDown, LogIn, LogOut } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { supabase } from '@/integrations/supabase/client';
 import ReviewForm from './ReviewForm';
 import ReviewCard from './ReviewCard';
 import RatingSummary from './RatingSummary';
-import OwnerLoginModal from './OwnerLoginModal';
 
 type SortOption = 'newest' | 'highest' | 'lowest';
 
@@ -18,84 +17,28 @@ interface Review {
   created_at: string;
 }
 
-interface OwnerReply {
-  id: string;
-  review_id: string;
-  reply: string;
-  owner_user_id: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
 const Reviews = () => {
   const { t, isRTL } = useLanguage();
   const { theme } = useTheme();
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [replies, setReplies] = useState<OwnerReply[]>([]);
   const [sort, setSort] = useState<SortOption>('newest');
-  const [isOwner, setIsOwner] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [myTokens, setMyTokens] = useState<Record<string, string>>({});
 
-  // Load own review tokens from localStorage
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem('my_review_tokens') || '{}');
     setMyTokens(stored);
   }, []);
 
   const fetchData = useCallback(async () => {
-    const [reviewsRes, repliesRes] = await Promise.all([
-      supabase.rpc('get_public_reviews'),
-      supabase.from('owner_replies').select('id, review_id, reply, owner_user_id, created_at, updated_at'),
-    ]);
-    if (reviewsRes.data) setReviews(reviewsRes.data as Review[]);
-    if (repliesRes.data) setReplies(repliesRes.data);
+    const { data } = await supabase.rpc('get_public_reviews');
+    if (data) setReviews(data as Review[]);
     setLoading(false);
   }, []);
 
   useEffect(() => {
     fetchData();
-
-    // Check admin role (server-side verified)
-    const checkAdmin = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        const { data } = await supabase.rpc('is_admin');
-        setIsOwner(!!data);
-      } else {
-        setIsOwner(false);
-      }
-    };
-    checkAdmin();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session) {
-        // Auto-bootstrap first admin (one-time, secure server-side)
-        await supabase.rpc('bootstrap_admin');
-        const { data } = await supabase.rpc('is_admin');
-        setIsOwner(!!data);
-      } else {
-        setIsOwner(false);
-      }
-    });
-
-    // Realtime subscription (owner_replies only — reviews use secure RPC)
-    const channel = supabase
-      .channel('reviews-realtime')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'owner_replies' }, () => fetchData())
-      .subscribe();
-
-    return () => {
-      subscription.unsubscribe();
-      supabase.removeChannel(channel);
-    };
   }, [fetchData]);
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    setIsOwner(false);
-  };
 
   const sortedReviews = [...reviews].sort((a, b) => {
     if (sort === 'newest') return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
@@ -151,36 +94,24 @@ const Reviews = () => {
           <ReviewForm onReviewAdded={fetchData} />
         </div>
 
-        {/* Sort + Owner controls */}
+        {/* Sort controls */}
         {reviews.length > 0 && (
-          <div className={`flex items-center justify-between flex-wrap gap-4 mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            {/* Sort pills */}
-            <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-              <ArrowUpDown size={14} className="text-muted-foreground/60" />
-              {sortOptions.map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => setSort(opt.value)}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
-                    sort === opt.value
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
-                  } ${isRTL ? 'font-arabic' : ''}`}
-                  style={sort !== opt.value ? { background: pillBg, border: pillBorder } : undefined}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Owner login/logout */}
-            <button
-              onClick={isOwner ? handleLogout : () => setShowLogin(true)}
-              className={`inline-flex items-center gap-1.5 text-xs text-muted-foreground/50 hover:text-primary transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}
-            >
-              {isOwner ? <LogOut size={12} /> : <LogIn size={12} />}
-              {isOwner ? (isRTL ? 'خروج' : 'Logout') : (isRTL ? 'دخول المالك' : 'Owner')}
-            </button>
+          <div className={`flex items-center gap-2 mb-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
+            <ArrowUpDown size={14} className="text-muted-foreground/60" />
+            {sortOptions.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => setSort(opt.value)}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                  sort === opt.value
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
+                } ${isRTL ? 'font-arabic' : ''}`}
+                style={sort !== opt.value ? { background: pillBg, border: pillBorder } : undefined}
+              >
+                {opt.label}
+              </button>
+            ))}
           </div>
         )}
 
@@ -197,32 +128,20 @@ const Reviews = () => {
           </div>
         ) : (
           <div className="space-y-4">
-            {sortedReviews.map((review) => {
-              const reply = replies.find((r) => r.review_id === review.id) || null;
-              return (
-                <ReviewCard
-                  key={review.id}
-                  review={review}
-                  ownerReply={reply}
-                  isOwner={isOwner}
-                  isOwnReview={!!myTokens[review.id]}
-                  onReplyUpdated={() => {
-                    fetchData();
-                    setMyTokens(JSON.parse(localStorage.getItem('my_review_tokens') || '{}'));
-                  }}
-                />
-              );
-            })}
+            {sortedReviews.map((review) => (
+              <ReviewCard
+                key={review.id}
+                review={review}
+                isOwnReview={!!myTokens[review.id]}
+                onDeleted={() => {
+                  fetchData();
+                  setMyTokens(JSON.parse(localStorage.getItem('my_review_tokens') || '{}'));
+                }}
+              />
+            ))}
           </div>
         )}
       </div>
-
-      {/* Owner Login Modal */}
-      <OwnerLoginModal
-        open={showLogin}
-        onClose={() => setShowLogin(false)}
-        onLoggedIn={() => setIsOwner(true)}
-      />
     </div>
   );
 };

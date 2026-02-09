@@ -1,18 +1,10 @@
 import { useState } from 'react';
-import { MessageSquare, Edit2, Check, X, Trash2 } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import StarRating from './StarRating';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
-
-interface OwnerReply {
-  id: string;
-  reply: string;
-  owner_user_id: string | null;
-  created_at: string;
-  updated_at: string;
-}
 
 interface ReviewCardProps {
   review: {
@@ -22,10 +14,8 @@ interface ReviewCardProps {
     comment: string;
     created_at: string;
   };
-  ownerReply?: OwnerReply | null;
-  isOwner: boolean;
   isOwnReview: boolean;
-  onReplyUpdated: () => void;
+  onDeleted: () => void;
 }
 
 function timeAgo(dateStr: string, isRTL: boolean): string {
@@ -50,46 +40,10 @@ function timeAgo(dateStr: string, isRTL: boolean): string {
   return isRTL ? `منذ ${mo} شهر` : `${mo}mo ago`;
 }
 
-const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }: ReviewCardProps) => {
-  const { t, isRTL } = useLanguage();
+const ReviewCard = ({ review, isOwnReview, onDeleted }: ReviewCardProps) => {
+  const { isRTL } = useLanguage();
   const { theme } = useTheme();
-  const [showReplyInput, setShowReplyInput] = useState(false);
-  const [replyText, setReplyText] = useState(ownerReply?.reply || '');
-  const [editing, setEditing] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
-
-  const rv = t.reviews;
-
-  const handleSaveReply = async () => {
-    if (!replyText.trim()) return;
-    setSaving(true);
-    try {
-      if (ownerReply) {
-        const { error } = await supabase
-          .from('owner_replies')
-          .update({ reply: replyText.trim() })
-          .eq('id', ownerReply.id);
-        if (error) throw error;
-      } else {
-        const { error } = await supabase
-          .from('owner_replies')
-          .insert({ review_id: review.id, reply: replyText.trim() });
-        if (error) throw error;
-      }
-      setShowReplyInput(false);
-      setEditing(false);
-      onReplyUpdated();
-    } catch {
-      toast({
-        title: isRTL ? 'خطأ' : 'Error',
-        description: isRTL ? 'فشل حفظ الرد.' : 'Failed to save reply.',
-        variant: 'destructive',
-      });
-    } finally {
-      setSaving(false);
-    }
-  };
 
   const handleDelete = async () => {
     const stored = JSON.parse(localStorage.getItem('my_review_tokens') || '{}');
@@ -106,7 +60,6 @@ const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }
       if (error) throw error;
       if (!data) throw new Error('Token mismatch');
 
-      // Remove token from localStorage
       delete stored[review.id];
       localStorage.setItem('my_review_tokens', JSON.stringify(stored));
 
@@ -114,7 +67,7 @@ const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }
         title: isRTL ? 'تم حذف التقييم' : 'Review deleted',
         description: isRTL ? 'تم حذف تقييمك بنجاح.' : 'Your review has been removed.',
       });
-      onReplyUpdated();
+      onDeleted();
     } catch {
       toast({
         title: isRTL ? 'خطأ' : 'Error',
@@ -132,18 +85,6 @@ const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }
   const cardBorder = theme === 'light'
     ? '1px solid hsl(214 20% 85% / 0.6)'
     : '1px solid hsl(195 100% 40% / 0.15)';
-  const replyBg = theme === 'light'
-    ? 'hsl(195 100% 95% / 0.5)'
-    : 'hsl(195 100% 15% / 0.15)';
-  const replyBorder = theme === 'light'
-    ? '1px solid hsl(195 100% 70% / 0.3)'
-    : '1px solid hsl(195 100% 40% / 0.2)';
-  const inputBg = theme === 'light'
-    ? 'hsl(210 20% 94%)'
-    : 'hsl(220 25% 12%)';
-  const inputBorder = theme === 'light'
-    ? '1px solid hsl(214 20% 82%)'
-    : '1px solid hsl(220 20% 20%)';
 
   const initial = review.name.charAt(0).toUpperCase();
 
@@ -154,7 +95,6 @@ const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }
     >
       {/* Header: Avatar + Name + Rating + Time + Delete */}
       <div className={`flex items-start gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
-        {/* Avatar */}
         <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
           <span className="text-sm font-bold text-primary">{initial}</span>
         </div>
@@ -173,7 +113,6 @@ const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }
           </div>
         </div>
 
-        {/* Delete button for own review */}
         {isOwnReview && (
           <button
             onClick={handleDelete}
@@ -190,73 +129,6 @@ const ReviewCard = ({ review, ownerReply, isOwner, isOwnReview, onReplyUpdated }
       <p className={`text-sm text-muted-foreground leading-relaxed ${isRTL ? 'font-arabic text-right' : ''}`}>
         {review.comment}
       </p>
-
-      {/* Owner Reply */}
-      {ownerReply && !editing && (
-        <div
-          className={`rounded-xl p-4 space-y-2 ${isRTL ? 'mr-6' : 'ml-6'}`}
-          style={{ background: replyBg, border: replyBorder }}
-        >
-          <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <span className={`text-xs font-semibold text-primary ${isRTL ? 'font-arabic' : ''}`}>
-              {isRTL ? 'محمد ياسر — المالك' : 'Mohamed Yasser — Owner'}
-            </span>
-            {isOwner && (
-              <button
-                onClick={() => { setEditing(true); setReplyText(ownerReply.reply); }}
-                className="text-muted-foreground/50 hover:text-primary transition-colors"
-              >
-                <Edit2 size={12} />
-              </button>
-            )}
-          </div>
-          <p className={`text-sm text-foreground/80 leading-relaxed ${isRTL ? 'font-arabic text-right' : ''}`}>
-            {ownerReply.reply}
-          </p>
-        </div>
-      )}
-
-      {/* Reply input (owner only) */}
-      {isOwner && (showReplyInput || editing) && (
-        <div className={`space-y-3 ${isRTL ? 'mr-6' : 'ml-6'}`}>
-          <textarea
-            value={replyText}
-            onChange={(e) => setReplyText(e.target.value)}
-            placeholder={isRTL ? 'اكتب ردك...' : 'Write your reply...'}
-            rows={3}
-            className={`w-full px-4 py-2.5 rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-primary/40 resize-none ${isRTL ? 'font-arabic text-right' : ''}`}
-            style={{ background: inputBg, border: inputBorder }}
-          />
-          <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <button
-              onClick={handleSaveReply}
-              disabled={!replyText.trim() || saving}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-semibold bg-primary text-primary-foreground hover:brightness-110 disabled:opacity-40 transition-all"
-            >
-              <Check size={12} />
-              {saving ? '...' : (isRTL ? 'حفظ' : 'Save')}
-            </button>
-            <button
-              onClick={() => { setShowReplyInput(false); setEditing(false); }}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <X size={12} />
-              {isRTL ? 'إلغاء' : 'Cancel'}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Reply button (owner only, no existing reply) */}
-      {isOwner && !ownerReply && !showReplyInput && (
-        <button
-          onClick={() => setShowReplyInput(true)}
-          className={`inline-flex items-center gap-1.5 text-xs text-muted-foreground/60 hover:text-primary transition-colors ${isRTL ? 'flex-row-reverse' : ''}`}
-        >
-          <MessageSquare size={12} />
-          {rv.replyBtn}
-        </button>
-      )}
     </div>
   );
 };
