@@ -106,6 +106,30 @@ interface Translations {
     relatedWork: string;
     relatedWorkHighlight: string;
   };
+  reviews: {
+    label: string;
+    title: string;
+    titleHighlight: string;
+    formTitle: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    ratingLabel: string;
+    commentLabel: string;
+    commentPlaceholder: string;
+    nameRequired: string;
+    ratingRequired: string;
+    commentRequired: string;
+    submitBtn: string;
+    ownerLabel: string;
+    replyBtn: string;
+    totalReviews: string;
+    noReviews: string;
+    sortNewest: string;
+    sortHighest: string;
+    sortLowest: string;
+  };
 }
 
 const translations: Record<Language, Translations> = {
@@ -256,6 +280,30 @@ const translations: Record<Language, Translations> = {
       relatedWork: 'Related',
       relatedWorkHighlight: 'Work',
     },
+    reviews: {
+      label: 'Reviews',
+      title: 'Client',
+      titleHighlight: 'Reviews',
+      formTitle: 'Leave a Review',
+      nameLabel: 'Name',
+      namePlaceholder: 'Your name',
+      emailLabel: 'Email (optional)',
+      emailPlaceholder: 'your@email.com',
+      ratingLabel: 'Rating',
+      commentLabel: 'Comment',
+      commentPlaceholder: 'Share your experience...',
+      nameRequired: 'Please enter your name before submitting.',
+      ratingRequired: 'Please select a rating.',
+      commentRequired: 'Please write a comment.',
+      submitBtn: 'Submit Review',
+      ownerLabel: 'Mohamed Yasser — Owner',
+      replyBtn: 'Reply',
+      totalReviews: 'reviews',
+      noReviews: 'No reviews yet. Be the first to leave one!',
+      sortNewest: 'Newest',
+      sortHighest: 'Highest',
+      sortLowest: 'Lowest',
+    },
   },
   ar: {
     nav: {
@@ -403,6 +451,30 @@ const translations: Record<Language, Translations> = {
       credits: 'فريق العمل',
       relatedWork: 'أعمال',
       relatedWorkHighlight: 'مشابهة',
+    },
+    reviews: {
+      label: 'التقييمات',
+      title: 'تقييمات',
+      titleHighlight: 'العملاء',
+      formTitle: 'اترك تقييمك',
+      nameLabel: 'الاسم',
+      namePlaceholder: 'اسمك',
+      emailLabel: 'البريد الإلكتروني (اختياري)',
+      emailPlaceholder: 'your@email.com',
+      ratingLabel: 'التقييم',
+      commentLabel: 'التعليق',
+      commentPlaceholder: 'شاركنا تجربتك...',
+      nameRequired: 'الرجاء إدخال اسمك قبل الإرسال.',
+      ratingRequired: 'الرجاء اختيار تقييم.',
+      commentRequired: 'الرجاء كتابة تعليق.',
+      submitBtn: 'إرسال التقييم',
+      ownerLabel: 'محمد ياسر — المالك',
+      replyBtn: 'رد',
+      totalReviews: 'تقييم',
+      noReviews: 'لا توجد تقييمات بعد. كن أول من يترك تقييماً!',
+      sortNewest: 'الأحدث',
+      sortHighest: 'الأعلى',
+      sortLowest: 'الأدنى',
     },
   },
 };
