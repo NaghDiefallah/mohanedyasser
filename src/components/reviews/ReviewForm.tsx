@@ -14,7 +14,6 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
   const { t, isRTL } = useLanguage();
   const { theme } = useTheme();
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -32,7 +31,7 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
 
       const { data, error } = await supabase.from('reviews').insert({
         name: name.trim(),
-        email: email.trim() || null,
+        email: null,
         rating,
         comment: comment.trim(),
         delete_token: deleteToken,
@@ -53,7 +52,6 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
       });
 
       setName('');
-      setEmail('');
       setRating(0);
       setComment('');
       onReviewAdded();
@@ -96,34 +94,19 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
         {rv.formTitle}
       </h3>
 
-      {/* Name & Email row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div>
-          <label className={`block text-xs text-muted-foreground mb-1.5 ${isRTL ? 'font-arabic text-right' : ''}`}>
-            {rv.nameLabel} <span className="text-primary">*</span>
-          </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder={rv.namePlaceholder}
-            className={`w-full px-4 py-2.5 rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-primary/40 ${isRTL ? 'font-arabic text-right' : ''}`}
-            style={{ background: inputBg, border: inputBorder }}
-          />
-        </div>
-        <div>
-          <label className={`block text-xs text-muted-foreground mb-1.5 ${isRTL ? 'font-arabic text-right' : ''}`}>
-            {rv.emailLabel}
-          </label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder={rv.emailPlaceholder}
-            className={`w-full px-4 py-2.5 rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-primary/40 ${isRTL ? 'font-arabic text-right' : ''}`}
-            style={{ background: inputBg, border: inputBorder }}
-          />
-        </div>
+      {/* Name */}
+      <div>
+        <label className={`block text-xs text-muted-foreground mb-1.5 ${isRTL ? 'font-arabic text-right' : ''}`}>
+          {rv.nameLabel} <span className="text-primary">*</span>
+        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder={rv.namePlaceholder}
+          className={`w-full px-4 py-2.5 rounded-lg text-sm text-foreground placeholder:text-muted-foreground/50 outline-none transition-colors focus:ring-1 focus:ring-primary/40 ${isRTL ? 'font-arabic text-right' : ''}`}
+          style={{ background: inputBg, border: inputBorder }}
+        />
       </div>
 
       {/* Star Rating */}
