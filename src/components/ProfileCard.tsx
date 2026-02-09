@@ -24,12 +24,18 @@ const ProfileCard = () => {
     };
     fetchRatings();
 
+    const handleUpdate = () => fetchRatings();
+    window.addEventListener('review-updated', handleUpdate);
+
     const channel = supabase
       .channel('profile-reviews')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'reviews' }, () => fetchRatings())
       .subscribe();
 
-    return () => { supabase.removeChannel(channel); };
+    return () => {
+      window.removeEventListener('review-updated', handleUpdate);
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const cardBg = theme === 'light'
