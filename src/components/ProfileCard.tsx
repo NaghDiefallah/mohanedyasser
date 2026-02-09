@@ -1,4 +1,4 @@
-import { Star, MapPin, Clock, Zap, Globe, Award } from 'lucide-react';
+import { Star, MapPin, Clock, Globe, Award } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import heroPortrait from '@/assets/hero-portrait.png';
@@ -24,7 +24,6 @@ const ProfileCard = () => {
     { icon: MapPin, label: profile.fromLabel, value: profile.from },
     { icon: Award, label: profile.experienceLabel, value: profile.experienceValue },
     { icon: Clock, label: profile.responseLabel, value: profile.responseValue },
-    { icon: Zap, label: profile.deliveryLabel, value: profile.deliveryValue },
     { icon: Globe, label: profile.languagesLabel, value: profile.languages },
   ];
 
@@ -50,17 +49,12 @@ const ProfileCard = () => {
 
         {/* Name + Badge + Rating */}
         <div className={`flex flex-col items-center sm:items-start gap-2 ${isRTL ? 'sm:items-end' : ''}`}>
-          <div className={`flex items-center gap-3 flex-wrap justify-center sm:justify-start ${isRTL ? 'sm:justify-end' : ''}`}>
-            <h3
-              className="text-xl md:text-2xl font-bold text-foreground"
-              style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Inter', sans-serif" }}
-            >
-              {profile.name}
-            </h3>
-            <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/15 text-primary border border-primary/20">
-              {profile.badge}
-            </span>
-          </div>
+          <h3
+            className="text-xl md:text-2xl font-bold text-foreground"
+            style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Inter', sans-serif" }}
+          >
+            {profile.name}
+          </h3>
 
           <p className={`text-sm text-muted-foreground ${isRTL ? 'font-arabic' : ''}`}>
             {profile.tagline}
