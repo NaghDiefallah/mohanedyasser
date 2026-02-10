@@ -72,7 +72,7 @@ const ProfileCard = () => {
             <img
               src={heroPortrait}
               alt={profile.name}
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover object-center"
             />
           </div>
         </div>
