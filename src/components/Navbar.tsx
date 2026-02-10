@@ -10,8 +10,16 @@ const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrollingProgrammatically, setIsScrollingProgrammatically] = useState(false);
   const { t, isRTL, language, setLanguage } = useLanguage();
   const { theme, toggleTheme } = useTheme();
+
+  const smoothScrollTo = (id: string) => {
+    setIsScrollingProgrammatically(true);
+    setIsVisible(true);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => setIsScrollingProgrammatically(false), 800);
+  };
 
   const navLinks = [
     { label: t.nav.home, href: "#home" },
@@ -27,6 +35,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      if (isScrollingProgrammatically) return;
       const currentScrollY = window.scrollY;
       
       if (currentScrollY < 10) {
@@ -87,7 +96,7 @@ const Navbar = () => {
                   size="sm" 
                   className="font-bold font-arabic tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-4 lg:px-6 text-xs lg:text-sm"
                   onClick={() => {
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    smoothScrollTo('contact');
                   }}
                 >
                   {t.nav.letsTalk}
@@ -185,7 +194,7 @@ const Navbar = () => {
                   size="sm" 
                   className="font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-4 lg:px-6 text-xs lg:text-sm"
                   onClick={() => {
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    smoothScrollTo('contact');
                   }}
                 >
                   {t.nav.letsTalk}
@@ -255,7 +264,7 @@ const Navbar = () => {
                   }}
                   onClick={() => {
                     setIsMobileMenuOpen(false);
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    smoothScrollTo('contact');
                   }}
                 >
                   {t.nav.letsTalk}
