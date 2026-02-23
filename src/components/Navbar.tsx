@@ -75,27 +75,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* LEFT side: In LTR = Toggles, In RTL = CTA */}
           <div className="hidden md:flex items-center gap-1 sm:gap-2">
-            {isRTL ? (
-              // RTL: CTA on LEFT (appears on right visually)
-              <div
-                className="rounded-md"
-                style={{
-                  boxShadow: '0 0 15px hsl(195 100% 50% / 0.25), 0 0 30px hsl(195 100% 50% / 0.1)',
-                }}
-              >
-                <Button 
-                  size="sm" 
-                  className="font-bold font-arabic tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 px-4 lg:px-6 text-xs lg:text-sm"
-                  onClick={() => {
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  {t.nav.letsTalk}
-                </Button>
-              </div>
-            ) : (
-              // LTR: Toggles on LEFT
-              <>
+            <>
                 <button
                   onClick={toggleTheme}
                   className="p-1.5 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200"
@@ -114,10 +94,9 @@ const Navbar = () => {
                   aria-label="Toggle language"
                 >
                   <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
-                  <span className="text-foreground font-bold">AR</span>
+                  {language === 'ar' ? 'EN' : 'AR'}
                 </button>
               </>
-            )}
           </div>
 
           {/* CENTER - Navigation Links (Desktop only) */}
@@ -149,33 +128,7 @@ const Navbar = () => {
 
           {/* RIGHT side: In LTR = CTA, In RTL = Toggles */}
           <div className="hidden md:flex items-center gap-2">
-            {isRTL ? (
-              // RTL: Toggles on RIGHT
-              <>
-                <button
-                  onClick={toggleLanguage}
-                  className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-secondary/50 transition-all duration-300 text-xs sm:text-sm font-bold"
-                  aria-label="Toggle language"
-                >
-                  <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
-                  <span className="text-foreground font-bold">EN</span>
-                </button>
-                
-                <button
-                  onClick={toggleTheme}
-                  className="p-1.5 sm:p-2 rounded-lg hover:bg-secondary/50 transition-colors duration-200"
-                  aria-label="Toggle theme"
-                >
-                  {theme === 'dark' ? (
-                    <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                  ) : (
-                    <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-foreground" />
-                  )}
-                </button>
-              </>
-            ) : (
-              // LTR: CTA on RIGHT
-              <div
+            <div
                 className="rounded-md"
                 style={{
                   boxShadow: '0 0 15px hsl(195 100% 50% / 0.25), 0 0 30px hsl(195 100% 50% / 0.1)',
@@ -191,7 +144,6 @@ const Navbar = () => {
                   {t.nav.letsTalk}
                 </Button>
               </div>
-            )}
           </div>
 
 

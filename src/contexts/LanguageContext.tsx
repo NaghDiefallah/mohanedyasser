@@ -181,7 +181,7 @@ const translations: Record<Language, Translations> = {
       ],
       skills: ['Video Editing', 'Motion Graphics', 'Color Grading', 'Sound Design', 'VFX', 'Animation'],
       profile: {
-        name: 'Mohamed Yasser',
+        name: 'Mohaned Yasser',
         badge: 'Professional Video Editor',
         tagline: 'Elevating Your Vision: Masterful Video Editing',
         rating: '4.9',
@@ -196,7 +196,7 @@ const translations: Record<Language, Translations> = {
         responseValue: '1 Hour',
         languagesLabel: 'Languages',
         languages: 'Arabic, English',
-        description: "Welcome to my profile! I'm Mohamed Yasser, a passionate and professional video editor specializing in cinematic storytelling, color grading, and high-quality post-production. I focus on delivering visually engaging and polished content tailored to each client's vision.",
+        description: "Welcome to my profile! I'm Mohaned Yasser, a passionate and professional video editor specializing in cinematic storytelling, color grading, and high-quality post-production. I focus on delivering visually engaging and polished content tailored to each client's vision.",
       },
     },
     work: {
@@ -298,7 +298,7 @@ const translations: Record<Language, Translations> = {
       ratingRequired: 'Please select a rating.',
       commentRequired: 'Please write a comment.',
       submitBtn: 'Submit Review',
-      ownerLabel: 'Mohamed Yasser — Owner',
+      ownerLabel: 'Mohaned Yasser — Owner',
       replyBtn: 'Reply',
       totalReviews: 'reviews',
       noReviews: 'No reviews yet. Be the first to leave one!',
@@ -503,7 +503,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     // Smooth RTL/LTR transition
     const root = document.documentElement;
     root.style.transition = 'none';
-    root.dir = language === 'ar' ? 'rtl' : 'ltr';
+    root.dir = 'ltr';
     root.lang = language;
     
     // Force reflow to apply direction change instantly

@@ -58,17 +58,6 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-
-                {/* Price & CTA */}
-                <div className="pt-4 sm:pt-6 border-t border-border mt-auto">
-                  <p className="text-xl sm:text-2xl font-bold text-primary mb-3 sm:mb-4">{service.price}</p>
-                  <Button
-                    variant="outline"
-                    className="w-full border-border hover:border-primary hover:bg-primary/10 transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm font-semibold"
-                  >
-                    {t.services.getQuote}
-                  </Button>
-                </div>
               </div>
             );
           })}
