@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { getReelsProjects } from "@/data/projects";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import ProjectThumbnail from "./ProjectThumbnail";
 
 const reelsProjects = getReelsProjects();
 
@@ -36,74 +37,71 @@ const StackedReelsPreview = () => {
           </p>
         </div>
 
-        {/* ===== DESKTOP: Stacked Album (hidden on mobile) ===== */}
-        <div className="hidden md:flex justify-center items-center mb-12">
-          <div className="relative w-[420px] h-[320px]">
-            {stackProjects.map((project, index) => {
-              const rotation = rotations[index] || 0;
-              const zIndex = index === Math.floor(stackProjects.length / 2) ? 10 : stackProjects.length - Math.abs(index - Math.floor(stackProjects.length / 2));
-              const xOffset = (index - Math.floor(stackProjects.length / 2)) * 18;
-
-              return (
-                <motion.div
-                  key={project.id}
-                  className="absolute inset-0 cursor-pointer group"
+        {/* ===== DESKTOP: Grid Layout (hidden on mobile) ===== */}
+        <div className="hidden md:grid md:grid-cols-3 gap-6 mb-12">
+          {stackProjects.map((project, index) => {
+            return (
+              <motion.div
+                key={project.id}
+                className="cursor-pointer group"
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.5, delay: index * 0.1 },
+                }}
+                viewport={{ once: true }}
+                whileHover={{
+                  scale: 1.05,
+                  y: -8,
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+                onClick={() => navigate("/reels")}
+              >
+                <div
+                  className="w-full h-64 rounded-xl overflow-hidden border border-border bg-card transition-shadow duration-300"
                   style={{
-                    zIndex,
+                    boxShadow: "0 4px 20px -4px hsl(0 0% 0% / 0.3)",
                   }}
-                  initial={{
-                    rotate: rotation,
-                    x: xOffset,
-                  }}
-                  whileHover={{
-                    scale: 1.08,
-                    rotate: 0,
-                    zIndex: 20,
-                    y: -20,
-                    transition: { duration: 0.3, ease: "easeOut" },
-                  }}
-                  onClick={() => navigate("/reels")}
                 >
-                  <div
-                    className="w-full h-full rounded-xl overflow-hidden border border-border bg-card transition-shadow duration-300"
-                    style={{
-                      boxShadow: `0 ${4 + index * 2}px ${20 + index * 5}px -4px hsl(0 0% 0% / ${0.3 + index * 0.05})`,
-                    }}
-                  >
-                    <div className="relative w-full h-full">
-                      <img
-                        src={project.thumbnail}
-                        alt={project.title}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                      />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="relative w-full h-full">
+                    <ProjectThumbnail
+                      project={project}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                      {/* Play button on hover */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <div
-                          className="w-14 h-14 rounded-full bg-primary flex items-center justify-center"
-                          style={{
-                            boxShadow: "0 0 20px hsl(var(--primary) / 0.4)",
-                          }}
-                        >
-                          <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
-                        </div>
-                      </div>
-
-                      {/* Title at bottom */}
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="text-foreground font-bold text-lg">{project.title}</h3>
-                        <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
-                          {project.category}
-                        </span>
+                    {/* Play button on hover */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <div
+                        className="w-14 h-14 rounded-full bg-primary flex items-center justify-center"
+                        style={{
+                          boxShadow: "0 0 20px hsl(var(--primary) / 0.4)",
+                        }}
+                      >
+                        <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
                       </div>
                     </div>
+
+                    {/* Title at bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-foreground font-bold text-lg">{project.title}</h3>
+                      <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground font-medium">
+                        {project.category}
+                      </span>
+                    </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* ===== MOBILE: Vertical card list (hidden on desktop) ===== */}
@@ -116,10 +114,12 @@ const StackedReelsPreview = () => {
             >
               <div className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300">
                 <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={project.thumbnail}
-                    alt={project.title}
+                  <ProjectThumbnail
+                    project={project}
                     className="w-full h-full object-cover"
+                    sizes="(max-width: 640px) 100vw, 100vw"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -145,10 +145,10 @@ const StackedReelsPreview = () => {
         <div className="flex justify-center">
           <Button
             size="lg"
-            className={`group gap-3 px-8 py-6 font-bold uppercase tracking-wider text-sm ${isRTL ? "font-arabic" : ""}`}
+            className={`group gap-3 px-8 py-6 font-bold uppercase tracking-wider text-sm text-white ${isRTL ? "font-arabic" : ""}`}
             style={{
-              backgroundColor: "#00a8e8",
-              boxShadow: "0 0 20px rgba(0, 168, 232, 0.4)",
+              backgroundColor: "#0077b6",
+              boxShadow: "0 0 20px rgba(57, 107, 128, 0.4)",
             }}
             onClick={() => navigate("/reels")}
           >

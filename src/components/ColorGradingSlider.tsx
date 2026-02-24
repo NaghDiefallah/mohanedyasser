@@ -1,8 +1,9 @@
 import { useState, useRef, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ViewportReveal from "./ViewportReveal";
-import beforeImage from "@/assets/color-grading-before.png";
-import afterImage from "@/assets/color-grading-after.png";
+import { colorGradingAfterSources, colorGradingBeforeSources } from "@/data/imageSources";
+
+const gradingSizes = "(max-width: 768px) 100vw, 768px";
 
 const ColorGradingSlider = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -76,24 +77,36 @@ const ColorGradingSlider = () => {
             }}
           >
             {/* After Image */}
-            <img
-              src={afterImage}
-              alt={isRTL ? "بعد" : "After"}
-              className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-              draggable={false}
-            />
+            <picture>
+              <source type="image/avif" srcSet={colorGradingAfterSources.avifSrcSet} sizes={gradingSizes} />
+              <source type="image/webp" srcSet={colorGradingAfterSources.webpSrcSet} sizes={gradingSizes} />
+              <img
+                src={colorGradingAfterSources.fallback}
+                alt={isRTL ? "بعد" : "After"}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                draggable={false}
+              />
+            </picture>
 
             {/* Before Image — clipped */}
             <div
               className="absolute inset-0 overflow-hidden pointer-events-none"
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
             >
-              <img
-                src={beforeImage}
-                alt={isRTL ? "قبل" : "Before"}
-                className="absolute inset-0 w-full h-full object-cover"
-                draggable={false}
-              />
+              <picture>
+                <source type="image/avif" srcSet={colorGradingBeforeSources.avifSrcSet} sizes={gradingSizes} />
+                <source type="image/webp" srcSet={colorGradingBeforeSources.webpSrcSet} sizes={gradingSizes} />
+                <img
+                  src={colorGradingBeforeSources.fallback}
+                  alt={isRTL ? "قبل" : "Before"}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  draggable={false}
+                />
+              </picture>
             </div>
 
             {/* Slider Line + Handle */}

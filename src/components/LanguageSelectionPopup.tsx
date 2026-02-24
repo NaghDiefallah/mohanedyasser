@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -6,17 +6,31 @@ import { useLanguage } from '@/contexts/LanguageContext';
 const LanguageSelectionPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { setLanguage } = useLanguage();
+  const hasOpened = useRef(false);
 
   useEffect(() => {
     // Check if user has already selected a language
     const hasSelectedLanguage = localStorage.getItem('language-selected');
-    if (!hasSelectedLanguage) {
-      // Small delay for better UX
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
+    if (hasSelectedLanguage) return;
+
+    const openOnce = () => {
+      if (hasOpened.current) return;
+      hasOpened.current = true;
+      setIsOpen(true);
+      window.removeEventListener('pointerdown', openOnce);
+      window.removeEventListener('keydown', openOnce);
+      window.removeEventListener('touchstart', openOnce);
+    };
+
+    window.addEventListener('pointerdown', openOnce, { once: true });
+    window.addEventListener('keydown', openOnce, { once: true });
+    window.addEventListener('touchstart', openOnce, { once: true });
+
+    return () => {
+      window.removeEventListener('pointerdown', openOnce);
+      window.removeEventListener('keydown', openOnce);
+      window.removeEventListener('touchstart', openOnce);
+    };
   }, []);
 
   const handleSelectLanguage = (lang: 'en' | 'ar') => {
@@ -26,7 +40,7 @@ const LanguageSelectionPopup = () => {
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {isOpen && (
         <>
           {/* Backdrop */}
@@ -42,7 +56,7 @@ const LanguageSelectionPopup = () => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: 'spring', duration: 0.6, bounce: 0.3 }}
+            transition={{ type: 'spring', duration: 0.35, bounce: 0.2 }}
             className="fixed z-[100] inset-0 flex items-center justify-center p-4"
           >
             <div 
@@ -56,7 +70,7 @@ const LanguageSelectionPopup = () => {
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ delay: 0.2, type: 'spring', bounce: 0.5 }}
+                  transition={{ type: 'spring', bounce: 0.4 }}
                   className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center"
                 >
                   <Globe className="w-8 h-8 text-primary" />
@@ -65,7 +79,7 @@ const LanguageSelectionPopup = () => {
                 <motion.h2 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ duration: 0.2 }}
                   className="text-2xl font-bold text-foreground mb-2"
                 >
                   Choose Your Language
@@ -74,7 +88,7 @@ const LanguageSelectionPopup = () => {
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ duration: 0.2 }}
                   className="text-lg text-muted-foreground"
                 >
                   اختر لغتك المفضلة
@@ -86,7 +100,7 @@ const LanguageSelectionPopup = () => {
                 <motion.button
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ duration: 0.2 }}
                   onClick={() => handleSelectLanguage('en')}
                   className="group relative p-6 rounded-xl border-2 border-border bg-secondary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
@@ -100,7 +114,7 @@ const LanguageSelectionPopup = () => {
                 <motion.button
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ duration: 0.2 }}
                   onClick={() => handleSelectLanguage('ar')}
                   className="group relative p-6 rounded-xl border-2 border-border bg-secondary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
@@ -116,7 +130,7 @@ const LanguageSelectionPopup = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
+                transition={{ duration: 0.2 }}
                 className="px-6 pb-6 text-center"
               >
                 <p className="text-xs text-muted-foreground/60">

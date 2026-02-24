@@ -1,4 +1,12 @@
 import brandCommercialImg from "@/assets/brand-commercial.jpg";
+import brandCommercialAvif320 from "@/assets/optimized/brand-commercial-320w.avif";
+import brandCommercialAvif480 from "@/assets/optimized/brand-commercial-480w.avif";
+import brandCommercialAvif640 from "@/assets/optimized/brand-commercial-640w.avif";
+import brandCommercialAvif960 from "@/assets/optimized/brand-commercial-960w.avif";
+import brandCommercialWebp320 from "@/assets/optimized/brand-commercial-320w.webp";
+import brandCommercialWebp480 from "@/assets/optimized/brand-commercial-480w.webp";
+import brandCommercialWebp640 from "@/assets/optimized/brand-commercial-640w.webp";
+import brandCommercialWebp960 from "@/assets/optimized/brand-commercial-960w.webp";
 
 export interface Project {
   id: number;
@@ -7,6 +15,11 @@ export interface Project {
   category: string;
   type: "reel" | "motion-graphics";
   thumbnail: string;
+  thumbnailSrcSet?: {
+    avif: string;
+    webp: string;
+  };
+  thumbnailSizes?: string;
   videoUrl: string;
   rotation: number;
   // Extended details for project page
@@ -36,6 +49,11 @@ export const allProjects: Project[] = [
     category: "Commercial",
     type: "reel",
     thumbnail: brandCommercialImg,
+    thumbnailSrcSet: {
+      avif: `${brandCommercialAvif320} 320w, ${brandCommercialAvif480} 480w, ${brandCommercialAvif640} 640w, ${brandCommercialAvif960} 960w`,
+      webp: `${brandCommercialWebp320} 320w, ${brandCommercialWebp480} 480w, ${brandCommercialWebp640} 640w, ${brandCommercialWebp960} 960w`,
+    },
+    thumbnailSizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: -2,
     description: "A high-energy commercial showcasing the brand's innovative spirit and modern aesthetic. This project pushed the boundaries of visual storytelling with dynamic camera movements and bold color grading.",
@@ -70,7 +88,7 @@ export const allProjects: Project[] = [
     title: "Music Video",
     category: "Music",
     type: "reel",
-    thumbnail: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: 3,
     description: "An experimental music video that blends performance footage with abstract visual elements. The project explores the relationship between sound and image through innovative editing techniques.",
@@ -100,7 +118,7 @@ export const allProjects: Project[] = [
     title: "Documentary",
     category: "Film",
     type: "reel",
-    thumbnail: "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: -1.5,
     description: "A compelling documentary exploring the intersection of art and technology. This project involved months of research and interviews to craft an authentic narrative.",
@@ -126,7 +144,7 @@ export const allProjects: Project[] = [
     title: "Social Campaign",
     category: "Social Media",
     type: "motion-graphics",
-    thumbnail: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: 2.5,
     description: "A series of animated social media content designed to maximize engagement and brand awareness. Each piece was optimized for different platforms while maintaining visual consistency.",
@@ -151,7 +169,7 @@ export const allProjects: Project[] = [
     title: "Product Launch",
     category: "Commercial",
     type: "motion-graphics",
-    thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?auto=format&fit=crop&w=800&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: -3,
     description: "A sleek product launch video combining 3D product visualization with dynamic motion graphics. The project showcased the product's features through engaging visual storytelling.",
@@ -185,7 +203,7 @@ export const allProjects: Project[] = [
     title: "Motion Reel",
     category: "Animation",
     type: "motion-graphics",
-    thumbnail: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=600&q=80",
+    thumbnail: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     rotation: 1.5,
     description: "A showcase reel highlighting the best motion graphics work from the past year. Features a variety of styles from minimal 2D animation to complex 3D compositions.",

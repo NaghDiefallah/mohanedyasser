@@ -7,9 +7,16 @@ import AnimatedRoutes from "./components/AnimatedRoutes";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import SettingsPopup from "./components/SettingsPopup";
-import LanguageSelectionPopup from "./components/LanguageSelectionPopup";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 30, // 30 minutes (formerly cacheTime)
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -21,7 +28,6 @@ const App = () => (
           <BrowserRouter>
             <AnimatedRoutes />
             <SettingsPopup />
-            <LanguageSelectionPopup />
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>

@@ -1,52 +1,132 @@
-import { useRef } from 'react';
+import { useRef, useCallback, useMemo } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { throttle } from '@/utils/taskScheduler';
+import { davinciResolveSources, logoMarkSources } from '@/data/imageSources';
 import adobeAe from '@/assets/adobe-after-effects.svg';
 import adobePr from '@/assets/adobe-premiere-pro.svg';
 import adobePs from '@/assets/adobe-photoshop.svg';
 import adobeAu from '@/assets/adobe-audition.svg';
-import davinciResolve from '@/assets/davinci-resolve.png';
 
 const softwareList = [
   { src: adobeAe, name: 'After Effects' },
   { src: adobePr, name: 'Premiere Pro' },
   { src: adobeAu, name: 'Audition' },
-  { src: davinciResolve, name: 'DaVinci Resolve' },
+  { src: davinciResolveSources, name: 'DaVinci Resolve' },
   { src: adobePs, name: 'Photoshop' },
 ];
+
+const softwareIconSizes = "(max-width: 640px) 40px, 48px";
+
+const resolveSoftwareSources = (source: string | typeof davinciResolveSources) =>
+  typeof source === 'string' ? { fallback: source } : source;
+
+const SoftwareIcon = ({
+  source,
+  name,
+  className,
+  width,
+  height,
+}: {
+  source: string | typeof davinciResolveSources;
+  name: string;
+  className: string;
+  width: number;
+  height: number;
+}) => {
+  const resolvedSource = resolveSoftwareSources(source);
+
+  if ('avifSrcSet' in resolvedSource && 'webpSrcSet' in resolvedSource) {
+    return (
+      <picture>
+        <source type="image/avif" srcSet={resolvedSource.avifSrcSet} sizes={softwareIconSizes} />
+        <source type="image/webp" srcSet={resolvedSource.webpSrcSet} sizes={softwareIconSizes} />
+        <motion.img
+          src={resolvedSource.fallback}
+          alt={name}
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+          width={width}
+          height={height}
+          className={className}
+          whileHover={{ scale: 1.15 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        />
+      </picture>
+    );
+  }
+
+  return (
+    <motion.img
+      src={resolvedSource.fallback}
+      alt={name}
+      loading="lazy"
+      decoding="async"
+      fetchPriority="low"
+      width={width}
+      height={height}
+      className={className}
+      whileHover={{ scale: 1.15 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    />
+  );
+};
+
+const logoMarkSizes = "(max-width: 640px) 60vw, 288px";
+
+const LogoMark = ({ className, onClick }: { className: string; onClick: () => void }) => (
+  <picture className="block">
+    <source type="image/avif" srcSet={logoMarkSources.avifSrcSet} sizes={logoMarkSizes} />
+    <source type="image/webp" srcSet={logoMarkSources.webpSrcSet} sizes={logoMarkSizes} />
+    <motion.img
+      alt="Mohaned Yasser Logo"
+      className={className}
+      style={{ filter: 'none' }}
+      src={logoMarkSources.fallback}
+      loading="eager"
+      decoding="async"
+      fetchPriority="high"
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      onClick={onClick}
+    />
+  </picture>
+);
 
 const CinematicHero = () => {
   const logoRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const springConfig = { stiffness: 150, damping: 15 };
+  const springConfig = useMemo(() => ({ stiffness: 150, damping: 15 }), []);
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
 
-  const handleLogoMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleLogoMouseMove = useCallback(throttle((e: React.MouseEvent<HTMLDivElement>) => {
     if (!logoRef.current) return;
     const rect = logoRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     mouseX.set((e.clientX - centerX) * 0.08);
     mouseY.set((e.clientY - centerY) * 0.08);
-  };
+  }, 16), [mouseX, mouseY]); // ~60fps throttle
 
-  const handleLogoMouseLeave = () => {
+  const handleLogoMouseLeave = useCallback(() => {
     mouseX.set(0);
     mouseY.set(0);
-  };
+  }, [mouseX, mouseY]);
 
   const { t, isRTL, language } = useLanguage();
   const { theme } = useTheme();
 
-  const bgOverlay = theme === 'light'
+  const bgOverlay = useMemo(() => theme === 'light'
     ? 'radial-gradient(ellipse 80% 60% at 50% 40%, hsl(195 50% 95% / 0.3) 0%, transparent 60%)'
-    : 'radial-gradient(ellipse 80% 60% at 50% 40%, hsl(195 100% 50% / 0.06) 0%, transparent 50%)';
+    : 'radial-gradient(ellipse 80% 60% at 50% 40%, hsl(195 100% 50% / 0.06) 0%, transparent 50%)',
+  [theme]);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16" key={language}>
@@ -77,15 +157,8 @@ const CinematicHero = () => {
             onMouseLeave={handleLogoMouseLeave}
             style={{ x, y }}
           >
-            <motion.img
-              alt="Mohaned Yasser Logo"
-            className="w-36 h-36 sm:w-44 sm:h-44 object-contain cursor-pointer"
-            style={{
-              filter: 'none'
-              }}
-              src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            <LogoMark
+              className="w-36 h-36 sm:w-44 sm:h-44 object-contain cursor-pointer"
               onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             />
           </motion.div>
@@ -113,12 +186,12 @@ const CinematicHero = () => {
             {softwareList.map((software) => (
               <Tooltip key={software.name}>
                 <TooltipTrigger asChild>
-                  <motion.img
-                    src={software.src}
-                    alt={software.name}
+                  <SoftwareIcon
+                    source={software.src}
+                    name={software.name}
                     className="w-9 h-9 sm:w-10 sm:h-10 cursor-pointer"
-                    whileHover={{ scale: 1.15 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    width={40}
+                    height={40}
                   />
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="bg-card/95 backdrop-blur-xl border-primary/30 text-foreground">
@@ -141,9 +214,9 @@ const CinematicHero = () => {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto sm:justify-center">
             <Button
               size="lg"
-              className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base w-full sm:w-auto ${isRTL ? 'font-arabic' : ''}`}
+              className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base w-full sm:w-auto text-white ${isRTL ? 'font-arabic' : ''}`}
                     style={{
-                      backgroundColor: '#00a8e8',
+                      backgroundColor: '#0077b6',
                       boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
@@ -193,12 +266,12 @@ const CinematicHero = () => {
                   {softwareList.map((software) => (
                     <Tooltip key={software.name}>
                       <TooltipTrigger asChild>
-                        <motion.img
-                          src={software.src}
-                          alt={software.name}
+                        <SoftwareIcon
+                          source={software.src}
+                          name={software.name}
                           className="w-12 h-12 cursor-pointer"
-                          whileHover={{ scale: 1.15 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                          width={48}
+                          height={48}
                         />
                       </TooltipTrigger>
                       <TooltipContent side="bottom" className="bg-card/95 backdrop-blur-xl border-primary/30 text-foreground">
@@ -211,9 +284,9 @@ const CinematicHero = () => {
                 <div className="flex gap-4">
                   <Button
                     size="lg"
-                    className="group gap-3 px-8 py-7 font-bold font-arabic uppercase tracking-wider text-base"
+                    className="group gap-3 px-8 py-7 font-bold font-arabic uppercase tracking-wider text-base text-white"
                     style={{
-                      backgroundColor: '#00a8e8',
+                      backgroundColor: '#0077b6',
                       boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
@@ -246,15 +319,8 @@ const CinematicHero = () => {
                   onMouseLeave={handleLogoMouseLeave}
                   style={{ x, y }}
                 >
-                  <motion.img
-                    alt="Mohaned Yasser Logo"
+                  <LogoMark
                     className="w-56 h-56 xl:w-72 xl:h-72 object-contain cursor-pointer"
-                    style={{ filter: 'none' }}
-                    src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png"
-                    whileHover={{
-                      scale: 1.05,
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
                   />
                 </motion.div>
@@ -295,15 +361,8 @@ const CinematicHero = () => {
                   onMouseLeave={handleLogoMouseLeave}
                   style={{ x, y }}
                 >
-                  <motion.img
-                    alt="Mohaned Yasser Logo"
+                  <LogoMark
                     className="w-56 h-56 xl:w-72 xl:h-72 object-contain cursor-pointer"
-                    style={{ filter: 'none' }}
-                    src="/lovable-uploads/4aebbd86-f802-4ff0-af74-268afb8d1275.png"
-                    whileHover={{
-                      scale: 1.05,
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
                   />
                 </motion.div>
@@ -337,12 +396,12 @@ const CinematicHero = () => {
                   {softwareList.map((software) => (
                     <Tooltip key={software.name}>
                       <TooltipTrigger asChild>
-                        <motion.img
-                          src={software.src}
-                          alt={software.name}
+                        <SoftwareIcon
+                          source={software.src}
+                          name={software.name}
                           className="w-12 h-12 cursor-pointer"
-                          whileHover={{ scale: 1.15 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                          width={48}
+                          height={48}
                         />
                       </TooltipTrigger>
                       <TooltipContent side="bottom" className="bg-card/95 backdrop-blur-xl border-primary/30 text-foreground">
@@ -355,9 +414,9 @@ const CinematicHero = () => {
                 <div className="flex gap-4 mt-2">
                   <Button
                     size="lg"
-                    className="group gap-3 px-8 py-7 font-bold uppercase tracking-wider text-base"
+                    className="group gap-3 px-8 py-7 font-bold uppercase tracking-wider text-base text-white"
                     style={{
-                      backgroundColor: '#00a8e8',
+                      backgroundColor: '#0077b6',
                       boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}

@@ -101,6 +101,7 @@ const Contact = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-3 rounded-full border border-white/20 text-white/70 bg-white/5 transition-all duration-300 hover:scale-110 hover:border-primary hover:text-primary"
+                      aria-label={`${link.label} ${link.handle}`}
                     >
                       {link.icon}
                     </a>
@@ -118,7 +119,7 @@ const Contact = () => {
 
           {/* Bottom copyright */}
           <div className="mt-12 pt-6 border-t border-white/10">
-            <p className="text-center text-sm text-white/40">
+            <p className="text-center text-sm text-white/70">
               © 2026 <span className="text-primary font-medium">Mohaned Yasser</span>. {t.contact.copyright}
             </p>
           </div>

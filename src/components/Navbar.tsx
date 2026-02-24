@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Moon, Sun, Globe } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import WorkDropdown from "@/components/WorkDropdown";
+import { throttle } from "@/utils/taskScheduler";
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -26,23 +25,26 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    // Throttled scroll handler to reduce repaints
+    const handleScroll = throttle(() => {
       const currentScrollY = window.scrollY;
       
       if (currentScrollY < 10) {
         setIsVisible(true);
       } else if (currentScrollY < lastScrollY) {
         setIsVisible(true);
-      } else if (currentScrollY > lastScrollY) {
+      } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
         setIsVisible(false);
         setIsMobileMenuOpen(false);
       }
       
       setLastScrollY(currentScrollY);
-    };
+    }, 100); // Throttle to 100ms
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [lastScrollY]);
 
   const navBg = theme === 'light' 
@@ -58,11 +60,13 @@ const Navbar = () => {
     : '0 10px 40px -10px hsl(195 100% 50% / 0.15)';
 
   return (
-    <motion.nav
-      initial={{ y: 0, opacity: 1 }}
-      animate={{ y: isVisible ? 0 : -100, opacity: isVisible ? 1 : 0 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+    <nav
       className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4"
+      style={{
+        transform: isVisible ? "translateY(0)" : "translateY(-100px)",
+        opacity: isVisible ? 1 : 0,
+        transition: "transform 0.3s ease, opacity 0.3s ease",
+      }}
     >
       <div 
         className="container mx-auto max-w-7xl rounded-lg px-3 sm:px-4 md:px-6 py-2 md:py-3 backdrop-blur-xl"
@@ -103,17 +107,7 @@ const Navbar = () => {
           <div className={`hidden md:flex items-center gap-6 lg:gap-8 ${isRTL ? 'flex-row-reverse font-arabic' : ''}`}>
             {navLinks.map((link) => {
               const linkClass = "text-xs lg:text-sm font-bold text-muted-foreground hover:text-primary transition-colors duration-200 tracking-[0.15em] lg:tracking-[0.2em]";
-              
-              if (link.href === "#work") {
-                return (
-                  <WorkDropdown
-                    key={link.label}
-                    label={link.label}
-                    className={linkClass}
-                  />
-                );
-              }
-              
+
               return (
                 <a
                   key={link.label}
@@ -172,6 +166,9 @@ const Navbar = () => {
             <button
               className="p-1.5 text-foreground"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-nav"
             >
               {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -179,45 +176,43 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden overflow-hidden"
+        <div
+          id="mobile-nav"
+          className="md:hidden overflow-hidden"
+          style={{
+            maxHeight: isMobileMenuOpen ? "400px" : "0px",
+            opacity: isMobileMenuOpen ? 1 : 0,
+            transition: "max-height 0.2s ease, opacity 0.2s ease",
+          }}
+        >
+          <div className={`pt-4 pb-2 flex flex-col gap-3 ${isRTL ? 'items-end' : 'items-start'}`}>
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors py-2 tracking-[0.15em]"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
+              </a>
+            ))}
+            <Button 
+              size="sm" 
+              className="w-full mt-2 font-bold uppercase tracking-wider bg-primary text-primary-foreground py-5"
+              style={{
+                boxShadow: '0 0 15px hsl(195 100% 50% / 0.25), 0 0 30px hsl(195 100% 50% / 0.1)',
+              }}
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
-              <div className={`pt-4 pb-2 flex flex-col gap-3 ${isRTL ? 'items-end' : 'items-start'}`}>
-                {navLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors py-2 tracking-[0.15em]"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-                <Button 
-                  size="sm" 
-                  className="w-full mt-2 font-bold uppercase tracking-wider bg-primary text-primary-foreground py-5"
-                  style={{
-                    boxShadow: '0 0 15px hsl(195 100% 50% / 0.25), 0 0 30px hsl(195 100% 50% / 0.1)',
-                  }}
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  {t.nav.letsTalk}
-                </Button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              {t.nav.letsTalk}
+            </Button>
+          </div>
+        </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

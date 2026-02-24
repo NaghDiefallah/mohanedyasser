@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:analyze": "vite build && node scripts/analyze-bundle.mjs",
     "build:dev": "vite build --mode development",
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "postbuild": "node scripts/inline-critical-css.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -75,13 +79,19 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react-swc": "^3.11.0",
     "autoprefixer": "^10.4.21",
+    "compression": "^1.8.1",
+    "critters": "^0.0.24",
     "eslint": "^9.32.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "express": "^5.2.1",
     "globals": "^15.15.0",
     "lovable-tagger": "^1.1.13",
     "postcss": "^8.5.6",
+    "rollup-plugin-visualizer": "^7.0.0",
+    "sharp": "^0.33.5",
     "tailwindcss": "^3.4.17",
+    "terser": "^5.46.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
     "vite": "^5.4.19"

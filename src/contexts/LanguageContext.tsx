@@ -95,6 +95,14 @@ interface Translations {
     before: string;
     after: string;
   };
+  mixingSoundDesign: {
+    label: string;
+    title: string;
+    titleHighlight: string;
+    description: string;
+    before: string;
+    after: string;
+  };
   projectDetail: {
     notFound: string;
     backToWork: string;
@@ -270,6 +278,14 @@ const translations: Record<Language, Translations> = {
       before: 'BEFORE',
       after: 'AFTER',
     },
+    mixingSoundDesign: {
+      label: 'Mixing & Sound Design',
+      title: 'MIXING',
+      titleHighlight: 'SOUND DESIGN',
+      description: 'Drag the slider to hear the before and after transformation.',
+      before: 'BEFORE',
+      after: 'AFTER',
+    },
     projectDetail: {
       notFound: 'Project Not Found',
       backToWork: 'Back to Work',
@@ -440,6 +456,14 @@ const translations: Record<Language, Translations> = {
       title: 'تلوين',
       titleHighlight: 'الفيديوهات',
       description: 'اسحب الشريط لرؤية الفرق بين قبل وبعد.',
+      before: 'قبل',
+      after: 'بعد',
+    },
+    mixingSoundDesign: {
+      label: 'مزج وتصميم الصوت',
+      title: 'مزج',
+      titleHighlight: 'تصميم الصوت',
+      description: 'اسحب الشريط لسماع الفرق بين قبل وبعد.',
       before: 'قبل',
       after: 'بعد',
     },

@@ -46,6 +46,7 @@ const StarRating = ({ rating, onRate, size = 18, interactive = false }: StarRati
             onMouseLeave={() => interactive && setHovered(0)}
             className={`relative transition-colors duration-150 ${interactive ? 'cursor-pointer hover:scale-110' : 'cursor-default'}`}
             style={{ width: size, height: size }}
+            aria-label={`Rate ${star} star${star > 1 ? 's' : ''}`}
           >
             {/* Background (empty) star */}
             <Star

@@ -5,6 +5,7 @@ import { getMotionGraphicsProjects } from "@/data/projects";
 import TiltCard from "./TiltCard";
 import ViewportReveal from "./ViewportReveal";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ProjectThumbnail from "./ProjectThumbnail";
 
 const motionGraphicsProjects = getMotionGraphicsProjects();
 
@@ -28,10 +29,12 @@ const ProjectCard = ({ project, index }: { project: typeof motionGraphicsProject
         >
           {/* Image area */}
           <div className="relative aspect-video overflow-hidden">
-            <img
-              src={project.thumbnail}
-              alt={project.title}
+            <ProjectThumbnail
+              project={project}
               className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 grayscale group-hover:grayscale-0"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              loading="lazy"
+              decoding="async"
             />
             
             {/* Gradient overlay */}

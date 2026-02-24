@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { getMotionGraphicsProjects } from "@/data/projects";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import ProjectThumbnail from "./ProjectThumbnail";
 
 const motionProjects = getMotionGraphicsProjects();
 
@@ -71,10 +72,12 @@ const StackedMotionPreview = () => {
                     }}
                   >
                     <div className="relative w-full h-full">
-                      <img
-                        src={project.thumbnail}
-                        alt={project.title}
+                      <ProjectThumbnail
+                        project={project}
                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        loading="lazy"
+                        decoding="async"
                       />
                       {/* Gradient overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -116,10 +119,12 @@ const StackedMotionPreview = () => {
             >
               <div className="relative overflow-hidden rounded-lg bg-card border border-border transition-all duration-300">
                 <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={project.thumbnail}
-                    alt={project.title}
+                  <ProjectThumbnail
+                    project={project}
                     className="w-full h-full object-cover"
+                    sizes="(max-width: 640px) 100vw, 100vw"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -145,9 +150,9 @@ const StackedMotionPreview = () => {
         <div className="flex justify-center">
           <Button
             size="lg"
-            className={`group gap-3 px-8 py-6 font-bold uppercase tracking-wider text-sm ${isRTL ? "font-arabic" : ""}`}
+            className={`group gap-3 px-8 py-6 font-bold uppercase tracking-wider text-sm text-white ${isRTL ? "font-arabic" : ""}`}
             style={{
-              backgroundColor: "#00a8e8",
+              backgroundColor: "#0077b6",
               boxShadow: "0 0 20px rgba(0, 168, 232, 0.4)",
             }}
             onClick={() => navigate("/motion-graphics")}

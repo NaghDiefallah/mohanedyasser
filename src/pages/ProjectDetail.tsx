@@ -5,6 +5,7 @@ import { getProjectBySlug, getRelatedProjects, Project } from "@/data/projects";
 import LiveBackground from "@/components/LiveBackground";
 import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
+import ProjectThumbnail from "@/components/ProjectThumbnail";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const ProjectDetail = () => {
@@ -236,10 +237,12 @@ const ProjectDetail = () => {
                       whileHover={{ y: -5 }}
                     >
                       <div className="aspect-[4/3] overflow-hidden">
-                        <img
-                          src={relatedProject.thumbnail}
-                          alt={relatedProject.title}
+                        <ProjectThumbnail
+                          project={relatedProject}
                           className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          loading="lazy"
+                          decoding="async"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                         

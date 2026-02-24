@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
-import heroPortrait from "@/assets/hero-portrait.png";
+import { heroPortraitSources } from "@/data/imageSources";
+
+const heroPortraitSizes = "(max-width: 640px) 70vw, (max-width: 1024px) 45vw, 420px";
 
 const Hero = () => {
   return (
@@ -77,7 +79,8 @@ const Hero = () => {
             >
               <Button 
                 size="lg" 
-                className="group gap-3 px-8 py-6 btn-primary-cinematic text-base tracking-wide"
+                className="group gap-3 px-8 py-6 btn-primary-cinematic text-base tracking-wide text-white"
+                style={{ backgroundColor: "#0077b6" }}
               >
                 View Portfolio
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -138,16 +141,23 @@ const Hero = () => {
             
             {/* Portrait with cinematic treatment */}
             <div className="relative rim-light">
-              <img 
-                src={heroPortrait} 
-                alt="Video Editor Portrait" 
-                className="relative w-[300px] sm:w-[360px] lg:w-[420px] h-auto object-contain"
-                style={{
-                  filter: 'contrast(1.15) brightness(0.85) saturate(0.9)',
-                  maskImage: 'linear-gradient(to bottom, black 50%, transparent 95%)',
-                  WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 95%)',
-                }}
-              />
+              <picture>
+                <source type="image/avif" srcSet={heroPortraitSources.avifSrcSet} sizes={heroPortraitSizes} />
+                <source type="image/webp" srcSet={heroPortraitSources.webpSrcSet} sizes={heroPortraitSizes} />
+                <img 
+                  src={heroPortraitSources.fallback} 
+                  alt="Video Editor Portrait" 
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  className="relative w-[300px] sm:w-[360px] lg:w-[420px] h-auto object-contain"
+                  style={{
+                    filter: 'contrast(1.15) brightness(0.85) saturate(0.9)',
+                    maskImage: 'linear-gradient(to bottom, black 50%, transparent 95%)',
+                    WebkitMaskImage: 'linear-gradient(to bottom, black 50%, transparent 95%)',
+                  }}
+                />
+              </picture>
               
               {/* Highlight edge - subtle rim light simulation */}
               <div 

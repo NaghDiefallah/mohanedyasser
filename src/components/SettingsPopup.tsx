@@ -20,6 +20,7 @@ const SettingsPopup = () => {
         style={{
           boxShadow: '0 4px 20px hsl(var(--primary) / 0.2)',
         }}
+        aria-label="Open settings"
       >
         <Settings className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
       </motion.button>
@@ -54,6 +55,7 @@ const SettingsPopup = () => {
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-1 rounded-md hover:bg-muted transition-colors"
+                  aria-label="Close settings"
                 >
                   <X className="w-4 h-4 text-muted-foreground" />
                 </button>

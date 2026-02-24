@@ -1,19 +1,67 @@
-import CinematicHero from "@/components/CinematicHero";
-import StackedReelsPreview from "@/components/StackedReelsPreview";
-import StackedMotionPreview from "@/components/StackedMotionPreview";
-import Services from "@/components/Services";
-import Contact from "@/components/Contact";
-import About from "@/components/About";
-import StickyFooter from "@/components/StickyFooter";
-import CinematicScene from "@/components/three/CinematicScene";
+import { lazy, Suspense, useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
-import ColorGradingSlider from "@/components/ColorGradingSlider";
-import VocalEnhance from "@/components/VocalEnhance";
-import Reviews from "@/components/reviews/Reviews";
+import DeferredSection from "@/components/DeferredSection";
+import HeroStatic from "@/components/HeroStatic";
 import { useTheme } from "@/contexts/ThemeContext";
+
+// Lazy load heavy components and data-dependent components
+const CinematicHero = lazy(() => import("@/components/CinematicHero"));
+const CinematicScene = lazy(() => import("@/components/three/CinematicScene"));
+const Reviews = lazy(() => import("@/components/reviews/Reviews"));
+const StackedReelsPreview = lazy(() => import("@/components/StackedReelsPreview"));
+const StackedMotionPreview = lazy(() => import("@/components/StackedMotionPreview"));
+const ColorGradingSlider = lazy(() => import("@/components/ColorGradingSlider"));
+const MixingSoundDesign = lazy(() => import("@/components/MixingSoundDesign"));
+const VocalEnhance = lazy(() => import("@/components/VocalEnhance"));
+const Services = lazy(() => import("@/components/Services"));
+const About = lazy(() => import("@/components/About"));
+const Contact = lazy(() => import("@/components/Contact"));
 
 const Index = () => {
   const { theme } = useTheme();
+  const [shouldRenderScene, setShouldRenderScene] = useState(false);
+  const [shouldRenderCinematicHero, setShouldRenderCinematicHero] = useState(false);
+
+  useEffect(() => {
+    if (theme !== 'dark') {
+      setShouldRenderScene(false);
+      return;
+    }
+
+    let timeoutId: number | undefined;
+    const win = window as Window & {
+      requestIdleCallback?: (cb: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    const schedule = () => setShouldRenderScene(true);
+
+    if (win.requestIdleCallback) {
+      const idleId = win.requestIdleCallback(schedule, { timeout: 2000 });
+      return () => win.cancelIdleCallback?.(idleId);
+    }
+
+    timeoutId = window.setTimeout(schedule, 1500);
+    return () => window.clearTimeout(timeoutId);
+  }, [theme]);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+    const win = window as Window & {
+      requestIdleCallback?: (cb: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    const schedule = () => setShouldRenderCinematicHero(true);
+
+    if (win.requestIdleCallback) {
+      const idleId = win.requestIdleCallback(schedule, { timeout: 2000 });
+      return () => win.cancelIdleCallback?.(idleId);
+    }
+
+    timeoutId = window.setTimeout(schedule, 1500);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
   
   const bgStyle = theme === 'light'
     ? 'linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(210 20% 95%) 50%, hsl(210 20% 98%) 100%)'
@@ -21,63 +69,105 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative w-full" style={{ background: bgStyle, overflowX: 'hidden' }}>
-      {/* Three.js cinematic background - only show in dark mode */}
-      {theme === 'dark' && <CinematicScene />}
-      
-      {/* Light mode subtle background */}
-      {theme === 'light' && (
-        <div className="fixed inset-0 -z-10">
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse 80% 60% at 50% 30%, hsl(195 100% 90% / 0.3) 0%, transparent 60%)',
-            }}
-          />
-        </div>
-      )}
-      
-      {/* Scroll-triggered Navbar */}
-      <Navbar />
-      
-      {/* Main content */}
-      <main className="relative z-10">
-        <section id="home">
-          <CinematicHero />
-        </section>
-        <section id="work">
-          <div id="reels">
-            <StackedReelsPreview />
+        {/* Three.js cinematic background - only show in dark mode */}
+        {theme === 'dark' && shouldRenderScene && (
+          <Suspense fallback={null}>
+            <CinematicScene />
+          </Suspense>
+        )}
+        
+        {/* Light mode subtle background */}
+        {theme === 'light' && (
+          <div className="fixed inset-0 -z-10">
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: 'radial-gradient(ellipse 80% 60% at 50% 30%, hsl(195 100% 90% / 0.3) 0%, transparent 60%)',
+              }}
+            />
           </div>
-          <div id="motion">
-            <StackedMotionPreview />
-          </div>
-        </section>
-        {/* Color Grading Slider - After Motion Graphics */}
-        <section id="color-grading">
-          <ColorGradingSlider />
-        </section>
-        {/* Vocal Enhance - After Color Grading */}
-        <section id="vocal-enhance">
-          <VocalEnhance />
-        </section>
-        {/* Mixing & Sound Design placeholder section */}
-        <section id="mixing" />
-        <section id="services">
-          <Services />
-        </section>
-        <section id="about">
-          <About />
-        </section>
-        <section id="reviews">
-          <Reviews />
-        </section>
-        <section id="contact">
-          <Contact />
-        </section>
-      </main>
+        )}
+        
+        <Navbar />
+        
+        {/* Main content */}
+        <main className="relative z-10">
+          <section id="home">
+            {shouldRenderCinematicHero ? (
+              <Suspense fallback={<div className="h-screen" />}>
+                <CinematicHero />
+              </Suspense>
+            ) : (
+              <HeroStatic />
+            )}
+          </section>
+          <DeferredSection minHeight={520}>
+            <section id="work">
+              <div id="reels">
+                <Suspense fallback={<div className="h-[320px]" />}>
+                  <StackedReelsPreview />
+                </Suspense>
+              </div>
+              <div id="motion">
+                <Suspense fallback={<div className="h-[320px]" />}>
+                  <StackedMotionPreview />
+                </Suspense>
+              </div>
+            </section>
+          </DeferredSection>
+          <DeferredSection minHeight={420}>
+            <section id="color-grading">
+              <Suspense fallback={<div className="h-[320px]" />}>
+                <ColorGradingSlider />
+              </Suspense>
+            </section>
+          </DeferredSection>
+          <DeferredSection minHeight={420}>
+            <section id="mixing">
+              <Suspense fallback={<div className="h-[320px]" />}>
+                <MixingSoundDesign />
+              </Suspense>
+            </section>
+          </DeferredSection>
+          <DeferredSection minHeight={320}>
+            <section id="vocal-enhance">
+              <Suspense fallback={<div className="h-[240px]" />}>
+                <VocalEnhance />
+              </Suspense>
+            </section>
+          </DeferredSection>
+          <DeferredSection minHeight={420}>
+            <section id="services">
+              <Suspense fallback={<div className="h-[320px]" />}>
+                <Services />
+              </Suspense>
+            </section>
+          </DeferredSection>
+          <DeferredSection minHeight={420}>
+            <section id="about">
+              <Suspense fallback={<div className="h-[320px]" />}>
+                <About />
+              </Suspense>
+            </section>
+          </DeferredSection>
+          <DeferredSection minHeight={420}>
+            <section id="reviews">
+              <Suspense fallback={<div className="py-20 px-4" />}>
+                <Reviews />
+              </Suspense>
+            </section>
+          </DeferredSection>
+          <DeferredSection minHeight={320}>
+            <section id="contact">
+              <Suspense fallback={<div className="h-[240px]" />}>
+                <Contact />
+              </Suspense>
+            </section>
+          </DeferredSection>
+        </main>
 
-      {/* Sticky Footer */}
-      <StickyFooter />
+        {/* Sticky Footer Very broken*/}
+        {/* <StickyFooter /> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { Star, MapPin, Clock, Globe, Award } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { supabase } from '@/integrations/supabase/client';
-import heroPortrait from '@/assets/hero-portrait.png';
+import { heroPortraitSources } from '@/data/imageSources';
 
 const ProfileCard = () => {
   const { t, isRTL } = useLanguage();
@@ -27,14 +27,8 @@ const ProfileCard = () => {
     const handleUpdate = () => fetchRatings();
     window.addEventListener('review-updated', handleUpdate);
 
-    const channel = supabase
-      .channel('profile-reviews')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'reviews' }, () => fetchRatings())
-      .subscribe();
-
     return () => {
       window.removeEventListener('review-updated', handleUpdate);
-      supabase.removeChannel(channel);
     };
   }, []);
 
@@ -69,11 +63,17 @@ const ProfileCard = () => {
           <div
             className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden ring-2 ring-primary/30"
           >
-            <img
-              src={heroPortrait}
-              alt={profile.name}
-              className="w-full h-full object-cover object-center"
-            />
+            <picture>
+              <source type="image/avif" srcSet={heroPortraitSources.avifSrcSet} sizes="112px" />
+              <source type="image/webp" srcSet={heroPortraitSources.webpSrcSet} sizes="112px" />
+              <img
+                src={heroPortraitSources.fallback}
+                alt={profile.name}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+              />
+            </picture>
           </div>
         </div>
 
@@ -122,7 +122,8 @@ const ProfileCard = () => {
           {/* Contact Button */}
           <a
             href="#contact"
-            className={`mt-3 inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 bg-primary text-primary-foreground hover:brightness-110 ${isRTL ? 'font-arabic' : ''}`}
+            className={`mt-3 inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 text-white ${isRTL ? 'font-arabic' : ''}`}
+            style={{ backgroundColor: '#0077b6' }}
           >
             {profile.contactBtn}
           </a>

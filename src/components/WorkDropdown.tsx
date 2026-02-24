@@ -18,8 +18,8 @@ const WorkDropdown = ({ label, className }: WorkDropdownProps) => {
     { label: "Reels", labelAr: "ريلز", href: "#reels", icon: Film },
     { label: "Motion Graphics", labelAr: "موشن جرافيك", href: "#motion", icon: Sparkles },
     { label: "Color Grading", labelAr: "تلوين الفيديو", href: "#color-grading", icon: Palette },
-    { label: "Vocal Enhance", labelAr: "تحسين الصوت", href: "#vocal-enhance", icon: Mic },
     { label: "Mixing & Sound Design", labelAr: "مكساج وتصميم صوتي", href: "#mixing", icon: Music },
+    { label: "Vocal Enhance", labelAr: "تحسين الصوت", href: "#vocal-enhance", icon: Mic },
   ];
 
   const dropdownBg = theme === 'light'

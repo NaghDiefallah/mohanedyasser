@@ -25,10 +25,14 @@ const CinematicScene = () => {
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
         gl={{ 
-          antialias: true, 
+          antialias: false, // Disable for better performance
           alpha: true,
           powerPreference: 'high-performance',
+          stencil: false,
+          depth: false,
         }}
+        dpr={[1, 1.5]} // Limit pixel ratio for better performance
+        performance={{ min: 0.5 }}
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>

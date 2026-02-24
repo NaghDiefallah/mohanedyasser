@@ -1,18 +1,29 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Index from "@/pages/Index";
-import ProjectDetail from "@/pages/ProjectDetail";
-import ReelsGallery from "@/pages/ReelsGallery";
-import MotionGraphicsGallery from "@/pages/MotionGraphicsGallery";
-import NotFound from "@/pages/NotFound";
+import { lazy, Suspense } from "react";
 import PageTransition from "./PageTransition";
+
+// Lazy load route components
+const Index = lazy(() => import("@/pages/Index"));
+const ProjectDetail = lazy(() => import("@/pages/ProjectDetail"));
+const ReelsGallery = lazy(() => import("@/pages/ReelsGallery"));
+const MotionGraphicsGallery = lazy(() => import("@/pages/MotionGraphicsGallery"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-pulse text-primary text-xl">Loading...</div>
+  </div>
+);
 
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes location={location} key={location.pathname}>
         <Route
           path="/"
           element={
@@ -53,7 +64,8 @@ const AnimatedRoutes = () => {
             </PageTransition>
           }
         />
-      </Routes>
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };

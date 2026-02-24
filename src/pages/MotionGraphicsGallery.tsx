@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Play } from "lucide-react";
 import { motion } from "framer-motion";
@@ -7,17 +7,43 @@ import Navbar from "@/components/Navbar";
 import VideoPlayerModal from "@/components/VideoPlayerModal";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import CinematicScene from "@/components/three/CinematicScene";
+import ProjectThumbnail from "@/components/ProjectThumbnail";
+
+const CinematicScene = lazy(() => import("@/components/three/CinematicScene"));
 
 const motionProjects = getMotionGraphicsProjects();
 
 const MotionGraphicsGallery = () => {
   const { t, isRTL } = useLanguage();
   const { theme } = useTheme();
+  const [shouldRenderScene, setShouldRenderScene] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<{
     url: string;
     title: string;
   } | null>(null);
+
+  useEffect(() => {
+    if (theme !== "dark") {
+      setShouldRenderScene(false);
+      return;
+    }
+
+    let timeoutId: number | undefined;
+    const win = window as Window & {
+      requestIdleCallback?: (cb: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+
+    const schedule = () => setShouldRenderScene(true);
+
+    if (win.requestIdleCallback) {
+      const idleId = win.requestIdleCallback(schedule, { timeout: 2000 });
+      return () => win.cancelIdleCallback?.(idleId);
+    }
+
+    timeoutId = window.setTimeout(schedule, 1500);
+    return () => window.clearTimeout(timeoutId);
+  }, [theme]);
 
   const bgStyle =
     theme === "light"
@@ -29,7 +55,11 @@ const MotionGraphicsGallery = () => {
       className="min-h-screen relative w-full"
       style={{ background: bgStyle, overflowX: "hidden" }}
     >
-      {theme === "dark" && <CinematicScene />}
+      {theme === "dark" && shouldRenderScene && (
+        <Suspense fallback={null}>
+          <CinematicScene />
+        </Suspense>
+      )}
 
       {theme === "light" && (
         <div className="fixed inset-0 -z-10">
@@ -112,10 +142,12 @@ const MotionGraphicsGallery = () => {
                   >
                     {/* Image */}
                     <div className="relative aspect-video overflow-hidden">
-                      <img
-                        src={project.thumbnail}
-                        alt={project.title}
+                      <ProjectThumbnail
+                        project={project}
                         className="w-full h-full object-cover transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        loading="lazy"
+                        decoding="async"
                       />
 
                       {/* Gradient overlay */}
