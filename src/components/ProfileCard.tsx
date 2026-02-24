@@ -81,7 +81,7 @@ const ProfileCard = () => {
         <div className={`flex flex-col items-center sm:items-start gap-2 ${isRTL ? 'sm:items-end' : ''}`}>
           <h3
             className="text-xl md:text-2xl font-bold text-foreground"
-            style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Inter', sans-serif" }}
+            style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "sans-serif, 'Bebas Neue'" }}
           >
             {profile.name}
           </h3>

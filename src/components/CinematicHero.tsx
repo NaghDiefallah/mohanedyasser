@@ -172,7 +172,7 @@ const CinematicHero = () => {
           <div>
             <h1
               className="text-[clamp(3.5rem,14vw,7rem)] leading-[0.9] font-bold tracking-[-0.02em]"
-              style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
+              style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "sans-serif, 'Bebas Neue'" }}
             >
               <span className="block text-foreground">{t.hero.title1}</span>
               <span className="block whitespace-nowrap text-primary">
@@ -214,9 +214,9 @@ const CinematicHero = () => {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 w-full sm:w-auto sm:justify-center">
             <Button
               size="lg"
-              className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base w-full sm:w-auto text-white ${isRTL ? 'font-arabic' : ''}`}
+              className={`group gap-3 px-8 py-6 sm:py-7 font-bold uppercase tracking-wider text-sm sm:text-base w-full sm:w-auto ${isRTL ? 'font-arabic' : ''}`}
                     style={{
-                      backgroundColor: '#0077b6',
+                      backgroundColor: '#00a8e8',
                       boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
@@ -284,9 +284,9 @@ const CinematicHero = () => {
                 <div className="flex gap-4">
                   <Button
                     size="lg"
-                    className="group gap-3 px-8 py-7 font-bold font-arabic uppercase tracking-wider text-base text-white"
+                    className="group gap-3 px-8 py-7 font-bold font-arabic uppercase tracking-wider text-base"
                     style={{
-                      backgroundColor: '#0077b6',
+                      backgroundColor: '#00a8e8',
                       boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}
@@ -384,7 +384,7 @@ const CinematicHero = () => {
 
                 <h1
                   className="text-[clamp(5rem,8vw,9rem)] leading-[0.9] font-bold tracking-[-0.02em]"
-                  style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+                  style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "sans-serif, 'Bebas Neue'" }}
                 >
                   <span className="block text-foreground">{t.hero.title1}</span>
                   <span className="block whitespace-nowrap text-primary">
@@ -414,9 +414,9 @@ const CinematicHero = () => {
                 <div className="flex gap-4 mt-2">
                   <Button
                     size="lg"
-                    className="group gap-3 px-8 py-7 font-bold uppercase tracking-wider text-base text-white"
+                    className="group gap-3 px-8 py-7 font-bold uppercase tracking-wider text-base"
                     style={{
-                      backgroundColor: '#0077b6',
+                      backgroundColor: '#00a8e8',
                       boxShadow: '0 0 20px rgba(0, 168, 232, 0.4)',
                     }}
                     onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })}

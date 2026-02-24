@@ -89,7 +89,7 @@ const ReviewForm = ({ onReviewAdded }: ReviewFormProps) => {
     >
       <h3
         className={`text-lg font-bold text-foreground ${isRTL ? 'font-arabic text-right' : ''}`}
-        style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Inter', sans-serif" }}
+        style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "sans-serif, 'Bebas Neue'" }}
       >
         {rv.formTitle}
       </h3>

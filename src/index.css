@@ -296,7 +296,7 @@
   
   /* Cinematic headline - elegant, not aggressive */
   .headline-cinematic {
-    font-family: 'Bebas Neue', 'Inter', sans-serif;
+    font-family: 'sans-serif', 'Inter', 'Bebas Neue';
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }

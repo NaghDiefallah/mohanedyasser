@@ -6,6 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 import ReviewForm from './ReviewForm';
 import ReviewCard from './ReviewCard';
 import RatingSummary from './RatingSummary';
+import ScrollReveal from '../ScrollReveal';
 
 type SortOption = 'newest' | 'highest' | 'lowest';
 
@@ -66,25 +67,24 @@ const Reviews = () => {
     : '1px solid hsl(220 20% 22%)';
 
   return (
-    <div id="reviews" className="py-20 md:py-32 px-6 sm:px-8">
+    <div id="reviews" className="py-20 md:py-15 px-6 sm:px-8">
       <div className="container mx-auto max-w-5xl">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-12 md:mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-8 h-[2px] bg-primary" />
-            <span className="text-xs tracking-[0.3em] text-primary font-bold uppercase">
-              {rv.label}
+        <ScrollReveal className="text-center mb-8 md:mb-10 space-y-3 md:space-y-4">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-8 md:w-12 bg-primary" />
+            <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
+              {rv.titleHighlight}
             </span>
-            <span className="w-8 h-[2px] bg-primary" />
+            <div className="h-px w-8 md:w-12 bg-primary" />
           </div>
-          <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
-            style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
-          >
-            <span className="text-foreground">{rv.title} </span>
-            <span className="text-primary">{rv.titleHighlight}</span>
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
+            {rv.title} <span className="text-primary">{rv.titleHighlight}</span>
           </h2>
-        </div>
+          {/* <p className="text-muted-foreground max-w-md mx-auto text-sm md:text-base">
+            {t.services.description}
+          </p> */}
+        </ScrollReveal>
 
         {/* Rating Summary */}
         {reviews.length > 0 && (

@@ -41,7 +41,7 @@ const RatingSummary = ({ reviews }: RatingSummaryProps) => {
         <div className="flex flex-col items-center gap-2 shrink-0">
           <span
             className="text-5xl md:text-6xl font-bold text-foreground"
-            style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+            style={{ fontFamily: "sans-serif, 'Bebas Neue'" }}
           >
             {avg.toFixed(1)}
           </span>

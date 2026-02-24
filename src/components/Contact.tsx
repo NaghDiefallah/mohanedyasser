@@ -31,25 +31,25 @@ const Contact = () => {
       icon: <InstagramIcon />,
       label: 'Instagram',
       handle: '@MohanedYasser',
-      href: 'https://instagram.com/MohanedYasser',
+      href: 'https://www.instagram.com/mohaned_yasser.ve/',
     },
     {
       icon: <FacebookIcon />,
       label: 'Facebook',
       handle: 'Mohaned Yasser',
-      href: 'https://facebook.com/MohanedYasser',
+      href: 'https://www.facebook.com/profile.php?id=61588338707101',
     },
     {
       icon: <WhatsAppIcon />,
       label: 'WhatsApp',
-      handle: '+20 123 456 7890',
-      href: 'https://wa.me/201234567890',
+      handle: '+20 101 458 1655',
+      href: 'https://wa.me/201014581655',
     },
     {
       icon: <Mail className="w-5 h-5" />,
       label: 'Email',
-      handle: 'contact@mohanedyasser.com',
-      href: 'mailto:contact@mohanedyasser.com',
+      handle: 'mohanedyasserve@gmail.com',
+      href: 'mailto:mohanedyasserve@gmail.com',
     },
   ];
 
@@ -69,17 +69,17 @@ const Contact = () => {
       
       {/* Main footer content */}
       <div
-        className="py-10 md:py-16 px-6 sm:px-8"
+        className="py-5 md:py-5 px-6 sm:px-8"
         style={{ background: bgStyle }}
       >
         <div className="container mx-auto max-w-7xl">
           {/* Centered contact section */}
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-5">
             {/* Contact header with underline */}
             <div className="relative">
               <h3 
                 className="text-lg font-semibold text-white/90 mb-1"
-                style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : 'Inter, sans-serif' }}
+                style={{ fontFamily: isRTL ? 'Cairo, sans-serif' : "sans-serif, 'Bebas Neue'" }}
               >
                 {t.contact.header}
               </h3>
@@ -118,9 +118,9 @@ const Contact = () => {
           </div>
 
           {/* Bottom copyright */}
-          <div className="mt-12 pt-6 border-t border-white/10">
+          <div className="mt-5 pt-5 border-t border-white/10">
             <p className="text-center text-sm text-white/70">
-              © 2026 <span className="text-primary font-medium">Mohaned Yasser</span>. {t.contact.copyright}
+              © 2026 <span className="text-primary font-medium">Nagh Diefalla</span>. {t.contact.copyright}
             </p>
           </div>
         </div>

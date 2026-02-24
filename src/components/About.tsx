@@ -1,5 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import ProfileCard from './ProfileCard';
+import ScrollReveal from './ScrollReveal';
 
 const About = () => {
   const { t, isRTL } = useLanguage();
@@ -7,23 +8,18 @@ const About = () => {
   return (
     <div className="py-20 md:py-32 px-6 sm:px-8">
       <div className="container mx-auto max-w-5xl">
-        {/* Section label with decorative lines */}
-        <div className="flex flex-col items-center text-center mb-12 md:mb-16">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-8 h-[2px] bg-primary" />
-            <span className="text-xs tracking-[0.3em] text-primary font-bold uppercase">
-              {t.about.label}
+        <ScrollReveal className="text-center mb-8 md:mb-10 space-y-3 md:space-y-4">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-8 md:w-12 bg-primary" />
+            <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
+              {t.about.title} {t.about.titleHighlight}
             </span>
-            <span className="w-8 h-[2px] bg-primary" />
+            <div className="h-px w-8 md:w-12 bg-primary" />
           </div>
-          <h2
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
-            style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
-          >
-            <span className="text-foreground">{t.about.title} </span>
-            <span className="text-primary">{t.about.titleHighlight}</span>
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-black text-foreground uppercase tracking-tight">
+            {t.about.title} <span className="text-primary">{t.about.titleHighlight}</span>
           </h2>
-        </div>
+        </ScrollReveal>
 
         {/* Profile Card */}
         <div>

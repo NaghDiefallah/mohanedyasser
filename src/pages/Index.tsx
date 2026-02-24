@@ -6,7 +6,6 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 // Lazy load heavy components and data-dependent components
 const CinematicHero = lazy(() => import("@/components/CinematicHero"));
-const CinematicScene = lazy(() => import("@/components/three/CinematicScene"));
 const Reviews = lazy(() => import("@/components/reviews/Reviews"));
 const StackedReelsPreview = lazy(() => import("@/components/StackedReelsPreview"));
 const StackedMotionPreview = lazy(() => import("@/components/StackedMotionPreview"));
@@ -69,13 +68,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative w-full" style={{ background: bgStyle, overflowX: 'hidden' }}>
-        {/* Three.js cinematic background - only show in dark mode */}
-        {theme === 'dark' && shouldRenderScene && (
-          <Suspense fallback={null}>
-            <CinematicScene />
-          </Suspense>
-        )}
-        
         {/* Light mode subtle background */}
         {theme === 'light' && (
           <div className="fixed inset-0 -z-10">

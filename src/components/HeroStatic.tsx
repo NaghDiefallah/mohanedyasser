@@ -29,7 +29,7 @@ const HeroStatic = () => {
 
           <h1
             className="text-[clamp(3.5rem,14vw,7rem)] leading-[0.9] font-bold tracking-[-0.02em]"
-            style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "'Bebas Neue', sans-serif" }}
+            style={{ fontFamily: isRTL ? "'Cairo', sans-serif" : "sans-serif, 'Bebas Neue'" }}
           >
             <span className="block text-foreground">{t.hero.title1}</span>
             <span className="block whitespace-nowrap text-primary">{t.hero.title2}</span>
